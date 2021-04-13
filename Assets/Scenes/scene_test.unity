@@ -6222,6 +6222,7 @@ GameObject:
   - component: {fileID: 309467254}
   - component: {fileID: 309467256}
   - component: {fileID: 309467257}
+  - component: {fileID: 309467258}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -6332,6 +6333,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.5, y: 1}
   m_Direction: 0
+--- !u!114 &309467258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309467253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdb3213e8b30ca4b84f1b71b480a42b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  walkAction:
+    m_Name: Walk
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4f3383e7-935f-4abf-a81e-43f64d40c0e9
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
