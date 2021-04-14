@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 72192779}
   - component: {fileID: 72192780}
   - component: {fileID: 72192781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc02a9332fd21e4a8d86815c5707eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deadzoneRadius: 0
+  _weaponData: {fileID: 11400000, guid: dda91c349427f7946824aa6c4c95778e, type: 2}
+  _bulletLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _fireAction:
+    m_Name: Fire
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 645b8372-2f77-452f-9efc-a3703b445400
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 70102be9-cb2b-4dec-a76d-6a2bf8d01de5
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fire
+      m_Flags: 0
 --- !u!1 &305326534
 GameObject:
   m_ObjectHideFlags: 0
@@ -6320,7 +6339,7 @@ GameObject:
   - component: {fileID: 309467256}
   - component: {fileID: 309467257}
   - component: {fileID: 309467258}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6443,18 +6462,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdb3213e8b30ca4b84f1b71b480a42b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  moveDamping: 10
-  walkAction:
+  _speed: 10
+  _moveDamping: 2
+  _walkAction:
     m_Name: Walk
     m_Type: 0
-    m_ExpectedControlType: Vector2
-    m_Id: 4f3383e7-935f-4abf-a81e-43f64d40c0e9
+    m_ExpectedControlType: 
+    m_Id: df08b306-6e0a-4469-974c-abf62eedcef9
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
-    - m_Name: 2D Vector
-      m_Id: d2334a83-324e-4f77-a0aa-c551e51f4cbd
+    - m_Name: walkAxis
+      m_Id: d74bd77c-3195-486c-a669-081a9a46717c
       m_Path: 2DVector
       m_Interactions: 
       m_Processors: 
@@ -6462,7 +6481,7 @@ MonoBehaviour:
       m_Action: Walk
       m_Flags: 4
     - m_Name: up
-      m_Id: c763b771-3be4-4429-9ee4-d83bc11a0d22
+      m_Id: 1e0062fd-c5c0-4568-986d-e11ace6f2d23
       m_Path: <Keyboard>/w
       m_Interactions: 
       m_Processors: 
@@ -6470,7 +6489,7 @@ MonoBehaviour:
       m_Action: Walk
       m_Flags: 8
     - m_Name: down
-      m_Id: 414eff37-e4b0-429c-94f3-05e9486c2a10
+      m_Id: 388afe79-4d8b-49ea-9762-6090078c73ce
       m_Path: <Keyboard>/s
       m_Interactions: 
       m_Processors: 
@@ -6478,7 +6497,7 @@ MonoBehaviour:
       m_Action: Walk
       m_Flags: 8
     - m_Name: left
-      m_Id: 6b082843-c5b0-46b7-9f9e-8b726cf0e8be
+      m_Id: 13c7b4de-54fd-4ca2-958c-c49996b51a35
       m_Path: <Keyboard>/a
       m_Interactions: 
       m_Processors: 
@@ -6486,7 +6505,7 @@ MonoBehaviour:
       m_Action: Walk
       m_Flags: 8
     - m_Name: right
-      m_Id: 0db68767-7e8b-45c1-8093-5df9df69e9d2
+      m_Id: 7b8583d9-e69e-4822-bd9a-904d674b3629
       m_Path: <Keyboard>/d
       m_Interactions: 
       m_Processors: 
@@ -6622,7 +6641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5436c4a091673ca4f8097da3dae738a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followDamping: 0.35
+  _followDamping: 0.35
 --- !u!1 &902928963
 GameObject:
   m_ObjectHideFlags: 0
@@ -6637,7 +6656,7 @@ GameObject:
   - component: {fileID: 902928967}
   - component: {fileID: 902928969}
   - component: {fileID: 902928968}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: tilemap_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

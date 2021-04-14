@@ -1,4 +1,7 @@
 
+using Scripts.Graphics;
+using Scripts.Entities;
+
 /// <summary>
 /// Provides access to singleton objects and services.
 /// </summary>

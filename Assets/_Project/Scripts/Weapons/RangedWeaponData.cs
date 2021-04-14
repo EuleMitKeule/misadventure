@@ -5,9 +5,8 @@ namespace Scripts.Weapons
     [CreateAssetMenu(menuName = "Weapons/New Ranged Weapon")]
     public class RangedWeaponData : WeaponData
     {
-        [SerializeField] public float fireSpeed;
-        [SerializeField] public float bulletSpeed;
-        [SerializeField] public GameObject bulletPrefab;
-        [SerializeField] public Sprite weaponSprite;
+        [SerializeField] public float _bulletSpeed;
+        [SerializeField] public GameObject _bulletPrefab;
+        [SerializeField] public Sprite _weaponSprite;
     }
 }
