@@ -123,6 +123,122 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &72192778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 72192779}
+  - component: {fileID: 72192780}
+  - component: {fileID: 72192781}
+  m_Layer: 6
+  m_Name: weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &72192779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72192778}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.375, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 309467255}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &72192780
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72192778}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 631342383
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 8f46798eeb17574499244bdea38a4e2e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &72192781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72192778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc02a9332fd21e4a8d86815c5707eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponData: {fileID: 11400000, guid: dda91c349427f7946824aa6c4c95778e, type: 2}
+  _bulletLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _fireAction:
+    m_Name: Fire
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 645b8372-2f77-452f-9efc-a3703b445400
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 70102be9-cb2b-4dec-a76d-6a2bf8d01de5
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fire
+      m_Flags: 0
 --- !u!1 &305326534
 GameObject:
   m_ObjectHideFlags: 0
@@ -6222,7 +6338,8 @@ GameObject:
   - component: {fileID: 309467254}
   - component: {fileID: 309467256}
   - component: {fileID: 309467257}
-  m_Layer: 0
+  - component: {fileID: 309467258}
+  m_Layer: 6
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6268,10 +6385,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 631342383
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 0d12a67f3a0d6664eade1fcda812e737, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.6226415, b: 0.049965363, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6291,7 +6408,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.99, y: 1.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 72192779}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6330,8 +6448,70 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
-  m_Direction: 0
+  m_Size: {x: 1, y: 0.5}
+  m_Direction: 1
+--- !u!114 &309467258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309467253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fdb3213e8b30ca4b84f1b71b480a42b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 10
+  _moveDamping: 2
+  _walkAction:
+    m_Name: Walk
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: df08b306-6e0a-4469-974c-abf62eedcef9
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: walkAxis
+      m_Id: d74bd77c-3195-486c-a669-081a9a46717c
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Walk
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 1e0062fd-c5c0-4568-986d-e11ace6f2d23
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Walk
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 388afe79-4d8b-49ea-9762-6090078c73ce
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Walk
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 13c7b4de-54fd-4ca2-958c-c49996b51a35
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Walk
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 7b8583d9-e69e-4822-bd9a-904d674b3629
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Walk
+      m_Flags: 8
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -6344,6 +6524,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: camera_main
   m_TagString: MainCamera
@@ -6414,11 +6595,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6448,6 +6629,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5436c4a091673ca4f8097da3dae738a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _followDamping: 0.35
 --- !u!1 &902928963
 GameObject:
   m_ObjectHideFlags: 0
@@ -6462,7 +6656,7 @@ GameObject:
   - component: {fileID: 902928967}
   - component: {fileID: 902928969}
   - component: {fileID: 902928968}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: tilemap_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6522,7 +6716,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1945429037
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -6901,16 +7095,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 2147483649
-  - first: {x: -9, y: 8, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 1
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 2147483649
   - first: {x: 6, y: 8, z: 0}
     second:
       serializedVersion: 2
@@ -6965,13 +7149,13 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 42
+  - m_RefCount: 41
     m_Data: {fileID: 11400000, guid: 78b3f750d34ac5e4c8c6fc48d4588f8f, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 42
+  - m_RefCount: 41
     m_Data: {fileID: 7482667652216324306, guid: 0d12a67f3a0d6664eade1fcda812e737, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 42
+  - m_RefCount: 41
     m_Data:
       e00: 1
       e01: 0
@@ -6992,7 +7176,7 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: 6e-45, g: 6e-45, b: 6e-45, a: 6e-45}
-  - m_RefCount: 42
+  - m_RefCount: 41
     m_Data: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
   - m_RefCount: 0
     m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
@@ -7056,22 +7240,6 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 902928967}
     m_ColliderPaths:
-    - - X: -79999900
-        Y: 79999959
-      - X: -79999900
-        Y: 90000041
-      - X: -79999959
-        Y: 90000100
-      - X: -90000041
-        Y: 90000100
-      - X: -90000100
-        Y: 90000041
-      - X: -90000100
-        Y: 79999959
-      - X: -90000041
-        Y: 79999900
-      - X: -79999959
-        Y: 79999900
     - - X: 110000100
         Y: 39999959
       - X: 110000100
@@ -7120,10 +7288,6 @@ CompositeCollider2D:
         Y: -70000000
   m_CompositePaths:
     m_Paths:
-    - - {x: -8.000026, y: 7.9999905}
-      - {x: -8.000026, y: 9.00001}
-      - {x: -9.00001, y: 8.999974}
-      - {x: -8.999974, y: 7.9999905}
     - - {x: 10.999974, y: 3.99999}
       - {x: 10.999974, y: 9.00001}
       - {x: 5.99999, y: 8.999974}
@@ -7160,7 +7324,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c4379d1c924e7e4409047e0afb1ecbe3, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

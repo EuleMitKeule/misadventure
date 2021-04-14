@@ -11,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - player
+  - enemy
+  - bullet
+  - wall
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: ground
     uniqueID: 36160119
+    locked: 0
+  - name: bullet
+    uniqueID: 3603694441
     locked: 0
   - name: player
     uniqueID: 631342383
