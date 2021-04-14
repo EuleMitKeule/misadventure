@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc02a9332fd21e4a8d86815c5707eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeadzoneRadius: 1
+  deadzoneRadius: 0
 --- !u!1 &305326534
 GameObject:
   m_ObjectHideFlags: 0
@@ -6505,6 +6505,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: camera_main
   m_TagString: MainCamera
@@ -6575,11 +6576,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6609,6 +6610,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5436c4a091673ca4f8097da3dae738a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followDamping: 0.35
 --- !u!1 &902928963
 GameObject:
   m_ObjectHideFlags: 0
