@@ -71,6 +71,8 @@ public class PlayerComponent : MonoBehaviour
     {
         Rigidbody = GetComponent<Rigidbody2D>();
         WeaponComponent = GetComponentInChildren<WeaponComponent>();
+
+        Locator.PlayerComponent = this;
     }
 
     void Start()
