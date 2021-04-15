@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Scripts.Weapons
+namespace HotlineHyrule.Weapons
 {
     public class WeaponComponent : MonoBehaviour
     {

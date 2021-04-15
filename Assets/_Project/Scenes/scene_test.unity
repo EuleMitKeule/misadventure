@@ -29838,6 +29838,7 @@ GameObject:
   - component: {fileID: 309467256}
   - component: {fileID: 309467257}
   - component: {fileID: 309467258}
+  - component: {fileID: 309467259}
   m_Layer: 6
   m_Name: player
   m_TagString: Untagged
@@ -30012,6 +30013,19 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Walk
       m_Flags: 8
+--- !u!114 &309467259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309467253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bda75ed6226a534e8618a01819c8fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

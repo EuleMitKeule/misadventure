@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.Weapons
+namespace HotlineHyrule.Weapons
 {
     public class WeaponData : ScriptableObject
     {

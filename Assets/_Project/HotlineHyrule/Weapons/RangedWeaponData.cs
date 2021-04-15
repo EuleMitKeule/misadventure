@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.Weapons
+namespace HotlineHyrule.Weapons
 {
     [CreateAssetMenu(menuName = "Weapons/New Ranged Weapon")]
     public class RangedWeaponData : WeaponData

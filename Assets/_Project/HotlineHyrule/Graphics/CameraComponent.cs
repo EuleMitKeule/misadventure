@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.Graphics
+namespace HotlineHyrule.Graphics
 {
     public class CameraComponent : MonoBehaviour
     {

@@ -1,8 +1,8 @@
-using Scripts.Weapons;
+using HotlineHyrule.Weapons;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Scripts.Entities
+namespace HotlineHyrule.Entities
 {
     /// <summary>
     /// Handles the player's movement.
