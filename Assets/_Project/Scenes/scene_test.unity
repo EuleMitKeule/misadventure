@@ -29839,6 +29839,7 @@ GameObject:
   - component: {fileID: 309467257}
   - component: {fileID: 309467258}
   - component: {fileID: 309467259}
+  - component: {fileID: 309467260}
   m_Layer: 6
   m_Name: player
   m_TagString: Untagged
@@ -29906,7 +29907,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 309467253}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.99, y: 1.71, z: 0}
+  m_LocalPosition: {x: -9.499, y: -2.504, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 72192779}
@@ -30026,6 +30027,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  startHealth: 100
+--- !u!114 &309467260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309467253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99186eca80c1458c940d8b522d84e757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnAction:
+    m_Name: Respawn
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 5bb4a3b5-078e-4390-b7af-1d3e554e2b0d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: afa66fe2-be52-4876-a8e0-95d95188cc67
+      m_Path: <Keyboard>/r
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Respawn
+      m_Flags: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -30157,8 +30187,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AssetsPPU: 16
-  m_RefResolutionX: 480
-  m_RefResolutionY: 270
+  m_RefResolutionX: 640
+  m_RefResolutionY: 360
   m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 0
@@ -45370,6 +45400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2053594591}
   - component: {fileID: 2053594590}
+  - component: {fileID: 2053594592}
   m_Layer: 0
   m_Name: grid_level1
   m_TagString: Untagged
@@ -45410,3 +45441,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2053594592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053594589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d50f7c9f37a412ea5871e4e29951110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRespawnPosition: {x: -10, y: -3}

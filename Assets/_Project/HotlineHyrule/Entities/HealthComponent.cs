@@ -24,8 +24,15 @@ namespace HotlineHyrule.Entities
 
         public event EventHandler<HealthEventArgs> HealthChanged;
 
-        void Awake() => ResetHealth();
+        void Awake()
+        {
+            ResetHealth();
 
-        public void ResetHealth() => Health = startHealth;
+            GetComponent<RespawnComponent>().Respawned += OnRespawned;
+        }
+
+        void ResetHealth() => Health = startHealth;
+
+        void OnRespawned(object sender, EventArgs e) => ResetHealth();
     }
 }
