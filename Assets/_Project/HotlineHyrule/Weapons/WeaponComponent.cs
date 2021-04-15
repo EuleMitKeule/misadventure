@@ -3,15 +3,33 @@ using UnityEngine.InputSystem;
 
 namespace HotlineHyrule.Weapons
 {
-    public class WeaponComponent : MonoBehaviour
+    /// <summary>
+    /// Handles the behavior of the weapon it's attached to.
+    /// </summary>
+    public class  WeaponComponent : MonoBehaviour
     {
-        [SerializeField] public WeaponData _weaponData;
-        [SerializeField] InputAction _fireAction;
+        /// <summary>
+        /// The weapon data corresponding to this weapon.
+        /// </summary>
+        [SerializeField] public WeaponData weaponData;
+        /// <summary>
+        /// The attack input action.
+        /// </summary>
+        [SerializeField] InputAction attackAction;
 
-        float LastFireTime { get; set; }
+        /// <summary>
+        /// The last point in time the weapon was used at.
+        /// </summary>
+        float LastAttackTime { get; set; }
 
-        bool IsFiring => _fireAction.ReadValue<float>() != 0f;
-        bool CanFire => Time.time >= LastFireTime + 1 / _weaponData._fireSpeed;
+        /// <summary>
+        /// Whether the attack input is currently being registered.
+        /// </summary>
+        bool IsAttacking => attackAction.ReadValue<float>() != 0f;
+        /// <summary>
+        /// Whether enough time has passed since the last usage for the weapon to be used again.
+        /// </summary>
+        bool CanAttack => Time.time >= LastAttackTime + 1 / weaponData.attackRate;
 
         Transform Transform { get; set; }
 
@@ -19,27 +37,30 @@ namespace HotlineHyrule.Weapons
         {
             Transform = transform;
 
-            _fireAction.Enable();
+            attackAction.Enable();
         }
 
         void Update()
         {
-            if (IsFiring) FireWeapon();
+            if (IsAttacking) PerformAttack();
         }
 
-        public void SetWeapon(WeaponData weaponData) => _weaponData = weaponData;
+        public void SetWeapon(WeaponData weaponData) => this.weaponData = weaponData;
 
-        void FireWeapon()
+        /// <summary>
+        /// Performs an attack if possible.
+        /// </summary>
+        void PerformAttack()
         {
-            if (!CanFire) return;
-            LastFireTime = Time.time;
+            if (!CanAttack) return;
+            LastAttackTime = Time.time;
 
-            if (_weaponData is RangedWeaponData rangedWeaponData)
+            if (weaponData is RangedWeaponData rangedWeaponData)
             {
-                var bulletObject = Instantiate(rangedWeaponData._bulletPrefab, Transform.position, Transform.rotation);
+                var bulletObject = Instantiate(rangedWeaponData.bulletPrefab, Transform.position, Transform.rotation);
                 var bulletRigidbody = bulletObject.GetComponent<Rigidbody2D>();
 
-                bulletRigidbody.velocity = Transform.up * rangedWeaponData._bulletSpeed;
+                bulletRigidbody.velocity = Transform.up * rangedWeaponData.bulletSpeed;
 
                 Destroy(bulletObject, 10f);
             }

@@ -13,17 +13,17 @@ namespace HotlineHyrule.Entities
         /// The player's movement speed.
         /// </summary>
         [Header("Physics")]
-        [SerializeField] float _speed;
+        [SerializeField] float speed;
         /// <summary>
         /// The damping value applied to the movement axis.
         /// </summary>
-        [SerializeField] float _moveDamping;
+        [SerializeField] float moveDamping;
 
         /// <summary>
         /// The movement input action.
         /// </summary>
         [Header("Input")]
-        [SerializeField] InputAction _walkAction;
+        [SerializeField] InputAction walkAction;
 
         /// <summary>
         /// The damped input axis.
@@ -56,11 +56,11 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// Whether the look target is within the weapon's deadzone.
         /// </summary>
-        bool IsInDeadzone => LookDistance < WeaponComponent._weaponData._deadzoneRadius;
+        bool IsInDeadzone => LookDistance < WeaponComponent.weaponData.deadzoneRadius;
         /// <summary>
         /// The position of the look target projected onto the deadzone circle.
         /// </summary>
-        Vector2 DeadzonedMousePosition => Rigidbody.position + LookDirection * WeaponComponent._weaponData._deadzoneRadius;
+        Vector2 DeadzonedMousePosition => Rigidbody.position + LookDirection * WeaponComponent.weaponData.deadzoneRadius;
         /// <summary>
         /// The position of the look target clamped to the outside of the deadzone.
         /// </summary>
@@ -82,7 +82,7 @@ namespace HotlineHyrule.Entities
         {
             CameraMain = Camera.main;
 
-            _walkAction.Enable();
+            walkAction.Enable();
         }
 
         void Update()
@@ -92,7 +92,7 @@ namespace HotlineHyrule.Entities
 
         void FixedUpdate()
         {
-            Rigidbody.velocity = _speed * WalkAxis;
+            Rigidbody.velocity = speed * WalkAxis;
             Rigidbody.rotation = LookAngle;
             WeaponComponent.transform.rotation = Quaternion.Euler(0, 0, WeaponAngle);
         }
@@ -102,8 +102,8 @@ namespace HotlineHyrule.Entities
         /// </summary>
         void ProcessInput()
         {
-            var value = _walkAction.ReadValue<Vector2>();
-            WalkAxis = Vector2.MoveTowards(WalkAxis, value, 1 / _moveDamping);
+            var value = walkAction.ReadValue<Vector2>();
+            WalkAxis = Vector2.MoveTowards(WalkAxis, value, 1 / moveDamping);
         }
     }
 }
