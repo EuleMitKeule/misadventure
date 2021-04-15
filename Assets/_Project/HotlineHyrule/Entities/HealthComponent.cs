@@ -16,7 +16,8 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// The amount of health the entity spawns with.
         /// </summary>
-        [SerializeField] int startHealth;
+        [SerializeField] public int startHealth;
+        
         int _health;
         /// <summary>
         /// The amount of health the entity currently has; clamped to [0, maxHealth].
@@ -33,6 +34,8 @@ namespace HotlineHyrule.Entities
                 HealthChanged?.Invoke(this, healthEventArgs);
             }
         }
+        
+        RespawnComponent RespawnComponent { get; set; }
 
         /// <summary>
         /// Is invoked when the health value has changed.
@@ -41,13 +44,15 @@ namespace HotlineHyrule.Entities
 
         void Awake()
         {
-            ResetHealth();
+            RespawnComponent = GetComponent<RespawnComponent>();
+            
+            if (RespawnComponent) RespawnComponent.Respawned += OnRespawned;
 
-            GetComponent<RespawnComponent>().Respawned += OnRespawned;
+            ResetHealth();
         }
 
         /// <summary>
-        /// Resets health to the start value.
+        /// Resets health to the start value, clamped to [0, maxHealth].
         /// </summary>
         void ResetHealth() => Health = startHealth;
 
