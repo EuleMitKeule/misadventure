@@ -1,10 +1,16 @@
 using UnityEngine;
 
-namespace Scripts.Graphics
+namespace HotlineHyrule.Graphics
 {
+    /// <summary>
+    /// Handles the movement behavior of the camera it's attached to.
+    /// </summary>
     public class CameraComponent : MonoBehaviour
     {
-        [Range(0, 1)] [SerializeField] float _followDamping;
+        /// <summary>
+        /// The strength of the damping applied to the camera's movement.
+        /// </summary>
+        [Range(0, 1)] [SerializeField] float followDamping;
 
         Transform Transform { get; set; }
         Camera Camera { get; set; }
@@ -12,7 +18,7 @@ namespace Scripts.Graphics
         void Awake()
         {
             Transform = transform;
-            Camera = GetComponent<UnityEngine.Camera>();
+            Camera = GetComponent<Camera>();
 
             Locator.CameraComponent = this;
         }
@@ -21,7 +27,7 @@ namespace Scripts.Graphics
         {
             var targetPosition = (Vector2)Locator.PlayerComponent.transform.position;
 
-            targetPosition = Vector2.Lerp(transform.position, targetPosition, Time.deltaTime * 1 / _followDamping);
+            targetPosition = Vector2.Lerp(transform.position, targetPosition, Time.deltaTime * 1 / followDamping);
 
             Transform.position = new Vector3(targetPosition.x, targetPosition.y, Transform.position.z);
         }
