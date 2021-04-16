@@ -4,7 +4,10 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "HotlineHyrule"
+        "HotlineHyrule",
+        "Unity.InputSystem",
+        "Unity.InputSystem.TestFramework",
+        "Unity.InputSystem.IntegrationTests"
     ],
     "includePlatforms": [
         "Editor"

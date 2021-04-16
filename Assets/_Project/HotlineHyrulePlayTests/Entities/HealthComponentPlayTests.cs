@@ -2,10 +2,12 @@
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.UI;
 
 namespace HotlineHyrulePlayTests.Entities
 {
-    public class HealthComponentPlayTests
+    public class HealthComponentPlayTests : InputTestFixture
     {
         [Test]
         public void ShouldSetStartHealth()
@@ -27,31 +29,35 @@ namespace HotlineHyrulePlayTests.Entities
             Assert.AreEqual(75, health);
         }
 
-        // [Test]
-        // public void ShouldResetHealthOnRespawn()
-        // {
-        //     var healthComponent = GetDummy(500, 500);
-        //     var testEntity = healthComponent.gameObject;
-        //     testEntity.AddComponent<Rigidbody2D>();
-        //     var respawnComponent = testEntity.AddComponent<RespawnComponent>();
-        //     healthComponent.HealthChanged += respawnComponent.OnHealthChanged;
-        //     respawnComponent.Respawned += healthComponent.OnRespawned;
-        //     var context = new InputAction.CallbackContext();
-        //
-        //     healthComponent.Health -= 500;
-        //      respawnComponent.OnButtonRespawn(context);
-        //     var health = healthComponent.Health;
-        //     
-        //     Assert.AreEqual(500, health);
-        // }
+        [Test]
+        public void ShouldResetHealthOnRespawn()
+        {
+            var keyboard = InputSystem.AddDevice<Keyboard>();
+            var healthComponent = GetDummy(500, 500, true);
 
-        static HealthComponent GetDummy(int maxHealth = 100, int startHealth = 100)
+            healthComponent.Health -= 500; 
+            PressAndRelease(keyboard.rKey);
+            
+            var health = healthComponent.Health;
+            
+            Assert.AreEqual(500, health);
+        }
+
+        static HealthComponent GetDummy(int maxHealth = 100, int startHealth = 100, bool withRespawnComponent = false)
         {
             var testEntity = new GameObject();
             testEntity.SetActive(false);
             var healthComponent = testEntity.AddComponent<HealthComponent>();
             healthComponent.maxHealth = maxHealth;
             healthComponent.startHealth = startHealth;
+
+            if (withRespawnComponent)
+            {
+                testEntity.AddComponent<Rigidbody2D>();
+                var respawnComponent = testEntity.AddComponent<RespawnComponent>();
+                respawnComponent.respawnAction = new InputAction("respawnAction", binding: "<Keyboard>/r");
+            }
+            
             testEntity.SetActive(true);
 
             return healthComponent;
