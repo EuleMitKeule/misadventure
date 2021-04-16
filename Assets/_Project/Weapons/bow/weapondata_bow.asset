@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
   m_Name: weapondata_bow
   m_EditorClassIdentifier: 
-  _weaponName: bow
-  _deadzoneRadius: 1
-  _fireSpeed: 3
-  _bulletSpeed: 25
-  _bulletPrefab: {fileID: 8636156419958803353, guid: 07c24f9187b030848977eb21dc349ec5, type: 3}
-  _weaponSprite: {fileID: 21300000, guid: 8f46798eeb17574499244bdea38a4e2e, type: 3}
+  weaponName: bow
+  deadzoneRadius: 1
+  attackRate: 5
+  weaponSprite: {fileID: -7628560355056779072, guid: ecbf13aefbfb7324481a8b0225dc3ca7, type: 3}
+  bulletSpeed: 20
+  bulletPrefab: {fileID: 8636156419958803353, guid: 07c24f9187b030848977eb21dc349ec5, type: 3}
