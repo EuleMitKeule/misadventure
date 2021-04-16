@@ -4,7 +4,13 @@ namespace HotlineHyrule.Weapons
 {
     public class BulletComponent : MonoBehaviour
     {
+        /// <summary>
+        /// The sprite changed to after an impact.
+        /// </summary>
         [SerializeField] Sprite impactSprite;
+        /// <summary>
+        /// Layermask that contains layers that count as impacts.
+        /// </summary>
         [SerializeField] public LayerMask impactMask;
 
         SpriteRenderer SpriteRenderer { get; set; }

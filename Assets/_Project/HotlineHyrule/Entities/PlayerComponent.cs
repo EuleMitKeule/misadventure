@@ -19,6 +19,9 @@ namespace HotlineHyrule.Entities
         /// </summary>
         [SerializeField] float moveDamping;
 
+        /// <summary>
+        /// The minimum amount of velocity that is considered movement for animation purposes.
+        /// </summary>
         [Header("Animation")]
         [SerializeField] float moveAnimationThreshold;
 
@@ -28,6 +31,9 @@ namespace HotlineHyrule.Entities
         [Header("Input")]
         [SerializeField] InputAction walkAction;
 
+        /// <summary>
+        /// The hash ID of isMoving in the leg animator.
+        /// </summary>
         static readonly int AnimIsMoving = Animator.StringToHash("isMoving");
 
         /// <summary>
@@ -115,6 +121,9 @@ namespace HotlineHyrule.Entities
             WalkAxis = Vector2.MoveTowards(WalkAxis, value, 1 / moveDamping);
         }
 
+        /// <summary>
+        /// Performs changes in animation.
+        /// </summary>
         void HandleAnimation()
         {
             AnimatorLegs.SetBool(AnimIsMoving, IsMoving);

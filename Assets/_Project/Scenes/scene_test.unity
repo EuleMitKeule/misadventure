@@ -29967,6 +29967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   moveDamping: 2
+  moveAnimationThreshold: 0.1
   walkAction:
     m_Name: Walk
     m_Type: 0
