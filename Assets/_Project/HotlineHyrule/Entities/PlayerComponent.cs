@@ -19,11 +19,16 @@ namespace HotlineHyrule.Entities
         /// </summary>
         [SerializeField] float moveDamping;
 
+        [Header("Animation")]
+        [SerializeField] float moveAnimationThreshold;
+
         /// <summary>
         /// The movement input action.
         /// </summary>
         [Header("Input")]
         [SerializeField] InputAction walkAction;
+
+        static readonly int AnimIsMoving = Animator.StringToHash("isMoving");
 
         /// <summary>
         /// The damped input axis.
@@ -65,15 +70,18 @@ namespace HotlineHyrule.Entities
         /// The position of the look target clamped to the outside of the deadzone.
         /// </summary>
         Vector2 ClampedMousePosition => IsInDeadzone ? DeadzonedMousePosition : MousePosition;
-
+        bool IsMoving => Rigidbody.velocity.magnitude > moveAnimationThreshold;
+        
         Rigidbody2D Rigidbody { get; set; }
         WeaponComponent WeaponComponent { get; set; }
+        Animator AnimatorLegs { get; set; }
         Camera CameraMain { get; set; }
 
         void Awake()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
             WeaponComponent = GetComponentInChildren<WeaponComponent>();
+            AnimatorLegs = GetComponentInChildren<Animator>();
 
             Locator.PlayerComponent = this;
         }
@@ -88,6 +96,7 @@ namespace HotlineHyrule.Entities
         void Update()
         {
             ProcessInput();
+            HandleAnimation();
         }
 
         void FixedUpdate()
@@ -104,6 +113,11 @@ namespace HotlineHyrule.Entities
         {
             var value = walkAction.ReadValue<Vector2>();
             WalkAxis = Vector2.MoveTowards(WalkAxis, value, 1 / moveDamping);
+        }
+
+        void HandleAnimation()
+        {
+            AnimatorLegs.SetBool(AnimIsMoving, IsMoving);
         }
     }
 }

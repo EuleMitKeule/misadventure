@@ -29,8 +29,6 @@ namespace HotlineHyrule.Entities
             {
                 var lastHealth = _health;
                 _health = Mathf.Clamp(value, 0, maxHealth);
-                
-                Debug.Log($"{value} => {_health}");
 
                 var healthEventArgs = new HealthEventArgs(_health, value - lastHealth);
                 HealthChanged?.Invoke(this, healthEventArgs);
@@ -65,7 +63,6 @@ namespace HotlineHyrule.Entities
         /// <param name="e"></param>
         void OnRespawned(object sender, EventArgs e)
         {
-            Debug.Log("OnRespawned");
             ResetHealth();
         }
     }
