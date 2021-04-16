@@ -219,22 +219,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc02a9332fd21e4a8d86815c5707eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponData: {fileID: 11400000, guid: dda91c349427f7946824aa6c4c95778e, type: 2}
-  _fireAction:
-    m_Name: Fire
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: 645b8372-2f77-452f-9efc-a3703b445400
+  weaponData: {fileID: 11400000, guid: dda91c349427f7946824aa6c4c95778e, type: 2}
+  attackAction:
+    m_Name: Attack
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c9ae5100-a512-402c-80ec-35e8979a038d
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 70102be9-cb2b-4dec-a76d-6a2bf8d01de5
+      m_Id: 1dc2e937-35eb-47fd-8748-90888e096f4b
       m_Path: <Mouse>/leftButton
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Fire
+      m_Action: Attack
       m_Flags: 0
 --- !u!1 &87118586
 GameObject:

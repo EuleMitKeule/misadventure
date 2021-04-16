@@ -37,17 +37,20 @@ namespace HotlineHyrule.Entities
         {
             HealthComponent = GetComponent<HealthComponent>();
             Rigidbody = GetComponent<Rigidbody2D>();
-
-            var playerComponent = GetComponent<PlayerComponent>();
-            var enemyComponent = GetComponent<EnemyComponent>();
-
-            if (playerComponent != null) RespawnPosition = Locator.LevelComponent.playerRespawnPosition.ToWorld();
-            else if (enemyComponent != null) RespawnPosition = enemyComponent.respawnPoint.ToWorld();
             
             HealthComponent.HealthChanged += OnHealthChanged;
             respawnAction.started += OnButtonRespawn;
 
             respawnAction.Enable();
+        }
+
+        void Start()
+        {
+            var playerComponent = GetComponent<PlayerComponent>();
+            var enemyComponent = GetComponent<EnemyComponent>();
+
+            if (playerComponent) RespawnPosition = Locator.LevelComponent.playerRespawnPosition.ToWorld();
+            else if (enemyComponent) RespawnPosition = enemyComponent.respawnPoint.ToWorld();
         }
 
         /// <summary>

@@ -1,3 +1,4 @@
+using HotlineHyrule.Entities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,6 +24,10 @@ namespace HotlineHyrule.Weapons
         float LastAttackTime { get; set; }
 
         /// <summary>
+        /// Whether the weapon component's parent is the player.
+        /// </summary>
+        bool IsPlayer => GetComponentInParent<PlayerComponent>();
+        /// <summary>
         /// Whether the attack input is currently being registered.
         /// </summary>
         bool IsAttacking => attackAction.ReadValue<float>() != 0f;
@@ -32,10 +37,12 @@ namespace HotlineHyrule.Weapons
         bool CanAttack => Time.time >= LastAttackTime + 1 / weaponData.attackRate;
 
         Transform Transform { get; set; }
+        SpriteRenderer SpriteRenderer { get; set; }
 
         void Awake()
         {
             Transform = transform;
+            SpriteRenderer = GetComponent<SpriteRenderer>();
 
             attackAction.Enable();
         }
@@ -45,7 +52,11 @@ namespace HotlineHyrule.Weapons
             if (IsAttacking) PerformAttack();
         }
 
-        public void SetWeapon(WeaponData weaponData) => this.weaponData = weaponData;
+        public void SetWeapon(WeaponData newWeaponData)
+        {
+            weaponData = newWeaponData;
+            SpriteRenderer.sprite = newWeaponData.weaponSprite;
+        }
 
         /// <summary>
         /// Performs an attack if possible.
@@ -55,15 +66,24 @@ namespace HotlineHyrule.Weapons
             if (!CanAttack) return;
             LastAttackTime = Time.time;
 
-            if (weaponData is RangedWeaponData rangedWeaponData)
-            {
-                var bulletObject = Instantiate(rangedWeaponData.bulletPrefab, Transform.position, Transform.rotation);
-                var bulletRigidbody = bulletObject.GetComponent<Rigidbody2D>();
+            if (weaponData is RangedWeaponData rangedWeaponData) PerformRangedAttack(rangedWeaponData);
+        }
 
-                bulletRigidbody.velocity = Transform.up * rangedWeaponData.bulletSpeed;
+        void PerformRangedAttack(RangedWeaponData rangedWeaponData)
+        {
+            var bulletObject = Instantiate(rangedWeaponData.bulletPrefab, Transform.position, Transform.rotation);
 
-                Destroy(bulletObject, 10f);
-            }
+            bulletObject.SetActive(false);
+
+            var bulletComponent = bulletObject.GetComponent<BulletComponent>();
+            bulletComponent.impactMask = new LayerMask();
+            bulletComponent.impactMask.value |= 1 << PhysicsLayer.WALL;
+            bulletComponent.impactMask.value |= 1 << (IsPlayer ? PhysicsLayer.ENEMY : PhysicsLayer.PLAYER);
+
+            bulletObject.SetActive(true);
+
+            var bulletRigidbody = bulletObject.GetComponent<Rigidbody2D>();
+            bulletRigidbody.velocity = Transform.up * rangedWeaponData.bulletSpeed;
         }
     }
 }
