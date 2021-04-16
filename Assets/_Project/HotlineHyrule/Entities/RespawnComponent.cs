@@ -14,7 +14,7 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// The respawn input action.
         /// </summary>
-        [SerializeField] InputAction respawnAction;
+        [SerializeField] public InputAction respawnAction;
         
         /// <summary>
         /// Whether the player is currently dead.

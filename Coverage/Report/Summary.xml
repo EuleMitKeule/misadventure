@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>4/16/2021 - 8:09:09 PM</Generatedon>
+    <Parser>MultiReportParser (2x OpenCoverParser)</Parser>
+    <Assemblies>3</Assemblies>
+    <Classes>11</Classes>
+    <Files>11</Files>
+    <Coveredlines>124</Coveredlines>
+    <Uncoveredlines>76</Uncoveredlines>
+    <Coverablelines>200</Coverablelines>
+    <Totallines>596</Totallines>
+    <Linecoverage>62</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+  </Summary>
+  <Coverage>
+    <Assembly name="HotlineHyrule" classes="9" coverage="38.7" coveredlines="48" coverablelines="124" totallines="444" branchcoverage="" coveredbranches="0" totalbranches="0">
+      <Class name="HotlineHyrule.Entities.HealthComponent" coverage="100" coveredlines="19" coverablelines="19" totallines="72" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Entities.HealthEventArgs" coverage="100" coveredlines="4" coverablelines="4" totallines="19" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Entities.PlayerComponent" coverage="0" coveredlines="0" coverablelines="34" totallines="109" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Entities.RespawnComponent" coverage="100" coveredlines="25" coverablelines="25" totallines="79" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Extensions.Vector2IntExtensions" coverage="0" coveredlines="0" coverablelines="1" totallines="14" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Graphics.CameraComponent" coverage="0" coveredlines="0" coverablelines="12" totallines="35" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Level.LevelComponent" coverage="0" coveredlines="0" coverablelines="3" totallines="20" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Locator" coverage="0" coveredlines="0" coverablelines="3" totallines="27" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Weapons.WeaponComponent" coverage="0" coveredlines="0" coverablelines="23" totallines="69" branchcoverage="" coveredbranches="0" totalbranches="0" />
+    </Assembly>
+    <Assembly name="HotlineHyrulePlayTests" classes="1" coverage="100" coveredlines="33" coverablelines="33" totallines="66" branchcoverage="" coveredbranches="0" totalbranches="0">
+      <Class name="HotlineHyrulePlayTests.Entities.HealthComponentPlayTests" coverage="100" coveredlines="33" coverablelines="33" totallines="66" branchcoverage="" coveredbranches="0" totalbranches="0" />
+    </Assembly>
+    <Assembly name="HotlineHyruleTests" classes="1" coverage="100" coveredlines="43" coverablelines="43" totallines="86" branchcoverage="" coveredbranches="0" totalbranches="0">
+      <Class name="HotlineHyruleTests.Entities.HealthComponentTests" coverage="100" coveredlines="43" coverablelines="43" totallines="86" branchcoverage="" coveredbranches="0" totalbranches="0" />
+    </Assembly>
+  </Coverage>
+</CoverageReport>
