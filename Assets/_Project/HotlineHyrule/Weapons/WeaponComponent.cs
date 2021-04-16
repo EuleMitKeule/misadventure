@@ -69,6 +69,10 @@ namespace HotlineHyrule.Weapons
             if (weaponData is RangedWeaponData rangedWeaponData) PerformRangedAttack(rangedWeaponData);
         }
 
+        /// <summary>
+        /// Performs a ranged attack with the passed ranged weapon.
+        /// </summary>
+        /// <param name="rangedWeaponData">The ranged weapon to perform the attack with.</param>
         void PerformRangedAttack(RangedWeaponData rangedWeaponData)
         {
             var bulletObject = Instantiate(rangedWeaponData.bulletPrefab, Transform.position, Transform.rotation);
