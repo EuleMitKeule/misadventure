@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2021-04-18_19-04-20" tag="">
+  <assembly name="HotlineHyrule">
+    <class name="HotlineHyrule.Entities.HealthComponent" coveredlines="26" coverablelines="36" totallines="69" coveredbranches="0" totalbranches="0" />
+    <class name="HotlineHyrule.Entities.HealthEventArgs" coveredlines="8" coverablelines="8" totallines="19" coveredbranches="0" totalbranches="0" />
+    <class name="HotlineHyrule.Entities.PlayerComponent" coveredlines="0" coverablelines="76" totallines="132" coveredbranches="0" totalbranches="0" />
+    <class name="HotlineHyrule.Entities.RespawnComponent" coveredlines="25" coverablelines="52" totallines="82" coveredbranches="0" totalbranches="0" />
+    <class name="HotlineHyrule.Extensions.Vector2IntExtensions" coveredlines="0" coverablelines="2" totallines="14" coveredbranches="0" totalbranches="0" />
+    <class name="HotlineHyrule.Graphics.CameraComponent" coveredlines="0" coverablelines="24" totallines="35" coveredbranches="0" totalbranches="0" />
+    <class name="HotlineHyrule.Level.LevelComponent" coveredlines="0" coverablelines="6" totallines="20" coveredbranches="0" totalbranches="0" />
+    <class name="HotlineHyrule.Locator" coveredlines="0" coverablelines="6" totallines="27" coveredbranches="0" totalbranches="0" />
+    <class name="HotlineHyrule.Weapons.ProjectileComponent" coveredlines="0" coverablelines="32" totallines="83" coveredbranches="0" totalbranches="0" />
+    <class name="HotlineHyrule.Weapons.WeaponComponent" coveredlines="0" coverablelines="62" totallines="116" coveredbranches="0" totalbranches="0" />
+  </assembly>
+  <assembly name="HotlineHyrulePlayTests">
+    <class name="HotlineHyrulePlayTests.Entities.HealthComponentPlayTests" coveredlines="33" coverablelines="66" totallines="66" coveredbranches="0" totalbranches="0" />
+  </assembly>
+  <assembly name="HotlineHyruleTests">
+    <class name="HotlineHyruleTests.Entities.HealthComponentTests" coveredlines="86" coverablelines="86" totallines="86" coveredbranches="0" totalbranches="0" />
+  </assembly>
+</coverage>
