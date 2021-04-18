@@ -67,11 +67,11 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// Whether the look target is within the weapon's deadzone.
         /// </summary>
-        bool IsInDeadzone => LookDistance < WeaponComponent.weaponData.deadzoneRadius;
+        bool IsInDeadzone => LookDistance < WeaponComponent.RangedWeaponData.deadzoneRadius;
         /// <summary>
         /// The position of the look target projected onto the deadzone circle.
         /// </summary>
-        Vector2 DeadzonedMousePosition => Rigidbody.position + LookDirection * WeaponComponent.weaponData.deadzoneRadius;
+        Vector2 DeadzonedMousePosition => Rigidbody.position + LookDirection * WeaponComponent.RangedWeaponData.deadzoneRadius;
         /// <summary>
         /// The position of the look target clamped to the outside of the deadzone.
         /// </summary>
@@ -109,7 +109,7 @@ namespace HotlineHyrule.Entities
         {
             Rigidbody.velocity = speed * WalkAxis;
             Rigidbody.rotation = LookAngle;
-            WeaponComponent.transform.rotation = Quaternion.Euler(0, 0, WeaponAngle);
+            if (WeaponComponent.HasRangedWeapon) WeaponComponent.transform.rotation = Quaternion.Euler(0, 0, WeaponAngle);
         }
 
         /// <summary>

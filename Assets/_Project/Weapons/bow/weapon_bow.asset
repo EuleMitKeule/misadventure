@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
-  m_Name: weapondata_bow
+  m_Name: weapon_bow
   m_EditorClassIdentifier: 
   weaponName: bow
-  deadzoneRadius: 1
   attackRate: 5
   weaponSprite: {fileID: 3798580205297923336, guid: bda38d274f999dc4c8a867c33cb4a2e4, type: 3}
-  projectileSpeed: 20
-  projectilePrefab: {fileID: 8636156419958803353, guid: 07c24f9187b030848977eb21dc349ec5, type: 3}
-  spawnPosition: {x: 0.0313, y: 0.56}
+  attackAnimation: {fileID: 0}
+  attackParticleSystemPrefab: {fileID: 0}
+  deadzoneRadius: 1
+  projectileSpeed: 0
+  projectilePrefab: {fileID: 0}
+  spawnPosition: {x: 0, y: 0}

@@ -9,6 +9,10 @@ namespace HotlineHyrule.Weapons
     public class RangedWeaponData : WeaponData
     {
         /// <summary>
+        /// The radius of the look target's deadzone around the player.
+        /// </summary>
+        [SerializeField] public float deadzoneRadius;
+        /// <summary>
         /// The speed a shot projectile travels at.
         /// </summary>
         [SerializeField] public float projectileSpeed;
