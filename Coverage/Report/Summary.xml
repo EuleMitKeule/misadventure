@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>18.04.2021 - 19:04:21</Generatedon>
+    <Generatedon>18.04.2021 - 23:47:35</Generatedon>
     <Parser>MultiReportParser (3x OpenCoverParser)</Parser>
     <Assemblies>3</Assemblies>
     <Classes>12</Classes>
@@ -9,29 +9,29 @@
     <Coveredlines>178</Coveredlines>
     <Uncoveredlines>278</Uncoveredlines>
     <Coverablelines>456</Coverablelines>
-    <Totallines>749</Totallines>
+    <Totallines>0</Totallines>
     <Linecoverage>39</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
   </Summary>
   <Coverage>
-    <Assembly name="HotlineHyrule" classes="10" coverage="19.4" coveredlines="59" coverablelines="304" totallines="597" branchcoverage="" coveredbranches="0" totalbranches="0">
-      <Class name="HotlineHyrule.Entities.HealthComponent" coverage="72.2" coveredlines="26" coverablelines="36" totallines="69" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="HotlineHyrule.Entities.HealthEventArgs" coverage="100" coveredlines="8" coverablelines="8" totallines="19" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="HotlineHyrule.Entities.PlayerComponent" coverage="0" coveredlines="0" coverablelines="76" totallines="132" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="HotlineHyrule.Entities.RespawnComponent" coverage="48" coveredlines="25" coverablelines="52" totallines="82" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="HotlineHyrule.Extensions.Vector2IntExtensions" coverage="0" coveredlines="0" coverablelines="2" totallines="14" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="HotlineHyrule.Graphics.CameraComponent" coverage="0" coveredlines="0" coverablelines="24" totallines="35" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="HotlineHyrule.Level.LevelComponent" coverage="0" coveredlines="0" coverablelines="6" totallines="20" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="HotlineHyrule.Locator" coverage="0" coveredlines="0" coverablelines="6" totallines="27" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="HotlineHyrule.Weapons.ProjectileComponent" coverage="0" coveredlines="0" coverablelines="32" totallines="83" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="HotlineHyrule.Weapons.WeaponComponent" coverage="0" coveredlines="0" coverablelines="62" totallines="116" branchcoverage="" coveredbranches="0" totalbranches="0" />
+    <Assembly name="HotlineHyrule" classes="10" coverage="19.4" coveredlines="59" coverablelines="304" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0">
+      <Class name="HotlineHyrule.Entities.HealthComponent" coverage="72.2" coveredlines="26" coverablelines="36" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Entities.HealthEventArgs" coverage="100" coveredlines="8" coverablelines="8" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Entities.PlayerComponent" coverage="0" coveredlines="0" coverablelines="76" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Entities.RespawnComponent" coverage="48" coveredlines="25" coverablelines="52" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Extensions.Vector2IntExtensions" coverage="0" coveredlines="0" coverablelines="2" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Graphics.CameraComponent" coverage="0" coveredlines="0" coverablelines="24" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Level.LevelComponent" coverage="0" coveredlines="0" coverablelines="6" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Locator" coverage="0" coveredlines="0" coverablelines="6" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Weapons.ProjectileComponent" coverage="0" coveredlines="0" coverablelines="32" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="HotlineHyrule.Weapons.WeaponComponent" coverage="0" coveredlines="0" coverablelines="62" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
     </Assembly>
-    <Assembly name="HotlineHyrulePlayTests" classes="1" coverage="50" coveredlines="33" coverablelines="66" totallines="66" branchcoverage="" coveredbranches="0" totalbranches="0">
-      <Class name="HotlineHyrulePlayTests.Entities.HealthComponentPlayTests" coverage="50" coveredlines="33" coverablelines="66" totallines="66" branchcoverage="" coveredbranches="0" totalbranches="0" />
+    <Assembly name="HotlineHyrulePlayTests" classes="1" coverage="50" coveredlines="33" coverablelines="66" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0">
+      <Class name="HotlineHyrulePlayTests.Entities.HealthComponentPlayTests" coverage="50" coveredlines="33" coverablelines="66" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
     </Assembly>
-    <Assembly name="HotlineHyruleTests" classes="1" coverage="100" coveredlines="86" coverablelines="86" totallines="86" branchcoverage="" coveredbranches="0" totalbranches="0">
-      <Class name="HotlineHyruleTests.Entities.HealthComponentTests" coverage="100" coveredlines="86" coverablelines="86" totallines="86" branchcoverage="" coveredbranches="0" totalbranches="0" />
+    <Assembly name="HotlineHyruleTests" classes="1" coverage="100" coveredlines="86" coverablelines="86" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0">
+      <Class name="HotlineHyruleTests.Entities.HealthComponentTests" coverage="100" coveredlines="86" coverablelines="86" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
     </Assembly>
   </Coverage>
 </CoverageReport>
