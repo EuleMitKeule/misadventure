@@ -35,6 +35,24 @@ namespace HotlineHyrule.Weapons
         /// Whether enough time has passed since the last usage for the weapon to be used again.
         /// </summary>
         bool CanAttack => Time.time >= LastAttackTime + 1 / weaponData.attackRate;
+        /// <summary>
+        /// Whether the current weapon is a ranged one.
+        /// </summary>
+        bool HasRangedWeapon => weaponData is RangedWeaponData;
+        /// <summary>
+        /// The ranged weapon data of the ranged weapon.
+        /// </summary>
+        RangedWeaponData RangedWeaponData => (RangedWeaponData) weaponData;
+        /// <summary>
+        /// The offset of the projectile spawn position relative to the weapon position.
+        /// </summary>
+        Vector3 ProjectileSpawnOffset =>
+            Transform.right * RangedWeaponData.spawnPosition.x +
+            Transform.up * RangedWeaponData.spawnPosition.y;
+        /// <summary>
+        /// The spawn position of the projectile.
+        /// </summary>
+        Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + Transform.position;
 
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
@@ -52,6 +70,10 @@ namespace HotlineHyrule.Weapons
             if (IsAttacking) PerformAttack();
         }
 
+        /// <summary>
+        /// Sets the current weapon to the given one.
+        /// </summary>
+        /// <param name="newWeaponData"></param>
         public void SetWeapon(WeaponData newWeaponData)
         {
             weaponData = newWeaponData;
@@ -66,28 +88,29 @@ namespace HotlineHyrule.Weapons
             if (!CanAttack) return;
             LastAttackTime = Time.time;
 
-            if (weaponData is RangedWeaponData rangedWeaponData) PerformRangedAttack(rangedWeaponData);
+            if (HasRangedWeapon) PerformRangedAttack();
         }
 
         /// <summary>
-        /// Performs a ranged attack with the passed ranged weapon.
+        /// Performs a ranged attack with the equipped ranged weapon.
         /// </summary>
-        /// <param name="rangedWeaponData">The ranged weapon to perform the attack with.</param>
-        void PerformRangedAttack(RangedWeaponData rangedWeaponData)
+        void PerformRangedAttack()
         {
-            var bulletObject = Instantiate(rangedWeaponData.bulletPrefab, Transform.position, Transform.rotation);
+            if (!HasRangedWeapon) return;
+            
+            var projectileObject = Instantiate(RangedWeaponData.projectilePrefab, ProjectileSpawnPosition, Transform.rotation);
 
-            bulletObject.SetActive(false);
+            projectileObject.SetActive(false);
 
-            var bulletComponent = bulletObject.GetComponent<BulletComponent>();
-            bulletComponent.impactMask = new LayerMask();
-            bulletComponent.impactMask.value |= 1 << PhysicsLayer.WALL;
-            bulletComponent.impactMask.value |= 1 << (IsPlayer ? PhysicsLayer.ENEMY : PhysicsLayer.PLAYER);
+            var projectileComponent = projectileObject.GetComponent<ProjectileComponent>();
+            projectileComponent.impactMask = new LayerMask();
+            projectileComponent.impactMask.value |= 1 << PhysicsLayer.WALL;
+            projectileComponent.impactMask.value |= 1 << (IsPlayer ? PhysicsLayer.ENEMY : PhysicsLayer.PLAYER);
 
-            bulletObject.SetActive(true);
+            projectileObject.SetActive(true);
 
-            var bulletRigidbody = bulletObject.GetComponent<Rigidbody2D>();
-            bulletRigidbody.velocity = Transform.up * rangedWeaponData.bulletSpeed;
+            var projectileRigidbody = projectileObject.GetComponent<Rigidbody2D>();
+            projectileRigidbody.velocity = Transform.up * RangedWeaponData.projectileSpeed;
         }
     }
 }

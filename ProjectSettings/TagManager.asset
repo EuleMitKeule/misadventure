@@ -13,7 +13,7 @@ TagManager:
   - UI
   - player
   - enemy
-  - bullet
+  - projectile
   - wall
   - 
   - 
@@ -44,7 +44,7 @@ TagManager:
   - name: ground
     uniqueID: 36160119
     locked: 0
-  - name: bullet
+  - name: projectile
     uniqueID: 3603694441
     locked: 0
   - name: player
