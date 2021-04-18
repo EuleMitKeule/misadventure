@@ -36,6 +36,14 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         bool CanAttack => Time.time >= LastAttackTime + 1 / weaponData.attackRate;
 
+        bool HasRangedWeapon => weaponData is RangedWeaponData;
+        RangedWeaponData RangedWeaponData => (RangedWeaponData) weaponData;
+
+        Vector3 ProjectileSpawnOffset =>
+            Transform.right * RangedWeaponData.spawnPosition.x +
+            Transform.up * RangedWeaponData.spawnPosition.y;
+        Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + Transform.position;
+
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
 
@@ -66,16 +74,17 @@ namespace HotlineHyrule.Weapons
             if (!CanAttack) return;
             LastAttackTime = Time.time;
 
-            if (weaponData is RangedWeaponData rangedWeaponData) PerformRangedAttack(rangedWeaponData);
+            if (HasRangedWeapon) PerformRangedAttack();
         }
 
         /// <summary>
-        /// Performs a ranged attack with the passed ranged weapon.
+        /// Performs a ranged attack with the equipped ranged weapon.
         /// </summary>
-        /// <param name="rangedWeaponData">The ranged weapon to perform the attack with.</param>
-        void PerformRangedAttack(RangedWeaponData rangedWeaponData)
+        void PerformRangedAttack()
         {
-            var bulletObject = Instantiate(rangedWeaponData.bulletPrefab, Transform.position, Transform.rotation);
+            if (!HasRangedWeapon) return;
+            
+            var bulletObject = Instantiate(RangedWeaponData.bulletPrefab, ProjectileSpawnPosition, Transform.rotation);
 
             bulletObject.SetActive(false);
 
@@ -87,7 +96,7 @@ namespace HotlineHyrule.Weapons
             bulletObject.SetActive(true);
 
             var bulletRigidbody = bulletObject.GetComponent<Rigidbody2D>();
-            bulletRigidbody.velocity = Transform.up * rangedWeaponData.bulletSpeed;
+            bulletRigidbody.velocity = Transform.up * RangedWeaponData.bulletSpeed;
         }
     }
 }

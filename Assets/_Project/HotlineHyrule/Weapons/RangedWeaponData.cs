@@ -16,5 +16,9 @@ namespace HotlineHyrule.Weapons
         /// The prefab used for spawning a bullet.
         /// </summary>
         [SerializeField] public GameObject bulletPrefab;
+        /// <summary>
+        /// The position the projectile is shot from.
+        /// </summary>
+        [SerializeField] public Vector2 spawnPosition;
     }
 }
