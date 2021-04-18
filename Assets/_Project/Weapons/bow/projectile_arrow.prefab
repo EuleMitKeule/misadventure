@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9011057950913740938}
   - component: {fileID: 1891562443640535959}
   m_Layer: 8
-  m_Name: bullet_arrow
+  m_Name: projectile_arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,6 +123,7 @@ MonoBehaviour:
   impactMask:
     serializedVersion: 2
     m_Bits: 0
+  impactRaycastOffset: -0.1
 --- !u!70 &1891562443640535959
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

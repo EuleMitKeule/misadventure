@@ -35,13 +35,23 @@ namespace HotlineHyrule.Weapons
         /// Whether enough time has passed since the last usage for the weapon to be used again.
         /// </summary>
         bool CanAttack => Time.time >= LastAttackTime + 1 / weaponData.attackRate;
-
+        /// <summary>
+        /// Whether the current weapon is a ranged one.
+        /// </summary>
         bool HasRangedWeapon => weaponData is RangedWeaponData;
+        /// <summary>
+        /// The ranged weapon data of the ranged weapon.
+        /// </summary>
         RangedWeaponData RangedWeaponData => (RangedWeaponData) weaponData;
-
+        /// <summary>
+        /// The offset of the projectile spawn position relative to the weapon position.
+        /// </summary>
         Vector3 ProjectileSpawnOffset =>
             Transform.right * RangedWeaponData.spawnPosition.x +
             Transform.up * RangedWeaponData.spawnPosition.y;
+        /// <summary>
+        /// The spawn position of the projectile.
+        /// </summary>
         Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + Transform.position;
 
         Transform Transform { get; set; }
@@ -60,6 +70,10 @@ namespace HotlineHyrule.Weapons
             if (IsAttacking) PerformAttack();
         }
 
+        /// <summary>
+        /// Sets the current weapon to the given one.
+        /// </summary>
+        /// <param name="newWeaponData"></param>
         public void SetWeapon(WeaponData newWeaponData)
         {
             weaponData = newWeaponData;
