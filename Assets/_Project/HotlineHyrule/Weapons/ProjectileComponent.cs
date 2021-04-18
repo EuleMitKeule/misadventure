@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace HotlineHyrule.Weapons
 {
-    public class BulletComponent : MonoBehaviour
+    public class ProjectileComponent : MonoBehaviour
     {
         /// <summary>
         /// The sprite changed to after an impact.

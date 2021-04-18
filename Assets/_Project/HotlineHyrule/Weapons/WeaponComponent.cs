@@ -84,19 +84,19 @@ namespace HotlineHyrule.Weapons
         {
             if (!HasRangedWeapon) return;
             
-            var bulletObject = Instantiate(RangedWeaponData.bulletPrefab, ProjectileSpawnPosition, Transform.rotation);
+            var projectileObject = Instantiate(RangedWeaponData.projectilePrefab, ProjectileSpawnPosition, Transform.rotation);
 
-            bulletObject.SetActive(false);
+            projectileObject.SetActive(false);
 
-            var bulletComponent = bulletObject.GetComponent<BulletComponent>();
-            bulletComponent.impactMask = new LayerMask();
-            bulletComponent.impactMask.value |= 1 << PhysicsLayer.WALL;
-            bulletComponent.impactMask.value |= 1 << (IsPlayer ? PhysicsLayer.ENEMY : PhysicsLayer.PLAYER);
+            var projectileComponent = projectileObject.GetComponent<ProjectileComponent>();
+            projectileComponent.impactMask = new LayerMask();
+            projectileComponent.impactMask.value |= 1 << PhysicsLayer.WALL;
+            projectileComponent.impactMask.value |= 1 << (IsPlayer ? PhysicsLayer.ENEMY : PhysicsLayer.PLAYER);
 
-            bulletObject.SetActive(true);
+            projectileObject.SetActive(true);
 
-            var bulletRigidbody = bulletObject.GetComponent<Rigidbody2D>();
-            bulletRigidbody.velocity = Transform.up * RangedWeaponData.bulletSpeed;
+            var projectileRigidbody = projectileObject.GetComponent<Rigidbody2D>();
+            projectileRigidbody.velocity = Transform.up * RangedWeaponData.projectileSpeed;
         }
     }
 }

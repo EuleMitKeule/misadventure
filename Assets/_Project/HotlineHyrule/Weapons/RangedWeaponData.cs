@@ -9,13 +9,13 @@ namespace HotlineHyrule.Weapons
     public class RangedWeaponData : WeaponData
     {
         /// <summary>
-        /// The speed a shot bullet travels at.
+        /// The speed a shot projectile travels at.
         /// </summary>
-        [SerializeField] public float bulletSpeed;
+        [SerializeField] public float projectileSpeed;
         /// <summary>
-        /// The prefab used for spawning a bullet.
+        /// The prefab used for spawning a projectile.
         /// </summary>
-        [SerializeField] public GameObject bulletPrefab;
+        [SerializeField] public GameObject projectilePrefab;
         /// <summary>
         /// The position the projectile is shot from.
         /// </summary>

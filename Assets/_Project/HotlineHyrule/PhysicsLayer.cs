@@ -4,7 +4,7 @@ namespace HotlineHyrule
     {
         public const int PLAYER = 6;
         public const int ENEMY = 7;
-        public const int BULLET = 8;
+        public const int PROJECTILE = 8;
         public const int WALL = 9;
     }
 }
