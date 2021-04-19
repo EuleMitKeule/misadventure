@@ -16,10 +16,9 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         [SerializeField] public float attackRate;
         /// <summary>
-        /// The sprite of the weapon.
+        /// The damage a hit of the weapon deals.
         /// </summary>
-        [SerializeField] public Sprite weaponSprite;
-        [SerializeField] Animation attackAnimation;
-        [SerializeField] GameObject attackParticleSystemPrefab;
+        [SerializeField] public int damage;
+        [SerializeField] public GameObject weaponPrefab;
     }
 }

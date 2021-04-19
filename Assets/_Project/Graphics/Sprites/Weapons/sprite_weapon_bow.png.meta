@@ -4,13 +4,16 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 3798580205297923336
-    second: sprite_weapon_bow
+    second: sprite_weapon_bow_idle
   - first:
       213: -867335307708292600
     second: sprite_bullet_arrow_stuck
   - first:
       213: -8914936383423489892
     second: sprite_bullet_arrow
+  - first:
+      213: 5986933845083683317
+    second: sprite_weapon_bow_attack
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -100,15 +103,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_weapon_bow
+      name: sprite_weapon_bow_idle
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 13
-        height: 12
+        height: 14
       alignment: 9
-      pivot: {x: 0.4615385, y: 0.125}
+      pivot: {x: 0.4615385, y: 0.10714286}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -124,8 +127,8 @@ TextureImporter:
       name: sprite_bullet_arrow_stuck
       rect:
         serializedVersion: 2
-        x: 13
-        y: 0
+        x: 29
+        y: 4
         width: 3
         height: 10
       alignment: 0
@@ -145,8 +148,8 @@ TextureImporter:
       name: sprite_bullet_arrow
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 26
+        y: 4
         width: 3
         height: 10
       alignment: 0
@@ -158,6 +161,27 @@ TextureImporter:
       bones: []
       spriteID: c9856d6b798c74480800000000000000
       internalID: -8914936383423489892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_weapon_bow_attack
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 0
+        width: 13
+        height: 14
+      alignment: 9
+      pivot: {x: 0.4615385, y: 0.10714286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f9f9f9ac9cd51350800000000000000
+      internalID: 5986933845083683317
       vertices: []
       indices: 
       edges: []

@@ -6,7 +6,6 @@ namespace HotlineHyrule.Weapons
     [CreateAssetMenu(menuName = "Weapons/New Melee Weapon")]
     public class MeleeWeaponData : WeaponData
     {
-        [SerializeField] public List<MeleeAttackArea> attackAreas;
-        [SerializeField] public float areaAttackRate;
+        
     }
 }

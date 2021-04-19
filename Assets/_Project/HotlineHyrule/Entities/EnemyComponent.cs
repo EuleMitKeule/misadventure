@@ -20,10 +20,15 @@ namespace HotlineHyrule.Entities
         [SerializeField] public EnemyStateBaseComponent state;
 
         [HideInInspector] public EnemyStateBaseComponent patrolState;
+        
+        HealthComponent HealthComponent { get; set; }
 
         void Awake()
         {
             patrolState = GetComponent<EnemyStatePatrolComponent>();
+            HealthComponent = GetComponent<HealthComponent>();
+
+            HealthComponent.HealthChanged += OnHealthChanged;
         }
 
         void Start()
@@ -52,6 +57,13 @@ namespace HotlineHyrule.Entities
             if (state) state.Exit();
             state = newState;
             state.Setup();
+        }
+
+        void OnHealthChanged(object sender, HealthEventArgs e)
+        {
+            if (e.NewHealth > 0) return;
+            
+            Destroy(gameObject);
         }
     }
 }

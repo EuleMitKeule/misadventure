@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using HotlineHyrule.Entities;
 using HotlineHyrule.Extensions;
 using UnityEngine;
@@ -48,11 +50,10 @@ namespace HotlineHyrule.Weapons
         /// The ranged weapon data of the ranged weapon.
         /// </summary>
         public RangedWeaponData RangedWeaponData => (RangedWeaponData)weaponData;
-
+        MeleeWeaponData MeleeWeaponData => (MeleeWeaponData)weaponData;
         /// <summary>
         /// The offset of the projectile spawn position relative to the weapon position.
         /// </summary>
-        MeleeWeaponData MeleeWeaponData => (MeleeWeaponData)weaponData;
         Vector3 ProjectileSpawnOffset =>
             Transform.right * RangedWeaponData.spawnPosition.x +
             Transform.up * RangedWeaponData.spawnPosition.y;
@@ -60,16 +61,18 @@ namespace HotlineHyrule.Weapons
         /// The spawn position of the projectile.
         /// </summary>
         Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + Transform.position;
-        Coroutine MeleeAttackCoroutine { get; set; }
-
+        
+        GameObject WeaponObject { get; set; }
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
+        Animator Animator { get; set; }
 
         void Awake()
         {
             Transform = transform;
             SpriteRenderer = GetComponent<SpriteRenderer>();
 
+            if (weaponData) SetWeapon(weaponData);
             attackAction.Enable();
         }
 
@@ -85,7 +88,8 @@ namespace HotlineHyrule.Weapons
         public void SetWeapon(WeaponData newWeaponData)
         {
             weaponData = newWeaponData;
-            SpriteRenderer.sprite = newWeaponData.weaponSprite;
+            WeaponObject = Instantiate(weaponData.weaponPrefab, Transform);
+            Animator = GetComponentInChildren<Animator>();
         }
 
         /// <summary>
@@ -96,6 +100,8 @@ namespace HotlineHyrule.Weapons
             if (!CanAttack) return;
             LastAttackTime = Time.time;
 
+            Animator.SetTrigger("attack");
+            
             if (HasRangedWeapon) PerformRangedAttack();
             else if (HasMeleeWeapon) PerformMeleeAttack();
         }
@@ -126,33 +132,17 @@ namespace HotlineHyrule.Weapons
         {
             if (!HasMeleeWeapon) return;
             
-            StartMeleeAttackRoutine();
-        }
-
-        void StartMeleeAttackRoutine() => MeleeAttackCoroutine ??= StartCoroutine(MeleeAttackRoutine());
-
-        void StopMeleeAttackRoutine()
-        {
-            StopCoroutine(MeleeAttackCoroutine);
-            MeleeAttackCoroutine = null;
-        }
-
-        IEnumerator MeleeAttackRoutine()
-        {
-            foreach (var meleeAttackArea in MeleeWeaponData.attackAreas)
-            {
-                var layerMask = 1 << (IsPlayer ? PhysicsLayer.ENEMY : PhysicsLayer.PLAYER);
-                var colliders = Physics.OverlapConeAll((Vector2) transform.position + meleeAttackArea.offset, meleeAttackArea.radius,
-                    Transform.up, meleeAttackArea.startAngle, meleeAttackArea.stopAngle, Transform.eulerAngles.z, layerMask);
-                
-                Debug.DrawLine((Vector2)transform.position + meleeAttackArea.offset, transform.position + Transform.up.RotateAroundZ(meleeAttackArea.startAngle) * meleeAttackArea.radius, Color.green, 1f);
-                Debug.DrawLine((Vector2)transform.position + meleeAttackArea.offset, transform.position + Transform.up.RotateAroundZ(meleeAttackArea.stopAngle) * meleeAttackArea.radius, Color.red, 1f);
-                if (colliders[0]) Debug.DrawLine((Vector2)transform.position + meleeAttackArea.offset, colliders[0].bounds.center, Color.yellow, 1f);
-                
-                yield return new WaitForSeconds(1 / MeleeWeaponData.areaAttackRate);
-            }
             
-            StopMeleeAttackRoutine();
+        }
+
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!HasMeleeWeapon) return;
+            
+            var healthComponent = other.GetComponent<HealthComponent>();
+            if (!healthComponent) return;
+
+            healthComponent.Health -= weaponData.damage;
         }
     }
 }

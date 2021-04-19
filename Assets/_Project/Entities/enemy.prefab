@@ -295,7 +295,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnPoint: {x: 0, y: 0}
-  state: 2
+  state: {fileID: 0}
+  patrolState: {fileID: 0}
 --- !u!114 &7492512237567023205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,7 +311,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 0
   moveSpeed: 100
-  collisionCooldown: 1
 --- !u!114 &7492512237567023210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,6 +320,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7492512237567023215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0123cff64a94c0aba275e7497b19258, type: 3}
+  m_Script: {fileID: 11500000, guid: 5bda75ed6226a534e8618a01819c8fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 30
+  startHealth: 30

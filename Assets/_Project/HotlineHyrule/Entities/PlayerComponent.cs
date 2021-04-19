@@ -24,17 +24,13 @@ namespace HotlineHyrule.Entities
         /// </summary>
         [Header("Animation")]
         [SerializeField] float moveAnimationThreshold;
+        [SerializeField] Animator legsAnimator;
 
         /// <summary>
         /// The movement input action.
         /// </summary>
         [Header("Input")]
         [SerializeField] InputAction walkAction;
-
-        /// <summary>
-        /// The hash ID of isMoving in the leg animator.
-        /// </summary>
-        static readonly int AnimIsMoving = Animator.StringToHash("isMoving");
 
         /// <summary>
         /// The damped input axis.
@@ -80,14 +76,13 @@ namespace HotlineHyrule.Entities
         
         Rigidbody2D Rigidbody { get; set; }
         WeaponComponent WeaponComponent { get; set; }
-        Animator AnimatorLegs { get; set; }
         Camera CameraMain { get; set; }
 
         void Awake()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
             WeaponComponent = GetComponentInChildren<WeaponComponent>();
-            AnimatorLegs = GetComponentInChildren<Animator>();
+            if (!legsAnimator) legsAnimator = transform.Find("legs").GetComponent<Animator>();
 
             Locator.PlayerComponent = this;
         }
@@ -126,7 +121,7 @@ namespace HotlineHyrule.Entities
         /// </summary>
         void HandleAnimation()
         {
-            AnimatorLegs.SetBool(AnimIsMoving, IsMoving);
+            legsAnimator.SetBool("isMoving", IsMoving);
         }
     }
 }

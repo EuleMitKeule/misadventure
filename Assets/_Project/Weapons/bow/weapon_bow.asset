@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: weapon_bow
   m_EditorClassIdentifier: 
   weaponName: bow
-  attackRate: 5
-  weaponSprite: {fileID: 3798580205297923336, guid: bda38d274f999dc4c8a867c33cb4a2e4, type: 3}
-  attackAnimation: {fileID: 0}
-  attackParticleSystemPrefab: {fileID: 0}
+  attackRate: 2
+  damage: 10
+  weaponPrefab: {fileID: 5105910019921273631, guid: 490df2099ce251e4b84573fe0369646f, type: 3}
   deadzoneRadius: 1
-  projectileSpeed: 0
-  projectilePrefab: {fileID: 0}
-  spawnPosition: {x: 0, y: 0}
+  projectileSpeed: 20
+  projectilePrefab: {fileID: 8636156419958803353, guid: 07c24f9187b030848977eb21dc349ec5, type: 3}
+  spawnPosition: {x: 0.0313, y: 0.56}
