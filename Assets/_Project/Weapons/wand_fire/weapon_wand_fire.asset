@@ -12,15 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99539d74b6f4c01b5d13551d1511721, type: 3}
   m_Name: weapon_wand_fire
   m_EditorClassIdentifier: 
-  weaponName: 
-  attackRate: 5
-  weaponSprite: {fileID: 0}
-  attackAnimation: {fileID: 0}
-  attackParticleSystemPrefab: {fileID: 0}
-  attackAreas:
-  - offset: {x: 0, y: 0}
-    radius: 5
-    startAngle: -45
-    stopAngle: 45
-    damage: 0
-  areaAttackRate: 5
+  weaponName: wand_fire
+  attackRate: 1.5
+  damage: 10
+  weaponPrefab: {fileID: 2020710984480727260, guid: 66f0ec3c88bf075418dae74881915107, type: 3}
