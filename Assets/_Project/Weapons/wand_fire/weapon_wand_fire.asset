@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: weapon_wand_fire
   m_EditorClassIdentifier: 
   weaponName: wand_fire
+  movementFactor: 1
   attackRate: 1.5
   damage: 10
   weaponPrefab: {fileID: 2020710984480727260, guid: 66f0ec3c88bf075418dae74881915107, type: 3}

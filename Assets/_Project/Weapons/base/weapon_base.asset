@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: weapon_base
   m_EditorClassIdentifier: 
   weaponName: base
+  movementFactor: 1
   attackRate: 1.5
   damage: 10
   weaponPrefab: {fileID: 6325796044115875506, guid: cd143c243af2bb5438803a8ea5fb18af, type: 3}

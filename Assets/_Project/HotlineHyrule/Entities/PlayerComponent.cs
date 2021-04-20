@@ -18,6 +18,9 @@ namespace HotlineHyrule.Entities
         /// The damping value applied to the movement axis.
         /// </summary>
         [SerializeField] float moveDamping;
+        /// <summary>
+        /// Multiplies the player's movement speed.
+        /// </summary>
 
         /// <summary>
         /// The minimum amount of velocity that is considered movement for animation purposes.
@@ -73,6 +76,16 @@ namespace HotlineHyrule.Entities
         /// </summary>
         Vector2 ClampedMousePosition => IsInDeadzone ? DeadzonedMousePosition : MousePosition;
         bool IsMoving => Rigidbody.velocity.magnitude > moveAnimationThreshold;
+        float _movementFactor;
+        public float MovementFactor
+        {
+            get { return _movementFactor; }
+            set
+            {
+                _movementFactor = value;
+                Rigidbody.velocity = speed * value * WalkAxis;
+            }
+        }
         
         Rigidbody2D Rigidbody { get; set; }
         WeaponComponent WeaponComponent { get; set; }
@@ -102,7 +115,7 @@ namespace HotlineHyrule.Entities
 
         void FixedUpdate()
         {
-            Rigidbody.velocity = speed * WalkAxis;
+            Rigidbody.velocity = speed * MovementFactor * WalkAxis;
             Rigidbody.rotation = LookAngle;
             if (WeaponComponent.HasRangedWeapon) WeaponComponent.transform.rotation = Quaternion.Euler(0, 0, WeaponAngle);
         }

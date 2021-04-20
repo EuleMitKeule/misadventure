@@ -2,13 +2,14 @@ using UnityEngine;
 
 namespace HotlineHyrule.Graphics
 {
+    [RequireComponent(typeof(ParticleSystem))]
     public class ParticleSystemComponent : MonoBehaviour
     {
         ParticleSystem ParticleSystem { get; set; }
 
         void Awake()
         {
-            ParticleSystem = GetComponentInChildren<ParticleSystem>();
+            ParticleSystem = GetComponent<ParticleSystem>();
         }
 
         public void Play() => ParticleSystem.Play();

@@ -29,7 +29,7 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// Whether the weapon component's parent is the player.
         /// </summary>
-        bool IsPlayer => GetComponentInParent<PlayerComponent>();
+        bool IsPlayer => PlayerComponent;
         /// <summary>
         /// Whether the attack input is currently being registered.
         /// </summary>
@@ -61,18 +61,23 @@ namespace HotlineHyrule.Weapons
         /// The spawn position of the projectile.
         /// </summary>
         Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + Transform.position;
+        public event EventHandler<EventArgs> AttackFinished;
         
         GameObject WeaponObject { get; set; }
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
         Animator Animator { get; set; }
         Rigidbody2D PlayerRigidbody { get; set; }
+        PlayerComponent PlayerComponent { get; set; }
 
         void Awake()
         {
             Transform = transform;
             SpriteRenderer = GetComponent<SpriteRenderer>();
             PlayerRigidbody = GetComponentsInParent<Rigidbody2D>()[1];
+            PlayerComponent = GetComponentInParent<PlayerComponent>();
+
+            AttackFinished += OnAttackFinished;
 
             if (weaponData) SetWeapon(weaponData);
             attackAction.Enable();
@@ -102,6 +107,13 @@ namespace HotlineHyrule.Weapons
             if (!CanAttack) return;
             LastAttackTime = Time.time;
 
+            Invoke(nameof(InvokeAttackFinished), weaponData.slowTimeWindow / weaponData.attackRate);
+            
+            if (IsPlayer)
+            {
+                PlayerComponent.MovementFactor = weaponData.movementFactor;
+            }
+            
             Animator.SetTrigger("attack");
             
             if (HasRangedWeapon) PerformRangedAttack();
@@ -126,21 +138,29 @@ namespace HotlineHyrule.Weapons
 
             projectileObject.SetActive(true);
 
+            var animator = projectileObject.GetComponent<Animator>();
+            if (animator) animator.SetTrigger("attack");
+
             var projectileRigidbody = projectileObject.GetComponent<Rigidbody2D>();
-            projectileRigidbody.velocity = Transform.up * RangedWeaponData.projectileSpeed;
+            if (projectileRigidbody)
+            {
+                var velocity = RangedWeaponData.projectileSpeed == 0f
+                    ? PlayerRigidbody.velocity
+                    : (Vector2)Transform.up * RangedWeaponData.projectileSpeed;
+                projectileRigidbody.velocity = velocity;
+            }
         }
 
         void PerformMeleeAttack()
         {
             if (!HasMeleeWeapon) return;
+        }
 
-            var stationaryChildComponent = GetComponentInChildren<StationaryChildComponent>();
-            if (stationaryChildComponent)
+        void OnAttackFinished(object sender, EventArgs e)
+        {
+            if (IsPlayer)
             {
-                stationaryChildComponent.Position = Transform.position;
-                stationaryChildComponent.Rotation = Transform.rotation;
-                stationaryChildComponent.Scale = Transform.localScale;
-                stationaryChildComponent.Velocity = PlayerRigidbody.velocity;
+                PlayerComponent.MovementFactor = 1f;
             }
         }
 
@@ -153,5 +173,7 @@ namespace HotlineHyrule.Weapons
 
             healthComponent.Health -= weaponData.damage;
         }
+
+        void InvokeAttackFinished() => AttackFinished?.Invoke(this, EventArgs.Empty);
     }
 }
