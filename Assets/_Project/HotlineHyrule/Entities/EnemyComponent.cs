@@ -18,17 +18,50 @@ namespace HotlineHyrule.Entities
         /// The enemy's current state
         /// </summary>
         [SerializeField] public EnemyStateBaseComponent state;
+        [SerializeField] float wallCheckDistance;
+        [SerializeField] LayerMask wallMask;
 
-        [HideInInspector] public EnemyStateBaseComponent patrolState;
+        public bool HasWallLeft =>
+            Physics2D.BoxCast(
+                transform.position,
+                _collider.bounds.size,
+                0f,
+                -transform.right,
+                wallCheckDistance,
+                wallMask
+            );
+        public bool HasWallRight =>
+            Physics2D.BoxCast(
+                transform.position,
+                _collider.bounds.size,
+                0f,
+                transform.right,
+                wallCheckDistance,
+                wallMask
+            );
+        public bool HasWallAbove =>
+            Physics2D.BoxCast(
+                transform.position,
+                _collider.bounds.size,
+                0f,
+                transform.up,
+                wallCheckDistance,
+                wallMask
+            );
+
+        public EnemyStateBaseComponent PatrolState { get; private set; }
+
+        Collider2D _collider;
 
         void Awake()
         {
-            patrolState = GetComponent<EnemyStatePatrolComponent>();
+            _collider = GetComponent<Collider2D>();
+            PatrolState = GetComponent<EnemyStatePatrolComponent>();
         }
 
         void Start()
         {
-            ChangeState(patrolState);
+            ChangeState(PatrolState);
         }
 
         void FixedUpdate()
