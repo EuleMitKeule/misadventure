@@ -66,11 +66,13 @@ namespace HotlineHyrule.Weapons
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
         Animator Animator { get; set; }
+        Rigidbody2D PlayerRigidbody { get; set; }
 
         void Awake()
         {
             Transform = transform;
             SpriteRenderer = GetComponent<SpriteRenderer>();
+            PlayerRigidbody = GetComponentsInParent<Rigidbody2D>()[1];
 
             if (weaponData) SetWeapon(weaponData);
             attackAction.Enable();
@@ -131,8 +133,15 @@ namespace HotlineHyrule.Weapons
         void PerformMeleeAttack()
         {
             if (!HasMeleeWeapon) return;
-            
-            
+
+            var stationaryChildComponent = GetComponentInChildren<StationaryChildComponent>();
+            if (stationaryChildComponent)
+            {
+                stationaryChildComponent.Position = Transform.position;
+                stationaryChildComponent.Rotation = Transform.rotation;
+                stationaryChildComponent.Scale = Transform.localScale;
+                stationaryChildComponent.Velocity = PlayerRigidbody.velocity;
+            }
         }
 
         void OnTriggerEnter2D(Collider2D other)
