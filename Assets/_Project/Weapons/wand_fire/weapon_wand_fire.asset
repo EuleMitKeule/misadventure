@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
-  m_Name: weapon_wand_fire_ranged
+  m_Name: weapon_wand_fire
   m_EditorClassIdentifier: 
   weaponName: wand_fire
   movementFactor: 0.5
