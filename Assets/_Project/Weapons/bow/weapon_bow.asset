@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
-  m_Name: New Ranged Weapon Data
+  m_Name: weapon_bow
   m_EditorClassIdentifier: 
-  weaponName: 
-  deadzoneRadius: 0
-  attackRate: 0
-  weaponSprite: {fileID: 0}
-  projectileSpeed: 0
-  projectilePrefab: {fileID: 0}
-  spawnPosition: {x: 0, y: 0}
+  weaponName: bow
+  movementFactor: 1
+  attackRate: 2
+  damage: 10
+  weaponPrefab: {fileID: 5105910019921273631, guid: 490df2099ce251e4b84573fe0369646f, type: 3}
+  deadzoneRadius: 1
+  projectileSpeed: 20
+  projectilePrefab: {fileID: 8636156419958803353, guid: 07c24f9187b030848977eb21dc349ec5, type: 3}
+  spawnPosition: {x: 0.0313, y: 0.56}

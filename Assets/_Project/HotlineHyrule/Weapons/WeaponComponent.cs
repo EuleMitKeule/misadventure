@@ -1,4 +1,8 @@
+using System;
+using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using HotlineHyrule.Entities;
+using HotlineHyrule.Extensions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,11 +26,10 @@ namespace HotlineHyrule.Weapons
         /// The last point in time the weapon was used at.
         /// </summary>
         float LastAttackTime { get; set; }
-
         /// <summary>
         /// Whether the weapon component's parent is the player.
         /// </summary>
-        bool IsPlayer => GetComponentInParent<PlayerComponent>();
+        bool IsPlayer => PlayerComponent;
         /// <summary>
         /// Whether the attack input is currently being registered.
         /// </summary>
@@ -38,11 +41,16 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// Whether the current weapon is a ranged one.
         /// </summary>
-        bool HasRangedWeapon => weaponData is RangedWeaponData;
+        public bool HasRangedWeapon => weaponData is RangedWeaponData;
+        /// <summary>
+        /// Whether the current weapon is a melee one.
+        /// </summary>
+        public bool HasMeleeWeapon => weaponData is MeleeWeaponData;
         /// <summary>
         /// The ranged weapon data of the ranged weapon.
         /// </summary>
-        RangedWeaponData RangedWeaponData => (RangedWeaponData) weaponData;
+        public RangedWeaponData RangedWeaponData => (RangedWeaponData)weaponData;
+        MeleeWeaponData MeleeWeaponData => (MeleeWeaponData)weaponData;
         /// <summary>
         /// The offset of the projectile spawn position relative to the weapon position.
         /// </summary>
@@ -53,15 +61,25 @@ namespace HotlineHyrule.Weapons
         /// The spawn position of the projectile.
         /// </summary>
         Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + Transform.position;
-
+        public event EventHandler<EventArgs> AttackFinished;
+        
+        GameObject WeaponObject { get; set; }
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
+        Animator Animator { get; set; }
+        Rigidbody2D PlayerRigidbody { get; set; }
+        PlayerComponent PlayerComponent { get; set; }
 
         void Awake()
         {
             Transform = transform;
             SpriteRenderer = GetComponent<SpriteRenderer>();
+            PlayerRigidbody = GetComponentsInParent<Rigidbody2D>()[1];
+            PlayerComponent = GetComponentInParent<PlayerComponent>();
 
+            AttackFinished += OnAttackFinished;
+
+            if (weaponData) SetWeapon(weaponData);
             attackAction.Enable();
         }
 
@@ -77,7 +95,8 @@ namespace HotlineHyrule.Weapons
         public void SetWeapon(WeaponData newWeaponData)
         {
             weaponData = newWeaponData;
-            SpriteRenderer.sprite = newWeaponData.weaponSprite;
+            WeaponObject = Instantiate(weaponData.weaponPrefab, Transform);
+            Animator = GetComponentInChildren<Animator>();
         }
 
         /// <summary>
@@ -88,7 +107,17 @@ namespace HotlineHyrule.Weapons
             if (!CanAttack) return;
             LastAttackTime = Time.time;
 
+            Invoke(nameof(InvokeAttackFinished), weaponData.slowTimeWindow / weaponData.attackRate);
+            
+            if (IsPlayer)
+            {
+                PlayerComponent.MovementFactor = weaponData.movementFactor;
+            }
+            
+            Animator.SetTrigger("attack");
+            
             if (HasRangedWeapon) PerformRangedAttack();
+            else if (HasMeleeWeapon) PerformMeleeAttack();
         }
 
         /// <summary>
@@ -109,8 +138,42 @@ namespace HotlineHyrule.Weapons
 
             projectileObject.SetActive(true);
 
+            var animator = projectileObject.GetComponent<Animator>();
+            if (animator) animator.SetTrigger("attack");
+
             var projectileRigidbody = projectileObject.GetComponent<Rigidbody2D>();
-            projectileRigidbody.velocity = Transform.up * RangedWeaponData.projectileSpeed;
+            if (projectileRigidbody)
+            {
+                var velocity = RangedWeaponData.projectileSpeed == 0f
+                    ? PlayerRigidbody.velocity
+                    : (Vector2)Transform.up * RangedWeaponData.projectileSpeed;
+                projectileRigidbody.velocity = velocity;
+            }
         }
+
+        void PerformMeleeAttack()
+        {
+            if (!HasMeleeWeapon) return;
+        }
+
+        void OnAttackFinished(object sender, EventArgs e)
+        {
+            if (IsPlayer)
+            {
+                PlayerComponent.MovementFactor = 1f;
+            }
+        }
+
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!HasMeleeWeapon) return;
+            
+            var healthComponent = other.GetComponent<HealthComponent>();
+            if (!healthComponent) return;
+
+            healthComponent.Health -= weaponData.damage;
+        }
+
+        void InvokeAttackFinished() => AttackFinished?.Invoke(this, EventArgs.Empty);
     }
 }

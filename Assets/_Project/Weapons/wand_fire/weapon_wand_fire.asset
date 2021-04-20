@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
-  m_Name: weapondata_bow
+  m_Name: weapon_wand_fire_ranged
   m_EditorClassIdentifier: 
-  weaponName: bow
+  weaponName: wand_fire
+  movementFactor: 0.5
+  slowTimeWindow: 0.5
+  attackRate: 1.5
+  damage: 10
+  weaponPrefab: {fileID: 440691573199316790, guid: 7be56d79869460b42b75975a9cc34556, type: 3}
   deadzoneRadius: 1
-  attackRate: 5
-  weaponSprite: {fileID: 3798580205297923336, guid: bda38d274f999dc4c8a867c33cb4a2e4, type: 3}
-  projectileSpeed: 20
-  projectilePrefab: {fileID: 8636156419958803353, guid: 07c24f9187b030848977eb21dc349ec5, type: 3}
-  spawnPosition: {x: 0.0313, y: 0.56}
+  projectileSpeed: 0
+  projectilePrefab: {fileID: 7320460730021520237, guid: 544655ebf7a0f3b4b95f34ca0ab95bee, type: 3}
+  spawnPosition: {x: 0, y: 0}

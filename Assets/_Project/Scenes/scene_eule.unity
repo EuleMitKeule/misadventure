@@ -169,8 +169,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc02a9332fd21e4a8d86815c5707eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 3d73b0030c67d364e8b5b56b97ed0986, type: 2}
+  weaponData: {fileID: 11400000, guid: de8d83c219eea42448aed313c9c0dd6e, type: 2}
   attackAction:
     m_Name: Attack
     m_Type: 0
@@ -29956,7 +29956,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   moveDamping: 2
-  movementFactor: 0
   moveAnimationThreshold: 0.1
   legsAnimator: {fileID: 0}
   walkAction:
@@ -45708,17 +45707,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7492512237567023205, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: collisionCooldown
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023211, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023211, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023211, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023211, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_LocalPosition.z

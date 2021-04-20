@@ -18,23 +18,22 @@ namespace HotlineHyrule.Entities
         /// The damping value applied to the movement axis.
         /// </summary>
         [SerializeField] float moveDamping;
+        /// <summary>
+        /// Multiplies the player's movement speed.
+        /// </summary>
 
         /// <summary>
         /// The minimum amount of velocity that is considered movement for animation purposes.
         /// </summary>
         [Header("Animation")]
         [SerializeField] float moveAnimationThreshold;
+        [SerializeField] Animator legsAnimator;
 
         /// <summary>
         /// The movement input action.
         /// </summary>
         [Header("Input")]
         [SerializeField] InputAction walkAction;
-
-        /// <summary>
-        /// The hash ID of isMoving in the leg animator.
-        /// </summary>
-        static readonly int AnimIsMoving = Animator.StringToHash("isMoving");
 
         /// <summary>
         /// The damped input axis.
@@ -67,27 +66,36 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// Whether the look target is within the weapon's deadzone.
         /// </summary>
-        bool IsInDeadzone => LookDistance < WeaponComponent.weaponData.deadzoneRadius;
+        bool IsInDeadzone => LookDistance < WeaponComponent.RangedWeaponData.deadzoneRadius;
         /// <summary>
         /// The position of the look target projected onto the deadzone circle.
         /// </summary>
-        Vector2 DeadzonedMousePosition => Rigidbody.position + LookDirection * WeaponComponent.weaponData.deadzoneRadius;
+        Vector2 DeadzonedMousePosition => Rigidbody.position + LookDirection * WeaponComponent.RangedWeaponData.deadzoneRadius;
         /// <summary>
         /// The position of the look target clamped to the outside of the deadzone.
         /// </summary>
         Vector2 ClampedMousePosition => IsInDeadzone ? DeadzonedMousePosition : MousePosition;
         bool IsMoving => Rigidbody.velocity.magnitude > moveAnimationThreshold;
+        float _movementFactor;
+        public float MovementFactor
+        {
+            get { return _movementFactor; }
+            set
+            {
+                _movementFactor = value;
+                Rigidbody.velocity = speed * value * WalkAxis;
+            }
+        }
         
         Rigidbody2D Rigidbody { get; set; }
         WeaponComponent WeaponComponent { get; set; }
-        Animator AnimatorLegs { get; set; }
         Camera CameraMain { get; set; }
 
         void Awake()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
             WeaponComponent = GetComponentInChildren<WeaponComponent>();
-            AnimatorLegs = GetComponentInChildren<Animator>();
+            if (!legsAnimator) legsAnimator = transform.Find("legs").GetComponent<Animator>();
 
             Locator.PlayerComponent = this;
         }
@@ -107,9 +115,9 @@ namespace HotlineHyrule.Entities
 
         void FixedUpdate()
         {
-            Rigidbody.velocity = speed * WalkAxis;
+            Rigidbody.velocity = speed * MovementFactor * WalkAxis;
             Rigidbody.rotation = LookAngle;
-            WeaponComponent.transform.rotation = Quaternion.Euler(0, 0, WeaponAngle);
+            if (WeaponComponent.HasRangedWeapon) WeaponComponent.transform.rotation = Quaternion.Euler(0, 0, WeaponAngle);
         }
 
         /// <summary>
@@ -126,7 +134,7 @@ namespace HotlineHyrule.Entities
         /// </summary>
         void HandleAnimation()
         {
-            AnimatorLegs.SetBool(AnimIsMoving, IsMoving);
+            legsAnimator.SetBool("isMoving", IsMoving);
         }
     }
 }

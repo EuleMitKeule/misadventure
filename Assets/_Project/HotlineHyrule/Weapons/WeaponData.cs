@@ -12,16 +12,19 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         [SerializeField] public string weaponName;
         /// <summary>
-        /// The radius of the look target's deadzone around the player.
+        /// Multiplies the player's movement speed.
         /// </summary>
-        [SerializeField] public float deadzoneRadius;
+        [SerializeField] public float movementFactor;
+        
+        [Range(0f, 1f)] [SerializeField] public float slowTimeWindow;
         /// <summary>
         /// The maximum amount of attacks performed per second.
         /// </summary>
         [SerializeField] public float attackRate;
         /// <summary>
-        /// The sprite of the weapon.
+        /// The damage a hit of the weapon deals.
         /// </summary>
-        [SerializeField] public Sprite weaponSprite;
+        [SerializeField] public int damage;
+        [SerializeField] public GameObject weaponPrefab;
     }
 }

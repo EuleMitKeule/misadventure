@@ -24,7 +24,7 @@ namespace HotlineHyrule.Entities
         public bool HasWallLeft =>
             Physics2D.BoxCast(
                 transform.position,
-                _collider.bounds.size,
+                Collider.bounds.size,
                 0f,
                 -transform.right,
                 wallCheckDistance,
@@ -33,7 +33,7 @@ namespace HotlineHyrule.Entities
         public bool HasWallRight =>
             Physics2D.BoxCast(
                 transform.position,
-                _collider.bounds.size,
+                Collider.bounds.size,
                 0f,
                 transform.right,
                 wallCheckDistance,
@@ -42,21 +42,24 @@ namespace HotlineHyrule.Entities
         public bool HasWallAbove =>
             Physics2D.BoxCast(
                 transform.position,
-                _collider.bounds.size,
+                Collider.bounds.size,
                 0f,
                 transform.up,
                 wallCheckDistance,
                 wallMask
             );
 
+        Collider2D Collider { get; set; }
+        HealthComponent HealthComponent { get; set; }
         public EnemyStateBaseComponent PatrolState { get; private set; }
-
-        Collider2D _collider;
 
         void Awake()
         {
-            _collider = GetComponent<Collider2D>();
+            Collider = GetComponent<Collider2D>();
+            HealthComponent = GetComponent<HealthComponent>();
             PatrolState = GetComponent<EnemyStatePatrolComponent>();
+
+            HealthComponent.HealthChanged += OnHealthChanged;
         }
 
         void Start()
@@ -85,6 +88,13 @@ namespace HotlineHyrule.Entities
             if (state) state.Exit();
             state = newState;
             state.Setup();
+        }
+
+        void OnHealthChanged(object sender, HealthEventArgs e)
+        {
+            if (e.NewHealth > 0) return;
+            
+            Destroy(gameObject);
         }
     }
 }
