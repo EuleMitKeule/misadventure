@@ -9,11 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a99539d74b6f4c01b5d13551d1511721, type: 3}
-  m_Name: weapon_wand_fire
+  m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
+  m_Name: weapon_wand_fire_ranged
   m_EditorClassIdentifier: 
   weaponName: wand_fire
-  movementFactor: 1
+  movementFactor: 0.5
+  slowTimeWindow: 0.5
   attackRate: 1.5
   damage: 10
-  weaponPrefab: {fileID: 2020710984480727260, guid: 66f0ec3c88bf075418dae74881915107, type: 3}
+  weaponPrefab: {fileID: 440691573199316790, guid: 7be56d79869460b42b75975a9cc34556, type: 3}
+  deadzoneRadius: 1
+  projectileSpeed: 0
+  projectilePrefab: {fileID: 7320460730021520237, guid: 544655ebf7a0f3b4b95f34ca0ab95bee, type: 3}
+  spawnPosition: {x: 0, y: 0}
