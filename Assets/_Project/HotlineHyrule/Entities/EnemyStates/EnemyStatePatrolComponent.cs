@@ -7,29 +7,42 @@ namespace HotlineHyrule.Entities.EnemyStates
     [RequireComponent(typeof(EnemyComponent))]
     public class EnemyStatePatrolComponent : EnemyStateBaseComponent
     {
-        [SerializeField] float moveSpeed = 100f;
+        [SerializeField] float moveSpeed;
 
         Rigidbody2D _rb;
+        EnemyComponent _enemyComponent;
 
         void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
+            _enemyComponent = GetComponent<EnemyComponent>();
         }
 
         public override void FixedStateUpdate()
         {
-            _rb.velocity = transform.up * (moveSpeed * Time.deltaTime);
-        }
+            _rb.velocity = transform.up * moveSpeed;
 
-        void OnTriggerStay2D(Collider2D other)
-        {
-            if (LayerMask.LayerToName(other.gameObject.layer) != "wall") return;
+            if (!_enemyComponent.HasWallAbove) return;
 
-            var angle = 90f;
+            if (_enemyComponent.HasWallLeft &! _enemyComponent.HasWallRight)
+            {
+                transform.eulerAngles += Vector3.forward * -90f;
+                return;
+            }
 
-            if (Random.value >= 0.5f) angle *= -1f;
+            if (_enemyComponent.HasWallRight &! _enemyComponent.HasWallLeft)
+            {
+                transform.eulerAngles += Vector3.forward * 90f;
+                return;
+            }
 
-            transform.eulerAngles += Vector3.forward * angle;
+            if (_enemyComponent.HasWallLeft && _enemyComponent.HasWallRight)
+            {
+                transform.eulerAngles += Vector3.forward * 180f;
+            }
+
+            var isTurningLeft = Random.Range(0, 2) == 1;
+            transform.eulerAngles += Vector3.forward * (isTurningLeft ? 90f : -90f);
         }
     }
 }
