@@ -135,6 +135,7 @@ namespace HotlineHyrule.Weapons
             projectileComponent.impactMask = new LayerMask();
             projectileComponent.impactMask.value |= 1 << PhysicsLayer.WALL;
             projectileComponent.impactMask.value |= 1 << (IsPlayer ? PhysicsLayer.ENEMY : PhysicsLayer.PLAYER);
+            projectileComponent.ImpactDamage = weaponData.damage;
 
             projectileObject.SetActive(true);
 
