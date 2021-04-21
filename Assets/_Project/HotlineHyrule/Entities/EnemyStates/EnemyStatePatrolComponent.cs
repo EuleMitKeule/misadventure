@@ -10,33 +10,32 @@ namespace HotlineHyrule.Entities.EnemyStates
         [SerializeField] float moveSpeed;
 
         Rigidbody2D _rb;
-        EnemyComponent _enemyComponent;
 
         void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
-            _enemyComponent = GetComponent<EnemyComponent>();
+            enemyComponent = GetComponent<EnemyComponent>();
         }
 
         public override void FixedStateUpdate()
         {
             _rb.velocity = transform.up * moveSpeed;
 
-            if (!_enemyComponent.HasWallAbove) return;
+            if (!enemyComponent.HasWallAbove) return;
 
-            if (_enemyComponent.HasWallLeft &! _enemyComponent.HasWallRight)
+            if (enemyComponent.HasWallLeft &! enemyComponent.HasWallRight)
             {
                 transform.eulerAngles += Vector3.forward * -90f;
                 return;
             }
 
-            if (_enemyComponent.HasWallRight &! _enemyComponent.HasWallLeft)
+            if (enemyComponent.HasWallRight &! enemyComponent.HasWallLeft)
             {
                 transform.eulerAngles += Vector3.forward * 90f;
                 return;
             }
 
-            if (_enemyComponent.HasWallLeft && _enemyComponent.HasWallRight)
+            if (enemyComponent.HasWallLeft && enemyComponent.HasWallRight)
             {
                 transform.eulerAngles += Vector3.forward * 180f;
             }

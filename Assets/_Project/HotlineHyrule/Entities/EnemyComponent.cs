@@ -19,7 +19,10 @@ namespace HotlineHyrule.Entities
         /// </summary>
         [SerializeField] public EnemyStateBaseComponent state;
         [SerializeField] float wallCheckDistance;
+        [SerializeField] float playerCheckDistance;
         [SerializeField] LayerMask wallMask;
+        [SerializeField] LayerMask playerMask;
+        [SerializeField] Collider2D sightRangeCollider;
 
         public bool HasWallLeft =>
             Physics2D.BoxCast(
@@ -95,6 +98,30 @@ namespace HotlineHyrule.Entities
             if (e.NewHealth > 0) return;
             
             Destroy(gameObject);
+        }
+
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!other.CompareTag("Player")) return;
+
+            Vector3 dir = transform.position - other.transform.position;
+            //float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg;
+            //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            
+            RaycastHit hit;
+            int mask = 1 << 7;
+            mask = ~mask;
+            // Does the ray intersect any objects excluding the player layer
+            if (Physics.Raycast(transform.position, dir, out hit, Mathf.Infinity, mask))
+            {
+                Debug.DrawRay(transform.position, dir * hit.distance, Color.yellow);
+                Debug.Log("HIT " + hit.distance);
+            }
+            else
+            {
+                Debug.DrawRay(transform.position, dir * 1000, Color.white);
+                Debug.Log("NOT HIT " + hit.distance);
+            }
         }
     }
 }

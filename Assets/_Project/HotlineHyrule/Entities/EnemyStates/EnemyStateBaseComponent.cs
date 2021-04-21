@@ -4,6 +4,8 @@ namespace HotlineHyrule.Entities.EnemyStates
 {
     public abstract class EnemyStateBaseComponent : MonoBehaviour
     {
+        protected EnemyComponent enemyComponent;
+
         /// <summary>
         /// (Future) Priority value if enemy can change between multiple states
         /// (the higher the value the higher the priority)
@@ -13,7 +15,10 @@ namespace HotlineHyrule.Entities.EnemyStates
         /// <summary>
         /// Things that shall be setup when the state is currently set for an enemy
         /// </summary>
-        public virtual void Setup() { }
+        public virtual void Setup()
+        {
+            enemyComponent = GetComponent<EnemyComponent>();
+        }
         /// <summary>
         /// Things that shall be updated for the current state of the enemy
         /// </summary>
