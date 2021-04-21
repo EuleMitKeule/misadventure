@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 996032350}
   - component: {fileID: 996032349}
   - component: {fileID: 996032353}
+  - component: {fileID: 5909628964670717430}
   m_Layer: 8
   m_Name: enemy1_projectile
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -691272855
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -3180731471358164972, guid: 1e07aafaedb95de45a9fef7d9273bddf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4833,7 +4834,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -691272855
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: -1
   m_RenderMode: 0
   m_SortMode: 0
@@ -4879,3 +4880,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5909628964670717430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3659320590787278025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261465b5c13226c4bbff10a34fcde221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  impactSprite: {fileID: 0}
+  impactMask:
+    serializedVersion: 2
+    m_Bits: 64
+  impactRaycastOffset: -0.1
