@@ -26,5 +26,6 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         [SerializeField] public int damage;
         [SerializeField] public GameObject weaponPrefab;
+        [SerializeField] public GameObject weaponDroppedPrefab;
     }
 }

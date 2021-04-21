@@ -340,7 +340,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1083238823
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -29876,7 +29876,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 631342383
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 208548070348498047, guid: 38714c79c4ce4074d9c7685fbd1d5ec5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -30061,8 +30061,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2917fd6ce4da47579129429cf0f9ace8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupRadius: 1
   meleeWeaponData: {fileID: 11400000, guid: 7fbc3196429833247905ee22e8ece4c4, type: 2}
-  rangedWeaponData: {fileID: 11400000, guid: dda91c349427f7946824aa6c4c95778e, type: 2}
+  rangedWeaponData: {fileID: 11400000, guid: 3d73b0030c67d364e8b5b56b97ed0986, type: 2}
+  itemMask:
+    serializedVersion: 2
+    m_Bits: 1024
   meleeWeaponAction:
     m_Name: Melee Weapon
     m_Type: 1
@@ -30094,6 +30098,22 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Ranged Weapon
+      m_Flags: 0
+  pickupAction:
+    m_Name: Pickup
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 4778dc45-8c9d-462f-b356-021d4b3a9d1d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 96367439-5e00-4708-87be-51ca693e334c
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pickup
       m_Flags: 0
 --- !u!1 &519420028
 GameObject:
@@ -30336,7 +30356,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 631342383
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: -1
   m_Sprite: {fileID: -901413254645882277, guid: 38714c79c4ce4074d9c7685fbd1d5ec5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -30545,7 +30565,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1945429037
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -42112,7 +42132,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1945429037
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -45404,7 +45424,7 @@ MonoBehaviour:
   m_Intensity: 0.5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 0000000077c227026903ccd62f85a125d31b0b8ca7e99040c302e633
+  m_ApplyToSortingLayers: 0000000077c227026903ccd62f85a125d31b0b8ca7e99040c302e6336b6b9759
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -45964,7 +45984,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1945429037
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -46296,6 +46316,67 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+--- !u!1001 &87149509608088889
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 87149508903852376, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+      propertyPath: m_Name
+      value: weapon_bow_dropped
+      objectReference: {fileID: 0}
+    - target: {fileID: 87149508903852379, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 87149508903852381, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 87149508903852381, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87149508903852381, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87149508903852381, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87149508903852381, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 87149508903852381, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87149508903852381, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87149508903852381, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 87149508903852381, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87149508903852381, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 87149508903852381, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
 --- !u!1001 &7492512238168066941
 PrefabInstance:
   m_ObjectHideFlags: 0
