@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: bow
   movementFactor: 1
+  slowTimeWindow: 0
   attackRate: 2
   damage: 10
   weaponPrefab: {fileID: 5105910019921273631, guid: 490df2099ce251e4b84573fe0369646f, type: 3}
+  weaponDroppedPrefab: {fileID: 87149508903852376, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
   deadzoneRadius: 1
   projectileSpeed: 20
   projectilePrefab: {fileID: 8636156419958803353, guid: 07c24f9187b030848977eb21dc349ec5, type: 3}
