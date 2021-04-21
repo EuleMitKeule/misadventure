@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,13 +9,27 @@ namespace HotlineHyrule.Entities.EnemyStates
     public class EnemyStatePatrolComponent : EnemyStateBaseComponent
     {
         [SerializeField] float moveSpeed;
+        [SerializeField] float sightRangeColliderCooldown = 2f;
 
         Rigidbody2D _rb;
 
         void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
-            enemyComponent = GetComponent<EnemyComponent>();
+            //enemyComponent = GetComponent<EnemyComponent>();
+        }
+
+        public override void Setup()
+        {
+            base.Setup();
+            StartCoroutine(DisableSightRangeCollider());
+        }
+
+        IEnumerator DisableSightRangeCollider()
+        {
+            enemyComponent.sightRangeCollider.enabled = false;
+            yield return new WaitForSeconds(sightRangeColliderCooldown);
+            enemyComponent.sightRangeCollider.enabled = true;
         }
 
         public override void FixedStateUpdate()
@@ -42,6 +57,18 @@ namespace HotlineHyrule.Entities.EnemyStates
 
             var isTurningLeft = Random.Range(0, 2) == 1;
             transform.eulerAngles += Vector3.forward * (isTurningLeft ? 90f : -90f);
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            _rb.velocity = Vector2.zero;
+        }
+
+        public override void OnLookingAtPlayer()
+        {
+            base.OnLookingAtPlayer();
+            enemyComponent.ChangeState(GetComponent<EnemyStateShootProjectileComponent>());
         }
     }
 }

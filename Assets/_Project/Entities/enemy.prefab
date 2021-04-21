@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 7492512237567023206}
   - component: {fileID: 7492512237567023204}
   - component: {fileID: 7492512237567023205}
+  - component: {fileID: 5802242549573311712}
   - component: {fileID: 7492512237567023210}
   m_Layer: 7
   m_Name: enemy
@@ -353,6 +354,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 0
   moveSpeed: 3
+  sightRangeColliderCooldown: 1
+--- !u!114 &5802242549573311712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7492512237567023215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e65cf9dbb2042308c29f3011d8b6329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  projectileObj: {fileID: 3659320590787278025, guid: 246b8993b647cbf40823bcd3255acb3c, type: 3}
 --- !u!114 &7492512237567023210
 MonoBehaviour:
   m_ObjectHideFlags: 0

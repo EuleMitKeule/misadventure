@@ -31,5 +31,7 @@ namespace HotlineHyrule.Entities.EnemyStates
         /// Things that shall be cleaned up when the enemy leaves the state
         /// </summary>
         public virtual void Exit() { }
+        
+        public virtual void OnLookingAtPlayer() { }
     }
 }
