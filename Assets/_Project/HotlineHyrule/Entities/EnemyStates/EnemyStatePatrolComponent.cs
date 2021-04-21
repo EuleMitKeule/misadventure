@@ -9,7 +9,7 @@ namespace HotlineHyrule.Entities.EnemyStates
     public class EnemyStatePatrolComponent : EnemyStateBaseComponent
     {
         /// <summary>
-        /// Move speed of the projectile
+        /// Move speed of the enemy
         /// </summary>
         [SerializeField] float moveSpeed;
         /// <summary>
