@@ -100,31 +100,26 @@ namespace HotlineHyrule.Entities
             Destroy(gameObject);
         }
 
-        void OnTriggerEnter2D(Collider2D other)
+        void OnTriggerStay2D(Collider2D other)
         {
-            if (!other.CompareTag("Player")) return;
+            if (!other.CompareTag("Player"))
+                return;
 
             Vector3 dir = other.transform.position - transform.position;
-            float angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg - 90f;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            if (state) state.OnLookingAtPlayer();
-            // int mask = playerMask.value;
-            // mask = ~mask;
-            // Debug.Log(mask);
-            //
-            // RaycastHit hit;
-            // // Does the ray intersect any objects excluding the player layer
-            // if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit))
-            // {
-            //     Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow, 10f);
-            //     Debug.Log("HIT " + hit.distance);
-            // }
-            // else
-            // {
-            //     Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * 1000, Color.white, 10f);
-            //     Debug.Log("NOT HIT " + hit.distance);
-            // }
+            //if (state)
+            //    state.OnLookingAtPlayer();
+
+            if (Physics2D.Raycast(transform.position, dir, dir.magnitude, wallMask))
+            {
+                // ENEMY CANT SEE THE PLAYER
+                Debug.DrawLine(transform.position, transform.position + dir, Color.red, 5f);
+            }
+            else
+            {
+                // ENEMY CAN SEE THE PLAYER
+                Debug.DrawLine(transform.position, transform.position + dir, Color.green, 5f);
+            }
         }
     }
 }
