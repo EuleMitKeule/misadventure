@@ -94,9 +94,11 @@ namespace HotlineHyrule.Weapons
         /// <param name="newWeaponData"></param>
         public void SetWeapon(WeaponData newWeaponData)
         {
+            if (WeaponObject) Destroy(WeaponObject);
+            
             weaponData = newWeaponData;
             WeaponObject = Instantiate(weaponData.weaponPrefab, Transform);
-            Animator = GetComponentInChildren<Animator>();
+            Animator = WeaponObject.GetComponent<Animator>();
         }
 
         /// <summary>

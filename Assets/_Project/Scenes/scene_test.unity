@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc02a9332fd21e4a8d86815c5707eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 3d73b0030c67d364e8b5b56b97ed0986, type: 2}
+  weaponData: {fileID: 11400000, guid: 7fbc3196429833247905ee22e8ece4c4, type: 2}
   attackAction:
     m_Name: Attack
     m_Type: 0
@@ -29829,6 +29829,7 @@ GameObject:
   - component: {fileID: 309467258}
   - component: {fileID: 309467259}
   - component: {fileID: 309467260}
+  - component: {fileID: 309467261}
   m_Layer: 6
   m_Name: player
   m_TagString: Untagged
@@ -30047,6 +30048,52 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Respawn
+      m_Flags: 0
+--- !u!114 &309467261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309467253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2917fd6ce4da47579129429cf0f9ace8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeWeaponData: {fileID: 11400000, guid: 7fbc3196429833247905ee22e8ece4c4, type: 2}
+  rangedWeaponData: {fileID: 11400000, guid: dda91c349427f7946824aa6c4c95778e, type: 2}
+  meleeWeaponAction:
+    m_Name: Melee Weapon
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 4418cf86-61b1-4aa2-b118-95b2f3921944
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c4c8b5d1-1bec-4156-b9e0-5e293253b2d8
+      m_Path: <Keyboard>/1
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Melee Weapon
+      m_Flags: 0
+  rangedWeaponAction:
+    m_Name: Ranged Weapon
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 2f6b8762-4156-4430-9fd5-32c03b46fdc7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b8852577-93e9-43da-aac6-c294b27df26c
+      m_Path: <Keyboard>/2
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Ranged Weapon
       m_Flags: 0
 --- !u!1 &519420028
 GameObject:
