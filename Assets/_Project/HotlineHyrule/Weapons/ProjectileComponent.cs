@@ -54,11 +54,13 @@ namespace HotlineHyrule.Weapons
 
         void Start()
         {
-            if (ImpactRaycastHit)
+            var impactRaycastHit = ImpactRaycastHit;
+            
+            if (impactRaycastHit)
             {
-                HandleCollision();
+                HandleCollision(impactRaycastHit.transform);
 
-                Transform.position = ImpactRaycastHit.centroid;
+                Transform.position = impactRaycastHit.centroid;
             }
         }
 
@@ -66,7 +68,7 @@ namespace HotlineHyrule.Weapons
         {
             if (impactMask.value != (impactMask.value | 1 << other.gameObject.layer)) return;
             
-            HandleCollision();
+            HandleCollision(other.transform);
 
             var healthComponent = other.gameObject.GetComponent<HealthComponent>();
             if (healthComponent) healthComponent.Health -= ImpactDamage;
@@ -76,7 +78,7 @@ namespace HotlineHyrule.Weapons
         {
             if (impactMask.value != (impactMask.value | 1 << other.gameObject.layer)) return;
 
-            HandleCollision();
+            HandleCollision(other.transform);
 
             var healthComponent = other.GetComponent<HealthComponent>();
             if (healthComponent) healthComponent.Health -= ImpactDamage;
@@ -90,9 +92,11 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// Handles the influence of a collision on the projectile.
         /// </summary>
-        void HandleCollision()
+        void HandleCollision(Transform other)
         {
             Rigidbody.velocity = Vector2.zero;
+            Transform.SetParent(other);
+            Rigidbody.simulated = false;
             if (SpriteRenderer) SpriteRenderer.sprite = impactSprite;
         }
     }
