@@ -19,9 +19,7 @@ namespace HotlineHyrule.Entities
         /// </summary>
         [SerializeField] public EnemyStateBaseComponent state;
         [SerializeField] float wallCheckDistance;
-        [SerializeField] float playerCheckDistance;
         [SerializeField] LayerMask wallMask;
-        [SerializeField] LayerMask playerMask;
         [SerializeField] public Collider2D sightRangeCollider;
 
         public bool HasWallLeft =>
