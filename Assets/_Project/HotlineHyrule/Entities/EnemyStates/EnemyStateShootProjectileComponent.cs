@@ -5,6 +5,9 @@ namespace HotlineHyrule.Entities.EnemyStates
 {
     public class EnemyStateShootProjectileComponent : EnemyStateBaseComponent
     {
+        /// <summary>
+        /// Projectile prefab that shall be spawned
+        /// </summary>
         [SerializeField] GameObject projectileObj;
         Animator _animator;
         
@@ -22,7 +25,7 @@ namespace HotlineHyrule.Entities.EnemyStates
             var instance = Instantiate(projectileObj, transform.position, Quaternion.Euler(transform.eulerAngles));
             yield return new WaitForSeconds(0.5f);
             _animator.SetTrigger("enterPatrolState");
-            enemyComponent.ChangeState(GetComponent<EnemyStatePatrolComponent>());
+            enemyComponent.ChangeState(enemyComponent.PatrolState);
         }
     }
 }

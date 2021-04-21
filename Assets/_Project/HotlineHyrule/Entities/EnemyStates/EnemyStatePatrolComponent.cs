@@ -8,7 +8,13 @@ namespace HotlineHyrule.Entities.EnemyStates
     [RequireComponent(typeof(EnemyComponent))]
     public class EnemyStatePatrolComponent : EnemyStateBaseComponent
     {
+        /// <summary>
+        /// Move speed of the projectile
+        /// </summary>
         [SerializeField] float moveSpeed;
+        /// <summary>
+        /// Cooldown for sight range collider. It makes sense to set one to avoid continuous state changes
+        /// </summary>
         [SerializeField] float sightRangeColliderCooldown = 2f;
 
         Rigidbody2D _rb;
@@ -68,7 +74,7 @@ namespace HotlineHyrule.Entities.EnemyStates
         public override void OnLookingAtPlayer()
         {
             base.OnLookingAtPlayer();
-            enemyComponent.ChangeState(GetComponent<EnemyStateShootProjectileComponent>());
+            enemyComponent.ChangeState(enemyComponent.ShootProjectileState);
         }
     }
 }

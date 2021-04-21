@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1257962532538699660}
   - component: {fileID: 8681546965552470864}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: collider_sightRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
