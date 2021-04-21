@@ -76,10 +76,10 @@ namespace HotlineHyrule.Entities
         /// </summary>
         Vector2 ClampedMousePosition => IsInDeadzone ? DeadzonedMousePosition : MousePosition;
         bool IsMoving => Rigidbody.velocity.magnitude > moveAnimationThreshold;
-        float _movementFactor;
+        float _movementFactor = 1f;
         public float MovementFactor
         {
-            get { return _movementFactor; }
+            get => _movementFactor;
             set
             {
                 _movementFactor = value;

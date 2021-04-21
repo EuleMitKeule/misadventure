@@ -21,4 +21,4 @@ MonoBehaviour:
   deadzoneRadius: 1
   projectileSpeed: 0
   projectilePrefab: {fileID: 7320460730021520237, guid: 544655ebf7a0f3b4b95f34ca0ab95bee, type: 3}
-  spawnPosition: {x: 0, y: 0}
+  spawnPosition: {x: 0, y: 1}

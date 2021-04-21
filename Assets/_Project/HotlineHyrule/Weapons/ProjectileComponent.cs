@@ -1,4 +1,5 @@
 using System;
+using HotlineHyrule.Entities;
 using UnityEngine;
 
 namespace HotlineHyrule.Weapons
@@ -35,7 +36,9 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         RaycastHit2D ImpactRaycastHit =>
             Physics2D.Raycast(ImpactRaycastOrigin, Transform.up, ImpactRaycastDistance, impactMask);
-        
+
+        public int ImpactDamage { get; set; }
+
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
         Rigidbody2D Rigidbody { get; set; }
@@ -64,6 +67,19 @@ namespace HotlineHyrule.Weapons
             if (impactMask.value != (impactMask.value | 1 << other.gameObject.layer)) return;
             
             HandleCollision();
+
+            var healthComponent = other.gameObject.GetComponent<HealthComponent>();
+            if (healthComponent) healthComponent.Health -= ImpactDamage;
+        }
+
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (impactMask.value != (impactMask.value | 1 << other.gameObject.layer)) return;
+
+            HandleCollision();
+
+            var healthComponent = other.GetComponent<HealthComponent>();
+            if (healthComponent) healthComponent.Health -= ImpactDamage;
         }
 
         void OnBecameInvisible()
@@ -77,7 +93,7 @@ namespace HotlineHyrule.Weapons
         void HandleCollision()
         {
             Rigidbody.velocity = Vector2.zero;
-            SpriteRenderer.sprite = impactSprite;
+            if (SpriteRenderer) SpriteRenderer.sprite = impactSprite;
         }
     }
 }
