@@ -332,13 +332,9 @@ MonoBehaviour:
   respawnPoint: {x: 0, y: 0}
   state: {fileID: 0}
   wallCheckDistance: 0.3
-  playerCheckDistance: 0
   wallMask:
     serializedVersion: 2
     m_Bits: 512
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 64
   sightRangeCollider: {fileID: 8681546965552470864}
 --- !u!114 &7492512237567023205
 MonoBehaviour:

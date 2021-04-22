@@ -113,5 +113,11 @@ namespace HotlineHyrule.Entities
             
             state.OnLookingAtPlayer();
         }
+
+        void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.layer != LayerMask.NameToLayer("enemy")) return;
+            transform.Rotate(Vector3.forward, 90f);
+        }
     }
 }
