@@ -15,48 +15,43 @@ namespace HotlineHyrule.Entities.EnemyStates
         /// <summary>
         /// Cooldown for sight range collider. It makes sense to set one to avoid continuous state changes
         /// </summary>
-        [SerializeField] float sightRangeColliderCooldown = 2f;
-
-        Rigidbody2D _rb;
-
-        void Awake()
-        {
-            _rb = GetComponent<Rigidbody2D>();
-            //enemyComponent = GetComponent<EnemyComponent>();
-        }
+        [SerializeField] float sightRangeColliderCooldown;
 
         public override void Setup()
         {
             base.Setup();
+
+            if (Animator) Animator.SetBool("isMoving", true);
+
             StartCoroutine(DisableSightRangeCollider());
         }
 
         IEnumerator DisableSightRangeCollider()
         {
-            enemyComponent.sightRangeCollider.enabled = false;
+            EnemyComponent.sightRangeCollider.enabled = false;
             yield return new WaitForSeconds(sightRangeColliderCooldown);
-            enemyComponent.sightRangeCollider.enabled = true;
+            EnemyComponent.sightRangeCollider.enabled = true;
         }
 
         public override void FixedStateUpdate()
         {
-            _rb.velocity = transform.up * moveSpeed;
+            Rigidbody.velocity = transform.up * moveSpeed;
 
-            if (!enemyComponent.HasWallAbove) return;
+            if (!EnemyComponent.HasWallAbove) return;
 
-            if (enemyComponent.HasWallLeft &! enemyComponent.HasWallRight)
+            if (EnemyComponent.HasWallLeft &! EnemyComponent.HasWallRight)
             {
                 transform.eulerAngles += Vector3.forward * -90f;
                 return;
             }
 
-            if (enemyComponent.HasWallRight &! enemyComponent.HasWallLeft)
+            if (EnemyComponent.HasWallRight &! EnemyComponent.HasWallLeft)
             {
                 transform.eulerAngles += Vector3.forward * 90f;
                 return;
             }
 
-            if (enemyComponent.HasWallLeft && enemyComponent.HasWallRight)
+            if (EnemyComponent.HasWallLeft && EnemyComponent.HasWallRight)
             {
                 transform.eulerAngles += Vector3.forward * 180f;
             }
@@ -68,13 +63,13 @@ namespace HotlineHyrule.Entities.EnemyStates
         public override void Exit()
         {
             base.Exit();
-            _rb.velocity = Vector2.zero;
+            Rigidbody.velocity = Vector2.zero;
         }
 
         public override void OnLookingAtPlayer()
         {
             base.OnLookingAtPlayer();
-            enemyComponent.ChangeState(enemyComponent.ShootProjectileState);
+            EnemyComponent.ChangeState(EnemyComponent.ShootProjectileState);
         }
     }
 }

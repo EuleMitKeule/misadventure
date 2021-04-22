@@ -60,7 +60,7 @@ namespace HotlineHyrule.Entities
             Collider = GetComponent<Collider2D>();
             HealthComponent = GetComponent<HealthComponent>();
             PatrolState = GetComponent<EnemyStatePatrolComponent>();
-            ShootProjectileState = GetComponent<EnemyStateShootProjectileComponent>();
+            ShootProjectileState = GetComponent<EnemyStateAttackComponent>();
 
             HealthComponent.HealthChanged += OnHealthChanged;
         }

@@ -44,13 +44,16 @@ namespace HotlineHyrule.Weapons
 
         void Start()
         {
-            var impactRaycastHit = ImpactRaycastHit;
-            
-            if (impactRaycastHit)
+            if (!projectileData.isSticky)
             {
-                HandleImpact(impactRaycastHit.transform);
+                var impactRaycastHit = ImpactRaycastHit;
 
-                Transform.position = impactRaycastHit.centroid;
+                if (impactRaycastHit)
+                {
+                    HandleImpact(impactRaycastHit.transform);
+
+                    Transform.position = impactRaycastHit.centroid;
+                }
             }
         }
 
@@ -97,7 +100,7 @@ namespace HotlineHyrule.Weapons
         {
             if (!projectileData.isSticky)
             {
-                Destroy(gameObject);
+                if (projectileData.destroyOnImpact) Destroy(gameObject);
                 return;
             }
 

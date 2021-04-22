@@ -4960,7 +4960,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -691272855
   m_SortingLayer: 3
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -4996,7 +4996,7 @@ Animator:
   m_GameObject: {fileID: 3659320590787278025}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6236c529c0468aa4c8ae4e4d2455dd73, type: 2}
+  m_Controller: {fileID: 22100000, guid: 4c719c5d7c3b9694a90232e4f88e084b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

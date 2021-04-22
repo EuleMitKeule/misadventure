@@ -33,7 +33,7 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// Whether the attack input is currently being registered.
         /// </summary>
-        bool IsAttacking => attackAction.ReadValue<float>() != 0f;
+        bool IsRequestingAttack => attackAction.ReadValue<float>() != 0f;
         /// <summary>
         /// Whether enough time has passed since the last usage for the weapon to be used again.
         /// </summary>
@@ -61,18 +61,31 @@ namespace HotlineHyrule.Weapons
         /// The spawn position of the projectile.
         /// </summary>
         Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + Transform.position;
-        int EntityLayer => IsPlayer ? PhysicsLayer.ENEMY : PhysicsLayer.PLAYER;
-        LayerMask ImpactLayerMask => 1 << PhysicsLayer.WALL | 1 << EntityLayer;
 
         GameObject InstantiateProjectile => Instantiate(RangedWeaponData.projectilePrefab, ProjectileSpawnPosition,
             Transform.rotation);
+
+        Rigidbody2D GetParentRigidbody
+        {
+            get
+            {
+                var rigidbodies = GetComponentsInParent<Rigidbody2D>();
+
+                var parentRigidbody = Rigidbody ?
+                    (rigidbodies.Length >= 2 ? rigidbodies[1] : null) :
+                    (rigidbodies.Length >= 1) ? rigidbodies[0] : null;
+
+                return parentRigidbody;
+            }
+        }
 
         public event EventHandler<EventArgs> AttackFinished;
         
         GameObject WeaponObject { get; set; }
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
-        Animator Animator { get; set; }
+        Animator WeaponAnimator { get; set; }
+        Rigidbody Rigidbody { get; set; }
         Rigidbody2D ParentRigidbody { get; set; }
         PlayerComponent PlayerComponent { get; set; }
 
@@ -80,7 +93,8 @@ namespace HotlineHyrule.Weapons
         {
             Transform = transform;
             SpriteRenderer = GetComponent<SpriteRenderer>();
-            ParentRigidbody = GetComponentsInParent<Rigidbody2D>()[1];
+            Rigidbody = GetComponent<Rigidbody>();
+            ParentRigidbody = GetParentRigidbody;
             PlayerComponent = GetComponentInParent<PlayerComponent>();
 
             AttackFinished += OnAttackFinished;
@@ -91,7 +105,7 @@ namespace HotlineHyrule.Weapons
 
         void Update()
         {
-            if (IsAttacking) PerformAttack();
+            if (IsRequestingAttack) PerformAttack();
         }
 
         /// <summary>
@@ -104,13 +118,13 @@ namespace HotlineHyrule.Weapons
             
             weaponData = newWeaponData;
             WeaponObject = Instantiate(weaponData.weaponPrefab, Transform);
-            Animator = WeaponObject.GetComponent<Animator>();
+            WeaponAnimator = WeaponObject.GetComponent<Animator>();
         }
 
         /// <summary>
         /// Performs an attack if possible.
         /// </summary>
-        void PerformAttack()
+        public void PerformAttack()
         {
             if (!CanAttack) return;
             LastAttackTime = Time.time;
@@ -122,7 +136,7 @@ namespace HotlineHyrule.Weapons
                 PlayerComponent.MovementFactor = weaponData.movementFactor;
             }
             
-            if (Animator) Animator.SetTrigger("attack");
+            if (WeaponAnimator) WeaponAnimator.SetTrigger("attack");
             
             if (HasRangedWeapon) PerformRangedAttack();
             else if (HasMeleeWeapon) PerformMeleeAttack();
@@ -166,7 +180,7 @@ namespace HotlineHyrule.Weapons
             var healthComponent = other.GetComponent<HealthComponent>();
             if (!healthComponent) return;
 
-            healthComponent.Health -= weaponData.damage;
+            healthComponent.Health -= MeleeWeaponData.damage;
         }
 
         void InvokeAttackFinished() => AttackFinished?.Invoke(this, EventArgs.Empty);

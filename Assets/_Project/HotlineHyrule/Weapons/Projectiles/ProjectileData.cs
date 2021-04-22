@@ -31,5 +31,7 @@ namespace HotlineHyrule.Weapons.Projectiles
         /// Whether the projectile stick to the object they collide with.
         /// </summary>
         [SerializeField] public bool isSticky;
+
+        [SerializeField] public bool destroyOnImpact;
     }
 }

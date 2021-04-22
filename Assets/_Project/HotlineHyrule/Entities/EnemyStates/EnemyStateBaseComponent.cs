@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using HotlineHyrule.Weapons;
+using UnityEngine;
 
 namespace HotlineHyrule.Entities.EnemyStates
 {
     public abstract class EnemyStateBaseComponent : MonoBehaviour
     {
-        protected EnemyComponent enemyComponent;
+        protected Rigidbody2D Rigidbody { get; private set; }
+        protected EnemyComponent EnemyComponent { get; private set; }
+        protected WeaponComponent WeaponComponent { get; private set; }
+        protected Animator Animator { get; private set; }
 
         /// <summary>
         /// (Future) Priority value if enemy can change between multiple states
@@ -17,7 +21,10 @@ namespace HotlineHyrule.Entities.EnemyStates
         /// </summary>
         public virtual void Setup()
         {
-            enemyComponent = GetComponent<EnemyComponent>();
+            Rigidbody = GetComponent<Rigidbody2D>();
+            EnemyComponent = GetComponent<EnemyComponent>();
+            WeaponComponent = GetComponentInChildren<WeaponComponent>();
+            Animator = GetComponent<Animator>();
         }
         /// <summary>
         /// Things that shall be updated for the current state of the enemy
