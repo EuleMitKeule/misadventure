@@ -1,23 +1,13 @@
 using System;
 using HotlineHyrule.Entities;
+using HotlineHyrule.Weapons.Projectiles;
 using UnityEngine;
 
 namespace HotlineHyrule.Weapons
 {
     public class ProjectileComponent : MonoBehaviour
     {
-        /// <summary>
-        /// The sprite changed to after an impact.
-        /// </summary>
-        [SerializeField] Sprite impactSprite;
-        /// <summary>
-        /// Layermask that contains layers that count as impacts.
-        /// </summary>
-        [SerializeField] public LayerMask impactMask;
-        /// <summary>
-        /// Offsets the start point if the impact raycast.
-        /// </summary>
-        [SerializeField] float impactRaycastOffset;
+        [SerializeField] ProjectileData projectileData;
 
         /// <summary>
         /// The distance between center and top of projectile.
@@ -26,23 +16,22 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// The start point of the impact raycast.
         /// </summary>
-        Vector2 ImpactRaycastOrigin => Transform.position + Transform.up * impactRaycastOffset;
+        Vector2 ImpactRaycastOrigin => Transform.position + Transform.up * projectileData.impactRaycastOffset;
         /// <summary>
         /// The length of the impact raycast.
         /// </summary>
-        float ImpactRaycastDistance => TopOffset - impactRaycastOffset;
+        float ImpactRaycastDistance => TopOffset - projectileData.impactRaycastOffset;
         /// <summary>
         /// The result of the impact raycast.
         /// </summary>
         RaycastHit2D ImpactRaycastHit =>
-            Physics2D.Raycast(ImpactRaycastOrigin, Transform.up, ImpactRaycastDistance, impactMask);
-
-        public int ImpactDamage { get; set; }
+            Physics2D.Raycast(ImpactRaycastOrigin, Transform.up, ImpactRaycastDistance, projectileData.impactMask);
 
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
         Rigidbody2D Rigidbody { get; set; }
         Collider2D Collider { get; set; }
+        Animator Animator { get; set; }
 
         void Awake()
         {
@@ -50,6 +39,7 @@ namespace HotlineHyrule.Weapons
             SpriteRenderer = GetComponent<SpriteRenderer>();
             Rigidbody = GetComponent<Rigidbody2D>();
             Collider = GetComponent<Collider2D>();
+            Animator = GetComponent<Animator>();
         }
 
         void Start()
@@ -58,7 +48,7 @@ namespace HotlineHyrule.Weapons
             
             if (impactRaycastHit)
             {
-                HandleCollision(impactRaycastHit.transform);
+                HandleImpact(impactRaycastHit.transform);
 
                 Transform.position = impactRaycastHit.centroid;
             }
@@ -66,22 +56,22 @@ namespace HotlineHyrule.Weapons
 
         void OnCollisionEnter2D(Collision2D other)
         {
-            if (impactMask.value != (impactMask.value | 1 << other.gameObject.layer)) return;
+            if (projectileData.impactMask.value != (projectileData.impactMask.value | 1 << other.gameObject.layer)) return;
             
-            HandleCollision(other.transform);
+            HandleImpact(other.transform);
 
             var healthComponent = other.gameObject.GetComponent<HealthComponent>();
-            if (healthComponent) healthComponent.Health -= ImpactDamage;
+            if (healthComponent) healthComponent.Health -= projectileData.damage;
         }
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (impactMask.value != (impactMask.value | 1 << other.gameObject.layer)) return;
+            if (projectileData.impactMask.value != (projectileData.impactMask.value | 1 << other.gameObject.layer)) return;
 
-            HandleCollision(other.transform);
+            HandleImpact(other.transform);
 
             var healthComponent = other.GetComponent<HealthComponent>();
-            if (healthComponent) healthComponent.Health -= ImpactDamage;
+            if (healthComponent) healthComponent.Health -= projectileData.damage;
         }
 
         void OnBecameInvisible()
@@ -89,15 +79,32 @@ namespace HotlineHyrule.Weapons
             Destroy(gameObject);
         }
 
+        public void Fire(Vector2 entityVelocity)
+        {
+            var velocity = projectileData.movementSpeed == 0f
+                ? entityVelocity
+                : (Vector2)Transform.up * projectileData.movementSpeed;
+
+            Rigidbody.velocity = velocity;
+
+            if (Animator) Animator.SetTrigger("attack");
+        }
+
         /// <summary>
         /// Handles the influence of a collision on the projectile.
         /// </summary>
-        void HandleCollision(Transform other)
+        void HandleImpact(Transform other)
         {
+            if (!projectileData.isSticky)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
             Rigidbody.velocity = Vector2.zero;
             Transform.SetParent(other);
             Rigidbody.simulated = false;
-            if (SpriteRenderer) SpriteRenderer.sprite = impactSprite;
+            if (SpriteRenderer) SpriteRenderer.sprite = projectileData.impactSprite;
         }
     }
 }

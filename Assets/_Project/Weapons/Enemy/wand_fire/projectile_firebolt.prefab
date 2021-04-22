@@ -118,15 +118,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8056576549639225386}
+  - component: {fileID: 3774472096424963229}
   - component: {fileID: 4964936843989076008}
   - component: {fileID: 996032350}
   - component: {fileID: 996032349}
   - component: {fileID: 996032353}
-  - component: {fileID: 4466516729668061952}
   - component: {fileID: -7781518035868833503}
   - component: {fileID: 1422982960205414279}
   m_Layer: 11
-  m_Name: enemy1_projectile
+  m_Name: projectile_firebolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,6 +147,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3774472096424963229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3659320590787278025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261465b5c13226c4bbff10a34fcde221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileData: {fileID: 11400000, guid: f6b160187cd2731448bc3ee1db0b56c2, type: 2}
 --- !u!212 &4964936843989076008
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4992,20 +5005,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4466516729668061952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3659320590787278025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8784ae65caeda914aaf2729743418e64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 1000
-  damage: 10
 --- !u!50 &-7781518035868833503
 Rigidbody2D:
   serializedVersion: 4
@@ -5020,12 +5019,12 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: c4379d1c924e7e4409047e0afb1ecbe3, type: 2}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!70 &1422982960205414279
 CapsuleCollider2D:

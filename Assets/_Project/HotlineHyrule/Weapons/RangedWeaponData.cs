@@ -13,10 +13,6 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         [SerializeField] public float deadzoneRadius;
         /// <summary>
-        /// The speed a shot projectile travels at.
-        /// </summary>
-        [SerializeField] public float projectileSpeed;
-        /// <summary>
         /// The prefab used for spawning a projectile.
         /// </summary>
         [SerializeField] public GameObject projectilePrefab;

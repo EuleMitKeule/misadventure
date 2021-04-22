@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using HotlineHyrule.Weapons;
 using UnityEngine;
 
 namespace HotlineHyrule.Entities.EnemyStates
@@ -23,6 +24,8 @@ namespace HotlineHyrule.Entities.EnemyStates
             _animator.SetTrigger("enterShootProjectileState");
             yield return new WaitForSeconds(0.5f);
             var instance = Instantiate(projectileObj, transform.position, Quaternion.Euler(transform.eulerAngles));
+            var projectileComponent = instance.GetComponent<ProjectileComponent>();
+            if (projectileComponent) projectileComponent.Fire(Vector2.zero);
             yield return new WaitForSeconds(0.5f);
             _animator.SetTrigger("enterPatrolState");
             enemyComponent.ChangeState(enemyComponent.PatrolState);

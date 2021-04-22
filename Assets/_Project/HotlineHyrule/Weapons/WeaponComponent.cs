@@ -61,20 +61,26 @@ namespace HotlineHyrule.Weapons
         /// The spawn position of the projectile.
         /// </summary>
         Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + Transform.position;
+        int EntityLayer => IsPlayer ? PhysicsLayer.ENEMY : PhysicsLayer.PLAYER;
+        LayerMask ImpactLayerMask => 1 << PhysicsLayer.WALL | 1 << EntityLayer;
+
+        GameObject InstantiateProjectile => Instantiate(RangedWeaponData.projectilePrefab, ProjectileSpawnPosition,
+            Transform.rotation);
+
         public event EventHandler<EventArgs> AttackFinished;
         
         GameObject WeaponObject { get; set; }
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
         Animator Animator { get; set; }
-        Rigidbody2D PlayerRigidbody { get; set; }
+        Rigidbody2D ParentRigidbody { get; set; }
         PlayerComponent PlayerComponent { get; set; }
 
         void Awake()
         {
             Transform = transform;
             SpriteRenderer = GetComponent<SpriteRenderer>();
-            PlayerRigidbody = GetComponentsInParent<Rigidbody2D>()[1];
+            ParentRigidbody = GetComponentsInParent<Rigidbody2D>()[1];
             PlayerComponent = GetComponentInParent<PlayerComponent>();
 
             AttackFinished += OnAttackFinished;
@@ -116,7 +122,7 @@ namespace HotlineHyrule.Weapons
                 PlayerComponent.MovementFactor = weaponData.movementFactor;
             }
             
-            Animator.SetTrigger("attack");
+            if (Animator) Animator.SetTrigger("attack");
             
             if (HasRangedWeapon) PerformRangedAttack();
             else if (HasMeleeWeapon) PerformMeleeAttack();
@@ -128,30 +134,16 @@ namespace HotlineHyrule.Weapons
         void PerformRangedAttack()
         {
             if (!HasRangedWeapon) return;
-            
-            var projectileObject = Instantiate(RangedWeaponData.projectilePrefab, ProjectileSpawnPosition, Transform.rotation);
 
-            projectileObject.SetActive(false);
+            FireProjectile();
+        }
+
+        void FireProjectile()
+        {
+            var projectileObject = InstantiateProjectile;
 
             var projectileComponent = projectileObject.GetComponent<ProjectileComponent>();
-            projectileComponent.impactMask = new LayerMask();
-            projectileComponent.impactMask.value |= 1 << PhysicsLayer.WALL;
-            projectileComponent.impactMask.value |= 1 << (IsPlayer ? PhysicsLayer.ENEMY : PhysicsLayer.PLAYER);
-            projectileComponent.ImpactDamage = weaponData.damage;
-
-            projectileObject.SetActive(true);
-
-            var animator = projectileObject.GetComponent<Animator>();
-            if (animator) animator.SetTrigger("attack");
-
-            var projectileRigidbody = projectileObject.GetComponent<Rigidbody2D>();
-            if (projectileRigidbody)
-            {
-                var velocity = RangedWeaponData.projectileSpeed == 0f
-                    ? PlayerRigidbody.velocity
-                    : (Vector2)Transform.up * RangedWeaponData.projectileSpeed;
-                projectileRigidbody.velocity = velocity;
-            }
+            if (projectileComponent) projectileComponent.Fire(ParentRigidbody.velocity);
         }
 
         void PerformMeleeAttack()
