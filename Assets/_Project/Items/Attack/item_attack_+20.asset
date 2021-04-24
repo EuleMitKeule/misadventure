@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 911c969171484f789dcdca5ca6dc5fb1, type: 3}
-  m_Name: item_potion_poison
+  m_Script: {fileID: 11500000, guid: 610c3210925c4af7b5f91020c0bbdff5, type: 3}
+  m_Name: item_attack_+20
   m_EditorClassIdentifier: 
   itemName: 
-  healTotal: -75
-  healAmount: -10
-  healRate: 1
+  damageFactor: 1
+  damageBonus: 20
+  attackSpeed: 1
+  duration: 10

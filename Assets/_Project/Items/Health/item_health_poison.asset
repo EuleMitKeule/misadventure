@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 911c969171484f789dcdca5ca6dc5fb1, type: 3}
-  m_Name: item_potion_health
+  m_Name: item_health_poison
   m_EditorClassIdentifier: 
   itemName: 
-  healTotal: 50
-  healAmount: 0
-  healRate: 0
+  healTotal: -75
+  healAmount: -10
+  healRate: 1

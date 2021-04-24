@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6325796044115875504}
   - component: {fileID: 9005154244242490432}
   m_Layer: 6
-  m_Name: weapon_base
+  m_Name: weapon_unarmed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,9 +72,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 631342383
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: -1
-  m_Sprite: {fileID: -6804999210424286090, guid: c778d46bf244d614182cfba6134a16cf, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_Size: {x: 0.25, y: 0.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &6325796044115875504
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 6325796044115875506}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ede1559477db535418d8bcbccdd98bc8, type: 2}
+  m_Controller: {fileID: 22100000, guid: f7d2f72ec27dbf54d898d8c4efdaadc8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
