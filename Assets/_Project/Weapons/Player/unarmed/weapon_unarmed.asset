@@ -17,5 +17,8 @@ MonoBehaviour:
   slowTimeWindow: 0
   attackRate: 1.5
   weaponPrefab: {fileID: 6325796044115875506, guid: cd143c243af2bb5438803a8ea5fb18af, type: 3}
-  weaponDroppedPrefab: {fileID: 0}
+  droppedWeaponPrefab: {fileID: 0}
+  hasInfiniteCharges: 1
+  weaponCharges: 0
+  chargeRandomness: 0
   damage: 10

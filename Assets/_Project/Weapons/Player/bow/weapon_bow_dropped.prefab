@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 87149508903852378}
   - component: {fileID: 87149508903852379}
   - component: {fileID: 1642420151997822405}
+  - component: {fileID: -4672214357769419756}
   m_Layer: 10
   m_Name: weapon_bow_dropped
   m_TagString: Untagged
@@ -95,7 +96,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -125,3 +126,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDatas:
   - {fileID: 11400000, guid: dda91c349427f7946824aa6c4c95778e, type: 2}
+--- !u!114 &-4672214357769419756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87149508903852376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53793c8aaf046d9be77d91919b85de8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponCharges: 0

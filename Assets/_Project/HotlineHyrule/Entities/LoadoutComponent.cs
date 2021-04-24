@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using HotlineHyrule.Weapons;
 using UnityEngine;
@@ -10,11 +11,14 @@ namespace HotlineHyrule.Entities
 {
     public class LoadoutComponent : MonoBehaviour
     {
-        [SerializeField] MeleeWeaponData meleeWeaponData;
-        [SerializeField] RangedWeaponData rangedWeaponData;
-        [SerializeField] InputAction meleeWeaponAction;
-        [SerializeField] InputAction rangedWeaponAction;
-        WeaponData[] Weapons => new WeaponData[] {meleeWeaponData, rangedWeaponData};
+        [SerializeField] WeaponData defaultWeapon;
+        [SerializeField] List<LoadoutSlot> loadoutSlots;
+        [SerializeField] InputAction changeWeaponAction;
+        
+        LoadoutSlot CurrentLoadoutSlot { get; set; }
+        int CurrentLoadoutSlotIndex => loadoutSlots.IndexOf(CurrentLoadoutSlot);
+        int NextLoadoutSlotIndex => (CurrentLoadoutSlotIndex + 1) % loadoutSlots.Count;
+        int PreviousLoadoutSlotIndex => (CurrentLoadoutSlotIndex + loadoutSlots.Count - 1) % loadoutSlots.Count;
             
         WeaponComponent WeaponComponent { get; set; }
 
@@ -22,30 +26,64 @@ namespace HotlineHyrule.Entities
         {
             WeaponComponent = GetComponentInChildren<WeaponComponent>();
 
-            meleeWeaponAction.started += OnButtonMeleeWeapon;
-            rangedWeaponAction.started += OnButtonRangedWeapon;
-            
-            meleeWeaponAction.Enable();
-            rangedWeaponAction.Enable();
+            if (WeaponComponent)
+            {
+                WeaponComponent.AttackStarted += OnAttackStarted;
+                WeaponComponent.AttackFinished += OnAttackFinished;
+            }
+
+            for (var i = 0; i < loadoutSlots.Count; i++)
+            {
+                var loadoutSlot = loadoutSlots[i];
+
+                if (!loadoutSlot.weaponData) loadoutSlot.weaponData = defaultWeapon;
+            }
+
+            ChangeSlot(0);
+
+            changeWeaponAction.started += _ => 
+                ChangeSlot(changeWeaponAction.ReadValue<float>() > 0 ? NextLoadoutSlotIndex : PreviousLoadoutSlotIndex);
+            changeWeaponAction.Enable();
         }
 
-        void OnButtonMeleeWeapon(InputAction.CallbackContext context) => WeaponComponent.SetWeapon(meleeWeaponData);
-
-        void OnButtonRangedWeapon(InputAction.CallbackContext context) => WeaponComponent.SetWeapon(rangedWeaponData);
-
-        public void PickUpWeapon(WeaponData weaponData)
+        void ChangeSlot(int slotIndex)
         {
-            switch (weaponData)
+            CurrentLoadoutSlot = loadoutSlots[slotIndex];
+            WeaponComponent.SetWeapon(CurrentLoadoutSlot.weaponData);
+        }
+
+        void OnAttackStarted(object sender, EventArgs e)
+        {
+            if (!CurrentLoadoutSlot.weaponData) return;
+            if (CurrentLoadoutSlot.weaponData.hasInfiniteCharges) return;
+            CurrentLoadoutSlot.weaponCharges -= 1;
+        }
+
+        void OnAttackFinished(object sender, EventArgs e)
+        {
+            if (!CurrentLoadoutSlot.weaponData) return;
+            if (CurrentLoadoutSlot.weaponData.hasInfiniteCharges) return;
+            if (CurrentLoadoutSlot.weaponCharges <= 0)
             {
-                case MeleeWeaponData newMeleeWeaponData:
-                    meleeWeaponData = newMeleeWeaponData;
-                    WeaponComponent.SetWeapon(meleeWeaponData);
-                    break;
-                case RangedWeaponData newRangedWeaponData:
-                    rangedWeaponData = newRangedWeaponData;
-                    WeaponComponent.SetWeapon(rangedWeaponData);
-                    break;
+                CurrentLoadoutSlot.weaponData = defaultWeapon;
+                ChangeSlot(CurrentLoadoutSlotIndex);
             }
+        }
+
+        public void PickUpWeapon(WeaponData newWeaponData, DroppedWeaponComponent newDroppedWeaponComponent)
+        {
+            if (CurrentLoadoutSlot.weaponData.droppedWeaponPrefab)
+            {
+                var droppedWeaponObject =
+                    Instantiate(CurrentLoadoutSlot.weaponData.droppedWeaponPrefab, transform.position, Quaternion.identity);
+                var droppedWeaponComponent = droppedWeaponObject.GetComponent<DroppedWeaponComponent>();
+                if (droppedWeaponComponent) droppedWeaponComponent.weaponCharges = CurrentLoadoutSlot.weaponCharges;
+            }
+            
+            CurrentLoadoutSlot.weaponData = newWeaponData;
+            CurrentLoadoutSlot.weaponCharges = newDroppedWeaponComponent.weaponCharges;
+            
+            ChangeSlot(CurrentLoadoutSlotIndex);
         }
     }
 }

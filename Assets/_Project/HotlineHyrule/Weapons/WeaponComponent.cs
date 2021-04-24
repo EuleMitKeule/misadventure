@@ -94,6 +94,7 @@ namespace HotlineHyrule.Weapons
             }
         }
 
+        public event EventHandler<EventArgs> AttackStarted;
         public event EventHandler<EventArgs> AttackFinished;
         
         GameObject WeaponObject { get; set; }
@@ -157,6 +158,8 @@ namespace HotlineHyrule.Weapons
             
             if (HasRangedWeapon) PerformRangedAttack();
             else if (HasMeleeWeapon) PerformMeleeAttack();
+
+            AttackStarted?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
