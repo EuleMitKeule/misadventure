@@ -17,12 +17,14 @@ namespace HotlineHyrule.Items
 
         HealthComponent HealthComponent { get; set; }
         LoadoutComponent LoadoutComponent { get; set; }
+        IMovementComponent MovementComponent { get; set; }
         WeaponComponent WeaponComponent { get; set; }
 
         void Awake()
         {
             HealthComponent = GetComponent<HealthComponent>();
             LoadoutComponent = GetComponent<LoadoutComponent>();
+            MovementComponent = GetComponent<IMovementComponent>();
             WeaponComponent = GetComponentInChildren<WeaponComponent>();
             
             pickupAction.started += OnButtonPickup;
@@ -51,6 +53,10 @@ namespace HotlineHyrule.Items
                     case AttackItemData attackItemData:
                         if (!WeaponComponent) continue;
                         WeaponComponent.Consume(attackItemData);
+                        break;
+                    case MovementItemData movementItemData:
+                        if (MovementComponent == null) continue;
+                        MovementComponent.Consume(movementItemData);
                         break;
                 }
             }

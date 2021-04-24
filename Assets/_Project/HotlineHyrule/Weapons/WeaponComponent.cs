@@ -150,7 +150,7 @@ namespace HotlineHyrule.Weapons
             
             if (IsPlayer)
             {
-                PlayerComponent.MovementFactor = weaponData.movementFactor;
+                PlayerComponent.MovementAttackFactor = weaponData.movementFactor;
             }
             
             if (WeaponAnimator) WeaponAnimator.SetTrigger("attack");
@@ -186,7 +186,7 @@ namespace HotlineHyrule.Weapons
         {
             if (IsPlayer)
             {
-                PlayerComponent.MovementFactor = 1f;
+                PlayerComponent.MovementAttackFactor = 1f;
             }
         }
 
