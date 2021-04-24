@@ -13,6 +13,12 @@ namespace HotlineHyrule.Entities.EnemyStates
             StartCoroutine(PerformAttackRoutine());
         }
 
+        public override void FixedStateUpdate()
+        {
+            base.FixedStateUpdate();
+            Rigidbody.velocity = Vector2.zero;
+        }
+
         IEnumerator PerformAttackRoutine()
         {
             if (Animator) Animator.SetTrigger("attack");
