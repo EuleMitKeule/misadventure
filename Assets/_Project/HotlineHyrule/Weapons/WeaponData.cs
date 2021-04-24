@@ -1,3 +1,5 @@
+using HotlineHyrule.Items;
+using UnityEditor;
 using UnityEngine;
 
 namespace HotlineHyrule.Weapons
@@ -5,12 +7,8 @@ namespace HotlineHyrule.Weapons
     /// <summary>
     /// Determines the properties of a weapon.
     /// </summary>
-    public class WeaponData : ScriptableObject
+    public class WeaponData : ItemData
     {
-        /// <summary>
-        /// The name of the weapon.
-        /// </summary>
-        [SerializeField] public string weaponName;
         /// <summary>
         /// Multiplies the player's movement speed.
         /// </summary>
