@@ -20,6 +20,7 @@ namespace HotlineHyrule.Entities
         [SerializeField] public EnemyStateBaseComponent state;
         [SerializeField] float wallCheckDistance;
         [SerializeField] LayerMask wallMask;
+        [SerializeField] public Collider2D sightRangeCollider;
 
         public bool HasWallLeft =>
             Physics2D.BoxCast(
@@ -52,12 +53,14 @@ namespace HotlineHyrule.Entities
         Collider2D Collider { get; set; }
         HealthComponent HealthComponent { get; set; }
         public EnemyStateBaseComponent PatrolState { get; private set; }
+        public EnemyStateBaseComponent ShootProjectileState { get; private set; }
 
         void Awake()
         {
             Collider = GetComponent<Collider2D>();
             HealthComponent = GetComponent<HealthComponent>();
             PatrolState = GetComponent<EnemyStatePatrolComponent>();
+            ShootProjectileState = GetComponent<EnemyStateAttackComponent>();
 
             HealthComponent.HealthChanged += OnHealthChanged;
         }
@@ -95,6 +98,26 @@ namespace HotlineHyrule.Entities
             if (e.NewHealth > 0) return;
             
             Destroy(gameObject);
+        }
+
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            // Check if target is Player and if there is no wall in the way
+            var dir = other.transform.position - transform.position;
+            if (other.gameObject.layer != LayerMask.NameToLayer("player")
+             || Physics2D.Raycast(transform.position, dir, dir.magnitude, wallMask)) return;
+            
+            // Look at player
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            
+            state.OnLookingAtPlayer();
+        }
+
+        void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.layer != LayerMask.NameToLayer("enemy")) return;
+            transform.Rotate(Vector3.forward, 90f);
         }
     }
 }

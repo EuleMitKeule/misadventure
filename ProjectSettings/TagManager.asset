@@ -16,8 +16,8 @@ TagManager:
   - projectile
   - wall
   - item
-  - 
-  - 
+  - enemyProjectile
+  - enemySightRange
   - 
   - 
   - 

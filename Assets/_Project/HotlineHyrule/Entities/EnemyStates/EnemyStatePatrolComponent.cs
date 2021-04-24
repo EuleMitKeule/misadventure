@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,42 +8,68 @@ namespace HotlineHyrule.Entities.EnemyStates
     [RequireComponent(typeof(EnemyComponent))]
     public class EnemyStatePatrolComponent : EnemyStateBaseComponent
     {
+        /// <summary>
+        /// Move speed of the enemy
+        /// </summary>
         [SerializeField] float moveSpeed;
+        /// <summary>
+        /// Cooldown for sight range collider. It makes sense to set one to avoid continuous state changes
+        /// </summary>
+        [SerializeField] float sightRangeColliderCooldown;
 
-        Rigidbody2D _rb;
-        EnemyComponent _enemyComponent;
-
-        void Awake()
+        public override void Setup()
         {
-            _rb = GetComponent<Rigidbody2D>();
-            _enemyComponent = GetComponent<EnemyComponent>();
+            base.Setup();
+
+            if (Animator) Animator.SetBool("isMoving", true);
+
+            StartCoroutine(DisableSightRangeCollider());
+        }
+
+        IEnumerator DisableSightRangeCollider()
+        {
+            EnemyComponent.sightRangeCollider.enabled = false;
+            yield return new WaitForSeconds(sightRangeColliderCooldown);
+            EnemyComponent.sightRangeCollider.enabled = true;
         }
 
         public override void FixedStateUpdate()
         {
-            _rb.velocity = transform.up * moveSpeed;
+            Rigidbody.velocity = transform.up * moveSpeed;
 
-            if (!_enemyComponent.HasWallAbove) return;
+            if (!EnemyComponent.HasWallAbove) return;
 
-            if (_enemyComponent.HasWallLeft &! _enemyComponent.HasWallRight)
+            if (EnemyComponent.HasWallLeft &! EnemyComponent.HasWallRight)
             {
                 transform.eulerAngles += Vector3.forward * -90f;
                 return;
             }
 
-            if (_enemyComponent.HasWallRight &! _enemyComponent.HasWallLeft)
+            if (EnemyComponent.HasWallRight &! EnemyComponent.HasWallLeft)
             {
                 transform.eulerAngles += Vector3.forward * 90f;
                 return;
             }
 
-            if (_enemyComponent.HasWallLeft && _enemyComponent.HasWallRight)
+            if (EnemyComponent.HasWallLeft && EnemyComponent.HasWallRight)
             {
                 transform.eulerAngles += Vector3.forward * 180f;
             }
 
             var isTurningLeft = Random.Range(0, 2) == 1;
             transform.eulerAngles += Vector3.forward * (isTurningLeft ? 90f : -90f);
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            Rigidbody.velocity = Vector2.zero;
+        }
+
+        public override void OnLookingAtPlayer()
+        {
+            base.OnLookingAtPlayer();
+            EnemyComponent.ChangeState(EnemyComponent.ShootProjectileState);
         }
     }
 }

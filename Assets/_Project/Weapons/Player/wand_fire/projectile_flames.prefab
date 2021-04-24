@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7320460730021520235}
   - component: {fileID: 7320460730021520214}
   - component: {fileID: 3184425719602560471}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: projectile_flames
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -691272855
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -4902,8 +4902,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261465b5c13226c4bbff10a34fcde221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactSprite: {fileID: 0}
-  impactMask:
-    serializedVersion: 2
-    m_Bits: 0
-  impactRaycastOffset: 0
+  projectileData: {fileID: 11400000, guid: 687a5c806367e194b92b8eaa299fc992, type: 2}

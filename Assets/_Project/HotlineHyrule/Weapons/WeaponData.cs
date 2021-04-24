@@ -21,10 +21,6 @@ namespace HotlineHyrule.Weapons
         /// The maximum amount of attacks performed per second.
         /// </summary>
         [SerializeField] public float attackRate;
-        /// <summary>
-        /// The damage a hit of the weapon deals.
-        /// </summary>
-        [SerializeField] public int damage;
         [SerializeField] public GameObject weaponPrefab;
         [SerializeField] public GameObject weaponDroppedPrefab;
     }
