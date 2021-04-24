@@ -13,7 +13,7 @@ namespace HotlineHyrule.Items
         [SerializeField] InputAction pickupAction;
 
         Collider2D[] OverlappingItems => Physics2D.OverlapCircleAll(transform.position, pickupRadius, itemMask);
-        Collider2D ClosestItem => OverlappingItems.OrderBy(element => (element.transform.position - transform.position).magnitude).First();
+        Collider2D ClosestItem => OverlappingItems.OrderBy(element => (element.transform.position - transform.position).magnitude).FirstOrDefault();
 
         HealthComponent HealthComponent { get; set; }
         LoadoutComponent LoadoutComponent { get; set; }
@@ -34,7 +34,9 @@ namespace HotlineHyrule.Items
 
         void OnButtonPickup(InputAction.CallbackContext context)
         {
-            var closestItemComponent = ClosestItem.GetComponent<ItemComponent>();
+            var closestItem = ClosestItem;
+            if (!closestItem) return;
+            var closestItemComponent = closestItem.GetComponent<ItemComponent>();
             if (!closestItemComponent) return;
             var itemDatas = closestItemComponent.itemDatas;
 
