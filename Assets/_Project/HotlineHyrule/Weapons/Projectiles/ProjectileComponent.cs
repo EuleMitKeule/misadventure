@@ -26,6 +26,8 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         RaycastHit2D ImpactRaycastHit =>
             Physics2D.Raycast(ImpactRaycastOrigin, Transform.up, ImpactRaycastDistance, projectileData.impactMask);
+        int DamageBonus { get; set; }
+        float DamageFactor { get; set; }
 
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
@@ -64,7 +66,7 @@ namespace HotlineHyrule.Weapons
             HandleImpact(other.transform);
 
             var healthComponent = other.gameObject.GetComponent<HealthComponent>();
-            if (healthComponent) healthComponent.Health -= projectileData.damage;
+            if (healthComponent) healthComponent.Health -= (int)(projectileData.damage * DamageFactor) + DamageBonus;
         }
 
         void OnTriggerEnter2D(Collider2D other)
@@ -74,7 +76,7 @@ namespace HotlineHyrule.Weapons
             HandleImpact(other.transform);
 
             var healthComponent = other.GetComponent<HealthComponent>();
-            if (healthComponent) healthComponent.Health -= projectileData.damage;
+            if (healthComponent) healthComponent.Health -= (int)(projectileData.damage * DamageFactor) + DamageBonus;
         }
 
         void OnBecameInvisible()
@@ -82,8 +84,11 @@ namespace HotlineHyrule.Weapons
             Destroy(gameObject);
         }
 
-        public void Fire(Vector2 entityVelocity)
+        public void Fire(Vector2 entityVelocity, int damageBonus, float damageFactor)
         {
+            DamageBonus = damageBonus;
+            DamageFactor = damageFactor;
+            
             var velocity = projectileData.movementSpeed == 0f
                 ? entityVelocity
                 : (Vector2)Transform.up * projectileData.movementSpeed;

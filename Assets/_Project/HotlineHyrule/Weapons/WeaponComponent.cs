@@ -3,6 +3,7 @@ using System.Collections;
 using System.Runtime.InteropServices.WindowsRuntime;
 using HotlineHyrule.Entities;
 using HotlineHyrule.Extensions;
+using HotlineHyrule.Items;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,6 +27,20 @@ namespace HotlineHyrule.Weapons
         /// The last point in time the weapon was used at.
         /// </summary>
         float LastAttackTime { get; set; }
+
+        float _attackSpeed;
+        float AttackSpeed
+        {
+            get => _attackSpeed;
+            set
+            {
+                _attackSpeed = value;
+                if (WeaponAnimator) WeaponAnimator.SetFloat("attackSpeed", _attackSpeed);
+            }
+        }
+
+        float DamageFactor { get; set; }
+        int DamageBonus { get; set; }
         /// <summary>
         /// Whether the weapon component's parent is the player.
         /// </summary>
@@ -37,7 +52,7 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// Whether enough time has passed since the last usage for the weapon to be used again.
         /// </summary>
-        bool CanAttack => Time.time >= LastAttackTime + 1 / weaponData.attackRate;
+        bool CanAttack => Time.time >= LastAttackTime + 1 / weaponData.attackRate / AttackSpeed;
         /// <summary>
         /// Whether the current weapon is a ranged one.
         /// </summary>
@@ -79,6 +94,7 @@ namespace HotlineHyrule.Weapons
             }
         }
 
+        public event EventHandler<EventArgs> AttackStarted;
         public event EventHandler<EventArgs> AttackFinished;
         
         GameObject WeaponObject { get; set; }
@@ -99,6 +115,8 @@ namespace HotlineHyrule.Weapons
 
             AttackFinished += OnAttackFinished;
 
+            ResetBuffs();
+            
             if (weaponData) SetWeapon(weaponData);
             attackAction.Enable();
         }
@@ -129,17 +147,19 @@ namespace HotlineHyrule.Weapons
             if (!CanAttack) return;
             LastAttackTime = Time.time;
 
-            Invoke(nameof(InvokeAttackFinished), weaponData.slowTimeWindow / weaponData.attackRate);
+            Invoke(nameof(InvokeAttackFinished), weaponData.slowTimeWindow / weaponData.attackRate / AttackSpeed);
             
             if (IsPlayer)
             {
-                PlayerComponent.MovementFactor = weaponData.movementFactor;
+                PlayerComponent.MovementAttackFactor = weaponData.movementFactor;
             }
             
             if (WeaponAnimator) WeaponAnimator.SetTrigger("attack");
             
             if (HasRangedWeapon) PerformRangedAttack();
             else if (HasMeleeWeapon) PerformMeleeAttack();
+
+            AttackStarted?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -157,7 +177,7 @@ namespace HotlineHyrule.Weapons
             var projectileObject = InstantiateProjectile;
 
             var projectileComponent = projectileObject.GetComponent<ProjectileComponent>();
-            if (projectileComponent) projectileComponent.Fire(ParentRigidbody.velocity);
+            if (projectileComponent) projectileComponent.Fire(ParentRigidbody.velocity, DamageBonus, DamageFactor);
         }
 
         void PerformMeleeAttack()
@@ -169,7 +189,7 @@ namespace HotlineHyrule.Weapons
         {
             if (IsPlayer)
             {
-                PlayerComponent.MovementFactor = 1f;
+                PlayerComponent.MovementAttackFactor = 1f;
             }
         }
 
@@ -180,9 +200,19 @@ namespace HotlineHyrule.Weapons
             var healthComponent = other.GetComponent<HealthComponent>();
             if (!healthComponent) return;
 
-            healthComponent.Health -= MeleeWeaponData.damage;
+            healthComponent.Health -= (int)(MeleeWeaponData.damage * DamageFactor) + DamageBonus;
         }
 
         void InvokeAttackFinished() => AttackFinished?.Invoke(this, EventArgs.Empty);
+
+        public void Consume(AttackItemData attackItem)
+        {
+            AttackSpeed = attackItem.attackSpeed;
+            DamageFactor = attackItem.damageFactor;
+            DamageBonus = attackItem.damageBonus;
+            Invoke(nameof(ResetBuffs), attackItem.duration);
+        }
+
+        void ResetBuffs() => (AttackSpeed, DamageFactor, DamageBonus) = (1, 1, 0);
     }
 }

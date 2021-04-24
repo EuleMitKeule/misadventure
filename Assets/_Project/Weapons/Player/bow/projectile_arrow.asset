@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 15
   movementSpeed: 20
-  impactSprite: {fileID: 0}
+  impactSprite: {fileID: -867335307708292600, guid: bda38d274f999dc4c8a867c33cb4a2e4, type: 3}
   impactMask:
     serializedVersion: 2
     m_Bits: 640
   impactRaycastOffset: 0.35
   isSticky: 1
+  destroyOnImpact: 0
