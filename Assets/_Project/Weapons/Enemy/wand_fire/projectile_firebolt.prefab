@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261465b5c13226c4bbff10a34fcde221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rangedWeaponData: {fileID: 11400000, guid: 94032551580cbb34eafdfd676d8321c8, type: 2}
   projectileData: {fileID: 11400000, guid: f6b160187cd2731448bc3ee1db0b56c2, type: 2}
 --- !u!212 &4964936843989076008
 SpriteRenderer:

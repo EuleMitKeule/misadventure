@@ -5,7 +5,7 @@ namespace HotlineHyrule.Weapons
     /// <summary>
     /// Determines the properties of a ranged weapon.
     /// </summary>
-    [CreateAssetMenu(menuName = "Weapons/New Ranged Weapon")]
+    [CreateAssetMenu(menuName = "Weapon/New Ranged Weapon")]
     public class RangedWeaponData : WeaponData
     {
         /// <summary>
@@ -22,5 +22,7 @@ namespace HotlineHyrule.Weapons
         /// The position the projectile is shot from.
         /// </summary>
         [SerializeField] public Vector2 spawnPosition;
+
+        [SerializeField] public bool unequipOnAttack;
     }
 }

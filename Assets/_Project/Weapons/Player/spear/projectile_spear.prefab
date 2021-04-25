@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: -5617943688056601515}
   - component: {fileID: 9011057950913740938}
   - component: {fileID: 1891562443640535959}
-  - component: {fileID: 1960687961229965307}
   m_Layer: 8
-  m_Name: projectile_arrow
+  m_Name: projectile_spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +99,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: c4379d1c924e7e4409047e0afb1ecbe3, type: 2}
@@ -120,8 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261465b5c13226c4bbff10a34fcde221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangedWeaponData: {fileID: 11400000, guid: dda91c349427f7946824aa6c4c95778e, type: 2}
-  projectileData: {fileID: 11400000, guid: c337f0dafb88e7b4c8630a86d0f8bade, type: 2}
+  rangedWeaponData: {fileID: 11400000, guid: 9368bade870391a4894e218110e868fc, type: 2}
+  projectileData: {fileID: 11400000, guid: 12993d69d34858542851e1c3ed72ea22, type: 2}
 --- !u!70 &1891562443640535959
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -138,22 +137,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.0725}
   m_Size: {x: 0.0625, y: 0.355}
   m_Direction: 0
---- !u!95 &1960687961229965307
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8636156419958803353}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: c393d21fa07b8954d8e47bb4a2f75d4e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

@@ -15,7 +15,7 @@ namespace HotlineHyrule.Entities
         [SerializeField] List<LoadoutSlot> loadoutSlots;
         [SerializeField] InputAction changeWeaponAction;
         
-        LoadoutSlot CurrentLoadoutSlot { get; set; }
+        public LoadoutSlot CurrentLoadoutSlot { get; set; }
         int CurrentLoadoutSlotIndex => loadoutSlots.IndexOf(CurrentLoadoutSlot);
         int NextLoadoutSlotIndex => (CurrentLoadoutSlotIndex + 1) % loadoutSlots.Count;
         int PreviousLoadoutSlotIndex => (CurrentLoadoutSlotIndex + loadoutSlots.Count - 1) % loadoutSlots.Count;

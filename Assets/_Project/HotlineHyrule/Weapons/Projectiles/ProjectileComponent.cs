@@ -7,6 +7,7 @@ namespace HotlineHyrule.Weapons
 {
     public class ProjectileComponent : MonoBehaviour
     {
+        [SerializeField] RangedWeaponData rangedWeaponData;
         [SerializeField] ProjectileData projectileData;
 
         /// <summary>
@@ -28,6 +29,11 @@ namespace HotlineHyrule.Weapons
             Physics2D.Raycast(ImpactRaycastOrigin, Transform.up, ImpactRaycastDistance, projectileData.impactMask);
         int DamageBonus { get; set; }
         float DamageFactor { get; set; }
+        LinearProjectileData LinearProjectileData => (LinearProjectileData)projectileData;
+        CurvedProjectileData CurvedProjectileData => (CurvedProjectileData)projectileData;
+        float StartSpeed =>
+            (CurvedProjectileData.range + Mathf.Pow(Rigidbody.velocity.magnitude, 2f) * Rigidbody.drag * Mathf.Pow(CurvedProjectileData.flightTime, 2f)) /
+            CurvedProjectileData.flightTime;  
 
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
@@ -48,16 +54,13 @@ namespace HotlineHyrule.Weapons
 
         void Start()
         {
-            if (!projectileData.isSticky)
+            var impactRaycastHit = ImpactRaycastHit;
+
+            if (impactRaycastHit)
             {
-                var impactRaycastHit = ImpactRaycastHit;
+                HandleImpact(impactRaycastHit.transform);
 
-                if (impactRaycastHit)
-                {
-                    HandleImpact(impactRaycastHit.transform);
-
-                    Transform.position = impactRaycastHit.centroid;
-                }
+                Transform.position = impactRaycastHit.centroid;
             }
         }
 
@@ -86,16 +89,23 @@ namespace HotlineHyrule.Weapons
             Destroy(gameObject);
         }
 
-        public void Fire(Vector2 entityVelocity, int damageBonus, float damageFactor, float attackSpeed)
+        public void Fire(Vector2 entityVelocity, int charges, int damageBonus, float damageFactor, float attackSpeed)
         {
+            if (projectileData is LinearProjectileData linearProjectileData)
+            {
+                var velocity = linearProjectileData.movementSpeed == 0f
+                    ? entityVelocity
+                    : (Vector2)Transform.up * linearProjectileData.movementSpeed;
+
+                Rigidbody.velocity = velocity;
+            }
+            else if (projectileData is CurvedProjectileData)
+            {
+                Rigidbody.velocity = Transform.up * StartSpeed;
+            }
+            
             DamageBonus = damageBonus;
             DamageFactor = damageFactor;
-            
-            var velocity = projectileData.movementSpeed == 0f
-                ? entityVelocity
-                : (Vector2)Transform.up * projectileData.movementSpeed;
-
-            Rigidbody.velocity = velocity;
 
             if (Animator)
             {
@@ -115,16 +125,12 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         void HandleImpact(Transform other)
         {
-            if (!projectileData.isSticky)
-            {
-                if (projectileData.destroyOnImpact) Destroy(gameObject);
-                return;
-            }
-
             Rigidbody.velocity = Vector2.zero;
             Transform.SetParent(other);
             Rigidbody.simulated = false;
-            if (SpriteRenderer) SpriteRenderer.sprite = projectileData.impactSprite;
+            if (Animator) Animator.SetTrigger("impact");
         }
+
+        public void Destroy() => Destroy(gameObject);
     }
 }

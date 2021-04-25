@@ -112,6 +112,7 @@ namespace HotlineHyrule.Weapons
         Rigidbody2D ParentRigidbody { get; set; }
         PlayerComponent PlayerComponent { get; set; }
         ParticleSystem ParticleSystem { get; set; }
+        LoadoutComponent LoadoutComponent { get; set; }
 
         void Awake()
         {
@@ -121,6 +122,7 @@ namespace HotlineHyrule.Weapons
             ParentRigidbody = GetParentRigidbody;
             PlayerComponent = GetComponentInParent<PlayerComponent>();
             ParticleSystem = GetComponentInChildren<ParticleSystem>();
+            LoadoutComponent = GetComponentInParent<LoadoutComponent>();
 
             AttackFinished += OnAttackFinished;
 
@@ -186,7 +188,12 @@ namespace HotlineHyrule.Weapons
             var projectileObject = InstantiateProjectile;
 
             var projectileComponent = projectileObject.GetComponent<ProjectileComponent>();
-            if (projectileComponent) projectileComponent.Fire(ParentRigidbody.velocity, DamageBonus, DamageFactor, AttackSpeed);
+            if (projectileComponent) projectileComponent.Fire(
+                ParentRigidbody.velocity, 
+                IsPlayer ? LoadoutComponent.CurrentLoadoutSlot.weaponCharges : 0, 
+                DamageBonus, 
+                DamageFactor, 
+                AttackSpeed);
         }
 
         void PerformMeleeAttack()

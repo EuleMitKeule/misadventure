@@ -9,15 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c91280813f554777801f26831cda12b3, type: 3}
+  m_Script: {fileID: 11500000, guid: d4aeb7eff8ae43649ba4bc3fd03f4190, type: 3}
   m_Name: projectile_arrow
   m_EditorClassIdentifier: 
-  damage: 15
-  movementSpeed: 20
-  impactSprite: {fileID: -867335307708292600, guid: bda38d274f999dc4c8a867c33cb4a2e4, type: 3}
+  damage: 10
   impactMask:
     serializedVersion: 2
     m_Bits: 640
-  impactRaycastOffset: 0.35
-  isSticky: 1
-  destroyOnImpact: 0
+  impactRaycastOffset: -0.35
+  penetrations: 0
+  movementSpeed: 25
