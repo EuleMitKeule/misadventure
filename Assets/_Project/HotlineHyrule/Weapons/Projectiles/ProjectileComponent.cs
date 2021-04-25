@@ -34,6 +34,7 @@ namespace HotlineHyrule.Weapons
         Rigidbody2D Rigidbody { get; set; }
         Collider2D Collider { get; set; }
         Animator Animator { get; set; }
+        ParticleSystem ParticleSystem { get; set; }
 
         void Awake()
         {
@@ -42,6 +43,7 @@ namespace HotlineHyrule.Weapons
             Rigidbody = GetComponent<Rigidbody2D>();
             Collider = GetComponent<Collider2D>();
             Animator = GetComponent<Animator>();
+            ParticleSystem = GetComponent<ParticleSystem>();
         }
 
         void Start()
@@ -84,7 +86,7 @@ namespace HotlineHyrule.Weapons
             Destroy(gameObject);
         }
 
-        public void Fire(Vector2 entityVelocity, int damageBonus, float damageFactor)
+        public void Fire(Vector2 entityVelocity, int damageBonus, float damageFactor, float attackSpeed)
         {
             DamageBonus = damageBonus;
             DamageFactor = damageFactor;
@@ -95,7 +97,17 @@ namespace HotlineHyrule.Weapons
 
             Rigidbody.velocity = velocity;
 
-            if (Animator) Animator.SetTrigger("attack");
+            if (Animator)
+            {
+                Animator.SetTrigger("attack");
+                Animator.SetFloat("attackSpeed", attackSpeed);
+            }
+
+            if (ParticleSystem)
+            {
+                var mainModule = ParticleSystem.main;
+                mainModule.simulationSpeed *= attackSpeed;
+            }
         }
 
         /// <summary>

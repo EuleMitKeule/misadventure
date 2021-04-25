@@ -29,6 +29,7 @@ namespace HotlineHyrule.Weapons
         float LastAttackTime { get; set; }
 
         float _attackSpeed;
+        float _particleSimulationSpeed;
         float AttackSpeed
         {
             get => _attackSpeed;
@@ -36,6 +37,12 @@ namespace HotlineHyrule.Weapons
             {
                 _attackSpeed = value;
                 if (WeaponAnimator) WeaponAnimator.SetFloat("attackSpeed", _attackSpeed);
+                if (ParticleSystem)
+                {
+                    var mainModule = ParticleSystem.main;
+                    _particleSimulationSpeed = mainModule.simulationSpeed;
+                    mainModule.simulationSpeed *= AttackSpeed;
+                }
             }
         }
 
@@ -104,6 +111,7 @@ namespace HotlineHyrule.Weapons
         Rigidbody Rigidbody { get; set; }
         Rigidbody2D ParentRigidbody { get; set; }
         PlayerComponent PlayerComponent { get; set; }
+        ParticleSystem ParticleSystem { get; set; }
 
         void Awake()
         {
@@ -112,6 +120,7 @@ namespace HotlineHyrule.Weapons
             Rigidbody = GetComponent<Rigidbody>();
             ParentRigidbody = GetParentRigidbody;
             PlayerComponent = GetComponentInParent<PlayerComponent>();
+            ParticleSystem = GetComponentInChildren<ParticleSystem>();
 
             AttackFinished += OnAttackFinished;
 
@@ -177,7 +186,7 @@ namespace HotlineHyrule.Weapons
             var projectileObject = InstantiateProjectile;
 
             var projectileComponent = projectileObject.GetComponent<ProjectileComponent>();
-            if (projectileComponent) projectileComponent.Fire(ParentRigidbody.velocity, DamageBonus, DamageFactor);
+            if (projectileComponent) projectileComponent.Fire(ParentRigidbody.velocity, DamageBonus, DamageFactor, AttackSpeed);
         }
 
         void PerformMeleeAttack()
@@ -213,6 +222,15 @@ namespace HotlineHyrule.Weapons
             Invoke(nameof(ResetBuffs), attackItem.duration);
         }
 
-        void ResetBuffs() => (AttackSpeed, DamageFactor, DamageBonus) = (1, 1, 0);
+        void ResetBuffs()
+        {
+            (AttackSpeed, DamageFactor, DamageBonus) = (1, 1, 0);
+
+            if (ParticleSystem)
+            {
+                var mainModule = ParticleSystem.main;
+                mainModule.simulationSpeed = _particleSimulationSpeed;
+            }
+        }
     }
 }
