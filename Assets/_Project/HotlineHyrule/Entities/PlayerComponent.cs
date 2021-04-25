@@ -106,13 +106,14 @@ namespace HotlineHyrule.Entities
         {
             ProcessInput();
             HandleAnimation();
+            
+            Rigidbody.rotation = LookAngle;
+            if (WeaponComponent.HasRangedWeapon) WeaponComponent.transform.rotation = Quaternion.Euler(0, 0, WeaponAngle);
         }
 
         void FixedUpdate()
         {
             Rigidbody.velocity = WalkAxis * (movementSpeed * MovementAttackFactor * MovementItemFactor);
-            Rigidbody.rotation = LookAngle;
-            if (WeaponComponent.HasRangedWeapon) WeaponComponent.transform.rotation = Quaternion.Euler(0, 0, WeaponAngle);
         }
 
         /// <summary>
