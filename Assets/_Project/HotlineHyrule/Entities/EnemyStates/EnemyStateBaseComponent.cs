@@ -10,6 +10,8 @@ namespace HotlineHyrule.Entities.EnemyStates
         protected WeaponComponent WeaponComponent { get; private set; }
         protected Animator Animator { get; private set; }
 
+        protected GameObject PlayerObject;
+
         /// <summary>
         /// (Future) Priority value if enemy can change between multiple states
         /// (the higher the value the higher the priority)
@@ -25,6 +27,7 @@ namespace HotlineHyrule.Entities.EnemyStates
             EnemyComponent = GetComponent<EnemyComponent>();
             WeaponComponent = GetComponentInChildren<WeaponComponent>();
             Animator = GetComponent<Animator>();
+            PlayerObject = Locator.PlayerComponent.gameObject;
         }
         /// <summary>
         /// Things that shall be updated for the current state of the enemy

@@ -12,25 +12,12 @@ namespace HotlineHyrule.Entities.EnemyStates
         /// Move speed of the enemy
         /// </summary>
         [SerializeField] float moveSpeed;
-        /// <summary>
-        /// Cooldown for sight range collider. It makes sense to set one to avoid continuous state changes
-        /// </summary>
-        [SerializeField] float sightRangeColliderCooldown;
 
         public override void Setup()
         {
             base.Setup();
 
             if (Animator) Animator.SetBool("isMoving", true);
-
-            StartCoroutine(DisableSightRangeCollider());
-        }
-
-        IEnumerator DisableSightRangeCollider()
-        {
-            EnemyComponent.sightRangeCollider.enabled = false;
-            yield return new WaitForSeconds(sightRangeColliderCooldown);
-            EnemyComponent.sightRangeCollider.enabled = true;
         }
 
         public override void FixedStateUpdate()

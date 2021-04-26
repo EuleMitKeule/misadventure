@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using HotlineHyrule.Weapons;
 using UnityEngine;
 
 namespace HotlineHyrule.Entities.EnemyStates
@@ -35,7 +34,7 @@ namespace HotlineHyrule.Entities.EnemyStates
 
             // _animator.SetTrigger("enterPatrolState");
 
-            EnemyComponent.ChangeState(EnemyComponent.PatrolState);
+            EnemyComponent.ChangeState(EnemyComponent.FollowState);
         }
     }
 }

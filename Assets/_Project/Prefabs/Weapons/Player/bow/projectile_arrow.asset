@@ -15,7 +15,7 @@ MonoBehaviour:
   damage: 10
   impactMask:
     serializedVersion: 2
-    m_Bits: 8704
+    m_Bits: 16896
   impactRaycastOffset: -0.35
   isSticky: 1
   penetrations: 0
