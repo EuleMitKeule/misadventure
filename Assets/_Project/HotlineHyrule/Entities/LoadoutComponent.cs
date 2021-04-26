@@ -15,7 +15,7 @@ namespace HotlineHyrule.Entities
         [SerializeField] List<LoadoutSlot> loadoutSlots;
         [SerializeField] InputAction changeWeaponAction;
         
-        LoadoutSlot CurrentLoadoutSlot { get; set; }
+        public LoadoutSlot CurrentLoadoutSlot { get; set; }
         int CurrentLoadoutSlotIndex => loadoutSlots.IndexOf(CurrentLoadoutSlot);
         int NextLoadoutSlotIndex => (CurrentLoadoutSlotIndex + 1) % loadoutSlots.Count;
         int PreviousLoadoutSlotIndex => (CurrentLoadoutSlotIndex + loadoutSlots.Count - 1) % loadoutSlots.Count;
@@ -49,8 +49,10 @@ namespace HotlineHyrule.Entities
         void ChangeSlot(int slotIndex)
         {
             CurrentLoadoutSlot = loadoutSlots[slotIndex];
-            WeaponComponent.SetWeapon(CurrentLoadoutSlot.weaponData);
+            Apply();
         }
+
+        void Apply() => WeaponComponent.SetWeapon(CurrentLoadoutSlot.weaponData);
 
         void OnAttackStarted(object sender, EventArgs e)
         {
@@ -70,20 +72,33 @@ namespace HotlineHyrule.Entities
             }
         }
 
-        public void PickUpWeapon(WeaponData newWeaponData, DroppedWeaponComponent newDroppedWeaponComponent)
+        public void Equip(WeaponData newWeaponData, DroppedWeaponComponent newDroppedWeaponComponent)
         {
-            if (CurrentLoadoutSlot.weaponData.droppedWeaponPrefab)
-            {
-                var droppedWeaponObject =
-                    Instantiate(CurrentLoadoutSlot.weaponData.droppedWeaponPrefab, transform.position, Quaternion.identity);
-                var droppedWeaponComponent = droppedWeaponObject.GetComponent<DroppedWeaponComponent>();
-                if (droppedWeaponComponent) droppedWeaponComponent.weaponCharges = CurrentLoadoutSlot.weaponCharges;
-            }
+            DropWeapon();
             
             CurrentLoadoutSlot.weaponData = newWeaponData;
             CurrentLoadoutSlot.weaponCharges = newDroppedWeaponComponent.weaponCharges;
             
             ChangeSlot(CurrentLoadoutSlotIndex);
+        }
+
+        public void DropWeapon()
+        {
+            if (!CurrentLoadoutSlot.weaponData.droppedWeaponPrefab) return;
+            if (CurrentLoadoutSlot.weaponData == defaultWeapon) return;
+            
+            var droppedWeaponObject =
+                Instantiate(CurrentLoadoutSlot.weaponData.droppedWeaponPrefab, transform.position, transform.rotation);
+            var droppedWeaponComponent = droppedWeaponObject.GetComponent<DroppedWeaponComponent>();
+            if (droppedWeaponComponent) droppedWeaponComponent.weaponCharges = CurrentLoadoutSlot.weaponCharges;
+        }
+
+        public void Unequip(int slotIndex = -1)
+        {
+            var isValidIndex = slotIndex >= 0 && slotIndex < loadoutSlots.Count;
+            loadoutSlots[isValidIndex ? slotIndex : CurrentLoadoutSlotIndex].weaponData = defaultWeapon;
+
+            Apply();
         }
     }
 }

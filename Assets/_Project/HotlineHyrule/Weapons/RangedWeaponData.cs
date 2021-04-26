@@ -5,7 +5,7 @@ namespace HotlineHyrule.Weapons
     /// <summary>
     /// Determines the properties of a ranged weapon.
     /// </summary>
-    [CreateAssetMenu(menuName = "Weapons/New Ranged Weapon")]
+    [CreateAssetMenu(menuName = "Weapon/New Ranged Weapon")]
     public class RangedWeaponData : WeaponData
     {
         /// <summary>

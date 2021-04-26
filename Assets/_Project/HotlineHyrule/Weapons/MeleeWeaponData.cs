@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HotlineHyrule.Weapons
 {
-    [CreateAssetMenu(menuName = "Weapons/New Melee Weapon")]
+    [CreateAssetMenu(menuName = "Weapon/New Melee Weapon")]
     public class MeleeWeaponData : WeaponData
     {
         /// <summary>
