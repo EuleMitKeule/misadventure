@@ -30379,7 +30379,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4672214357769419756, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
       propertyPath: weaponCharges
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 87149508903852376, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
       propertyPath: m_Name
