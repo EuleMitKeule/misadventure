@@ -35,7 +35,7 @@ namespace HotlineHyrule.Entities.EnemyStates
 
             // _animator.SetTrigger("enterPatrolState");
 
-            EnemyComponent.ChangeState(EnemyComponent.PatrolState);
+            EnemyComponent.ChangeState(EnemyComponent.FollowState);
         }
     }
 }

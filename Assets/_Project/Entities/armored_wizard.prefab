@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &286386546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 286386547}
+  - component: {fileID: 286386549}
+  - component: {fileID: 286386548}
+  m_Layer: 2
+  m_Name: collider_followRange
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &286386547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286386546}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.72, y: -13.72, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7492512237567023211}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &286386549
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286386546}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 13
+--- !u!114 &286386548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286386546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e1c800acecd4897bcbd1e98e0de001c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1507218450127106195
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,8 +298,9 @@ GameObject:
   - component: {fileID: 7492512237567023205}
   - component: {fileID: 5802242549573311712}
   - component: {fileID: 7492512237567023210}
+  - component: {fileID: 794638678}
   m_Layer: 7
-  m_Name: enemy
+  m_Name: armored_wizard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,6 +320,7 @@ Transform:
   - {fileID: 7492512237098339439}
   - {fileID: 1257962532538699660}
   - {fileID: 9068153159861092283}
+  - {fileID: 286386547}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -403,7 +465,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 0
   moveSpeed: 3
-  sightRangeColliderCooldown: 1
 --- !u!114 &5802242549573311712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,3 +492,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   startHealth: 30
+--- !u!114 &794638678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7492512237567023215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a57a558fec24d06a03243a0a1ed5f83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  followDuration: 5
+  moveSpeed: 200

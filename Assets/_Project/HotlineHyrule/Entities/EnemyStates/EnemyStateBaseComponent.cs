@@ -1,5 +1,6 @@
 ﻿using HotlineHyrule.Weapons;
 using UnityEngine;
+using static HotlineHyrule.PlayerManagerComponent;
 
 namespace HotlineHyrule.Entities.EnemyStates
 {
@@ -9,6 +10,8 @@ namespace HotlineHyrule.Entities.EnemyStates
         protected EnemyComponent EnemyComponent { get; private set; }
         protected WeaponComponent WeaponComponent { get; private set; }
         protected Animator Animator { get; private set; }
+
+        protected GameObject Player;
 
         /// <summary>
         /// (Future) Priority value if enemy can change between multiple states
@@ -25,6 +28,7 @@ namespace HotlineHyrule.Entities.EnemyStates
             EnemyComponent = GetComponent<EnemyComponent>();
             WeaponComponent = GetComponentInChildren<WeaponComponent>();
             Animator = GetComponent<Animator>();
+            Player = PlayerManagerComponent.Player;
         }
         /// <summary>
         /// Things that shall be updated for the current state of the enemy
