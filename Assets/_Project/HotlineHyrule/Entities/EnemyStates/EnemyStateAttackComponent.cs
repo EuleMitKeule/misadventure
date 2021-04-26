@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using HotlineHyrule.Weapons;
 using UnityEngine;
 
 namespace HotlineHyrule.Entities.EnemyStates

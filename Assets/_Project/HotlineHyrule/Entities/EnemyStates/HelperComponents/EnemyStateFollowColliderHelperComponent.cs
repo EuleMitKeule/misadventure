@@ -5,12 +5,19 @@ namespace HotlineHyrule.Entities.EnemyStates.HelperComponents
 {
     public class EnemyStateFollowColliderHelperComponent : MonoBehaviour
     {
-        public static event EventHandler PlayerLeftFollowRange;
-        
-        void OnTriggerExit2D(Collider2D other)
+        Collider2D _collider;
+
+        void Awake()
+        {
+            _collider = GetComponent<Collider2D>();
+        }
+
+        public static event EventHandler<Collider2D> PlayerStayFollowRange;
+
+        void OnTriggerStay2D(Collider2D other)
         {
             if (LayerMask.NameToLayer("player") != other.gameObject.layer) return;
-            PlayerLeftFollowRange?.Invoke(this, EventArgs.Empty);
+            PlayerStayFollowRange?.Invoke(this, _collider);
         }
     }
 }

@@ -1,21 +1,31 @@
-﻿using System;
-using System.Collections;
-using HotlineHyrule.Entities.EnemyStates.HelperComponents;
-using HotlineHyrule.Weapons;
+﻿using HotlineHyrule.Entities.EnemyStates.HelperComponents;
 using UnityEngine;
 
 namespace HotlineHyrule.Entities.EnemyStates
 {
     public class EnemyStateFollowComponent : EnemyStateBaseComponent
     {
+        /// <summary>
+        /// Duration for the enemy following the player
+        /// </summary>
         [SerializeField] float followDuration;
+        /// <summary>
+        /// Move speed for enemy while following the player
+        /// </summary>
         [SerializeField] float moveSpeed;
+        /// <summary>
+        /// Collider component on that the following is based on.
+        /// As long as the player does not leave this collider, the
+        /// enemy will follow them. 
+        /// </summary>
+        [SerializeField] Collider2D followRangeCollider;
+        
         float _timer;
 
         public override void Setup()
         {
             base.Setup();
-            EnemyStateFollowColliderHelperComponent.PlayerLeftFollowRange += OnPlayerLeftFollowRange;
+            EnemyStateFollowColliderHelperComponent.PlayerStayFollowRange += OnPlayerStayFollowRange;
             _timer = 0f;
         }
 
@@ -36,14 +46,10 @@ namespace HotlineHyrule.Entities.EnemyStates
             Rigidbody.velocity = new Vector2(transform.up.x, transform.up.y) * moveSpeed * Time.deltaTime;
         }
 
-        void OnPlayerLeftFollowRange(object sender, EventArgs e)
+        void OnPlayerStayFollowRange(object sender, Collider2D col)
         {
-            EnemyComponent.ChangeState(EnemyComponent.PatrolState);
-        }
-        
-        void OnPlayerEntersSightRange(object sender, EventArgs e)
-        {
-            EnemyComponent.ChangeState(EnemyComponent.ShootProjectileState);
+            if (col != followRangeCollider) return;
+            _timer = 0f;
         }
 
         public override void OnLookingAtPlayer()
@@ -55,7 +61,8 @@ namespace HotlineHyrule.Entities.EnemyStates
         public override void Exit()
         {
             base.Exit();
-            EnemyStateFollowColliderHelperComponent.PlayerLeftFollowRange -= OnPlayerLeftFollowRange;
+            _timer = 0f;
+            EnemyStateFollowColliderHelperComponent.PlayerStayFollowRange -= OnPlayerStayFollowRange;
         }
     }
 }
