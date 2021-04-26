@@ -49,8 +49,10 @@ namespace HotlineHyrule.Entities
         void ChangeSlot(int slotIndex)
         {
             CurrentLoadoutSlot = loadoutSlots[slotIndex];
-            WeaponComponent.SetWeapon(CurrentLoadoutSlot.weaponData);
+            Apply();
         }
+
+        void Apply() => WeaponComponent.SetWeapon(CurrentLoadoutSlot.weaponData);
 
         void OnAttackStarted(object sender, EventArgs e)
         {
@@ -70,7 +72,7 @@ namespace HotlineHyrule.Entities
             }
         }
 
-        public void PickUpWeapon(WeaponData newWeaponData, DroppedWeaponComponent newDroppedWeaponComponent)
+        public void Equip(WeaponData newWeaponData, DroppedWeaponComponent newDroppedWeaponComponent)
         {
             if (CurrentLoadoutSlot.weaponData.droppedWeaponPrefab)
             {
@@ -84,6 +86,14 @@ namespace HotlineHyrule.Entities
             CurrentLoadoutSlot.weaponCharges = newDroppedWeaponComponent.weaponCharges;
             
             ChangeSlot(CurrentLoadoutSlotIndex);
+        }
+
+        public void Unequip(int slotIndex = -1)
+        {
+            var isValidIndex = slotIndex >= 0 && slotIndex < loadoutSlots.Count;
+            loadoutSlots[isValidIndex ? slotIndex : CurrentLoadoutSlotIndex].weaponData = defaultWeapon;
+
+            Apply();
         }
     }
 }

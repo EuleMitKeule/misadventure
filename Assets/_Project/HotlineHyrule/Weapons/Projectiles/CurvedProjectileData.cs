@@ -7,5 +7,6 @@ namespace HotlineHyrule.Weapons.Projectiles
     {
         [SerializeField] public float range;
         [SerializeField] public float flightTime;
+        [Range(0.01f, 0.5f)] [SerializeField] public float movementThreshold;
     }
 }

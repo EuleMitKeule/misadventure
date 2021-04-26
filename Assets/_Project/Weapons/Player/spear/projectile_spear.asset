@@ -18,5 +18,6 @@ MonoBehaviour:
     m_Bits: 640
   impactRaycastOffset: 0
   penetrations: 0
-  range: 13
+  range: 5
   flightTime: 1
+  movementThreshold: 0.05

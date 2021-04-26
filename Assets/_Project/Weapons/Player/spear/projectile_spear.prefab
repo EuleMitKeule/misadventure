@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -5617943688056601515}
   - component: {fileID: 9011057950913740938}
   - component: {fileID: 1891562443640535959}
+  - component: {fileID: -5580828249093098039}
   m_Layer: 8
   m_Name: projectile_spear
   m_TagString: Untagged
@@ -137,3 +138,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.0725}
   m_Size: {x: 0.0625, y: 0.355}
   m_Direction: 0
+--- !u!95 &-5580828249093098039
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8636156419958803353}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 125f1716ab83c7f45bad6407b02c55c7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

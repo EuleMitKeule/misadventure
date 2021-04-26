@@ -160,17 +160,14 @@ namespace HotlineHyrule.Weapons
 
             Invoke(nameof(InvokeAttackFinished), weaponData.slowTimeWindow / weaponData.attackRate / AttackSpeed);
             
-            if (IsPlayer)
-            {
-                PlayerComponent.MovementAttackFactor = weaponData.movementFactor;
-            }
+            if (IsPlayer) PlayerComponent.MovementAttackFactor = weaponData.movementFactor; //TODO enable for enemy
             
             if (WeaponAnimator) WeaponAnimator.SetTrigger("attack");
             
+            AttackStarted?.Invoke(this, EventArgs.Empty);
+
             if (HasRangedWeapon) PerformRangedAttack();
             else if (HasMeleeWeapon) PerformMeleeAttack();
-
-            AttackStarted?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -181,6 +178,13 @@ namespace HotlineHyrule.Weapons
             if (!HasRangedWeapon) return;
 
             FireProjectile();
+
+            if (RangedWeaponData.unequipOnAttack)
+            {
+                if (!LoadoutComponent) return;
+
+                LoadoutComponent.Unequip();
+            }
         }
 
         void FireProjectile()

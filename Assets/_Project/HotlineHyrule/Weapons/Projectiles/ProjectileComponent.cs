@@ -31,9 +31,15 @@ namespace HotlineHyrule.Weapons
         float DamageFactor { get; set; }
         LinearProjectileData LinearProjectileData => (LinearProjectileData)projectileData;
         CurvedProjectileData CurvedProjectileData => (CurvedProjectileData)projectileData;
+        bool IsLinearProjectile => projectileData is LinearProjectileData;
+        bool IsCurvedProjectile => projectileData is CurvedProjectileData;
         float StartSpeed =>
-            (CurvedProjectileData.range + Mathf.Pow(Rigidbody.velocity.magnitude, 2f) * Rigidbody.drag * Mathf.Pow(CurvedProjectileData.flightTime, 2f)) /
-            CurvedProjectileData.flightTime;  
+            (CurvedProjectileData.range + Mathf.Pow(Rigidbody.velocity.magnitude, 2f) * Rigidbody.drag * Mathf.Pow(CurvedProjectileData.flightTime * TIME_FACTOR, 2f)) /
+            (CurvedProjectileData.flightTime * TIME_FACTOR);
+        float StartDrag => 1 / (CurvedProjectileData.flightTime * TIME_FACTOR);
+        const float TIME_FACTOR = 1 / 4.638f;
+
+        int WeaponCharges { get; set; }
 
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
@@ -64,6 +70,13 @@ namespace HotlineHyrule.Weapons
             }
         }
 
+        void FixedUpdate()
+        {
+            if (!IsCurvedProjectile) return;
+
+            if (Rigidbody.velocity.magnitude < CurvedProjectileData.movementThreshold) HandleImpact();
+        }
+
         void OnCollisionEnter2D(Collision2D other)
         {
             if (projectileData.impactMask.value != (projectileData.impactMask.value | 1 << other.gameObject.layer)) return;
@@ -89,7 +102,7 @@ namespace HotlineHyrule.Weapons
             Destroy(gameObject);
         }
 
-        public void Fire(Vector2 entityVelocity, int charges, int damageBonus, float damageFactor, float attackSpeed)
+        public void Fire(Vector2 entityVelocity, int weaponCharges, int damageBonus, float damageFactor, float attackSpeed)
         {
             if (projectileData is LinearProjectileData linearProjectileData)
             {
@@ -101,11 +114,13 @@ namespace HotlineHyrule.Weapons
             }
             else if (projectileData is CurvedProjectileData)
             {
+                Rigidbody.drag = StartDrag;
                 Rigidbody.velocity = Transform.up * StartSpeed;
             }
             
             DamageBonus = damageBonus;
             DamageFactor = damageFactor;
+            WeaponCharges = weaponCharges;
 
             if (Animator)
             {
@@ -123,14 +138,35 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// Handles the influence of a collision on the projectile.
         /// </summary>
-        void HandleImpact(Transform other)
+        void HandleImpact(Transform other = null)
         {
             Rigidbody.velocity = Vector2.zero;
-            Transform.SetParent(other);
             Rigidbody.simulated = false;
+
+            if (projectileData.isSticky) if (other) Transform.SetParent(other);
+
             if (Animator) Animator.SetTrigger("impact");
         }
 
-        public void Destroy() => Destroy(gameObject);
+        public void Destroy()
+        {
+            Debug.Log($"Destroyed {name}");
+            Destroy(gameObject);
+        }
+
+        public void DropWeapon()
+        {
+            if (!rangedWeaponData.unequipOnAttack) return;
+            if (WeaponCharges <= 0) return;
+            if (!rangedWeaponData.droppedWeaponPrefab) return;
+
+            Debug.Log($"Dropped {name}");
+
+            var droppedWeaponObject = Instantiate(rangedWeaponData.droppedWeaponPrefab, transform.position,
+                Quaternion.identity);
+
+            var droppedWeaponComponent = droppedWeaponObject.GetComponent<DroppedWeaponComponent>();
+            if (droppedWeaponComponent) droppedWeaponComponent.weaponCharges = WeaponCharges;
+        }
     }
 }
