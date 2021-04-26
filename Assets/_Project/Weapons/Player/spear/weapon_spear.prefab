@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5105910019921273628}
   - component: {fileID: 5105910019921273629}
   m_Layer: 6
-  m_Name: weapon_bow
+  m_Name: weapon_spear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 631342383
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: -1
   m_Sprite: {fileID: 3798580205297923336, guid: bda38d274f999dc4c8a867c33cb4a2e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -94,7 +94,7 @@ Animator:
   m_GameObject: {fileID: 5105910019921273631}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 1bb30212635885c42a07c9909cd7f37c, type: 2}
+  m_Controller: {fileID: 22100000, guid: f7d2f72ec27dbf54d898d8c4efdaadc8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
