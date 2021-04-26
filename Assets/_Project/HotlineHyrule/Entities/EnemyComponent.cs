@@ -54,6 +54,7 @@ namespace HotlineHyrule.Entities
         HealthComponent HealthComponent { get; set; }
         public EnemyStateBaseComponent PatrolState { get; private set; }
         public EnemyStateBaseComponent ShootProjectileState { get; private set; }
+        public EnemyStateBaseComponent FollowState { get; private set; }
 
         void Awake()
         {
@@ -61,6 +62,7 @@ namespace HotlineHyrule.Entities
             HealthComponent = GetComponent<HealthComponent>();
             PatrolState = GetComponent<EnemyStatePatrolComponent>();
             ShootProjectileState = GetComponent<EnemyStateAttackComponent>();
+            FollowState = GetComponent<EnemyStateFollowComponent>();
 
             HealthComponent.HealthChanged += OnHealthChanged;
         }
@@ -100,7 +102,7 @@ namespace HotlineHyrule.Entities
             Destroy(gameObject);
         }
 
-        void OnTriggerEnter2D(Collider2D other)
+        void OnTriggerStay2D(Collider2D other)
         {
             // Check if target is Player and if there is no wall in the way
             var dir = other.transform.position - transform.position;
