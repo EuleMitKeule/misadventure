@@ -178,13 +178,6 @@ namespace HotlineHyrule.Weapons
             if (!HasRangedWeapon) return;
 
             FireProjectile();
-
-            if (RangedWeaponData.unequipOnAttack)
-            {
-                if (!LoadoutComponent) return;
-
-                LoadoutComponent.Unequip();
-            }
         }
 
         void FireProjectile()

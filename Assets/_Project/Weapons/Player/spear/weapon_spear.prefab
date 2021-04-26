@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5105910019921273630}
   - component: {fileID: 5105910019921273628}
   - component: {fileID: 5105910019921273629}
+  - component: {fileID: 117467140965994014}
   m_Layer: 6
   m_Name: weapon_spear
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 631342383
   m_SortingLayer: 4
   m_SortingOrder: -1
-  m_Sprite: {fileID: 3798580205297923336, guid: bda38d274f999dc4c8a867c33cb4a2e4, type: 3}
+  m_Sprite: {fileID: -3312681287433971974, guid: a8780be3b62727145beaab4ba60207eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 5105910019921273631}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: f7d2f72ec27dbf54d898d8c4efdaadc8, type: 2}
+  m_Controller: {fileID: 22100000, guid: 2a54134e1a62598488196b715787d99d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -103,3 +104,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &117467140965994014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5105910019921273631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 167a99ff0d764d3abe13ff37a84a789c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

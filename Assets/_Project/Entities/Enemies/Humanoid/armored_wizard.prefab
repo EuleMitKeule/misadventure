@@ -1,20 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7437007182026605979
+--- !u!1001 &4732495673438085389
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6584715816111582176, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: 94032551580cbb34eafdfd676d8321c8, type: 2}
     - target: {fileID: 7492512237567023206, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 22100000, guid: b3a33a79bd5f53d4398202ed714b65b0, type: 2}
+      objectReference: {fileID: 22100000, guid: cbbc39fa8a1b27643a09dbe8006da923, type: 2}
+    - target: {fileID: 7492512237567023208, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023208, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -3493186044149395723, guid: b14f1472d04d2ab4590bb92a55113635, type: 3}
+      objectReference: {fileID: -603512007615238259, guid: 2423ef5dcd485ce45b23914fbdd0d8c9, type: 3}
+    - target: {fileID: 7492512237567023208, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023211, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -61,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023215, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_Name
-      value: forest_gnome
+      value: armored_wizard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}

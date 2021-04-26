@@ -74,18 +74,23 @@ namespace HotlineHyrule.Entities
 
         public void Equip(WeaponData newWeaponData, DroppedWeaponComponent newDroppedWeaponComponent)
         {
-            if (CurrentLoadoutSlot.weaponData.droppedWeaponPrefab)
-            {
-                var droppedWeaponObject =
-                    Instantiate(CurrentLoadoutSlot.weaponData.droppedWeaponPrefab, transform.position, Quaternion.identity);
-                var droppedWeaponComponent = droppedWeaponObject.GetComponent<DroppedWeaponComponent>();
-                if (droppedWeaponComponent) droppedWeaponComponent.weaponCharges = CurrentLoadoutSlot.weaponCharges;
-            }
+            DropWeapon();
             
             CurrentLoadoutSlot.weaponData = newWeaponData;
             CurrentLoadoutSlot.weaponCharges = newDroppedWeaponComponent.weaponCharges;
             
             ChangeSlot(CurrentLoadoutSlotIndex);
+        }
+
+        public void DropWeapon()
+        {
+            if (!CurrentLoadoutSlot.weaponData.droppedWeaponPrefab) return;
+            if (CurrentLoadoutSlot.weaponData == defaultWeapon) return;
+            
+            var droppedWeaponObject =
+                Instantiate(CurrentLoadoutSlot.weaponData.droppedWeaponPrefab, transform.position, transform.rotation);
+            var droppedWeaponComponent = droppedWeaponObject.GetComponent<DroppedWeaponComponent>();
+            if (droppedWeaponComponent) droppedWeaponComponent.weaponCharges = CurrentLoadoutSlot.weaponCharges;
         }
 
         public void Unequip(int slotIndex = -1)

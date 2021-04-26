@@ -22,7 +22,5 @@ namespace HotlineHyrule.Weapons
         /// The position the projectile is shot from.
         /// </summary>
         [SerializeField] public Vector2 spawnPosition;
-
-        [SerializeField] public bool unequipOnAttack;
     }
 }

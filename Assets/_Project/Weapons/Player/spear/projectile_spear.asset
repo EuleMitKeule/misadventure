@@ -15,10 +15,10 @@ MonoBehaviour:
   damage: 10
   impactMask:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 8704
   impactRaycastOffset: 0
   isSticky: 0
   penetrations: 3
-  range: 5
-  flightTime: 1
-  movementThreshold: 0.05
+  range: 7.5
+  flightTime: 0.75
+  movementThreshold: 0.5

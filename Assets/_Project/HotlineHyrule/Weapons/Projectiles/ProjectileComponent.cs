@@ -84,7 +84,7 @@ namespace HotlineHyrule.Weapons
 
             HandleImpact(other.transform);
 
-            var healthComponent = other.gameObject.GetComponent<HealthComponent>();
+            var healthComponent = other.gameObject.GetComponentInParent<HealthComponent>();
             if (healthComponent) healthComponent.Health -= (int)(projectileData.damage * DamageFactor) + DamageBonus;
         }
 
@@ -95,7 +95,7 @@ namespace HotlineHyrule.Weapons
             if (Penetrations <= 0 || other.gameObject.layer.IsWall()) HandleImpact(other.transform);
             Penetrations -= 1;
 
-            var healthComponent = other.GetComponent<HealthComponent>();
+            var healthComponent = other.GetComponentInParent<HealthComponent>();
             if (healthComponent) healthComponent.Health -= (int)(projectileData.damage * DamageFactor) + DamageBonus;
         }
 
@@ -153,20 +153,16 @@ namespace HotlineHyrule.Weapons
 
         public void Destroy()
         {
-            Debug.Log($"Destroyed {name}");
             Destroy(gameObject);
         }
 
         public void DropWeapon()
         {
-            if (!rangedWeaponData.unequipOnAttack) return;
             if (WeaponCharges <= 0) return;
             if (!rangedWeaponData.droppedWeaponPrefab) return;
 
-            Debug.Log($"Dropped {name}");
-
             var droppedWeaponObject = Instantiate(rangedWeaponData.droppedWeaponPrefab, transform.position,
-                Quaternion.identity);
+                transform.rotation);
 
             var droppedWeaponComponent = droppedWeaponObject.GetComponent<DroppedWeaponComponent>();
             if (droppedWeaponComponent) droppedWeaponComponent.weaponCharges = WeaponCharges;
