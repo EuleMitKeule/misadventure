@@ -17,7 +17,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 640
   impactRaycastOffset: 0
-  penetrations: 0
+  isSticky: 0
+  penetrations: 3
   range: 5
   flightTime: 1
   movementThreshold: 0.05

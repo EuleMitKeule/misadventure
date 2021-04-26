@@ -40,6 +40,7 @@ namespace HotlineHyrule.Weapons
         const float TIME_FACTOR = 1 / 4.638f;
 
         int WeaponCharges { get; set; }
+        int Penetrations { get; set; }
 
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
@@ -80,7 +81,7 @@ namespace HotlineHyrule.Weapons
         void OnCollisionEnter2D(Collision2D other)
         {
             if (projectileData.impactMask.value != (projectileData.impactMask.value | 1 << other.gameObject.layer)) return;
-            
+
             HandleImpact(other.transform);
 
             var healthComponent = other.gameObject.GetComponent<HealthComponent>();
@@ -91,7 +92,8 @@ namespace HotlineHyrule.Weapons
         {
             if (projectileData.impactMask.value != (projectileData.impactMask.value | 1 << other.gameObject.layer)) return;
 
-            HandleImpact(other.transform);
+            if (Penetrations <= 0 || other.gameObject.layer.IsWall()) HandleImpact(other.transform);
+            Penetrations -= 1;
 
             var healthComponent = other.GetComponent<HealthComponent>();
             if (healthComponent) healthComponent.Health -= (int)(projectileData.damage * DamageFactor) + DamageBonus;
@@ -121,6 +123,7 @@ namespace HotlineHyrule.Weapons
             DamageBonus = damageBonus;
             DamageFactor = damageFactor;
             WeaponCharges = weaponCharges;
+            Penetrations = projectileData.penetrations;
 
             if (Animator)
             {

@@ -18,5 +18,5 @@ MonoBehaviour:
     m_Bits: 640
   impactRaycastOffset: -0.35
   isSticky: 1
-  penetrations: 0
+  penetrations: 5
   movementSpeed: 25
