@@ -40,7 +40,7 @@ namespace HotlineHyrule.Entities.EnemyStates
             }
             _timer += Time.deltaTime;
             
-            var dir = transform.position - Player.transform.position;
+            var dir = transform.position - PlayerObject.transform.position;
             var angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg + 90f;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             Rigidbody.velocity = new Vector2(transform.up.x, transform.up.y) * moveSpeed * Time.deltaTime;

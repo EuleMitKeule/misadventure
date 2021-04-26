@@ -155,6 +155,7 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         public void PerformAttack()
         {
+            // if (!weaponData) return;
             if (!CanAttack) return;
             LastAttackTime = Time.time;
 

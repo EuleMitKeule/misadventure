@@ -141,7 +141,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7492512237567023211}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &6108195585538764472
 CapsuleCollider2D:
@@ -342,9 +342,9 @@ GameObject:
   - component: {fileID: 7492512237567023214}
   - component: {fileID: 7492512237567023206}
   - component: {fileID: 7492512237567023204}
+  - component: {fileID: 7492512237567023210}
   - component: {fileID: 7492512237567023205}
   - component: {fileID: 5802242549573311712}
-  - component: {fileID: 7492512237567023210}
   - component: {fileID: 794638678}
   m_Layer: 7
   m_Name: enemy_humanoid_base
@@ -499,6 +499,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   sightRangeCollider: {fileID: 8681546965552470864}
+--- !u!114 &7492512237567023210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7492512237567023215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bda75ed6226a534e8618a01819c8fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 30
+  startHealth: 30
 --- !u!114 &7492512237567023205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,20 +540,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
---- !u!114 &7492512237567023210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7492512237567023215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bda75ed6226a534e8618a01819c8fd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 30
-  startHealth: 30
 --- !u!114 &794638678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,4 +556,3 @@ MonoBehaviour:
   followDuration: 5
   moveSpeed: 200
   followRangeCollider: {fileID: 286386549}
-  _timer: 0
