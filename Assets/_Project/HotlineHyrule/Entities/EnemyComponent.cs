@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using HotlineHyrule.Entities.EnemyStates;
+using HotlineHyrule.Extensions;
 using UnityEngine;
 
 namespace HotlineHyrule.Entities
@@ -21,6 +22,7 @@ namespace HotlineHyrule.Entities
         [SerializeField] float wallCheckDistance;
         [SerializeField] LayerMask wallMask;
         [SerializeField] public Collider2D sightRangeCollider;
+        [SerializeField] public ItemDropDictionary itemDrops;
 
         public bool HasWallLeft =>
             Physics2D.BoxCast(
