@@ -83,7 +83,7 @@ namespace HotlineHyrule.Graphics
                 {
                     var isTorus = true;
 
-                    foreach (var otherPolygon in polygons)
+                    foreach (var otherPolygon in containedPolygons)
                     {
                         if (otherPolygon == polygon) continue;
                         if (otherPolygon == containedPolygon) continue;
