@@ -11,7 +11,7 @@ namespace HotlineHyrule.Entities
     {
         [SerializeField] Vector3 spawnPos;
         [SerializeField] GameObject enemyPrefab_rnd;
-        public int intEnemyMaxCount; 
+        public int intEnemyMaxCount; //Enemy Prefabs-Anzahl muss angegeben werden
        
         // Start is called before the first frame update
         void Start()
@@ -20,6 +20,8 @@ namespace HotlineHyrule.Entities
             spawnPos = new Vector3(7, 3, 0);
             Debug.Log("SpawnPos: " + spawnPos.x + ", " + spawnPos.y);
             Instantiate(enemyPrefab_rnd, spawnPos, Quaternion.identity);*/
+            
+            //
             if(intEnemyMaxCount<= 0)
             {
                 Debug.Log("Error Anazahl Gegner nicht angegeben! Gegneranzahl: " + intEnemyMaxCount);
@@ -28,7 +30,7 @@ namespace HotlineHyrule.Entities
             {
                 for (int i = 0; i <= intEnemyMaxCount; i++)
                 {
-                    SpawnRandomPrefeb();
+                    SpawnRandomEnemyPrefeb();
                 }
             }
             
@@ -40,7 +42,7 @@ namespace HotlineHyrule.Entities
 
         }
 
-        void SpawnRandomPrefeb()
+        void SpawnRandomEnemyPrefeb()
         {
             int intSpawnPointX = Random.Range(-10, 10);
             int intSpawnPointY = Random.Range(-15, 15);
