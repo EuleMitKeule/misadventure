@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc02a9332fd21e4a8d86815c5707eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: de8d83c219eea42448aed313c9c0dd6e, type: 2}
+  weaponData: {fileID: 11400000, guid: 3d73b0030c67d364e8b5b56b97ed0986, type: 2}
   attackAction:
     m_Name: Attack
     m_Type: 0
