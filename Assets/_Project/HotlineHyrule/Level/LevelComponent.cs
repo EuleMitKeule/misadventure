@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace HotlineHyrule.Level
 {
@@ -11,10 +12,27 @@ namespace HotlineHyrule.Level
         /// The cell position the player respawns at.
         /// </summary>
         [SerializeField] public Vector2Int playerRespawnPosition;
-        
+        [SerializeField] public Tilemap wallTilemap;
+        [SerializeField] public Tilemap groundTilemap;
+
         void Awake()
         {
-            Locator.LevelComponent = this;
+            Locator.LevelComponent = this;           
+
+            if(!wallTilemap)
+            {
+                wallTilemap = GameObject.Find("tilemap_wall").GetComponent<Tilemap>();
+            }
+            if (!groundTilemap)
+            {
+                groundTilemap = GameObject.Find("tilemap_ground").GetComponent<Tilemap>();
+            }
+
         }
+
+
+        public bool IsWall(Vector3Int position) => wallTilemap.HasTile(position);
+
+        public BoundsInt LevelBounds() => groundTilemap.cellBounds;
     }
 }
