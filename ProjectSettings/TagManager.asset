@@ -15,11 +15,11 @@ TagManager:
   - enemy
   - projectile
   - wall
-  - 
-  - 
-  - 
-  - 
-  - 
+  - item
+  - enemyProjectile
+  - enemySightRange
+  - enemyFollowRange
+  - enemyHitbox
   - 
   - 
   - 
@@ -44,6 +44,9 @@ TagManager:
   - name: ground
     uniqueID: 36160119
     locked: 0
+  - name: Item
+    uniqueID: 1503095659
+    locked: 0
   - name: projectile
     uniqueID: 3603694441
     locked: 0
@@ -58,4 +61,7 @@ TagManager:
     locked: 0
   - name: objects
     uniqueID: 1083238823
+    locked: 0
+  - name: effects
+    uniqueID: 61649585
     locked: 0

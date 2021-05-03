@@ -1,3 +1,4 @@
+using HotlineHyrule.Items;
 using HotlineHyrule.Weapons;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,13 +8,13 @@ namespace HotlineHyrule.Entities
     /// <summary>
     /// Handles the player's movement.
     /// </summary>
-    public class PlayerComponent : MonoBehaviour
+    public class PlayerComponent : MonoBehaviour, IMovementComponent
     {
         /// <summary>
         /// The player's movement speed.
         /// </summary>
         [Header("Physics")]
-        [SerializeField] float speed;
+        [SerializeField] float movementSpeed;
         /// <summary>
         /// The damping value applied to the movement axis.
         /// </summary>
@@ -76,16 +77,8 @@ namespace HotlineHyrule.Entities
         /// </summary>
         Vector2 ClampedMousePosition => IsInDeadzone ? DeadzonedMousePosition : MousePosition;
         bool IsMoving => Rigidbody.velocity.magnitude > moveAnimationThreshold;
-        float _movementFactor;
-        public float MovementFactor
-        {
-            get { return _movementFactor; }
-            set
-            {
-                _movementFactor = value;
-                Rigidbody.velocity = speed * value * WalkAxis;
-            }
-        }
+        public float MovementAttackFactor { get; set; }
+        float MovementItemFactor { get; set; }
         
         Rigidbody2D Rigidbody { get; set; }
         WeaponComponent WeaponComponent { get; set; }
@@ -98,6 +91,8 @@ namespace HotlineHyrule.Entities
             if (!legsAnimator) legsAnimator = transform.Find("legs").GetComponent<Animator>();
 
             Locator.PlayerComponent = this;
+            
+            ResetBuffs();
         }
 
         void Start()
@@ -111,13 +106,14 @@ namespace HotlineHyrule.Entities
         {
             ProcessInput();
             HandleAnimation();
+            
+            Rigidbody.rotation = LookAngle;
+            if (WeaponComponent.HasRangedWeapon) WeaponComponent.transform.rotation = Quaternion.Euler(0, 0, WeaponAngle);
         }
 
         void FixedUpdate()
         {
-            Rigidbody.velocity = speed * MovementFactor * WalkAxis;
-            Rigidbody.rotation = LookAngle;
-            if (WeaponComponent.HasRangedWeapon) WeaponComponent.transform.rotation = Quaternion.Euler(0, 0, WeaponAngle);
+            Rigidbody.velocity = WalkAxis * (movementSpeed * MovementAttackFactor * MovementItemFactor);
         }
 
         /// <summary>
@@ -136,5 +132,13 @@ namespace HotlineHyrule.Entities
         {
             legsAnimator.SetBool("isMoving", IsMoving);
         }
+
+        public void Consume(MovementItemData movementItem)
+        {
+            MovementItemFactor = movementItem.movementFactor;
+            Invoke(nameof(ResetBuffs), movementItem.duration);
+        }
+
+        void ResetBuffs() => (MovementAttackFactor, MovementItemFactor) = (1f, 1f);
     }
 }

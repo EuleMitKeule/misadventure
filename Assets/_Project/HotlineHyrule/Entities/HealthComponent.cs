@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using HotlineHyrule.Items;
 using UnityEditor;
 using UnityEngine;
 
@@ -64,6 +66,31 @@ namespace HotlineHyrule.Entities
         void OnRespawned(object sender, EventArgs e)
         {
             ResetHealth();
+        }
+
+        public void Consume(HealthItemData healthItem)
+        {
+            if (healthItem.healRate == 0)
+            {
+                Health += healthItem.healTotal;
+                return;
+            }
+
+            if (healthItem.healAmount == 0) return;
+            if (Mathf.Sign(healthItem.healTotal) - Mathf.Sign(healthItem.healAmount) > float.Epsilon) return;
+            StartCoroutine(HealRoutine(healthItem));
+        }
+
+        IEnumerator HealRoutine(HealthItemData healthItem)
+        {
+            var healTotal = healthItem.healTotal;
+
+            while (Mathf.Abs(healTotal) >= Mathf.Abs(healthItem.healAmount))
+            {
+                healTotal -= healthItem.healAmount;
+                Health += healthItem.healAmount;
+                yield return new WaitForSeconds(1 / healthItem.healRate);
+            }
         }
     }
 }

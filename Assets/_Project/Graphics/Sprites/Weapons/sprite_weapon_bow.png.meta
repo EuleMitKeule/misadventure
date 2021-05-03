@@ -14,6 +14,9 @@ TextureImporter:
   - first:
       213: 5986933845083683317
     second: sprite_weapon_bow_attack
+  - first:
+      213: 3502427125632892329
+    second: sprite_weapon_bow_dropped
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -182,6 +185,27 @@ TextureImporter:
       bones: []
       spriteID: 5f9f9f9ac9cd51350800000000000000
       internalID: 5986933845083683317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_weapon_bow_dropped
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 4
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ad7a030aee1b9030800000000000000
+      internalID: 3502427125632892329
       vertices: []
       indices: 
       edges: []

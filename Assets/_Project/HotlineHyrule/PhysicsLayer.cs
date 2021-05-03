@@ -6,5 +6,8 @@ namespace HotlineHyrule
         public const int ENEMY = 7;
         public const int PROJECTILE = 8;
         public const int WALL = 9;
+        public const int ITEM = 10;
+
+        public static bool IsWall(this int layer) => layer == WALL;
     }
 }
