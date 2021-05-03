@@ -4,41 +4,58 @@ using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
 using HotlineHyrule.Level;
+using HotlineHyrule.Extensions;
+using UnityEngine.Tilemaps;
 
 namespace HotlineHyrule.Entities
 {
     public class RespawnEnemy : MonoBehaviour
     {
-        [SerializeField] Vector3 spawnPos;
-        [SerializeField] public GameObject enemyPrefab_rnd;
-        [SerializeField] public int intEnemyMaxCount; //Enemy Prefabs-Anzahl muss angegeben werden     
+                
+        [SerializeField] public List<GameObject> enemyPrefab_rnd; // Prefabs sind als liste und randomisiert aussuchen, 
+        [SerializeField] public Tilemap spawnTilemap;
         [SerializeField] public bool useLevelBounds;
-        [SerializeField] public BoundsInt spawnBounds;
-       
+        [SerializeField] Vector3 spawnPos;
+        //[SerializeField] public BoundsInt spawnBounds;       
+        [SerializeField] public int enemyMaxCount;
+        
+        [SerializeField] public bool useSpawnWaves;
+        [SerializeField] public bool randomSpawnPositionPerWaves;
+
+        [SerializeField] public int spawnWavesCount;
+        [SerializeField] [Range(0, 1)] public float intervallRandomnes;
+        [SerializeField] public int spawnCountPerWave;
+        [SerializeField] [Range(0, 1)] public float spawnCounterRandomnes; //Gegner dürfen nicht an der selben Stelle innerhalb einer Welle gespawnd werden
+
+        private int enemyCount;
+
+        //Spawn per wave
+        //spawn at time
+        //waveintrvall mit %-Abweichung (randomisiert intervall +/- Abweichung als Grenze)
+        //
+
         // Start is called before the first frame update
         void Start()
         {
-            /* Static Spawn
-            spawnPos = new Vector3(7, 3, 0);
-            Debug.Log("SpawnPos: " + spawnPos.x + ", " + spawnPos.y);
-            Instantiate(enemyPrefab_rnd, spawnPos, Quaternion.identity);*/
-
-           
-
+          
             //
-            if (intEnemyMaxCount<= 0)
+            if (enemyMaxCount <= 0)
             {
-                Debug.Log("Error Anazahl Gegner nicht angegeben! Gegneranzahl: " + intEnemyMaxCount);
+                Debug.Log("Error Anazahl Gegner nicht angegeben! Gegneranzahl: " + enemyMaxCount);
             }
             else
             {
 
-                BoundsInt bounds = useLevelBounds ? Locator.LevelComponent.LevelBounds() : spawnBounds;
+                // BoundsInt bounds = useLevelBounds ? Locator.LevelComponent.LevelBounds() : spawnBounds;
 
-                for (int i = 0; i <= intEnemyMaxCount; i++)
+                BoundsInt bounds = useLevelBounds ? Locator.LevelComponent.LevelBounds() : spawnTilemap.cellBounds;
+
+                for (int i = 0; i <= enemyMaxCount; i++)
                 {
                     SpawnRandomEnemyPrefeb(bounds);
                 }
+
+                //Coroutine für die Wellen implementieren
             }
             
         }
@@ -63,23 +80,35 @@ namespace HotlineHyrule.Entities
 
             Vector3Int spawnPosition = new Vector3Int(intSpawnPointX, intSpawnPointY, 0);
 
-            while (levelComponent.IsWall(spawnPosition))
+            while (!spawnTilemap.HasTile(spawnPosition)) //levelComponent.IsWall(spawnPosition)
             {                
                 intSpawnPointX = Random.Range(spawnBounds.min.x, spawnBounds.max.x);
                 intSpawnPointY = Random.Range(spawnBounds.min.y, spawnBounds.max.y);
                 spawnPosition = new Vector3Int(intSpawnPointX, intSpawnPointY, 0);
+                
+
                 errorCount += 1;
 
-                if(errorCount > 15)
+                if(errorCount > 50)
                 {
-                    break;
+                    return;
                 }
             }
 
             // Instanz von Enemy-prefab an einer randomisierten Position spawnen ohne Rotation.
             // mit Rotation freischalten spawnPoints[spawnPointIndex].rotation
             rotation = Random.Range(0, 360);
-            Instantiate(enemyPrefab_rnd, spawnPosition, Quaternion.Euler(0,0,rotation));
+            var spawnObj = Instantiate(enemyPrefab_rnd[0], spawnPosition.ToWorld(), Quaternion.Euler(0,0,rotation));
+            enemyCount += 1;
+            var healthComponent = spawnObj.GetComponent<HealthComponent>();
+            healthComponent.HealthChanged += onHealthChanged;
+        }
+
+        private void onHealthChanged(object sender, HealthEventArgs e)
+        {
+            if(e.NewHealth == 0){
+                enemyCount -= 1;
+            }
         }
     }
 }

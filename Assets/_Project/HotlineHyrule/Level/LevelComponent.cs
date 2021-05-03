@@ -32,6 +32,7 @@ namespace HotlineHyrule.Level
 
 
         public bool IsWall(Vector3Int position) => wallTilemap.HasTile(position);
+        public bool IsWall(Vector3 position) => wallTilemap.HasTile(wallTilemap.WorldToCell(position));
 
         public BoundsInt LevelBounds() => groundTilemap.cellBounds;
     }
