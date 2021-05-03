@@ -108,6 +108,8 @@ namespace HotlineHyrule.Entities
         {
             if(e.NewHealth == 0){
                 enemyCount -= 1;
+                Debug.Log("Kill");
+                Debug.Log("Enemy count: " + enemyCount);
             }
         }
     }
