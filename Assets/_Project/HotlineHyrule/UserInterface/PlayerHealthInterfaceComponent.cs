@@ -8,6 +8,7 @@ namespace HotlineHyrule.UserInterface
     public class PlayerHealthInterfaceComponent : MonoBehaviour
     {
         [SerializeField] GameObject healthContainerObject;
+        [SerializeField] GameObject heartPrefab;
         public Sprite fullHeartSprite;
         public Sprite halfHeartSprite;
 
@@ -25,16 +26,13 @@ namespace HotlineHyrule.UserInterface
 
         void SetHealthTo(int amount)
         {
-            if (_health < amount)
-                AddHealth(amount - _health);
-            else
-                SubtractHealth(_health - amount);
+            if (_health < amount) AddHealth(amount - _health);
+            else SubtractHealth(_health - amount);
         }
 
         void AddHealth(int amount)
         {
-            if (amount <= 0)
-                return;
+            if (amount <= 0) return;
 
             var remaining = amount;
 
@@ -44,44 +42,37 @@ namespace HotlineHyrule.UserInterface
                 remaining -= 1;
             }
 
-            for (int i = 0; i < (remaining + 1) / 2; ++i)
+            for (var i = 0; i < (remaining + 1) / 2; ++i)
             {
-                GameObject icon = new GameObject();
-                icon.transform.SetParent(healthContainerObject.transform);
+                var heartObject = Instantiate(heartPrefab, healthContainerObject.transform);
 
-                RectTransform rectTransform = icon.AddComponent<RectTransform>();
-                Image image = icon.AddComponent<Image>();
-
-                rectTransform.localPosition = new Vector3(-900 + _healthIcons.Count % 12 * 31, 400 - _healthIcons.Count / 12 * 31, 0);
-                rectTransform.sizeDelta = new Vector2(32, 32);
-
-                image.sprite = fullHeartSprite;
-
-                _healthIcons.Add(icon);
+                _healthIcons.Add(heartObject);
             }
 
             _health += amount;
 
             if (_health % 2 == 1)
-                _healthIcons[^1].GetComponent<Image>().sprite = halfHeartSprite;
+            {
+                var heartImage = _healthIcons[^1].GetComponent<Image>();
+                heartImage.sprite = halfHeartSprite;
+            }
         }
 
         void SubtractHealth(int amount)
         {
-            if (amount <= 0)
-                return;
+            if (amount <= 0) return;
 
-            int cappedAmount = _health < amount ? _health : amount;
-            int remaining = cappedAmount;
+            var cappedAmount = _health < amount ? _health : amount;
+            var remaining = cappedAmount;
 
             if (_health % 2 == 1)
             {
                 Destroy(_healthIcons[^1]);
                 _healthIcons.RemoveAt(_healthIcons.Count - 1);
-                --remaining;
+                remaining -= 1;
             }
 
-            for (int i = 0; i < remaining / 2; ++i)
+            for (var i = 0; i < remaining / 2; ++i)
             {
                 Destroy(_healthIcons[^1]);
                 _healthIcons.RemoveAt(_healthIcons.Count - 1);
@@ -90,8 +81,10 @@ namespace HotlineHyrule.UserInterface
             _health -= cappedAmount;
 
             if (_health % 2 == 1)
-                _healthIcons[^1].GetComponent<Image>().sprite = halfHeartSprite;
-
+            {
+                var heartImage = _healthIcons[^1].GetComponent<Image>();
+                heartImage.sprite = halfHeartSprite;
+            }
         }
 
         void OnPlayerHealthChanged(object sender, HealthEventArgs e)
