@@ -113,10 +113,10 @@ namespace HotlineHyruleEditor
                 if (typeof(UnityObject).IsAssignableFrom(typeof(TK)))
                     _Dictionary.DefaultKey = (TK)(object)EditorGUILayout.ObjectField("Default Key", (UnityObject)(object)_Dictionary.DefaultKey, typeof(TK), false);
             }
-            catch (Exception e)
+            catch (Exception)
             {
+                // ignored
             }
-
         }
 
         private void RemoveItem(TK key)
