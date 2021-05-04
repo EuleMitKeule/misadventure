@@ -5,6 +5,16 @@ namespace HotlineHyrule.Entities.EnemyStates
 {
     public class EnemyStateAttackComponent : EnemyStateBaseComponent
     {
+        /// <summary>
+        /// Delay (in seconds) for performing the attack.
+        /// Exmaple usuage is to fit the attack to the animation
+        /// </summary>
+        [SerializeField] float performAttackDelay = 0.5f;
+        /// <summary>
+        /// Delay when the attack state shall be left after the attack got performed
+        /// </summary>
+        [SerializeField] float changeStateDelay = 0.5f;
+        
         public override void Setup()
         {
             base.Setup();
@@ -22,7 +32,7 @@ namespace HotlineHyrule.Entities.EnemyStates
         {
             if (Animator) Animator.SetTrigger("attack");
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(performAttackDelay);
 
             if (WeaponComponent) WeaponComponent.PerformAttack();
 
@@ -30,7 +40,7 @@ namespace HotlineHyrule.Entities.EnemyStates
             // var projectileComponent = instance.GetComponent<ProjectileComponent>();
             // if (projectileComponent) projectileComponent.Fire(Vector2.zero);
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(changeStateDelay);
 
             // _animator.SetTrigger("enterPatrolState");
 

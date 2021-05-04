@@ -23,6 +23,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 5802242549573311712, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: performAttackDelay
+      value: 0.83
+      objectReference: {fileID: 0}
     - target: {fileID: 6584715816111582176, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: weaponData
       value: 
@@ -34,7 +38,7 @@ PrefabInstance:
     - target: {fileID: 7492512237567023208, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -3493186044149395723, guid: b14f1472d04d2ab4590bb92a55113635, type: 3}
+      objectReference: {fileID: 2902164335791148994, guid: b14f1472d04d2ab4590bb92a55113635, type: 3}
     - target: {fileID: 7492512237567023208, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
