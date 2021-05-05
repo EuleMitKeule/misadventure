@@ -19,10 +19,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: 4912454545561825547, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5802242549573311712, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: performAttackDelay
       value: 0.83

@@ -93,7 +93,7 @@ namespace HotlineHyrule.Entities
         public void ChangeState(EnemyStateBaseComponent newState)
         {
             if (!newState) return;
-
+            if (state && newState.priority < state.priority) return;
             if (state) state.Exit();
             state = newState;
             state.Setup();
@@ -102,7 +102,6 @@ namespace HotlineHyrule.Entities
         void OnHealthChanged(object sender, HealthEventArgs e)
         {
             if (e.NewHealth > 0) return;
-            
             ChangeState(DyingState);
         }
 

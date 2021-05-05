@@ -5,16 +5,16 @@ namespace HotlineHyrule.Entities.EnemyStates.HelperComponents
 {
     public class AnimationEventHelperComponent : MonoBehaviour
     {
-        ParticleSystem _particleSystem;
+        [SerializeField] ParticleSystem particleSystem;
 
-        void Awake()
+        public void InitParticleObject()
         {
-            _particleSystem = GetComponent<ParticleSystem>();
+            Instantiate(particleSystem.gameObject, transform.position, Quaternion.identity);
         }
 
-        public void PlayParticleEffect()
+        public void DestroyObject()
         {
-            _particleSystem.Play();
+            Destroy(gameObject);
         }
     }
 }
