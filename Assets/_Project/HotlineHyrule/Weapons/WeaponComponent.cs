@@ -192,6 +192,9 @@ namespace HotlineHyrule.Weapons
                 DamageBonus, 
                 DamageFactor, 
                 AttackSpeed);
+            // DEBUG CODE
+            SoundManager.PlaySound(Sound.Explosion, gameObject.transform.position);
+            // END OF DEBUG CODE
         }
 
         void PerformMeleeAttack()
