@@ -29,6 +29,15 @@ TextureImporter:
   - first:
       213: 6486108793597233059
     second: sprite_enemy_forest_gnome_5
+  - first:
+      213: 3704575502701049035
+    second: sprite_enemy_forest_gnome_6
+  - first:
+      213: 8426320560605306988
+    second: sprite_enemy_forest_gnome_7
+  - first:
+      213: -3164888130388526879
+    second: sprite_enemy_forest_gnome_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -123,7 +132,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
+        width: 18
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -142,9 +151,9 @@ TextureImporter:
       name: sprite_enemy_forest_gnome_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 18
         y: 0
-        width: 16
+        width: 18
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -163,9 +172,9 @@ TextureImporter:
       name: sprite_enemy_forest_gnome_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 36
         y: 0
-        width: 16
+        width: 18
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -184,9 +193,9 @@ TextureImporter:
       name: sprite_enemy_forest_gnome_3
       rect:
         serializedVersion: 2
-        x: 48
+        x: 54
         y: 0
-        width: 16
+        width: 18
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -205,9 +214,9 @@ TextureImporter:
       name: sprite_enemy_forest_gnome_4
       rect:
         serializedVersion: 2
-        x: 64
+        x: 72
         y: 0
-        width: 16
+        width: 18
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -226,9 +235,9 @@ TextureImporter:
       name: sprite_enemy_forest_gnome_5
       rect:
         serializedVersion: 2
-        x: 80
+        x: 90
         y: 0
-        width: 16
+        width: 18
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -239,6 +248,69 @@ TextureImporter:
       bones: []
       spriteID: 3a786e83599430a50800000000000000
       internalID: 6486108793597233059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_enemy_forest_gnome_6
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 0
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc43c12cacb496330800000000000000
+      internalID: 3704575502701049035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_enemy_forest_gnome_7
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 0
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c602372c7ed40f470800000000000000
+      internalID: 8426320560605306988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_enemy_forest_gnome_8
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e87752830f0414d0800000000000000
+      internalID: -3164888130388526879
       vertices: []
       indices: 
       edges: []
