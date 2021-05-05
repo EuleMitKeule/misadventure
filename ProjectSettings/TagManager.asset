@@ -18,8 +18,8 @@ TagManager:
   - item
   - enemyProjectile
   - enemySightRange
-  - 
-  - 
+  - enemyFollowRange
+  - enemyHitbox
   - 
   - 
   - 
@@ -61,4 +61,10 @@ TagManager:
     locked: 0
   - name: objects
     uniqueID: 1083238823
+    locked: 0
+  - name: effects
+    uniqueID: 61649585
+    locked: 0
+  - name: ui
+    uniqueID: 472863783
     locked: 0

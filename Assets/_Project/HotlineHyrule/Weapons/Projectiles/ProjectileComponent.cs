@@ -7,6 +7,7 @@ namespace HotlineHyrule.Weapons
 {
     public class ProjectileComponent : MonoBehaviour
     {
+        [SerializeField] RangedWeaponData rangedWeaponData;
         [SerializeField] ProjectileData projectileData;
 
         /// <summary>
@@ -28,6 +29,18 @@ namespace HotlineHyrule.Weapons
             Physics2D.Raycast(ImpactRaycastOrigin, Transform.up, ImpactRaycastDistance, projectileData.impactMask);
         int DamageBonus { get; set; }
         float DamageFactor { get; set; }
+        LinearProjectileData LinearProjectileData => (LinearProjectileData)projectileData;
+        CurvedProjectileData CurvedProjectileData => (CurvedProjectileData)projectileData;
+        bool IsLinearProjectile => projectileData is LinearProjectileData;
+        bool IsCurvedProjectile => projectileData is CurvedProjectileData;
+        float StartSpeed =>
+            (CurvedProjectileData.range + Mathf.Pow(Rigidbody.velocity.magnitude, 2f) * Rigidbody.drag * Mathf.Pow(CurvedProjectileData.flightTime * TIME_FACTOR, 2f)) /
+            (CurvedProjectileData.flightTime * TIME_FACTOR);
+        float StartDrag => 1 / (CurvedProjectileData.flightTime * TIME_FACTOR);
+        const float TIME_FACTOR = 1 / 4.638f;
+
+        int WeaponCharges { get; set; }
+        int Penetrations { get; set; }
 
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
@@ -48,26 +61,30 @@ namespace HotlineHyrule.Weapons
 
         void Start()
         {
-            if (!projectileData.isSticky)
+            var impactRaycastHit = ImpactRaycastHit;
+
+            if (impactRaycastHit)
             {
-                var impactRaycastHit = ImpactRaycastHit;
+                HandleImpact(impactRaycastHit.transform);
 
-                if (impactRaycastHit)
-                {
-                    HandleImpact(impactRaycastHit.transform);
-
-                    Transform.position = impactRaycastHit.centroid;
-                }
+                Transform.position = impactRaycastHit.centroid;
             }
+        }
+
+        void FixedUpdate()
+        {
+            if (!IsCurvedProjectile) return;
+
+            if (Rigidbody.velocity.magnitude < CurvedProjectileData.movementThreshold) HandleImpact();
         }
 
         void OnCollisionEnter2D(Collision2D other)
         {
             if (projectileData.impactMask.value != (projectileData.impactMask.value | 1 << other.gameObject.layer)) return;
-            
+
             HandleImpact(other.transform);
 
-            var healthComponent = other.gameObject.GetComponent<HealthComponent>();
+            var healthComponent = other.gameObject.GetComponentInParent<HealthComponent>();
             if (healthComponent) healthComponent.Health -= (int)(projectileData.damage * DamageFactor) + DamageBonus;
         }
 
@@ -75,9 +92,10 @@ namespace HotlineHyrule.Weapons
         {
             if (projectileData.impactMask.value != (projectileData.impactMask.value | 1 << other.gameObject.layer)) return;
 
-            HandleImpact(other.transform);
+            if (Penetrations <= 0 || other.gameObject.layer.IsWall()) HandleImpact(other.transform);
+            Penetrations -= 1;
 
-            var healthComponent = other.GetComponent<HealthComponent>();
+            var healthComponent = other.GetComponentInParent<HealthComponent>();
             if (healthComponent) healthComponent.Health -= (int)(projectileData.damage * DamageFactor) + DamageBonus;
         }
 
@@ -86,16 +104,26 @@ namespace HotlineHyrule.Weapons
             Destroy(gameObject);
         }
 
-        public void Fire(Vector2 entityVelocity, int damageBonus, float damageFactor, float attackSpeed)
+        public void Fire(Vector2 entityVelocity, int weaponCharges, int damageBonus, float damageFactor, float attackSpeed)
         {
+            if (projectileData is LinearProjectileData linearProjectileData)
+            {
+                var velocity = linearProjectileData.movementSpeed == 0f
+                    ? entityVelocity
+                    : (Vector2)Transform.up * linearProjectileData.movementSpeed;
+
+                Rigidbody.velocity = velocity;
+            }
+            else if (projectileData is CurvedProjectileData)
+            {
+                Rigidbody.drag = StartDrag;
+                Rigidbody.velocity = Transform.up * StartSpeed;
+            }
+            
             DamageBonus = damageBonus;
             DamageFactor = damageFactor;
-            
-            var velocity = projectileData.movementSpeed == 0f
-                ? entityVelocity
-                : (Vector2)Transform.up * projectileData.movementSpeed;
-
-            Rigidbody.velocity = velocity;
+            WeaponCharges = weaponCharges;
+            Penetrations = projectileData.penetrations;
 
             if (Animator)
             {
@@ -113,18 +141,31 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// Handles the influence of a collision on the projectile.
         /// </summary>
-        void HandleImpact(Transform other)
+        void HandleImpact(Transform other = null)
         {
-            if (!projectileData.isSticky)
-            {
-                if (projectileData.destroyOnImpact) Destroy(gameObject);
-                return;
-            }
-
             Rigidbody.velocity = Vector2.zero;
-            Transform.SetParent(other);
             Rigidbody.simulated = false;
-            if (SpriteRenderer) SpriteRenderer.sprite = projectileData.impactSprite;
+
+            if (projectileData.isSticky) if (other) Transform.SetParent(other);
+
+            if (Animator) Animator.SetTrigger("impact");
+        }
+
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
+
+        public void DropWeapon()
+        {
+            if (WeaponCharges <= 0) return;
+            if (!rangedWeaponData.droppedWeaponPrefab) return;
+
+            var droppedWeaponObject = Instantiate(rangedWeaponData.droppedWeaponPrefab, transform.position,
+                transform.rotation);
+
+            var droppedWeaponComponent = droppedWeaponObject.GetComponent<DroppedWeaponComponent>();
+            if (droppedWeaponComponent) droppedWeaponComponent.weaponCharges = WeaponCharges;
         }
     }
 }
