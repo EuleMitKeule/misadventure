@@ -32,6 +32,12 @@ MonoBehaviour:
     m_OverrideSprite: {fileID: 5540550522636094197, guid: 32f02c765f70433469593945ea5c8db4, type: 3}
   - m_OriginalSprite: {fileID: -1355066155209484461, guid: 32f02c765f70433469593945ea5c8db4, type: 3}
     m_OverrideSprite: {fileID: 6235572843830121072, guid: 32f02c765f70433469593945ea5c8db4, type: 3}
+  - m_OriginalSprite: {fileID: -6841033895019910237, guid: 32f02c765f70433469593945ea5c8db4, type: 3}
+    m_OverrideSprite: {fileID: 7331120363997653560, guid: 32f02c765f70433469593945ea5c8db4, type: 3}
+  - m_OriginalSprite: {fileID: 1524221926594277629, guid: 32f02c765f70433469593945ea5c8db4, type: 3}
+    m_OverrideSprite: {fileID: 1849344624802801007, guid: 32f02c765f70433469593945ea5c8db4, type: 3}
+  - m_OriginalSprite: {fileID: 9070366129040174908, guid: 32f02c765f70433469593945ea5c8db4, type: 3}
+    m_OverrideSprite: {fileID: 15162568785949156, guid: 32f02c765f70433469593945ea5c8db4, type: 3}
   m_GameObjects: []
   m_InstanceTile: {fileID: 6368312793603144569}
 --- !u!114 &6368312793603144569
@@ -53,13 +59,16 @@ MonoBehaviour:
   - m_Id: 0
     m_Sprites:
     - {fileID: -8675468374938715357, guid: 32f02c765f70433469593945ea5c8db4, type: 3}
+    - {fileID: 7331120363997653560, guid: 32f02c765f70433469593945ea5c8db4, type: 3}
+    - {fileID: 1849344624802801007, guid: 32f02c765f70433469593945ea5c8db4, type: 3}
+    - {fileID: 15162568785949156, guid: 32f02c765f70433469593945ea5c8db4, type: 3}
     m_GameObject: {fileID: 0}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
     m_PerlinScale: 0.5
-    m_Output: 0
+    m_Output: 1
     m_ColliderType: 1
-    m_RandomTransform: 0
+    m_RandomTransform: 1
     m_Neighbors: 01000000010000000100000001000000
     m_NeighborPositions:
     - {x: -1, y: 0, z: 0}
