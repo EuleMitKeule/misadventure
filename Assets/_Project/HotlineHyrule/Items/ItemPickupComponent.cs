@@ -12,8 +12,10 @@ namespace HotlineHyrule.Items
         [SerializeField] LayerMask itemMask;
         [SerializeField] InputAction pickupAction;
 
-        Collider2D[] OverlappingItems => Physics2D.OverlapCircleAll(transform.position, pickupRadius, itemMask);
-        Collider2D ClosestItem => OverlappingItems.OrderBy(element => (element.transform.position - transform.position).magnitude).FirstOrDefault();
+        Collider2D[] OverlappingItems =>
+            Physics2D.OverlapCircleAll(transform.position, pickupRadius, itemMask);
+        Collider2D ClosestItem =>
+            OverlappingItems.OrderBy(element => (element.transform.position - transform.position).magnitude).FirstOrDefault();
 
         HealthComponent HealthComponent { get; set; }
         LoadoutComponent LoadoutComponent { get; set; }
@@ -36,12 +38,16 @@ namespace HotlineHyrule.Items
         {
             var closestItem = ClosestItem;
             if (!closestItem) return;
+
             var closestItemComponent = closestItem.GetComponent<ItemComponent>();
             if (!closestItemComponent) return;
+
             var itemDatas = closestItemComponent.itemDatas;
 
             foreach (var itemData in itemDatas)
             {
+                if (itemData is ConsumableItemData consumableItemData) SpawnParticleSystem(consumableItemData);
+
                 switch (itemData)
                 {
                     case WeaponData weaponData:
@@ -65,6 +71,12 @@ namespace HotlineHyrule.Items
             }
             
             Destroy(closestItemComponent.gameObject);
+        }
+
+        void SpawnParticleSystem(ConsumableItemData consumableItemData)
+        {
+            if (!consumableItemData.consumeParticleSystemPrefab) return;
+            Instantiate(consumableItemData.consumeParticleSystemPrefab, transform);
         }
     }
 }

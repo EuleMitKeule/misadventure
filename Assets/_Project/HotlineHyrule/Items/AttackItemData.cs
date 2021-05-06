@@ -3,7 +3,7 @@ using UnityEngine;
 namespace HotlineHyrule.Items
 {
     [CreateAssetMenu(menuName = "Item/New Attack Item")]
-    public class AttackItemData : ItemData
+    public class AttackItemData : ConsumableItemData
     {
         [SerializeField] public float damageFactor;
         [SerializeField] public int damageBonus;
