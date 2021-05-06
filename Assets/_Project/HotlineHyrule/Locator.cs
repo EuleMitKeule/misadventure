@@ -1,6 +1,7 @@
 using HotlineHyrule.Entities;
 using HotlineHyrule.Graphics;
 using HotlineHyrule.Level;
+using HotlineHyrule.Pathfinding;
 
 namespace HotlineHyrule
 {
@@ -23,5 +24,7 @@ namespace HotlineHyrule
         /// The current level's level component.
         /// </summary>
         public static LevelComponent LevelComponent { get; set; }
+        
+        public static NavComponent NavComponent { get; set; }
     }
 }
