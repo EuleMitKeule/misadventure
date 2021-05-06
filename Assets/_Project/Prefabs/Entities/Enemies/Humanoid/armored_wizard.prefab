@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 3089981348205039177, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: deathParticleSystemPrefab
+      value: 
+      objectReference: {fileID: 32106695664497314, guid: 55aef061e5074ee4089868d4090f134f, type: 3}
     - target: {fileID: 6584715816111582176, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: weaponData
       value: 
