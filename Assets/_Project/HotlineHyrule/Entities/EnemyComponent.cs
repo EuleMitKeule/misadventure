@@ -57,6 +57,7 @@ namespace HotlineHyrule.Entities
         public EnemyStateBaseComponent PatrolState { get; private set; }
         public EnemyStateBaseComponent ShootProjectileState { get; private set; }
         public EnemyStateBaseComponent FollowState { get; private set; }
+        public EnemyStateBaseComponent DyingState { get; private set; }
 
         void Awake()
         {
@@ -65,6 +66,7 @@ namespace HotlineHyrule.Entities
             PatrolState = GetComponent<EnemyStatePatrolComponent>();
             ShootProjectileState = GetComponent<EnemyStateAttackComponent>();
             FollowState = GetComponent<EnemyStateFollowComponent>();
+            DyingState = GetComponent<EnemyStateDyingComponent>();
 
             HealthComponent.HealthChanged += OnHealthChanged;
         }
@@ -91,7 +93,7 @@ namespace HotlineHyrule.Entities
         public void ChangeState(EnemyStateBaseComponent newState)
         {
             if (!newState) return;
-
+            if (state && newState.priority < state.priority) return;
             if (state) state.Exit();
             state = newState;
             state.Setup();
@@ -100,8 +102,7 @@ namespace HotlineHyrule.Entities
         void OnHealthChanged(object sender, HealthEventArgs e)
         {
             if (e.NewHealth > 0) return;
-            
-            Destroy(gameObject);
+            ChangeState(DyingState);
         }
 
         void OnTriggerStay2D(Collider2D other)
