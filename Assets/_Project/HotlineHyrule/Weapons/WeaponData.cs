@@ -12,12 +12,12 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// Multiplies the player's movement speed.
         /// </summary>
-        [SerializeField] public float movementFactor;
+        [SerializeField] public float movementFactor = 1f;
         [Range(0f, 1f)] [SerializeField] public float slowTimeWindow;
         /// <summary>
         /// The maximum amount of attacks performed per second.
         /// </summary>
-        [SerializeField] public float attackRate;
+        [SerializeField] public float attackRate = 1f;
         [SerializeField] public GameObject weaponPrefab;
         [SerializeField] public GameObject droppedWeaponPrefab;
         [SerializeField] public bool hasInfiniteCharges;
