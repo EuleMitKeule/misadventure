@@ -59,7 +59,8 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// Whether enough time has passed since the last usage for the weapon to be used again.
         /// </summary>
-        bool CanAttack => Time.time >= LastAttackTime + 1 / weaponData.attackRate / AttackSpeed;
+        bool CanAttack =>
+            weaponData.attackRate == 0 || Time.time >= LastAttackTime + 1 / weaponData.attackRate / AttackSpeed;
         /// <summary>
         /// Whether the current weapon is a ranged one.
         /// </summary>
@@ -155,8 +156,9 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         public void PerformAttack()
         {
-            // if (!weaponData) return;
+            if (!weaponData) return;
             if (!CanAttack) return;
+
             LastAttackTime = Time.time;
 
             Invoke(nameof(InvokeAttackFinished), weaponData.slowTimeWindow / weaponData.attackRate / AttackSpeed);

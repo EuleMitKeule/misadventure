@@ -143,7 +143,6 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         void HandleImpact(Transform other = null)
         {
-            Rigidbody.velocity = Vector2.zero;
             Rigidbody.simulated = false;
 
             if (projectileData.isSticky) if (other) Transform.SetParent(other);
