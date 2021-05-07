@@ -24,7 +24,10 @@ namespace HotlineHyrule
         /// The current level's level component.
         /// </summary>
         public static LevelComponent LevelComponent { get; set; }
-        
+
+        /// <summary>
+        /// The current level's nav component.
+        /// </summary>
         public static NavComponent NavComponent { get; set; }
     }
 }
