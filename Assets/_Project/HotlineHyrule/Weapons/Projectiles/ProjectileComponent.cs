@@ -7,8 +7,8 @@ namespace HotlineHyrule.Weapons
 {
     public class ProjectileComponent : MonoBehaviour
     {
-        [SerializeField] RangedWeaponData rangedWeaponData;
-        [SerializeField] ProjectileData projectileData;
+        [SerializeField] public RangedWeaponData rangedWeaponData;
+        [SerializeField] public ProjectileData projectileData;
 
         /// <summary>
         /// The distance between center and top of projectile.
