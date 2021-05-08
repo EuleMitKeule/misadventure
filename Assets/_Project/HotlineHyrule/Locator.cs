@@ -2,6 +2,7 @@ using HotlineHyrule.Entities;
 using HotlineHyrule.Graphics;
 using HotlineHyrule.Level;
 using HotlineHyrule.Pathfinding;
+using HotlineHyrule.Sound;
 
 namespace HotlineHyrule
 {

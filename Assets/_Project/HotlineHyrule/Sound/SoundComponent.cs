@@ -1,36 +1,34 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace HotlineHyrule
+namespace HotlineHyrule.Sound
 {
     public class SoundComponent : MonoBehaviour
     {
-
-        AudioSource bgm1AudioSource;
-        AudioSource bgm2AudioSource;
-        AudioSource effectAudioSource;
-
-        bool bgm1Active = false;
-
-        IEnumerator fadeInCoroutine;
-        IEnumerator fadeOutCoroutine;
-
-        [SerializeField] InputAction debugFadeBGMAction;
         [SerializeField] AudioClip debugBGM1;
         [SerializeField] AudioClip debugBGM2;
+        [SerializeField] InputAction debugFadeBGMAction;
+
+        AudioSource _bgm1AudioSource;
+        AudioSource _bgm2AudioSource;
+        AudioSource _effectAudioSource;
+
+        bool _bgm1Active;
+
+        IEnumerator _fadeInCoroutine;
+        IEnumerator _fadeOutCoroutine;
 
         void Awake()
         {
             Locator.SoundComponent = this;
 
-            bgm1AudioSource = gameObject.AddComponent<AudioSource>();
-            bgm2AudioSource = gameObject.AddComponent<AudioSource>();
-            effectAudioSource = gameObject.AddComponent<AudioSource>();
+            _bgm1AudioSource = gameObject.AddComponent<AudioSource>();
+            _bgm2AudioSource = gameObject.AddComponent<AudioSource>();
+            _effectAudioSource = gameObject.AddComponent<AudioSource>();
 
-            bgm1AudioSource.loop = true;
-            bgm2AudioSource.loop = true;
+            _bgm1AudioSource.loop = true;
+            _bgm2AudioSource.loop = true;
 
             debugFadeBGMAction.started += OnDebugAction;
             debugFadeBGMAction.Enable();
@@ -38,44 +36,42 @@ namespace HotlineHyrule
 
         public void PlayBGM(AudioClip clip, float fadeDuration = 2)
         {
-            if (fadeOutCoroutine != null)
-                StopCoroutine(fadeOutCoroutine);
-            if (fadeInCoroutine != null)
-                StopCoroutine(fadeInCoroutine);
+            if (_fadeOutCoroutine != null) StopCoroutine(_fadeOutCoroutine);
+            if (_fadeInCoroutine != null) StopCoroutine(_fadeInCoroutine);
 
-            if (bgm1Active)
+            if (_bgm1Active)
             {
-                bgm2AudioSource.clip = clip;
+                _bgm2AudioSource.clip = clip;
 
-                fadeOutCoroutine = FadeOutAudio(bgm1AudioSource, fadeDuration);
-                fadeInCoroutine = FadeInAudio(bgm2AudioSource, fadeDuration);
+                _fadeOutCoroutine = FadeOutAudio(_bgm1AudioSource, fadeDuration);
+                _fadeInCoroutine = FadeInAudio(_bgm2AudioSource, fadeDuration);
 
-                StartCoroutine(fadeInCoroutine);
-                StartCoroutine(fadeOutCoroutine);
+                StartCoroutine(_fadeInCoroutine);
+                StartCoroutine(_fadeOutCoroutine);
             }
             else
             {
-                bgm1AudioSource.clip = clip;
+                _bgm1AudioSource.clip = clip;
 
-                fadeOutCoroutine = FadeOutAudio(bgm2AudioSource, fadeDuration);
-                fadeInCoroutine = FadeInAudio(bgm1AudioSource, fadeDuration);
+                _fadeOutCoroutine = FadeOutAudio(_bgm2AudioSource, fadeDuration);
+                _fadeInCoroutine = FadeInAudio(_bgm1AudioSource, fadeDuration);
 
-                StartCoroutine(fadeOutCoroutine);
-                StartCoroutine(fadeInCoroutine);
+                StartCoroutine(_fadeOutCoroutine);
+                StartCoroutine(_fadeInCoroutine);
             }
 
-            bgm1Active = !bgm1Active;
+            _bgm1Active = !_bgm1Active;
         }
 
         public void PlaySound(AudioClip clip)
         {
-            effectAudioSource.PlayOneShot(clip);
+            _effectAudioSource.PlayOneShot(clip);
         }
 
         IEnumerator FadeInAudio(AudioSource audioSource, float duration)
         {
-            float currentTime = 0;
-            float start = audioSource.volume;
+            var currentTime = 0f;
+            var start = audioSource.volume;
 
             audioSource.Play();
 
@@ -85,14 +81,12 @@ namespace HotlineHyrule
                 audioSource.volume = Mathf.Lerp(start, 1, currentTime / duration);
                 yield return null;
             }
-
-            yield break;
         }
 
         IEnumerator FadeOutAudio(AudioSource audioSource, float duration)
         {
-            float currentTime = 0;
-            float start = audioSource.volume;
+            var currentTime = 0f;
+            var start = audioSource.volume;
 
             while (currentTime < duration)
             {
@@ -102,15 +96,11 @@ namespace HotlineHyrule
             }
 
             audioSource.Stop();
-            yield break;
         }
 
         void OnDebugAction(InputAction.CallbackContext context)
         {
-            if (bgm1Active)
-                PlayBGM(debugBGM2);
-            else
-                PlayBGM(debugBGM1);
+            PlayBGM(_bgm1Active ? debugBGM2 : debugBGM1);
         }
     }
 }
