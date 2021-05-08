@@ -23,6 +23,25 @@ namespace HotlineHyrule.Entities
         [SerializeField] LayerMask wallMask;
         [SerializeField] public Collider2D sightRangeCollider;
         [SerializeField] public ItemDropDictionary itemDrops;
+        [SerializeField] float attackRange;
+        [SerializeField] float followRange;
+        [SerializeField] float followAngle;
+
+        public Vector3 PlayerPosition => Locator.PlayerComponent.transform.position;
+        public Vector3 PlayerDirection => (PlayerPosition - transform.position).normalized;
+        public bool IsPlayerInFollowRange => (transform.position - PlayerPosition).magnitude <= followRange;
+        public bool IsPlayerInAttackRange => (transform.position - PlayerPosition).magnitude <= attackRange;
+        public float PlayerAngle => Vector3.SignedAngle(transform.up, PlayerDirection, Vector3.forward);
+        public bool IsPlayerInAngle => Mathf.Abs(PlayerAngle) < followAngle;
+        public bool IsPlayerBehindWall =>
+            Physics2D.Raycast(
+                transform.position,
+                PlayerDirection,
+                followRange,
+                1 << PhysicsLayer.WALL
+            );
+        public bool IsPlayerVisible => IsPlayerInFollowRange && IsPlayerInAngle && !IsPlayerBehindWall;
+        public bool IsPlayerAttackable => IsPlayerInAttackRange && IsPlayerInAngle && !IsPlayerBehindWall;
 
         public bool HasWallLeft =>
             Physics2D.BoxCast(
@@ -55,7 +74,9 @@ namespace HotlineHyrule.Entities
         Collider2D Collider { get; set; }
         HealthComponent HealthComponent { get; set; }
         public EnemyStateBaseComponent PatrolState { get; private set; }
-        public EnemyStateBaseComponent ShootProjectileState { get; private set; }
+        public EnemyStateBaseComponent SearchState { get; private set; }
+        public EnemyStateBaseComponent TurnAroundState { get; private set; }
+        public EnemyStateBaseComponent AttackState { get; private set; }
         public EnemyStateBaseComponent FollowState { get; private set; }
         public EnemyStateBaseComponent DyingState { get; private set; }
 
@@ -64,7 +85,9 @@ namespace HotlineHyrule.Entities
             Collider = GetComponent<Collider2D>();
             HealthComponent = GetComponent<HealthComponent>();
             PatrolState = GetComponent<EnemyStatePatrolComponent>();
-            ShootProjectileState = GetComponent<EnemyStateAttackComponent>();
+            SearchState = GetComponent<EnemyStateSearchComponent>();
+            TurnAroundState = GetComponent<EnemyStateTurnAroundComponent>();
+            AttackState = GetComponent<EnemyStateAttackComponent>();
             FollowState = GetComponent<EnemyStateFollowComponent>();
             DyingState = GetComponent<EnemyStateDyingComponent>();
 
@@ -92,6 +115,8 @@ namespace HotlineHyrule.Entities
         /// <param name="newState">The new state the enemy shall get</param>
         public void ChangeState(EnemyStateBaseComponent newState)
         {
+            Debug.Log(newState.GetType().Name);
+
             if (!newState) return;
             if (state && newState.priority < state.priority) return;
             if (state) state.Exit();

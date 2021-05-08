@@ -16,7 +16,8 @@ namespace HotlineHyrule.Entities.EnemyStates.HelperComponents
 
         void OnTriggerStay2D(Collider2D other)
         {
-            if (LayerMask.NameToLayer("player") != other.gameObject.layer) return;
+            if (other.gameObject.layer == PhysicsLayer.PLAYER) return;
+            
             PlayerStayFollowRange?.Invoke(this, _collider);
         }
     }

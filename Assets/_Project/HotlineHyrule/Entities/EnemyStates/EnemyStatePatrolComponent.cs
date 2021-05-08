@@ -24,39 +24,42 @@ namespace HotlineHyrule.Entities.EnemyStates
         {
             Rigidbody.velocity = transform.up * moveSpeed;
 
-            if (!EnemyComponent.HasWallAbove) return;
-
-            if (EnemyComponent.HasWallLeft &! EnemyComponent.HasWallRight)
+            if (EnemyComponent.IsPlayerVisible)
             {
-                transform.eulerAngles += Vector3.forward * -90f;
-                return;
+                if (EnemyComponent.FollowState)
+                {
+                    EnemyComponent.ChangeState(EnemyComponent.FollowState);
+                }
             }
 
-            if (EnemyComponent.HasWallRight &! EnemyComponent.HasWallLeft)
+            if (EnemyComponent.HasWallAbove)
             {
-                transform.eulerAngles += Vector3.forward * 90f;
-                return;
-            }
+                if (EnemyComponent.HasWallLeft &! EnemyComponent.HasWallRight)
+                {
+                    transform.eulerAngles += Vector3.forward * -90f;
+                    return;
+                }
 
-            if (EnemyComponent.HasWallLeft && EnemyComponent.HasWallRight)
-            {
-                transform.eulerAngles += Vector3.forward * 180f;
-            }
+                if (EnemyComponent.HasWallRight &! EnemyComponent.HasWallLeft)
+                {
+                    transform.eulerAngles += Vector3.forward * 90f;
+                    return;
+                }
 
-            var isTurningLeft = Random.Range(0, 2) == 1;
-            transform.eulerAngles += Vector3.forward * (isTurningLeft ? 90f : -90f);
+                if (EnemyComponent.HasWallLeft && EnemyComponent.HasWallRight)
+                {
+                    transform.eulerAngles += Vector3.forward * 180f;
+                }
+
+                var isTurningLeft = Random.Range(0, 2) == 1;
+                transform.eulerAngles += Vector3.forward * (isTurningLeft ? 90f : -90f);
+            }
         }
 
         public override void Exit()
         {
             base.Exit();
             Rigidbody.velocity = Vector2.zero;
-        }
-
-        public override void OnLookingAtPlayer()
-        {
-            base.OnLookingAtPlayer();
-            EnemyComponent.ChangeState(EnemyComponent.ShootProjectileState);
         }
     }
 }
