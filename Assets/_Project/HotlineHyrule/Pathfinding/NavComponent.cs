@@ -17,6 +17,8 @@ namespace HotlineHyrule.Pathfinding
         {
             Locator.NavComponent = this;
             GenerateNavMap();
+            
+            Pathfinder.InitializeNavMap(NavMap);
         }
         
         [ContextMenu("Generate Nav Map")]

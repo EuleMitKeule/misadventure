@@ -1,4 +1,5 @@
-﻿using HotlineHyrule.Weapons;
+﻿using HotlineHyrule.Pathfinding;
+using HotlineHyrule.Weapons;
 using UnityEngine;
 
 namespace HotlineHyrule.Entities.EnemyStates
@@ -8,6 +9,7 @@ namespace HotlineHyrule.Entities.EnemyStates
         protected Rigidbody2D Rigidbody { get; private set; }
         protected EnemyComponent EnemyComponent { get; private set; }
         protected WeaponComponent WeaponComponent { get; private set; }
+        protected PathfindingComponent PathfindingComponent { get; private set; }
         protected Animator Animator { get; private set; }
 
         protected GameObject PlayerObject;
@@ -26,6 +28,7 @@ namespace HotlineHyrule.Entities.EnemyStates
             Rigidbody = GetComponent<Rigidbody2D>();
             EnemyComponent = GetComponent<EnemyComponent>();
             WeaponComponent = GetComponentInChildren<WeaponComponent>();
+            PathfindingComponent = GetComponent<PathfindingComponent>();
             Animator = GetComponent<Animator>();
             PlayerObject = Locator.PlayerComponent.gameObject;
         }

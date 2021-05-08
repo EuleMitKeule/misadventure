@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,29 +7,33 @@ namespace HotlineHyrule.Pathfinding
 {
     public static class Pathfinder
     {
-        public static List<Vector3Int> FindPath(Vector3Int startPosition, Vector3Int endPosition, List<Vector3Int> navMap)
+        static Dictionary<Vector3Int, NavNode> NavMap { get; set; }
+        
+        public static void InitializeNavMap(List<Vector3Int> navMap)
         {
-            if (!navMap.Contains(startPosition))
+            NavMap = new Dictionary<Vector3Int, NavNode>();
+            
+            foreach (var position in navMap)
             {
-                return new List<Vector3Int>();
+                var navNode = new NavNode(position);
+                
+                NavMap.Add(position, navNode);
             }
+        }
+        
+        public static List<Vector3Int> FindPath(Vector3Int startPosition, Vector3Int endPosition)
+        {
+            NavMap.TryGetValue(startPosition, out var startNode);
+            NavMap.TryGetValue(endPosition, out var endNode);
 
-            if (!navMap.Contains(endPosition))
-            {
-                return new List<Vector3Int>();
-            }
+            if (startNode == null || endNode == null) return new List<Vector3Int>();
 
-            var nodes = (from position in navMap select new NavNode(position)).ToList();
-
-            var startNode = nodes.Find(node => node.Position == startPosition);
-            var endNode = nodes.Find(node => node.Position == endPosition);
-
-            var openNodes = new List<NavNode>();
-            var closedNodes = new List<NavNode>();
+            var openNodes = new HashSet<NavNode>();
+            var closedNodes = new HashSet<NavNode>();
 
             var currentNode = startNode;
-
-            openNodes.Add(startNode);
+            
+            openNodes.Add(currentNode);
 
             while (openNodes.Count > 0)
             {
@@ -37,14 +42,32 @@ namespace HotlineHyrule.Pathfinding
                 openNodes.Remove(currentNode);
                 closedNodes.Add(currentNode);
 
-                if (currentNode.Equals(endNode)) return RetracePath(startNode, endNode);
+                if (currentNode.Equals(endNode))
+                {
+                    var path = RetracePath(startNode, endNode);
 
-                foreach (var neighbour in GetNeighbours(currentNode, nodes))
+                    foreach (var navNode in openNodes)
+                    {
+                        navNode.CostG = 0;
+                        navNode.CostH = 0;
+                        navNode.Parent = null;
+                    }
+                    foreach (var navNode in closedNodes)
+                    {
+                        navNode.CostG = 0;
+                        navNode.CostH = 0;
+                        navNode.Parent = null;
+                    }
+
+                    return path;
+                }
+
+                foreach (var neighbour in GetNeighbours(currentNode, NavMap))
                 {
                     if (closedNodes.Contains(neighbour)) continue;
 
                     var newCostG = currentNode.CostG + GetDistance(currentNode, neighbour);
-
+                    
                     if (newCostG < neighbour.CostG || !openNodes.Contains(neighbour))
                     {
                         neighbour.CostG = newCostG;
@@ -79,10 +102,23 @@ namespace HotlineHyrule.Pathfinding
             var path = new List<Vector3Int>();
             var currentNode = endNavNode;
 
-            while (!currentNode.Equals(startNavNode))
+            var lastCurrentNode = currentNode;
+            try
             {
-                path.Add(currentNode.Position);
-                currentNode = currentNode.Parent;
+                while (!currentNode.Equals(startNavNode))
+                {
+                    lastCurrentNode = currentNode;
+                    path.Add(currentNode.Position);
+                    currentNode = currentNode.Parent;
+                }
+            }
+            catch (Exception)
+            {
+                Debug.Log($"Position: {lastCurrentNode.Position}");
+                Debug.Log($"CostF: {lastCurrentNode.CostF}");
+                Debug.Log($"Parent: {lastCurrentNode.Parent}");
+                Debug.Log($"IsStartNode: {lastCurrentNode.Equals(startNavNode)}");
+                Debug.Log($"IsEndNode: {lastCurrentNode.Equals(endNavNode)}");
             }
 
             path.Reverse();
@@ -123,9 +159,8 @@ namespace HotlineHyrule.Pathfinding
             return distance;
         }
 
-        public static List<NavNode> GetNeighbours(NavNode from, IEnumerable<NavNode> nodes)
+        public static List<NavNode> GetNeighbours(NavNode from, Dictionary<Vector3Int, NavNode> nodes)
         {
-            var nodesList = nodes.ToList();
             var neighbours = new List<NavNode>();
             var walkableNeighbours = new List<NavNode>();
 
@@ -133,12 +168,12 @@ namespace HotlineHyrule.Pathfinding
             {
                 for (var y = -1; y <= 1; y++)
                 {
-                    var neighbour = nodesList.Find(node => node.Position == from.Position + new Vector3Int(x, y, 0));
+                    nodes.TryGetValue(from.Position + new Vector3Int(x, y, 0), out var neighbour);
                     neighbours.Add(neighbour);
                     
                     if (x == 0 && y == 0) continue;
 
-                    if (nodesList.Contains(neighbour)) walkableNeighbours.Add(neighbour);
+                    if (neighbour != null) walkableNeighbours.Add(neighbour);
                 }
             }
 
@@ -153,8 +188,8 @@ namespace HotlineHyrule.Pathfinding
 
                 var a = new Vector3Int(x, 0, 0);
                 var b = new Vector3Int(0, y, 0);
-                var nodeA = nodesList.Find(node => node.Position == from.Position + a);
-                var nodeB = nodesList.Find(node => node.Position == from.Position + b);
+                var nodeA = walkableNeighbours.Find(node => node.Position == from.Position + a);
+                var nodeB = walkableNeighbours.Find(node => node.Position == from.Position + b);
                 
                 if (nodeA == null || nodeB == null) walkableNeighbours.Remove(neighbour);
             }

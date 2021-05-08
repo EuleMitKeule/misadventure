@@ -20,43 +20,49 @@ namespace HotlineHyrule.Entities.EnemyStates
             if (Animator) Animator.SetBool("isMoving", true);
         }
 
-        public override void FixedStateUpdate()
-        {
-            Rigidbody.velocity = transform.up * moveSpeed;
-
-            if (!EnemyComponent.HasWallAbove) return;
-
-            if (EnemyComponent.HasWallLeft &! EnemyComponent.HasWallRight)
-            {
-                transform.eulerAngles += Vector3.forward * -90f;
-                return;
-            }
-
-            if (EnemyComponent.HasWallRight &! EnemyComponent.HasWallLeft)
-            {
-                transform.eulerAngles += Vector3.forward * 90f;
-                return;
-            }
-
-            if (EnemyComponent.HasWallLeft && EnemyComponent.HasWallRight)
-            {
-                transform.eulerAngles += Vector3.forward * 180f;
-            }
-
-            var isTurningLeft = Random.Range(0, 2) == 1;
-            transform.eulerAngles += Vector3.forward * (isTurningLeft ? 90f : -90f);
-        }
-
         public override void Exit()
         {
             base.Exit();
+            
             Rigidbody.velocity = Vector2.zero;
         }
 
-        public override void OnLookingAtPlayer()
+        public override void FixedStateUpdate()
         {
-            base.OnLookingAtPlayer();
-            EnemyComponent.ChangeState(EnemyComponent.ShootProjectileState);
+            base.FixedStateUpdate();
+            
+            Rigidbody.velocity = transform.up * moveSpeed;
+
+            if (EnemyComponent.IsPlayerVisible)
+            {
+                if (EnemyComponent.FollowState)
+                {
+                    EnemyComponent.ChangeState(EnemyComponent.FollowState);
+                }
+            }
+
+            if (EnemyComponent.HasWallAbove)
+            {
+                if (EnemyComponent.HasWallLeft &! EnemyComponent.HasWallRight)
+                {
+                    transform.eulerAngles += Vector3.forward * -90f;
+                    return;
+                }
+
+                if (EnemyComponent.HasWallRight &! EnemyComponent.HasWallLeft)
+                {
+                    transform.eulerAngles += Vector3.forward * 90f;
+                    return;
+                }
+
+                if (EnemyComponent.HasWallLeft && EnemyComponent.HasWallRight)
+                {
+                    transform.eulerAngles += Vector3.forward * 180f;
+                }
+
+                var isTurningLeft = Random.Range(0, 2) == 1;
+                transform.eulerAngles += Vector3.forward * (isTurningLeft ? 90f : -90f);
+            }
         }
     }
 }
