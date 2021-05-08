@@ -22,5 +22,10 @@ namespace HotlineHyrule.Weapons
         /// The position the projectile is shot from.
         /// </summary>
         [SerializeField] public Vector2 spawnPosition;
+
+        /// <summary>
+        /// The sound that is played when the weapon is fired.
+        /// </summary>
+        [SerializeField] public AudioClip weaponFiredSound;
     }
 }
