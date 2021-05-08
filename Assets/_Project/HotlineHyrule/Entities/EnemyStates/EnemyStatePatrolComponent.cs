@@ -20,8 +20,17 @@ namespace HotlineHyrule.Entities.EnemyStates
             if (Animator) Animator.SetBool("isMoving", true);
         }
 
+        public override void Exit()
+        {
+            base.Exit();
+            
+            Rigidbody.velocity = Vector2.zero;
+        }
+
         public override void FixedStateUpdate()
         {
+            base.FixedStateUpdate();
+            
             Rigidbody.velocity = transform.up * moveSpeed;
 
             if (EnemyComponent.IsPlayerVisible)
@@ -54,12 +63,6 @@ namespace HotlineHyrule.Entities.EnemyStates
                 var isTurningLeft = Random.Range(0, 2) == 1;
                 transform.eulerAngles += Vector3.forward * (isTurningLeft ? 90f : -90f);
             }
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
-            Rigidbody.velocity = Vector2.zero;
         }
     }
 }

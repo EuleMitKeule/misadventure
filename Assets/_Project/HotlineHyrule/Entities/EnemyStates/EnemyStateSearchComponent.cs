@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace HotlineHyrule.Entities.EnemyStates
@@ -14,27 +15,43 @@ namespace HotlineHyrule.Entities.EnemyStates
 
             LastSeenPosition = EnemyComponent.PlayerPosition;
             PathfindingComponent.SetDestination(Locator.LevelComponent.Grid.WorldToCell(LastSeenPosition));
+
+            PathfindingComponent.DestinationReached += OnDestinationReached;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            
+            PathfindingComponent.ClearDestination();
+        }
+
+        public override void StateUpdate()
+        {
+            base.StateUpdate();
+            
+            Debug.DrawLine(transform.position, LastSeenPosition, Color.yellow);
         }
 
         public override void FixedStateUpdate()
         {
             Rigidbody.velocity = PathfindingComponent.CurrentDirection * followSpeed;
-            // transform.LookAt(PathfindingComponent.CurrentDirection);
+            if (Rigidbody.velocity != Vector2.zero) transform.rotation = EnemyComponent.WalkRotation;
 
-            if (!PathfindingComponent.hasWaypoint)
-            {
-                EnemyComponent.ChangeState(EnemyComponent.TurnAroundState);
-            }
-
-            if (EnemyComponent.IsPlayerInAttackRange)
+            if (EnemyComponent.IsPlayerAttackable)
             {
                 EnemyComponent.ChangeState(EnemyComponent.AttackState);
             }
 
-            if (EnemyComponent.IsPlayerInFollowRange)
+            if (EnemyComponent.IsPlayerVisible)
             {
                 EnemyComponent.ChangeState(EnemyComponent.FollowState);
             }
+        }
+
+        void OnDestinationReached(object sender, EventArgs e)
+        {
+            EnemyComponent.ChangeState(EnemyComponent.TurnAroundState);
         }
     }
 }

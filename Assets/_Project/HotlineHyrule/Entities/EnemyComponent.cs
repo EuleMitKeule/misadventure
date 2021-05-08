@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HotlineHyrule.Entities.EnemyStates;
 using HotlineHyrule.Extensions;
+using UnityEditor;
 using UnityEngine;
 
 namespace HotlineHyrule.Entities
@@ -27,6 +28,10 @@ namespace HotlineHyrule.Entities
         [SerializeField] float followRange;
         [SerializeField] float followAngle;
 
+        public float WalkAngle => Vector3.SignedAngle(Vector3.up, Rigidbody.velocity, Vector3.forward);
+        public Quaternion WalkRotation => Quaternion.Euler(0f, 0f, WalkAngle);
+        public float FollowAngle => Vector3.SignedAngle(Vector3.up, PlayerDirection, Vector3.forward);
+        public Quaternion FollowRotation => Quaternion.Euler(0f, 0f, FollowAngle);
         public Vector3 PlayerPosition => Locator.PlayerComponent.transform.position;
         public Vector3 PlayerDirection => (PlayerPosition - transform.position).normalized;
         public bool IsPlayerInFollowRange => (transform.position - PlayerPosition).magnitude <= followRange;
@@ -38,8 +43,8 @@ namespace HotlineHyrule.Entities
                 transform.position,
                 PlayerDirection,
                 followRange,
-                1 << PhysicsLayer.WALL
-            );
+                1 << PhysicsLayer.WALL | 1 << PhysicsLayer.PLAYER
+            ).collider.gameObject != Locator.PlayerComponent.gameObject;
         public bool IsPlayerVisible => IsPlayerInFollowRange && IsPlayerInAngle && !IsPlayerBehindWall;
         public bool IsPlayerAttackable => IsPlayerInAttackRange && IsPlayerInAngle && !IsPlayerBehindWall;
 
@@ -71,6 +76,7 @@ namespace HotlineHyrule.Entities
                 wallMask
             );
 
+        Rigidbody2D Rigidbody { get; set; }
         Collider2D Collider { get; set; }
         HealthComponent HealthComponent { get; set; }
         public EnemyStateBaseComponent PatrolState { get; private set; }
@@ -82,6 +88,7 @@ namespace HotlineHyrule.Entities
 
         void Awake()
         {
+            Rigidbody = GetComponent<Rigidbody2D>();
             Collider = GetComponent<Collider2D>();
             HealthComponent = GetComponent<HealthComponent>();
             PatrolState = GetComponent<EnemyStatePatrolComponent>();
@@ -107,6 +114,20 @@ namespace HotlineHyrule.Entities
         void Update()
         {
             if (state) state.StateUpdate();
+            
+            if (IsPlayerVisible) Debug.DrawLine(transform.position, PlayerPosition, IsPlayerAttackable ? Color.green : Color.red);
+        }
+
+        void OnDrawGizmos()
+        {
+            if (state != null)
+            {
+                var style = new GUIStyle();
+                style.alignment = TextAnchor.MiddleCenter;
+                style.normal.textColor = Color.white;
+                
+                Handles.Label(transform.position, state.GetType().Name, style);
+            }
         }
 
         /// <summary>
@@ -115,8 +136,6 @@ namespace HotlineHyrule.Entities
         /// <param name="newState">The new state the enemy shall get</param>
         public void ChangeState(EnemyStateBaseComponent newState)
         {
-            Debug.Log(newState.GetType().Name);
-
             if (!newState) return;
             if (state && newState.priority < state.priority) return;
             if (state) state.Exit();

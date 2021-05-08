@@ -24,10 +24,19 @@ namespace HotlineHyrule.Entities.EnemyStates
             StartAttackRoutine();
         }
 
+        public override void Exit()
+        {
+            base.Exit();
+
+            StopAttackRoutine();
+        }
+
         public override void FixedStateUpdate()
         {
             base.FixedStateUpdate();
+
             Rigidbody.velocity = Vector2.zero;
+            transform.rotation = EnemyComponent.FollowRotation;
 
             if (!EnemyComponent.IsPlayerAttackable)
             {
@@ -38,7 +47,7 @@ namespace HotlineHyrule.Entities.EnemyStates
                 }
                 else
                 {
-                    EnemyComponent.ChangeState(EnemyComponent.PatrolState);
+                    EnemyComponent.ChangeState(EnemyComponent.SearchState ? EnemyComponent.SearchState : EnemyComponent.PatrolState);
                 }
             }
         }
@@ -50,6 +59,8 @@ namespace HotlineHyrule.Entities.EnemyStates
 
         void StopAttackRoutine()
         {
+            if (AttackCoroutine == null) return;
+            
             StopCoroutine(AttackCoroutine);
             AttackCoroutine = null;
         }

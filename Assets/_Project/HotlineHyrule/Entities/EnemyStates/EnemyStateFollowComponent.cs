@@ -25,8 +25,8 @@ namespace HotlineHyrule.Entities.EnemyStates
         {
             base.FixedStateUpdate();
 
-            // transform.LookAt(EnemyComponent.PlayerPosition);
             Rigidbody.velocity = EnemyComponent.PlayerDirection * moveSpeed;
+            transform.rotation = EnemyComponent.FollowRotation;
 
             if (EnemyComponent.IsPlayerAttackable)
             {

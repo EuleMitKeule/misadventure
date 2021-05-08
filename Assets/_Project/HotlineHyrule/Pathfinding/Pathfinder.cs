@@ -153,8 +153,8 @@ namespace HotlineHyrule.Pathfinding
 
                 var a = new Vector3Int(x, 0, 0);
                 var b = new Vector3Int(0, y, 0);
-                var nodeA = nodesList.Find(node => node.Position == from.Position + a);
-                var nodeB = nodesList.Find(node => node.Position == from.Position + b);
+                var nodeA = neighbours.Find(node => node.Position == from.Position + a);
+                var nodeB = neighbours.Find(node => node.Position == from.Position + b);
                 
                 if (nodeA == null || nodeB == null) walkableNeighbours.Remove(neighbour);
             }

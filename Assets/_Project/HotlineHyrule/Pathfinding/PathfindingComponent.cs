@@ -26,6 +26,11 @@ namespace HotlineHyrule.Pathfinding
             CellPositionChanged += OnCellPositionChanged;
         }
 
+        void Start()
+        {
+            CurrentCell = Locator.LevelComponent.Grid.WorldToCell(transform.position);
+        }
+
         void Update()
         {
             UpdateCell();
@@ -55,8 +60,6 @@ namespace HotlineHyrule.Pathfinding
         /// <param name="destinationCell">The path's destination cell position</param>
         public void SetDestination(Vector3Int destinationCell)
         {
-            UpdateCell();
-            
             var navMap = Locator.NavComponent.NavMap;
             
             currentPath = Pathfinder.FindPath(CurrentCell, destinationCell, navMap);
@@ -74,6 +77,11 @@ namespace HotlineHyrule.Pathfinding
             OnCellPositionChanged(this, new CellEventArgs(CurrentCell));
 
             DestinationChanged?.Invoke(this, new CellEventArgs(destinationCell));
+        }
+
+        public void ClearDestination()
+        {
+            hasWaypoint = false;
         }
         
         /// <summary>

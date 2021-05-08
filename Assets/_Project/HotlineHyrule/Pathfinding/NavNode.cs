@@ -4,7 +4,6 @@ namespace HotlineHyrule.Pathfinding
 {
     public class NavNode
     {
-
         public readonly Vector3Int Position;
         public NavNode Parent;
         public int CostG;
