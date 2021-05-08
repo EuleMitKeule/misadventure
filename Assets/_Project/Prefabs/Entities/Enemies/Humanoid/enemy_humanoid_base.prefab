@@ -346,6 +346,8 @@ GameObject:
   - component: {fileID: 7492512237567023205}
   - component: {fileID: 5802242549573311712}
   - component: {fileID: 794638678}
+  - component: {fileID: 3469506423157028055}
+  - component: {fileID: 3089981348205039177}
   m_Layer: 7
   m_Name: enemy_humanoid_base
   m_TagString: Untagged
@@ -499,6 +501,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   sightRangeCollider: {fileID: 8681546965552470864}
+  itemDrops:
+    DefaultKey: {fileID: 0}
+    _Buckets: ffffffffffffffffffffffff
+    _HashCodes: 000000000000000000000000
+    _Next: 000000000000000000000000
+    _Count: 0
+    _Version: 0
+    _FreeList: -1
+    _FreeCount: 0
+    _Keys:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    _Values:
+    - 0
+    - 0
+    - 0
 --- !u!114 &7492512237567023210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,6 +559,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
+  performAttackDelay: 0.5
+  changeStateDelay: 0.5
 --- !u!114 &794638678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,3 +577,29 @@ MonoBehaviour:
   followDuration: 5
   moveSpeed: 200
   followRangeCollider: {fileID: 286386549}
+--- !u!114 &3469506423157028055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7492512237567023215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87f991acc4644c9b70b16fae54585f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 10
+--- !u!114 &3089981348205039177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7492512237567023215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bba672451cc4893a236d6461b37be9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathParticleSystemPrefab: {fileID: 32106695664497314, guid: 55aef061e5074ee4089868d4090f134f, type: 3}
