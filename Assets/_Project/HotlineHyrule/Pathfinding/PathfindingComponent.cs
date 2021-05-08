@@ -60,9 +60,7 @@ namespace HotlineHyrule.Pathfinding
         /// <param name="destinationCell">The path's destination cell position</param>
         public void SetDestination(Vector3Int destinationCell)
         {
-            var navMap = Locator.NavComponent.NavMap;
-            
-            currentPath = Pathfinder.FindPath(CurrentCell, destinationCell, navMap);
+            currentPath = Pathfinder.FindPath(CurrentCell, destinationCell);
 
             if (currentPath.Count == 0)
             {

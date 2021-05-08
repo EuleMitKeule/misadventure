@@ -118,18 +118,6 @@ namespace HotlineHyrule.Entities
             if (IsPlayerVisible) Debug.DrawLine(transform.position, PlayerPosition, IsPlayerAttackable ? Color.green : Color.red);
         }
 
-        void OnDrawGizmos()
-        {
-            if (state != null)
-            {
-                var style = new GUIStyle();
-                style.alignment = TextAnchor.MiddleCenter;
-                style.normal.textColor = Color.white;
-                
-                Handles.Label(transform.position, state.GetType().Name, style);
-            }
-        }
-
         /// <summary>
         /// Changes the enemy's state. Also exits the current one and sets up the new one
         /// </summary>
@@ -168,5 +156,19 @@ namespace HotlineHyrule.Entities
             if (other.gameObject.layer != LayerMask.NameToLayer("enemy")) return;
             transform.Rotate(Vector3.forward, 90f);
         }
+
+#if UNITY_EDITOR
+        void OnDrawGizmos()
+        {
+            if (state != null)
+            {
+                var style = new GUIStyle();
+                style.alignment = TextAnchor.MiddleCenter;
+                style.normal.textColor = Color.white;
+                
+                Handles.Label(transform.position, state.GetType().Name, style);
+            }
+        }
+#endif
     }
 }
