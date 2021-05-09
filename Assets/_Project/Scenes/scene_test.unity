@@ -30452,27 +30452,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &438384406 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 58351699886775796, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-  m_PrefabInstance: {fileID: 2038405701}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &438384409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 438384406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a9d49be98e72c14490f17dfb2880448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasWaypoint: 0
-  currentWaypoint: {x: 0, y: 0, z: 0}
-  currentPath: []
-  travelThreshold: 0.2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -48044,33 +48023,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2762944709165460835, guid: cbe363a9cdb5e744caf073fa7b75af46, type: 3}
-      propertyPath: m_ShadowIntensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2762944709165460835, guid: cbe363a9cdb5e744caf073fa7b75af46, type: 3}
-      propertyPath: m_ShadowIntensityEnabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2762944709165460835, guid: cbe363a9cdb5e744caf073fa7b75af46, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2762944709165460835, guid: cbe363a9cdb5e744caf073fa7b75af46, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[7]
-      value: 1503095659
-      objectReference: {fileID: 0}
-    - target: {fileID: 2762944709165460835, guid: cbe363a9cdb5e744caf073fa7b75af46, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[8]
-      value: 61649585
-      objectReference: {fileID: 0}
     - target: {fileID: 2762944710831683938, guid: cbe363a9cdb5e744caf073fa7b75af46, type: 3}
       propertyPath: m_Name
       value: armored_wizard
-      objectReference: {fileID: 0}
-    - target: {fileID: 2762944710831683938, guid: cbe363a9cdb5e744caf073fa7b75af46, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2762944710831683942, guid: cbe363a9cdb5e744caf073fa7b75af46, type: 3}
       propertyPath: m_RootOrder
@@ -48116,10 +48071,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3735307610944056377, guid: cbe363a9cdb5e744caf073fa7b75af46, type: 3}
-      propertyPath: weaponData
-      value: 
-      objectReference: {fileID: 11400000, guid: 94032551580cbb34eafdfd676d8321c8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbe363a9cdb5e744caf073fa7b75af46, type: 3}
 --- !u!1001 &2038405701
@@ -48129,26 +48080,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 58351699273320949, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: m_ShadowIntensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 58351699273320949, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: m_ShadowIntensityEnabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 58351699273320949, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 58351699273320949, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[7]
-      value: 1503095659
-      objectReference: {fileID: 0}
-    - target: {fileID: 58351699273320949, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[8]
-      value: 61649585
-      objectReference: {fileID: 0}
     - target: {fileID: 58351699886775792, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -48196,46 +48127,6 @@ PrefabInstance:
     - target: {fileID: 58351699886775796, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
       propertyPath: m_Name
       value: forest_gnome
-      objectReference: {fileID: 0}
-    - target: {fileID: 58351699886775796, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 58351699886775806, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: followAngle
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 58351699886775806, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: followRange
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 58351699886775807, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: attackRange
-      value: 7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 58351699886775807, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: followAngle
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 58351699886775807, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: followRange
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3986434784945142795, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4012771565782489467, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: performAttackDelay
-      value: 0.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 7437007182310698217, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7437007182415314125, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
-      propertyPath: moveSpeed
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
