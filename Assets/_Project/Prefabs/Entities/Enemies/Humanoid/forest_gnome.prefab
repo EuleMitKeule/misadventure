@@ -28,13 +28,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 94032551580cbb34eafdfd676d8321c8, type: 2}
     - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
-      propertyPath: attackRange
-      value: 6
+      propertyPath: itemDrops.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
-      propertyPath: bloodParticleSystem
+      propertyPath: itemDrops.Array.data[0].data
       value: 
-      objectReference: {fileID: 2442639310212140477, guid: 742d2062a2e8daf449387836a4690fdc, type: 3}
+      objectReference: {fileID: 11400000, guid: 95fdee72c21b25f4bb3a30c5620e6a13, type: 2}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: itemDrops.Array.data[0].dropRate
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023206, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_Controller
       value: 
@@ -95,9 +99,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: forest_gnome
       objectReference: {fileID: 0}
-    - target: {fileID: 8249268261262953780, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
-      propertyPath: weaponData
-      value: 
-      objectReference: {fileID: 11400000, guid: 3147dfdefaca3664983e14fcbe56ee9b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}

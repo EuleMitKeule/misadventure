@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using HotlineHyrule.Entities.EnemyStates;
 using HotlineHyrule.Extensions;
+using HotlineHyrule.Items;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace HotlineHyrule.Entities
 {
@@ -12,6 +14,22 @@ namespace HotlineHyrule.Entities
     /// </summary>
     public class EnemyComponent : MonoBehaviour
     {
+        /// <summary>
+        /// Struct that combines given Item data with a drop rate
+        /// </summary>
+        [Serializable]
+        struct ItemDrop
+        {
+            /// <summary>
+            /// The Item data that shall be dropped
+            /// </summary>
+            public ItemData data;
+            /// <summary>
+            /// The likelihood to drop the item
+            /// </summary>
+            [Range(0f, 1f)] public float dropRate;
+        }
+        
         /// <summary>
         /// The enemy's respawn point.
         /// </summary>
@@ -23,7 +41,10 @@ namespace HotlineHyrule.Entities
         [SerializeField] float wallCheckDistance;
         [SerializeField] LayerMask wallMask;
         [SerializeField] public Collider2D sightRangeCollider;
-        [SerializeField] public ItemDropDictionary itemDrops;
+        /// <summary>
+        /// List of items that can be dropped by a given chance when the enemy is destroyed
+        /// </summary>
+        [SerializeField] List<ItemDrop> itemDrops;
         [SerializeField] float attackRange;
         [SerializeField] float followRange;
         [SerializeField] float followAngle;
@@ -162,6 +183,17 @@ namespace HotlineHyrule.Entities
             transform.Rotate(Vector3.forward, 90f);
         }
 
+        void OnDestroy()
+        {
+            foreach (var item in itemDrops)
+            {
+                if (Random.value <= item.dropRate)
+                { 
+                    Instantiate(item.data.itemPrefab, transform.position, Quaternion.identity);
+                }
+            }
+        }
+        
 #if UNITY_EDITOR
         void OnDrawGizmos()
         {
