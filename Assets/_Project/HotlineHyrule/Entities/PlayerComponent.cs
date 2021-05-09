@@ -19,9 +19,6 @@ namespace HotlineHyrule.Entities
         /// The damping value applied to the movement axis.
         /// </summary>
         [SerializeField] float moveDamping;
-        /// <summary>
-        /// Multiplies the player's movement speed.
-        /// </summary>
 
         /// <summary>
         /// The minimum amount of velocity that is considered movement for animation purposes.
@@ -29,6 +26,7 @@ namespace HotlineHyrule.Entities
         [Header("Animation")]
         [SerializeField] float moveAnimationThreshold;
         [SerializeField] Animator legsAnimator;
+        [SerializeField] GameObject bloodParticleSystem;
 
         /// <summary>
         /// The movement input action.
@@ -77,20 +75,30 @@ namespace HotlineHyrule.Entities
         /// </summary>
         Vector2 ClampedMousePosition => IsInDeadzone ? DeadzonedMousePosition : MousePosition;
         bool IsMoving => Rigidbody.velocity.magnitude > moveAnimationThreshold;
+        /// <summary>
+        /// Multiplies the player's movement speed.
+        /// </summary>
         public float MovementAttackFactor { get; set; }
+        /// <summary>
+        /// Multiplies the player's movement speed.
+        /// </summary>
         float MovementItemFactor { get; set; }
         
         Rigidbody2D Rigidbody { get; set; }
+        HealthComponent HealthComponent { get; set; }
         WeaponComponent WeaponComponent { get; set; }
         Camera CameraMain { get; set; }
 
         void Awake()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
+            HealthComponent = GetComponent<HealthComponent>();
             WeaponComponent = GetComponentInChildren<WeaponComponent>();
             if (!legsAnimator) legsAnimator = transform.Find("legs").GetComponent<Animator>();
 
             Locator.PlayerComponent = this;
+
+            HealthComponent.HealthChanged += OnHealthChanged; 
             
             ResetBuffs();
         }
@@ -140,5 +148,12 @@ namespace HotlineHyrule.Entities
         }
 
         void ResetBuffs() => (MovementAttackFactor, MovementItemFactor) = (1f, 1f);
+        
+        void OnHealthChanged(object sender, HealthEventArgs e)
+        {
+            if (e.HealthDifference >= 0) return;
+
+            if (bloodParticleSystem) Instantiate(bloodParticleSystem, transform.position, Quaternion.identity);
+        }
     }
 }

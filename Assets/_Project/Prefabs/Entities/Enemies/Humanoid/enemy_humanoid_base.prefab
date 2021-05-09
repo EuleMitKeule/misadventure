@@ -240,6 +240,7 @@ MonoBehaviour:
   attackRange: 10
   followRange: 15
   followAngle: 60
+  bloodParticleSystem: {fileID: 2442639310212140477, guid: bbd2f2170baf96d41814258f53875278, type: 3}
 --- !u!114 &7492512237567023210
 MonoBehaviour:
   m_ObjectHideFlags: 0
