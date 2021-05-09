@@ -145,6 +145,9 @@ namespace HotlineHyrule.Weapons
         {
             Rigidbody.simulated = false;
 
+            var particleSystem = projectileData.impactParticleSystem;
+            if (particleSystem) Instantiate(particleSystem, transform.position, Quaternion.identity);
+
             if (projectileData.isSticky) if (other) Transform.SetParent(other);
 
             if (Animator) Animator.SetTrigger("impact");

@@ -19,6 +19,7 @@ MonoBehaviour:
   impactRaycastOffset: 0
   isSticky: 0
   penetrations: 0
+  impactParticleSystem: {fileID: 6858063568646399262, guid: f219f899488b1a74f9a79bb4aa584c4e, type: 3}
   range: 7
   flightTime: 1
   movementThreshold: 0.1

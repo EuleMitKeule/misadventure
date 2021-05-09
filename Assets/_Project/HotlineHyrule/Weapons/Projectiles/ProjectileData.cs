@@ -15,5 +15,6 @@ namespace HotlineHyrule.Weapons.Projectiles
         [SerializeField] public float impactRaycastOffset;
         [SerializeField] public bool isSticky;
         [SerializeField] public int penetrations;
+        [SerializeField] public GameObject impactParticleSystem;
     }
 }
