@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: item_health_health
   m_EditorClassIdentifier: 
   itemName: 
+  itemPrefab: {fileID: 9085038711784390681, guid: b730e36813bcc4c4aa151dc56d20ec51, type: 3}
+  consumeParticleSystemPrefab: {fileID: 0}
   healTotal: 50
   healAmount: 0
   healRate: 0
