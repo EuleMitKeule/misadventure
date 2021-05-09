@@ -75,7 +75,7 @@ namespace HotlineHyrule.Weapons
         {
             if (!IsCurvedProjectile) return;
 
-            if (Rigidbody.velocity.magnitude < CurvedProjectileData.movementThreshold) HandleImpact();
+            if (Rigidbody.velocity.magnitude < CurvedProjectileData.movementThreshold) HandleStop();
         }
 
         void OnCollisionEnter2D(Collision2D other)
@@ -150,6 +150,13 @@ namespace HotlineHyrule.Weapons
             if (Animator) Animator.SetTrigger("impact");
         }
 
+        void HandleStop()
+        {
+            Rigidbody.simulated = false;
+
+            if (Animator) Animator.SetTrigger("stop");
+        }
+
         public void Destroy()
         {
             Destroy(gameObject);
@@ -157,7 +164,7 @@ namespace HotlineHyrule.Weapons
 
         public void DropWeapon()
         {
-            if (WeaponCharges <= 0) return;
+            if (!rangedWeaponData.hasInfiniteCharges && WeaponCharges <= 0) return;
             if (!rangedWeaponData.droppedWeaponPrefab) return;
 
             var droppedWeaponObject = Instantiate(rangedWeaponData.droppedWeaponPrefab, transform.position,

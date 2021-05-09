@@ -15,13 +15,13 @@ MonoBehaviour:
   itemName: 
   movementFactor: 1
   slowTimeWindow: 0
-  attackRate: 1.5
+  attackRate: 0.8
   weaponPrefab: {fileID: 3193329723167763181, guid: 30d0b6835fd42164f8a4210bf196a0e7, type: 3}
-  droppedWeaponPrefab: {fileID: 0}
+  droppedWeaponPrefab: {fileID: 87149508903852376, guid: d06348ec007e6064db5cc6810d2ec1e5, type: 3}
   hasInfiniteCharges: 0
   weaponCharges: 0
   chargeRandomness: 0
   deadzoneRadius: 0
   projectilePrefab: {fileID: 3659320590787278025, guid: 246b8993b647cbf40823bcd3255acb3c, type: 3}
-  spawnPosition: {x: -0.3, y: 0.2}
+  spawnPosition: {x: -0.345, y: 0.9}
   weaponFiredSound: {fileID: 8300000, guid: 8db2144109b18444b9d092a1cb23254e, type: 3}

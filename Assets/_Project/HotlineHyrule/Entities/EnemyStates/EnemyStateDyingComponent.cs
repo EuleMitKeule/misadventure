@@ -11,7 +11,11 @@ namespace HotlineHyrule.Entities.EnemyStates
 
             Rigidbody.simulated = false;
 
-            Animator.SetTrigger("dying");
+            if (Animator)
+            {
+                Animator.SetBool("isMoving", true);
+                Animator.SetTrigger("dying");
+            }
         }
     }
 }

@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 5446931342054602534}
   - component: {fileID: 9151779101607721902}
   - component: {fileID: 6536122567573235307}
+  - component: {fileID: 4848770603401616501}
   m_Layer: 10
-  m_Name: weapon_player_tree_branch_dropped
+  m_Name: weapon_player_pine_cone_dropped
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5446931342054602536}
-  m_LocalRotation: {x: -0, y: -0, z: 0.072609596, w: 0.99736047}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 8.328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5446931342054602534
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -71,10 +72,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1083238823
-  m_SortingLayer: 7
-  m_SortingOrder: 1
-  m_Sprite: {fileID: -3334739161026809706, guid: c5fa8adc8bf3e69418cb35b9db348720, type: 3}
+  m_SortingLayerID: 1503095659
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 5284806796472663492, guid: 342a02c8ae5c29240b6cfb098e563b40, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -112,3 +113,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDatas:
   - {fileID: 11400000, guid: 0dc7175a284f8ac4e9c83ba8cc220be6, type: 2}
+--- !u!58 &4848770603401616501
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5446931342054602536}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.25

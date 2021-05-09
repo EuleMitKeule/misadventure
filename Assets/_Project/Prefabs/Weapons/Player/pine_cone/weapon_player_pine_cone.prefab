@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6459073364223741992}
   - component: {fileID: 6459073364223741993}
+  - component: {fileID: 7884211027443946649}
+  - component: {fileID: 1481153490093163552}
   m_Layer: 6
-  m_Name: weapon_player_tree_branch
+  m_Name: weapon_player_pine_cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6459073364223741991}
-  m_LocalRotation: {x: 0, y: 0, z: 0.072611555, w: 0.9973603}
-  m_LocalPosition: {x: 0.291, y: 0.304, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 8.328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6459073364223741993
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -71,8 +73,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 631342383
   m_SortingLayer: 4
-  m_SortingOrder: 1
-  m_Sprite: {fileID: -3334739161026809706, guid: c5fa8adc8bf3e69418cb35b9db348720, type: 3}
+  m_SortingOrder: -1
+  m_Sprite: {fileID: 5914255144033738422, guid: 342a02c8ae5c29240b6cfb098e563b40, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -83,3 +85,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7884211027443946649
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6459073364223741991}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 697bdb42715ecc245b126001d6e1faa3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1481153490093163552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6459073364223741991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 167a99ff0d764d3abe13ff37a84a789c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

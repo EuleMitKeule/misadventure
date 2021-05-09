@@ -21,6 +21,13 @@ namespace HotlineHyrule.Entities.EnemyStates
         // float LookAngle => Mathf.Atan2(LookDirection.y, LookDirection.x) * Mathf.Rad2Deg + 90f;
         // Quaternion LookRotation => Quaternion.Euler(0f, 0f, LookAngle);
 
+        public override void Setup()
+        {
+            base.Setup();
+            
+            if (Animator) Animator.SetBool("isMoving", true);
+        }
+        
         public override void FixedStateUpdate()
         {
             base.FixedStateUpdate();

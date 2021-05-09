@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: a8780be3b62727145beaab4ba60207eb
+guid: 342a02c8ae5c29240b6cfb098e563b40
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3312681287433971974
-    second: sprite_weapon_spear_idle
+      213: 5914255144033738422
+    second: sprite_weapon_pine_cone_0
   - first:
-      213: 6897855179661496130
-    second: sprite_weapon_spear_attack
+      213: 4303111624352057609
+    second: sprite_weapon_pine_cone_1
   - first:
-      213: 4255860533672829024
-    second: sprite_projectile_spear
+      213: 5284806796472663492
+    second: sprite_weapon_pine_cone_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -100,64 +100,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_weapon_spear_idle
+      name: sprite_weapon_pine_cone_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 4
-        height: 23
+        height: 9
       alignment: 9
-      pivot: {x: 0.25, y: 0.36956522}
+      pivot: {x: 0.25, y: 0.16666667}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af61a60abedf602d0800000000000000
-      internalID: -3312681287433971974
+      spriteID: 6be582be7b7a31250800000000000000
+      internalID: 5914255144033738422
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_weapon_spear_attack
+      name: sprite_weapon_pine_cone_1
       rect:
         serializedVersion: 2
         x: 4
         y: 0
         width: 4
-        height: 23
+        height: 12
       alignment: 9
-      pivot: {x: 0.25, y: 0.36956522}
+      pivot: {x: 0.25, y: 0.125}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24fcfcf4dba1abf50800000000000000
-      internalID: 6897855179661496130
+      spriteID: 909cb563939b7bb30800000000000000
+      internalID: 4303111624352057609
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_projectile_spear
+      name: sprite_weapon_pine_cone_2
       rect:
         serializedVersion: 2
-        x: 8
-        y: 0
-        width: 2
-        height: 23
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
+        x: 0
+        y: 9
+        width: 3
+        height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0606c2b5b9adf0b30800000000000000
-      internalID: 4255860533672829024
+      spriteID: 4cdb25208c7675940800000000000000
+      internalID: 5284806796472663492
       vertices: []
       indices: 
       edges: []

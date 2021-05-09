@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: controller_weapon_pine_cone
+  m_Controller: {fileID: 9100000, guid: ede1559477db535418d8bcbccdd98bc8, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 6d01fef1e520aed4eaa1216ceac3f27f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5f5aceded79b3f94a9730d52b3f609b9, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: fa5a03ba204e4a94eb2338e9145727d3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 08e2fbd4ea798a84699a2a8c0bd7664f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 67fe384ccfc50d042bdf8a1f84319129, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: eb8481c8b59f3754ea334fbc3ab8f53e, type: 2}

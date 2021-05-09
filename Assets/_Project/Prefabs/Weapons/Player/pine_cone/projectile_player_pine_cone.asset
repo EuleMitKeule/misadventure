@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b3124b8a41bc1743ac1d5b548103b40, type: 3}
-  m_Name: projectile_player_tree_branch
+  m_Name: projectile_player_pine_cone
   m_EditorClassIdentifier: 
   damage: 5
   impactMask:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 16896
   impactRaycastOffset: 0
   isSticky: 0
   penetrations: 0
   range: 7
   flightTime: 1
-  movementThreshold: 0
+  movementThreshold: 0.25
