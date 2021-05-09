@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: item_health_poison
   m_EditorClassIdentifier: 
   itemName: 
+  itemPrefab: {fileID: 6310304692703711339, guid: 14108b6a809a8314cb12e4c65de48942, type: 3}
+  consumeParticleSystemPrefab: {fileID: 0}
   healTotal: -75
   healAmount: -10
   healRate: 1

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: item_attack_+20
   m_EditorClassIdentifier: 
   itemName: 
+  itemPrefab: {fileID: 7750176915603624539, guid: f9fef390ac99e5047a7c4c7c2a084672, type: 3}
+  consumeParticleSystemPrefab: {fileID: 0}
   damageFactor: 1
   damageBonus: 20
   attackSpeed: 1

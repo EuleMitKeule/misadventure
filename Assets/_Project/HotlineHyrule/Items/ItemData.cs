@@ -6,5 +6,6 @@ namespace HotlineHyrule.Items
     public class ItemData : ScriptableObject
     {
         [SerializeField] public string itemName;
+        [SerializeField] public GameObject itemPrefab;
     }
 }
