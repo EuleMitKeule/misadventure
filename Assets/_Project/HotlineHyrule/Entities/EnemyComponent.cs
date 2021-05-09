@@ -27,6 +27,7 @@ namespace HotlineHyrule.Entities
         [SerializeField] float attackRange;
         [SerializeField] float followRange;
         [SerializeField] float followAngle;
+        [SerializeField] GameObject bloodParticleSystem;
 
         public float WalkAngle => Vector3.SignedAngle(Vector3.up, Rigidbody.velocity, Vector3.forward);
         public Quaternion WalkRotation => Quaternion.Euler(0f, 0f, WalkAngle);
@@ -133,8 +134,12 @@ namespace HotlineHyrule.Entities
 
         void OnHealthChanged(object sender, HealthEventArgs e)
         {
-            if (e.NewHealth > 0) return;
-            ChangeState(DyingState);
+            if (e.HealthDifference < 0)
+            {
+                if (bloodParticleSystem) Instantiate(bloodParticleSystem, transform.position, Quaternion.identity);
+            }
+            
+            if (e.NewHealth <= 0) ChangeState(DyingState);
         }
 
         void OnTriggerStay2D(Collider2D other)
