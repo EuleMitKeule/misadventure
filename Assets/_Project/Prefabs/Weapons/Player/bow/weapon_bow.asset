@@ -24,3 +24,4 @@ MonoBehaviour:
   deadzoneRadius: 1
   projectilePrefab: {fileID: 8636156419958803353, guid: 07c24f9187b030848977eb21dc349ec5, type: 3}
   spawnPosition: {x: 0.0313, y: 0.56}
+  weaponFiredSound: {fileID: 8300000, guid: 730fd8cd09c673f468f9c3fd091ec962, type: 3}

@@ -194,6 +194,8 @@ namespace HotlineHyrule.Weapons
                 DamageBonus, 
                 DamageFactor, 
                 AttackSpeed);
+            
+            Locator.SoundComponent.PlaySound(RangedWeaponData.weaponFiredSound);
         }
 
         void PerformMeleeAttack()
