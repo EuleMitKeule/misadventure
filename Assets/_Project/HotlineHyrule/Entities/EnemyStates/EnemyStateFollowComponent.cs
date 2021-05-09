@@ -5,64 +5,38 @@ namespace HotlineHyrule.Entities.EnemyStates
 {
     public class EnemyStateFollowComponent : EnemyStateBaseComponent
     {
-        /// <summary>
-        /// Duration for the enemy following the player
-        /// </summary>
-        [SerializeField] float followDuration;
+        // /// <summary>
+        // /// Duration for the enemy following the player
+        // /// </summary>
+        // [SerializeField] float followDuration;
         /// <summary>
         /// Move speed for enemy while following the player
         /// </summary>
         [SerializeField] float moveSpeed;
-        /// <summary>
-        /// Collider component on that the following is based on.
-        /// As long as the player does not leave this collider, the
-        /// enemy will follow them. 
-        /// </summary>
-        [SerializeField] Collider2D followRangeCollider;
-        
-        float _timer;
+        // [SerializeField] float attackRange;
+        //
+        // float _timer;
 
-        public override void Setup()
-        {
-            base.Setup();
-            EnemyStateFollowColliderHelperComponent.PlayerStayFollowRange += OnPlayerStayFollowRange;
-            _timer = 0f;
-        }
+        // Vector3 LookDirection => transform.position - PlayerObject.transform.position;
+        // float LookAngle => Mathf.Atan2(LookDirection.y, LookDirection.x) * Mathf.Rad2Deg + 90f;
+        // Quaternion LookRotation => Quaternion.Euler(0f, 0f, LookAngle);
 
         public override void FixedStateUpdate()
         {
             base.FixedStateUpdate();
 
-            if (_timer > followDuration)
+            Rigidbody.velocity = EnemyComponent.PlayerDirection * moveSpeed;
+            transform.rotation = EnemyComponent.FollowRotation;
+
+            if (EnemyComponent.IsPlayerAttackable)
             {
-                EnemyComponent.ChangeState(EnemyComponent.PatrolState);
-                return;
+                EnemyComponent.ChangeState(EnemyComponent.AttackState);
             }
-            _timer += Time.deltaTime;
-            
-            var dir = transform.position - PlayerObject.transform.position;
-            var angle = Mathf.Atan2(dir.y,dir.x) * Mathf.Rad2Deg + 90f;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            Rigidbody.velocity = new Vector2(transform.up.x, transform.up.y) * moveSpeed * Time.deltaTime;
-        }
 
-        void OnPlayerStayFollowRange(object sender, Collider2D col)
-        {
-            if (col != followRangeCollider) return;
-            _timer = 0f;
-        }
-
-        public override void OnLookingAtPlayer()
-        {
-            base.OnLookingAtPlayer();
-            EnemyComponent.ChangeState(EnemyComponent.ShootProjectileState);
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
-            _timer = 0f;
-            EnemyStateFollowColliderHelperComponent.PlayerStayFollowRange -= OnPlayerStayFollowRange;
+            if (!EnemyComponent.IsPlayerVisible)
+            {
+                EnemyComponent.ChangeState(EnemyComponent.SearchState);
+            }
         }
     }
 }

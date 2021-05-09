@@ -44,6 +44,29 @@ namespace HotlineHyrule.Entities
         /// List of items that can be dropped by a given chance when the enemy is destroyed
         /// </summary>
         [SerializeField] List<ItemDrop> itemDrops;
+        [SerializeField] float attackRange;
+        [SerializeField] float followRange;
+        [SerializeField] float followAngle;
+
+        public float WalkAngle => Vector3.SignedAngle(Vector3.up, Rigidbody.velocity, Vector3.forward);
+        public Quaternion WalkRotation => Quaternion.Euler(0f, 0f, WalkAngle);
+        public float FollowAngle => Vector3.SignedAngle(Vector3.up, PlayerDirection, Vector3.forward);
+        public Quaternion FollowRotation => Quaternion.Euler(0f, 0f, FollowAngle);
+        public Vector3 PlayerPosition => Locator.PlayerComponent.transform.position;
+        public Vector3 PlayerDirection => (PlayerPosition - transform.position).normalized;
+        public bool IsPlayerInFollowRange => (transform.position - PlayerPosition).magnitude <= followRange;
+        public bool IsPlayerInAttackRange => (transform.position - PlayerPosition).magnitude <= attackRange;
+        public float PlayerAngle => Vector3.SignedAngle(transform.up, PlayerDirection, Vector3.forward);
+        public bool IsPlayerInAngle => Mathf.Abs(PlayerAngle) < followAngle;
+        public bool IsPlayerBehindWall =>
+            Physics2D.Raycast(
+                transform.position,
+                PlayerDirection,
+                followRange,
+                1 << PhysicsLayer.WALL | 1 << PhysicsLayer.PLAYER
+            ).collider.gameObject != Locator.PlayerComponent.gameObject;
+        public bool IsPlayerVisible => IsPlayerInFollowRange && IsPlayerInAngle && !IsPlayerBehindWall;
+        public bool IsPlayerAttackable => IsPlayerInAttackRange && IsPlayerInAngle && !IsPlayerBehindWall;
 
         public bool HasWallLeft =>
             Physics2D.BoxCast(
@@ -73,19 +96,25 @@ namespace HotlineHyrule.Entities
                 wallMask
             );
 
+        Rigidbody2D Rigidbody { get; set; }
         Collider2D Collider { get; set; }
         HealthComponent HealthComponent { get; set; }
         public EnemyStateBaseComponent PatrolState { get; private set; }
-        public EnemyStateBaseComponent ShootProjectileState { get; private set; }
+        public EnemyStateBaseComponent SearchState { get; private set; }
+        public EnemyStateBaseComponent TurnAroundState { get; private set; }
+        public EnemyStateBaseComponent AttackState { get; private set; }
         public EnemyStateBaseComponent FollowState { get; private set; }
         public EnemyStateBaseComponent DyingState { get; private set; }
 
         void Awake()
         {
+            Rigidbody = GetComponent<Rigidbody2D>();
             Collider = GetComponent<Collider2D>();
             HealthComponent = GetComponent<HealthComponent>();
             PatrolState = GetComponent<EnemyStatePatrolComponent>();
-            ShootProjectileState = GetComponent<EnemyStateAttackComponent>();
+            SearchState = GetComponent<EnemyStateSearchComponent>();
+            TurnAroundState = GetComponent<EnemyStateTurnAroundComponent>();
+            AttackState = GetComponent<EnemyStateAttackComponent>();
             FollowState = GetComponent<EnemyStateFollowComponent>();
             DyingState = GetComponent<EnemyStateDyingComponent>();
 
@@ -105,6 +134,8 @@ namespace HotlineHyrule.Entities
         void Update()
         {
             if (state) state.StateUpdate();
+            
+            if (IsPlayerVisible) Debug.DrawLine(transform.position, PlayerPosition, IsPlayerAttackable ? Color.green : Color.red);
         }
 
         /// <summary>
@@ -156,5 +187,19 @@ namespace HotlineHyrule.Entities
                 }
             }
         }
+        
+#if UNITY_EDITOR
+        void OnDrawGizmos()
+        {
+            if (state != null)
+            {
+                var style = new GUIStyle();
+                style.alignment = TextAnchor.MiddleCenter;
+                style.normal.textColor = Color.white;
+                
+                Handles.Label(transform.position, state.GetType().Name, style);
+            }
+        }
+#endif
     }
 }
