@@ -12,6 +12,8 @@ namespace HotlineHyrule.Entities.EnemyStates
         public override void Setup()
         {
             base.Setup();
+            
+            if (Animator) Animator.SetBool("isMoving", true);
 
             LastSeenPosition = EnemyComponent.PlayerPosition;
             PathfindingComponent.SetDestination(Locator.LevelComponent.Grid.WorldToCell(LastSeenPosition));

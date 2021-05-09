@@ -14,6 +14,7 @@ namespace HotlineHyrule.Weapons
     /// </summary>
     public class  WeaponComponent : MonoBehaviour
     {
+        [SerializeField] Vector3 weaponOffset;
         /// <summary>
         /// The weapon data corresponding to this weapon.
         /// </summary>
@@ -56,10 +57,12 @@ namespace HotlineHyrule.Weapons
         /// Whether the attack input is currently being registered.
         /// </summary>
         bool IsRequestingAttack => attackAction.ReadValue<float>() != 0f;
+        public float AttackDelay => 1 / weaponData.attackRate / AttackSpeed;
         /// <summary>
         /// Whether enough time has passed since the last usage for the weapon to be used again.
         /// </summary>
-        bool CanAttack => Time.time >= LastAttackTime + 1 / weaponData.attackRate / AttackSpeed;
+        public bool CanAttack =>
+            weaponData.attackRate == 0 || Time.time >= LastAttackTime + AttackDelay;
         /// <summary>
         /// Whether the current weapon is a ranged one.
         /// </summary>
@@ -73,56 +76,40 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         public RangedWeaponData RangedWeaponData => (RangedWeaponData)weaponData;
         MeleeWeaponData MeleeWeaponData => (MeleeWeaponData)weaponData;
+        public Vector3 WeaponPosition => WeaponTransform.position;
         /// <summary>
         /// The offset of the projectile spawn position relative to the weapon position.
         /// </summary>
         Vector3 ProjectileSpawnOffset =>
-            Transform.right * RangedWeaponData.spawnPosition.x +
-            Transform.up * RangedWeaponData.spawnPosition.y;
+            WeaponTransform.right * RangedWeaponData.spawnPosition.x +
+            WeaponTransform.up * RangedWeaponData.spawnPosition.y;
         /// <summary>
         /// The spawn position of the projectile.
         /// </summary>
-        Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + Transform.position;
+        Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + WeaponTransform.position;
 
         GameObject InstantiateProjectile => Instantiate(RangedWeaponData.projectilePrefab, ProjectileSpawnPosition,
-            Transform.rotation);
-
-        Rigidbody2D GetParentRigidbody
-        {
-            get
-            {
-                var rigidbodies = GetComponentsInParent<Rigidbody2D>();
-
-                var parentRigidbody = Rigidbody ?
-                    (rigidbodies.Length >= 2 ? rigidbodies[1] : null) :
-                    (rigidbodies.Length >= 1) ? rigidbodies[0] : null;
-
-                return parentRigidbody;
-            }
-        }
+            WeaponTransform.rotation);
 
         public event EventHandler<EventArgs> AttackStarted;
         public event EventHandler<EventArgs> AttackFinished;
         
         GameObject WeaponObject { get; set; }
-        Transform Transform { get; set; }
+        Transform WeaponTransform => WeaponObject.transform;
         SpriteRenderer SpriteRenderer { get; set; }
         Animator WeaponAnimator { get; set; }
-        Rigidbody Rigidbody { get; set; }
-        Rigidbody2D ParentRigidbody { get; set; }
+        Rigidbody2D Rigidbody { get; set; }
         PlayerComponent PlayerComponent { get; set; }
         ParticleSystem ParticleSystem { get; set; }
         LoadoutComponent LoadoutComponent { get; set; }
 
         void Awake()
         {
-            Transform = transform;
             SpriteRenderer = GetComponent<SpriteRenderer>();
-            Rigidbody = GetComponent<Rigidbody>();
-            ParentRigidbody = GetParentRigidbody;
-            PlayerComponent = GetComponentInParent<PlayerComponent>();
+            Rigidbody = GetComponent<Rigidbody2D>();
+            PlayerComponent = GetComponent<PlayerComponent>();
             ParticleSystem = GetComponentInChildren<ParticleSystem>();
-            LoadoutComponent = GetComponentInParent<LoadoutComponent>();
+            LoadoutComponent = GetComponent<LoadoutComponent>();
 
             AttackFinished += OnAttackFinished;
 
@@ -146,8 +133,14 @@ namespace HotlineHyrule.Weapons
             if (WeaponObject) Destroy(WeaponObject);
             
             weaponData = newWeaponData;
-            WeaponObject = Instantiate(weaponData.weaponPrefab, Transform);
+            WeaponObject = Instantiate(weaponData.weaponPrefab, transform);
+            WeaponTransform.localPosition = weaponOffset;
             WeaponAnimator = WeaponObject.GetComponent<Animator>();
+        }
+
+        public void SetWeaponRotation(float angle)
+        {
+            WeaponTransform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
 
         /// <summary>
@@ -155,29 +148,31 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         public void PerformAttack()
         {
-            // if (!weaponData) return;
+            if (!weaponData) return;
             if (!CanAttack) return;
+
             LastAttackTime = Time.time;
 
-            Invoke(nameof(InvokeAttackFinished), weaponData.slowTimeWindow / weaponData.attackRate / AttackSpeed);
-            
             if (IsPlayer) PlayerComponent.MovementAttackFactor = weaponData.movementFactor; //TODO enable for enemy
             
             if (WeaponAnimator) WeaponAnimator.SetTrigger("attack");
             
+            var time = WeaponAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+            Invoke(nameof(InvokeAttackFinished), time);
+            
             AttackStarted?.Invoke(this, EventArgs.Empty);
 
-            if (HasRangedWeapon) PerformRangedAttack();
-            else if (HasMeleeWeapon) PerformMeleeAttack();
+            // if (HasRangedWeapon) PerformRangedAttack();
+            // else if (HasMeleeWeapon) PerformMeleeAttack();
         }
 
         /// <summary>
         /// Performs a ranged attack with the equipped ranged weapon.
         /// </summary>
-        void PerformRangedAttack()
+        public void PerformRangedAttack()
         {
             if (!HasRangedWeapon) return;
-
+            
             FireProjectile();
         }
 
@@ -187,7 +182,7 @@ namespace HotlineHyrule.Weapons
 
             var projectileComponent = projectileObject.GetComponent<ProjectileComponent>();
             if (projectileComponent) projectileComponent.Fire(
-                ParentRigidbody.velocity, 
+                Rigidbody.velocity, 
                 IsPlayer ? LoadoutComponent.CurrentLoadoutSlot.weaponCharges : 0, 
                 DamageBonus, 
                 DamageFactor, 
@@ -196,7 +191,7 @@ namespace HotlineHyrule.Weapons
             Locator.SoundComponent.PlaySound(RangedWeaponData.weaponFiredSound);
         }
 
-        void PerformMeleeAttack()
+        public void PerformMeleeAttack()
         {
             if (!HasMeleeWeapon) return;
         }

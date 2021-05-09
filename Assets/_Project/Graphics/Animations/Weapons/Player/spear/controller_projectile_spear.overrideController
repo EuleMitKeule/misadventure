@@ -7,7 +7,9 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: controller_projectile_spear
-  m_Controller: {fileID: 9100000, guid: ede1559477db535418d8bcbccdd98bc8, type: 2}
+  m_Controller: {fileID: 9100000, guid: 722517cdec31a3141ad795cefa8f186f, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 67fe384ccfc50d042bdf8a1f84319129, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: fa559ded3cd4d8e4fa9ecbd99073872a, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 34c67041d8591e840b5775030d0406d6, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 649dad6a92c3df3408bcc24822370ca6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 65ad10c77772eef4eb7206cb19b33cc9, type: 2}

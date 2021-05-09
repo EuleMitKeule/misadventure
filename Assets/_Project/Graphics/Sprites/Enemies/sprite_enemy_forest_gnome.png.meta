@@ -38,6 +38,12 @@ TextureImporter:
   - first:
       213: -3164888130388526879
     second: sprite_enemy_forest_gnome_8
+  - first:
+      213: 513708906702695250
+    second: sprite_enemy_forest_gnome_9
+  - first:
+      213: -2398060975928811634
+    second: sprite_enemy_forest_gnome_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -131,11 +137,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 18
-        height: 16
+        y: 3
+        width: 16
+        height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -151,12 +157,12 @@ TextureImporter:
       name: sprite_enemy_forest_gnome_1
       rect:
         serializedVersion: 2
-        x: 18
-        y: 0
-        width: 18
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 16
+        y: 3
+        width: 16
+        height: 12
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -172,12 +178,12 @@ TextureImporter:
       name: sprite_enemy_forest_gnome_2
       rect:
         serializedVersion: 2
-        x: 36
-        y: 0
-        width: 18
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 32
+        y: 3
+        width: 16
+        height: 13
+      alignment: 9
+      pivot: {x: 0.5, y: 0.46153846}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -193,12 +199,12 @@ TextureImporter:
       name: sprite_enemy_forest_gnome_3
       rect:
         serializedVersion: 2
-        x: 54
-        y: 0
-        width: 18
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 48
+        y: 3
+        width: 16
+        height: 11
+      alignment: 9
+      pivot: {x: 0.5, y: 0.54545456}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -214,12 +220,12 @@ TextureImporter:
       name: sprite_enemy_forest_gnome_4
       rect:
         serializedVersion: 2
-        x: 72
-        y: 0
-        width: 18
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 64
+        y: 3
+        width: 16
+        height: 11
+      alignment: 9
+      pivot: {x: 0.5, y: 0.54545456}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -235,12 +241,12 @@ TextureImporter:
       name: sprite_enemy_forest_gnome_5
       rect:
         serializedVersion: 2
-        x: 90
-        y: 0
-        width: 18
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 80
+        y: 3
+        width: 16
+        height: 11
+      alignment: 9
+      pivot: {x: 0.5, y: 0.54545456}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -256,12 +262,12 @@ TextureImporter:
       name: sprite_enemy_forest_gnome_6
       rect:
         serializedVersion: 2
-        x: 108
-        y: 0
-        width: 18
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 96
+        y: 3
+        width: 16
+        height: 11
+      alignment: 9
+      pivot: {x: 0.5, y: 0.54545456}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -277,12 +283,12 @@ TextureImporter:
       name: sprite_enemy_forest_gnome_7
       rect:
         serializedVersion: 2
-        x: 126
-        y: 0
-        width: 18
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 112
+        y: 3
+        width: 16
+        height: 11
+      alignment: 9
+      pivot: {x: 0.5, y: 0.54545456}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -298,12 +304,12 @@ TextureImporter:
       name: sprite_enemy_forest_gnome_8
       rect:
         serializedVersion: 2
-        x: 144
-        y: 0
-        width: 18
-        height: 16
+        x: 128
+        y: 2
+        width: 16
+        height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -311,6 +317,48 @@ TextureImporter:
       bones: []
       spriteID: 1e87752830f0414d0800000000000000
       internalID: -3164888130388526879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_enemy_forest_gnome_9
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 1
+        width: 16
+        height: 13
+      alignment: 9
+      pivot: {x: 0.5, y: 0.46153846}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25be7f5678f012700800000000000000
+      internalID: 513708906702695250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_enemy_forest_gnome_10
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 18
+        height: 14
+      alignment: 9
+      pivot: {x: 0.5, y: 0.42857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8f59047f3068bed0800000000000000
+      internalID: -2398060975928811634
       vertices: []
       indices: 
       edges: []

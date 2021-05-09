@@ -5,21 +5,13 @@ namespace HotlineHyrule.Entities.EnemyStates
 {
     public class EnemyStateAttackComponent : EnemyStateBaseComponent
     {
-        /// <summary>
-        /// Delay (in seconds) for performing the attack.
-        /// Exmaple usuage is to fit the attack to the animation
-        /// </summary>
-        [SerializeField] float performAttackDelay = 0.5f;
-        /// <summary>
-        /// Delay when the attack state shall be left after the attack got performed
-        /// </summary>
-        [SerializeField] float changeStateDelay = 0.5f;
-
         Coroutine AttackCoroutine { get; set; }
 
         public override void Setup()
         {
             base.Setup();
+            
+            if (Animator) Animator.SetBool("isMoving", false);
 
             StartAttackRoutine();
         }
@@ -69,11 +61,14 @@ namespace HotlineHyrule.Entities.EnemyStates
         {
             while (true)
             {
-                if (Animator) Animator.SetTrigger("attack");
+                if (WeaponComponent.CanAttack)
+                {
+                    if (Animator) Animator.SetTrigger("attack");
+                    if (WeaponComponent) WeaponComponent.PerformAttack();   
+                }
 
-                yield return new WaitForSeconds(performAttackDelay);
+                yield return new WaitForSeconds(WeaponComponent.AttackDelay);
 
-                if (WeaponComponent) WeaponComponent.PerformAttack();
             }
         }
     }

@@ -59,7 +59,7 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// The direction from weapon to look target.
         /// </summary>
-        Vector2 WeaponDirection => (ClampedMousePosition - (Vector2)WeaponComponent.transform.position).normalized;
+        Vector2 WeaponDirection => (ClampedMousePosition - (Vector2)WeaponComponent.WeaponPosition).normalized;
         /// <summary>
         /// The angle between weapon direction and y axis.
         /// </summary>
@@ -108,7 +108,7 @@ namespace HotlineHyrule.Entities
             HandleAnimation();
             
             Rigidbody.rotation = LookAngle;
-            if (WeaponComponent.HasRangedWeapon) WeaponComponent.transform.rotation = Quaternion.Euler(0, 0, WeaponAngle);
+            if (WeaponComponent.HasRangedWeapon) WeaponComponent.SetWeaponRotation(WeaponAngle);
         }
 
         void FixedUpdate()
