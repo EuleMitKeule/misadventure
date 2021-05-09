@@ -13,6 +13,9 @@ namespace HotlineHyrule.Entities
     /// </summary>
     public class EnemyComponent : MonoBehaviour
     {
+        /// <summary>
+        /// Struct that combines given Item data with a drop rate
+        /// </summary>
         [Serializable]
         struct ItemDrop
         {
@@ -31,6 +34,9 @@ namespace HotlineHyrule.Entities
         [SerializeField] float wallCheckDistance;
         [SerializeField] LayerMask wallMask;
         [SerializeField] public Collider2D sightRangeCollider;
+        /// <summary>
+        /// List of items that can be dropped by a given chance when the enemy is destroyed
+        /// </summary>
         [SerializeField] List<ItemDrop> itemDrops;
 
         public bool HasWallLeft =>
