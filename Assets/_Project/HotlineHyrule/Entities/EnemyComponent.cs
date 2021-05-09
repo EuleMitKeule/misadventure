@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using HotlineHyrule.Entities.EnemyStates;
 using HotlineHyrule.Extensions;
+using HotlineHyrule.Items;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace HotlineHyrule.Entities
 {
@@ -11,6 +13,13 @@ namespace HotlineHyrule.Entities
     /// </summary>
     public class EnemyComponent : MonoBehaviour
     {
+        [Serializable]
+        struct ItemDrop
+        {
+            public ItemData data;
+            public float dropRate;
+        }
+        
         /// <summary>
         /// The enemy's respawn point.
         /// </summary>
@@ -22,7 +31,7 @@ namespace HotlineHyrule.Entities
         [SerializeField] float wallCheckDistance;
         [SerializeField] LayerMask wallMask;
         [SerializeField] public Collider2D sightRangeCollider;
-        [SerializeField] public ItemDropDictionary itemDrops;
+        [SerializeField] List<ItemDrop> itemDrops;
 
         public bool HasWallLeft =>
             Physics2D.BoxCast(
@@ -123,6 +132,17 @@ namespace HotlineHyrule.Entities
         {
             if (other.gameObject.layer != LayerMask.NameToLayer("enemy")) return;
             transform.Rotate(Vector3.forward, 90f);
+        }
+
+        void OnDestroy()
+        {
+            foreach (var item in itemDrops)
+            {
+                if (Random.value <= item.dropRate)
+                { 
+                    Instantiate(item.data.itemPrefab, transform.position, Quaternion.identity);
+                }
+            }
         }
     }
 }
