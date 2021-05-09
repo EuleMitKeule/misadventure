@@ -19,8 +19,14 @@ namespace HotlineHyrule.Entities
         [Serializable]
         struct ItemDrop
         {
+            /// <summary>
+            /// The Item data that shall be dropped
+            /// </summary>
             public ItemData data;
-            public float dropRate;
+            /// <summary>
+            /// The likelihood to drop the item
+            /// </summary>
+            [Range(0f, 1f)] public float dropRate;
         }
         
         /// <summary>
