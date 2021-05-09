@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HotlineHyrule.Entities.EnemyStates;
 using HotlineHyrule.Extensions;
 using HotlineHyrule.Items;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
