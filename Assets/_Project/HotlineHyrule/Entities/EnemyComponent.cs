@@ -29,14 +29,32 @@ namespace HotlineHyrule.Entities
         /// </summary>
         [Header("AI")]
         [SerializeField] public EnemyStateBaseComponent state;
+        /// <summary>
+        /// Layers that count as wall.
+        /// </summary>
         [SerializeField] LayerMask wallMask;
+        /// <summary>
+        /// Distance to check for walls at.
+        /// </summary>
         [SerializeField] float wallCheckDistance;
-        [SerializeField] float attackRange;
-        [SerializeField] float followRange;
+        /// <summary>
+        /// Total angle of the vision cone.
+        /// </summary>
         [SerializeField] float followAngle;
+        /// <summary>
+        /// Range in which the enemy will follow.
+        /// </summary>
+        [SerializeField] float followRange;
+        /// <summary>
+        /// Range in which the enemy will attack.
+        /// </summary>
+        [SerializeField] float attackRange;
 
+        /// <summary>
+        /// Particle system prefab to spawn when taking damage.
+        /// </summary>
         [Header("Effects")]
-        [SerializeField] GameObject bloodParticleSystem;
+        [SerializeField] GameObject damageParticleSystemPrefab;
 
         public Vector3 PlayerPosition => Locator.PlayerComponent.transform.position;
         public Vector3 PlayerDirection => transform.position.DirectionTo(PlayerPosition);
@@ -152,7 +170,7 @@ namespace HotlineHyrule.Entities
         {
             if (e.IsDamage)
             {
-                if (bloodParticleSystem) Instantiate(bloodParticleSystem, transform.position, Quaternion.identity);
+                if (damageParticleSystemPrefab) Instantiate(damageParticleSystemPrefab, transform.position, Quaternion.identity);
             }
 
             if (e.IsKilled)
