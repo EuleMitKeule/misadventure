@@ -6,7 +6,5 @@ namespace HotlineHyrule.Entities
     public interface IMovementComponent
     {
         void Consume(MovementItemData movementItem);
-
-        //TODO MovementFactor
     }
 }

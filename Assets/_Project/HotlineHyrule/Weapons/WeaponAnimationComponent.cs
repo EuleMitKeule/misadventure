@@ -22,11 +22,24 @@ namespace HotlineHyrule.Weapons
             WeaponComponent.PerformRangedAttack();
         }
 
+        public void PerformMeleeAttack()
+        {
+            if (!WeaponComponent) return;
+
+            WeaponComponent.PerformMeleeAttack();
+        }
+
         public void Unequip()
         {
             if (!LoadoutComponent) return;
 
-            LoadoutComponent.Unequip();
+            LoadoutComponent.Unequip(false);
+        }
+        public void UnequipAndDrop()
+        {
+            if (!LoadoutComponent) return;
+
+            LoadoutComponent.Unequip(true);
         }
     }
 }

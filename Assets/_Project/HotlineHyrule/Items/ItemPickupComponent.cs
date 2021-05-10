@@ -53,7 +53,7 @@ namespace HotlineHyrule.Items
                     case WeaponData weaponData:
                         if (!LoadoutComponent) continue;
                         var droppedWeaponComponent = closestItem.GetComponent<DroppedWeaponComponent>();
-                        LoadoutComponent.Equip(weaponData, droppedWeaponComponent);
+                        LoadoutComponent.Equip(weaponData, droppedWeaponComponent.weaponCharges);
                         break;
                     case HealthItemData healthItemData:
                         if (!HealthComponent) continue;
