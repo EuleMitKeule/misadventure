@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using HotlineHyrule.Entities;
 using HotlineHyrule.Weapons;
@@ -8,14 +9,33 @@ namespace HotlineHyrule.Items
 {
     public class ItemPickupComponent : MonoBehaviour
     {
+        /// <summary>
+        /// The range in which items can be picked up.
+        /// </summary>
+        [Header("General")]
         [SerializeField] float pickupRadius;
+        /// <summary>
+        /// Which layers count as item.
+        /// </summary>
         [SerializeField] LayerMask itemMask;
+        /// <summary>
+        /// The input action to pickup items.
+        /// </summary>
+        [Header("Input")]
         [SerializeField] InputAction pickupAction;
 
+        /// <summary>
+        /// List of items that are currently in range.
+        /// </summary>
         Collider2D[] OverlappingItems =>
             Physics2D.OverlapCircleAll(transform.position, pickupRadius, itemMask);
+        /// <summary>
+        /// The item that is currently closest.
+        /// </summary>
         Collider2D ClosestItem =>
-            OverlappingItems.OrderBy(element => (element.transform.position - transform.position).magnitude).FirstOrDefault();
+            OverlappingItems
+            .OrderBy(element => (element.transform.position - transform.position).magnitude)
+            .FirstOrDefault();
 
         HealthComponent HealthComponent { get; set; }
         LoadoutComponent LoadoutComponent { get; set; }
@@ -27,7 +47,7 @@ namespace HotlineHyrule.Items
             HealthComponent = GetComponent<HealthComponent>();
             LoadoutComponent = GetComponent<LoadoutComponent>();
             MovementComponent = GetComponent<IMovementComponent>();
-            WeaponComponent = GetComponentInChildren<WeaponComponent>();
+            WeaponComponent = GetComponent<WeaponComponent>();
             
             pickupAction.started += OnButtonPickup;
             
@@ -42,9 +62,14 @@ namespace HotlineHyrule.Items
             var closestItemComponent = closestItem.GetComponent<ItemComponent>();
             if (!closestItemComponent) return;
 
-            var itemDatas = closestItemComponent.itemDatas;
+            ConsumeItem(closestItemComponent);
+        }
 
-            foreach (var itemData in itemDatas)
+        void ConsumeItem(ItemComponent itemComponent)
+        {
+            var items = itemComponent.itemDatas;
+
+            foreach (var itemData in items)
             {
                 if (itemData is ConsumableItemData consumableItemData) SpawnParticleSystem(consumableItemData);
 
@@ -52,12 +77,12 @@ namespace HotlineHyrule.Items
                 {
                     case WeaponData weaponData:
                         if (!LoadoutComponent) continue;
-                        var droppedWeaponComponent = closestItem.GetComponent<DroppedWeaponComponent>();
+                        var droppedWeaponComponent = itemComponent.GetComponent<DroppedWeaponComponent>();
                         LoadoutComponent.Equip(weaponData, droppedWeaponComponent.weaponCharges);
                         break;
                     case HealthItemData healthItemData:
                         if (!HealthComponent) continue;
-                        HealthComponent.Consume(healthItemData);        
+                        HealthComponent.Consume(healthItemData);
                         break;
                     case AttackItemData attackItemData:
                         if (!WeaponComponent) continue;
@@ -69,8 +94,8 @@ namespace HotlineHyrule.Items
                         break;
                 }
             }
-            
-            Destroy(closestItemComponent.gameObject);
+
+            Destroy(itemComponent.gameObject);
         }
 
         void SpawnParticleSystem(ConsumableItemData consumableItemData)
