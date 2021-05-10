@@ -10,8 +10,6 @@ namespace HotlineHyrule.Entities.EnemyStates
         public override void EnterState()
         {
             base.EnterState();
-            
-            if (Animator) Animator.SetBool("isMoving", false);
 
             StartAttackRoutine();
         }
@@ -27,7 +25,7 @@ namespace HotlineHyrule.Entities.EnemyStates
         {
             base.FixedUpdateState();
 
-            Rigidbody.velocity = Vector2.zero;
+            EnemyComponent.SetVelocity(Vector2.zero);
             transform.rotation = EnemyComponent.FollowRotation;
 
             if (!EnemyComponent.IsPlayerAttackable)

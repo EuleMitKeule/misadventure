@@ -9,22 +9,15 @@ namespace HotlineHyrule.Entities.EnemyStates
     public class EnemyStatePatrolComponent : EnemyStateBaseComponent
     {
         /// <summary>
-        /// Move speed of the enemy
+        /// The movement speed of the enemy while patrolling.
         /// </summary>
         [SerializeField] float moveSpeed;
-
-        public override void EnterState()
-        {
-            base.EnterState();
-
-            if (Animator) Animator.SetBool("isMoving", true);
-        }
 
         public override void ExitState()
         {
             base.ExitState();
-            
-            Rigidbody.velocity = Vector2.zero;
+
+            EnemyComponent.SetVelocity(Vector2.zero);
         }
 
         public override void OnCollisionEnterState(Collision2D other)
@@ -37,15 +30,12 @@ namespace HotlineHyrule.Entities.EnemyStates
         public override void FixedUpdateState()
         {
             base.FixedUpdateState();
-            
-            Rigidbody.velocity = transform.up * moveSpeed;
+
+            EnemyComponent.SetVelocity(transform.up * moveSpeed);
 
             if (EnemyComponent.IsPlayerFollowable)
             {
-                if (EnemyComponent.FollowState)
-                {
-                    EnemyComponent.ChangeState(EnemyComponent.FollowState);
-                }
+                if (EnemyComponent.FollowState) EnemyComponent.ChangeState(EnemyComponent.FollowState);
             }
 
             if (EnemyComponent.IsWallAbove)

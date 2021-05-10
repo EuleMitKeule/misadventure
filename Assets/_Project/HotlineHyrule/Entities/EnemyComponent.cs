@@ -56,6 +56,10 @@ namespace HotlineHyrule.Entities
         [Header("Effects")]
         [SerializeField] GameObject damageParticleSystemPrefab;
 
+        Vector2 Velocity { get; set; }
+
+        bool IsInMovementAnim => Animator.GetBool("isMoving");
+
         /// <summary>
         /// The player's current position.
         /// </summary>
@@ -156,6 +160,7 @@ namespace HotlineHyrule.Entities
 
         Rigidbody2D Rigidbody { get; set; }
         Collider2D Collider { get; set; }
+        Animator Animator { get; set; }
         HealthComponent HealthComponent { get; set; }
 
         public EnemyStateBaseComponent PatrolState { get; private set; }
@@ -169,6 +174,7 @@ namespace HotlineHyrule.Entities
         {
             Rigidbody = GetComponent<Rigidbody2D>();
             Collider = GetComponent<Collider2D>();
+            Animator = GetComponent<Animator>();
             HealthComponent = GetComponent<HealthComponent>();
             PatrolState = GetComponent<EnemyStatePatrolComponent>();
             SearchState = GetComponent<EnemyStateSearchComponent>();
@@ -188,6 +194,8 @@ namespace HotlineHyrule.Entities
         void FixedUpdate()
         {
             if (state) state.FixedUpdateState();
+
+            Rigidbody.velocity = Velocity;
         }
 
         void Update()
@@ -211,6 +219,16 @@ namespace HotlineHyrule.Entities
 
             state = newState;
             state.EnterState();
+        }
+
+        public void SetVelocity(Vector2 velocity)
+        {
+            if (IsInMovementAnim != (velocity == Vector2.zero))
+            {
+                if (Animator) Animator.SetBool("isMoving", velocity != Vector2.zero);
+            }
+
+            Velocity = velocity;
         }
 
         void OnHealthChanged(object sender, HealthEventArgs e)

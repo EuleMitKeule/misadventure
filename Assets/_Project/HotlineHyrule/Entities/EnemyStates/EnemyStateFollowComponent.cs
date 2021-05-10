@@ -5,34 +5,16 @@ namespace HotlineHyrule.Entities.EnemyStates
 {
     public class EnemyStateFollowComponent : EnemyStateBaseComponent
     {
-        // /// <summary>
-        // /// Duration for the enemy following the player
-        // /// </summary>
-        // [SerializeField] float followDuration;
         /// <summary>
-        /// Move speed for enemy while following the player
+        /// The movement speed for enemy while following.
         /// </summary>
         [SerializeField] float moveSpeed;
-        // [SerializeField] float attackRange;
-        //
-        // float _timer;
-
-        // Vector3 LookDirection => transform.position - PlayerObject.transform.position;
-        // float LookAngle => Mathf.Atan2(LookDirection.y, LookDirection.x) * Mathf.Rad2Deg + 90f;
-        // Quaternion LookRotation => Quaternion.Euler(0f, 0f, LookAngle);
-
-        public override void EnterState()
-        {
-            base.EnterState();
-            
-            if (Animator) Animator.SetBool("isMoving", true);
-        }
         
         public override void FixedUpdateState()
         {
             base.FixedUpdateState();
 
-            Rigidbody.velocity = EnemyComponent.PlayerDirection * moveSpeed;
+            EnemyComponent.SetVelocity(EnemyComponent.PlayerDirection * moveSpeed);
             transform.rotation = EnemyComponent.FollowRotation;
 
             if (EnemyComponent.IsPlayerAttackable)

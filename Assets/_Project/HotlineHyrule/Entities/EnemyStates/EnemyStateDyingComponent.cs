@@ -9,13 +9,10 @@ namespace HotlineHyrule.Entities.EnemyStates
         {
             base.EnterState();
 
+            EnemyComponent.SetVelocity(Vector2.zero);
             Rigidbody.simulated = false;
 
-            if (Animator)
-            {
-                Animator.SetBool("isMoving", true);
-                Animator.SetTrigger("dying");
-            }
+            if (Animator) Animator.SetTrigger("dying");
         }
     }
 }

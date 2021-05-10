@@ -5,15 +5,16 @@ namespace HotlineHyrule.Entities.EnemyStates
 {
     public class EnemyStateSearchComponent : EnemyStateBaseComponent
     {
-        [SerializeField] float followSpeed;
+        /// <summary>
+        /// The movement speed of the enemy while searching.
+        /// </summary>
+        [SerializeField] float moveSpeed;
 
         public Vector3 LastSeenPosition { get; set; }
 
         public override void EnterState()
         {
             base.EnterState();
-            
-            if (Animator) Animator.SetBool("isMoving", true);
 
             LastSeenPosition = EnemyComponent.PlayerPosition;
             PathfindingComponent.SetDestination(Locator.LevelComponent.Grid.WorldToCell(LastSeenPosition));
@@ -31,13 +32,15 @@ namespace HotlineHyrule.Entities.EnemyStates
         public override void UpdateState()
         {
             base.UpdateState();
-            
+
+#if UNITY_EDITOR
             Debug.DrawLine(transform.position, LastSeenPosition, Color.yellow);
+#endif
         }
 
         public override void FixedUpdateState()
         {
-            Rigidbody.velocity = PathfindingComponent.CurrentDirection * followSpeed;
+            EnemyComponent.SetVelocity(PathfindingComponent.CurrentDirection * moveSpeed);
             if (Rigidbody.velocity != Vector2.zero) transform.rotation = EnemyComponent.WalkRotation;
 
             if (EnemyComponent.IsPlayerAttackable)
