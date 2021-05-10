@@ -12,6 +12,8 @@ namespace HotlineHyrule.Entities
         /// How much the health value was changed by.
         /// </summary>
         public int HealthDifference { get; }
+        public bool IsDamage => HealthDifference < 0;
+        public bool IsKilled => NewHealth <= 0;
 
         public HealthEventArgs(int newHealth, int healthDifference) =>
             (NewHealth, HealthDifference) = (newHealth, healthDifference);

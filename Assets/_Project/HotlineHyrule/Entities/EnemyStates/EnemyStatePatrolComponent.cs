@@ -13,27 +13,34 @@ namespace HotlineHyrule.Entities.EnemyStates
         /// </summary>
         [SerializeField] float moveSpeed;
 
-        public override void Setup()
+        public override void EnterState()
         {
-            base.Setup();
+            base.EnterState();
 
             if (Animator) Animator.SetBool("isMoving", true);
         }
 
-        public override void Exit()
+        public override void ExitState()
         {
-            base.Exit();
+            base.ExitState();
             
             Rigidbody.velocity = Vector2.zero;
         }
 
-        public override void FixedStateUpdate()
+        public override void StateOnCollisionEnter2D(Collision2D other)
         {
-            base.FixedStateUpdate();
+            if (!other.gameObject.layer.IsEnemy()) return;
+
+            transform.Rotate(Vector3.forward, 90f);
+        }
+
+        public override void StateFixedUpdate()
+        {
+            base.StateFixedUpdate();
             
             Rigidbody.velocity = transform.up * moveSpeed;
 
-            if (EnemyComponent.IsPlayerVisible)
+            if (EnemyComponent.IsPlayerFollowable)
             {
                 if (EnemyComponent.FollowState)
                 {
@@ -41,21 +48,21 @@ namespace HotlineHyrule.Entities.EnemyStates
                 }
             }
 
-            if (EnemyComponent.HasWallAbove)
+            if (EnemyComponent.IsWallAbove)
             {
-                if (EnemyComponent.HasWallLeft &! EnemyComponent.HasWallRight)
+                if (EnemyComponent.IsWallLeft &! EnemyComponent.IsWallRight)
                 {
                     transform.eulerAngles += Vector3.forward * -90f;
                     return;
                 }
 
-                if (EnemyComponent.HasWallRight &! EnemyComponent.HasWallLeft)
+                if (EnemyComponent.IsWallRight &! EnemyComponent.IsWallLeft)
                 {
                     transform.eulerAngles += Vector3.forward * 90f;
                     return;
                 }
 
-                if (EnemyComponent.HasWallLeft && EnemyComponent.HasWallRight)
+                if (EnemyComponent.IsWallLeft && EnemyComponent.IsWallRight)
                 {
                     transform.eulerAngles += Vector3.forward * 180f;
                 }

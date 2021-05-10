@@ -10,5 +10,7 @@ namespace HotlineHyrule
         public const int ENEMY_PROJECTILE = 11;
 
         public static bool IsWall(this int layer) => layer == WALL;
+        public static bool IsEnemy(this int layer) => layer == ENEMY;
+        public static bool IsPlayer(this int layer) => layer == PLAYER;
     }
 }

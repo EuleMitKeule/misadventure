@@ -34,6 +34,11 @@ namespace HotlineHyrule.Extensions
             return inside;
         }
 
+        public static Vector2 To(this Vector2 from, Vector2 to) => to - from;
+
+        public static Vector2 DirectionTo(this Vector2 from, Vector2 to) => (to - from).normalized;
+        public static float DistanceTo(this Vector2 from, Vector2 to) => (to - from).magnitude;
+
         public static bool ContainsPolygon(this Vector2[] polygon, Vector2[] otherPolygon) =>
             otherPolygon.All(polygon.ContainsPoint);
     }

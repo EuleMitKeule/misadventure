@@ -15,62 +15,53 @@ namespace HotlineHyrule.Entities
     public class EnemyComponent : MonoBehaviour
     {
         /// <summary>
-        /// Struct that combines given Item data with a drop rate
-        /// </summary>
-        [Serializable]
-        struct ItemDrop
-        {
-            /// <summary>
-            /// The Item data that shall be dropped
-            /// </summary>
-            public ItemData data;
-            /// <summary>
-            /// The likelihood to drop the item
-            /// </summary>
-            [Range(0f, 1f)] public float dropRate;
-        }
-        
-        /// <summary>
         /// The enemy's respawn point.
         /// </summary>
+        [Header("General")]
         [SerializeField] public Vector2Int respawnPoint;
         /// <summary>
-        /// The enemy's current state
-        /// </summary>
-        [SerializeField] public EnemyStateBaseComponent state;
-        [SerializeField] float wallCheckDistance;
-        [SerializeField] LayerMask wallMask;
-        [SerializeField] public Collider2D sightRangeCollider;
-        /// <summary>
-        /// List of items that can be dropped by a given chance when the enemy is destroyed
+        /// List of items that can be dropped by a given chance when the enemy is destroyed.
         /// </summary>
         [SerializeField] List<ItemDrop> itemDrops;
+
+        /// <summary>
+        /// The enemy's current state.
+        /// </summary>
+        [Header("AI")]
+        [SerializeField] public EnemyStateBaseComponent state;
+        [SerializeField] LayerMask wallMask;
+        [SerializeField] float wallCheckDistance;
         [SerializeField] float attackRange;
         [SerializeField] float followRange;
         [SerializeField] float followAngle;
+
+        [Header("Effects")]
         [SerializeField] GameObject bloodParticleSystem;
 
-        public float WalkAngle => Vector3.SignedAngle(Vector3.up, Rigidbody.velocity, Vector3.forward);
-        public Quaternion WalkRotation => Quaternion.Euler(0f, 0f, WalkAngle);
-        public float FollowAngle => Vector3.SignedAngle(Vector3.up, PlayerDirection, Vector3.forward);
-        public Quaternion FollowRotation => Quaternion.Euler(0f, 0f, FollowAngle);
         public Vector3 PlayerPosition => Locator.PlayerComponent.transform.position;
-        public Vector3 PlayerDirection => (PlayerPosition - transform.position).normalized;
-        public bool IsPlayerInFollowRange => (transform.position - PlayerPosition).magnitude <= followRange;
-        public bool IsPlayerInAttackRange => (transform.position - PlayerPosition).magnitude <= attackRange;
-        public float PlayerAngle => Vector3.SignedAngle(transform.up, PlayerDirection, Vector3.forward);
-        public bool IsPlayerInAngle => Mathf.Abs(PlayerAngle) < followAngle;
-        public bool IsPlayerBehindWall =>
+        public Vector3 PlayerDirection => transform.position.DirectionTo(PlayerPosition);
+
+        float WalkAngle => Vector3.SignedAngle(Vector3.up, Rigidbody.velocity, Vector3.forward);
+        float FollowAngle => Vector3.SignedAngle(Vector3.up, PlayerDirection, Vector3.forward);
+        float PlayerAngle => Vector3.SignedAngle(transform.up, PlayerDirection, Vector3.forward);
+        public Quaternion WalkRotation => Quaternion.Euler(0f, 0f, WalkAngle);
+        public Quaternion FollowRotation => Quaternion.Euler(0f, 0f, FollowAngle);
+
+        bool IsPlayerInAngle => Mathf.Abs(PlayerAngle) < followAngle;
+        bool IsPlayerInFollowRange => transform.position.DistanceTo(PlayerPosition) <= followRange;
+        bool IsPlayerInAttackRange => transform.position.DistanceTo(PlayerPosition) <= attackRange;
+        public bool IsPlayerFollowable => IsPlayerInFollowRange && IsPlayerInAngle && IsPlayerVisible;
+        public bool IsPlayerAttackable => IsPlayerInAttackRange && IsPlayerInAngle && IsPlayerVisible;
+
+        bool IsPlayerVisible =>
             Physics2D.Raycast(
                 transform.position,
                 PlayerDirection,
                 followRange,
-                1 << PhysicsLayer.WALL | 1 << PhysicsLayer.PLAYER
-            ).collider.gameObject != Locator.PlayerComponent.gameObject;
-        public bool IsPlayerVisible => IsPlayerInFollowRange && IsPlayerInAngle && !IsPlayerBehindWall;
-        public bool IsPlayerAttackable => IsPlayerInAttackRange && IsPlayerInAngle && !IsPlayerBehindWall;
+                wallMask | 1 << PhysicsLayer.PLAYER
+            ).transform.gameObject.layer.IsPlayer();
 
-        public bool HasWallLeft =>
+        public bool IsWallLeft =>
             Physics2D.BoxCast(
                 transform.position,
                 Collider.bounds.size,
@@ -79,7 +70,7 @@ namespace HotlineHyrule.Entities
                 wallCheckDistance,
                 wallMask
             );
-        public bool HasWallRight =>
+        public bool IsWallRight =>
             Physics2D.BoxCast(
                 transform.position,
                 Collider.bounds.size,
@@ -88,7 +79,7 @@ namespace HotlineHyrule.Entities
                 wallCheckDistance,
                 wallMask
             );
-        public bool HasWallAbove =>
+        public bool IsWallAbove =>
             Physics2D.BoxCast(
                 transform.position,
                 Collider.bounds.size,
@@ -101,6 +92,7 @@ namespace HotlineHyrule.Entities
         Rigidbody2D Rigidbody { get; set; }
         Collider2D Collider { get; set; }
         HealthComponent HealthComponent { get; set; }
+
         public EnemyStateBaseComponent PatrolState { get; private set; }
         public EnemyStateBaseComponent SearchState { get; private set; }
         public EnemyStateBaseComponent TurnAroundState { get; private set; }
@@ -130,14 +122,16 @@ namespace HotlineHyrule.Entities
 
         void FixedUpdate()
         {
-            if (state) state.FixedStateUpdate();
+            if (state) state.StateFixedUpdate();
         }
 
         void Update()
         {
             if (state) state.StateUpdate();
-            
-            if (IsPlayerVisible) Debug.DrawLine(transform.position, PlayerPosition, IsPlayerAttackable ? Color.green : Color.red);
+
+#if UNITY_EDITOR
+            if (IsPlayerFollowable) Debug.DrawLine(transform.position, PlayerPosition, IsPlayerAttackable ? Color.green : Color.red);
+#endif
         }
 
         /// <summary>
@@ -148,50 +142,36 @@ namespace HotlineHyrule.Entities
         {
             if (!newState) return;
             if (state && newState.priority < state.priority) return;
-            if (state) state.Exit();
+            if (state) state.ExitState();
+
             state = newState;
-            state.Setup();
+            state.EnterState();
         }
 
         void OnHealthChanged(object sender, HealthEventArgs e)
         {
-            if (e.HealthDifference < 0)
+            if (e.IsDamage)
             {
                 if (bloodParticleSystem) Instantiate(bloodParticleSystem, transform.position, Quaternion.identity);
             }
-            
-            if (e.NewHealth <= 0) ChangeState(DyingState);
-        }
 
-        void OnTriggerStay2D(Collider2D other)
-        {
-            // Check if target is Player and if there is no wall in the way
-            var dir = other.transform.position - transform.position;
-            if (other.gameObject.layer != LayerMask.NameToLayer("player")
-             || Physics2D.Raycast(transform.position, dir, dir.magnitude, wallMask)) return;
-            
-            // Look at player
-            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            
-            state.OnLookingAtPlayer();
+            if (e.IsKilled)
+            {
+                ChangeState(DyingState);
+
+                foreach (var item in itemDrops)
+                {
+                    if (Random.value <= item.dropRate)
+                    {
+                        Instantiate(item.data.itemPrefab, transform.position, Quaternion.identity);
+                    }
+                }
+            }
         }
 
         void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.layer != LayerMask.NameToLayer("enemy")) return;
-            transform.Rotate(Vector3.forward, 90f);
-        }
-
-        void OnDestroy()
-        {
-            foreach (var item in itemDrops)
-            {
-                if (Random.value <= item.dropRate)
-                { 
-                    Instantiate(item.data.itemPrefab, transform.position, Quaternion.identity);
-                }
-            }
+            if (state) state.StateOnCollisionEnter2D(other);
         }
         
 #if UNITY_EDITOR

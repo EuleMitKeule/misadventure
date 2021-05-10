@@ -9,30 +9,30 @@ namespace HotlineHyrule.Entities.EnemyStates
 
         Coroutine TurnAroundCoroutine { get; set; }
 
-        public override void Setup()
+        public override void EnterState()
         {
-            base.Setup();
+            base.EnterState();
             
             if (Animator) Animator.SetBool("isMoving", false);
 
             StartTurnAroundRoutine();
         }
 
-        public override void Exit()
+        public override void ExitState()
         {
-            base.Exit();
+            base.ExitState();
 
             StopTurnAroundCoroutine();
         }
 
-        public override void FixedStateUpdate()
+        public override void StateFixedUpdate()
         {
-            base.FixedStateUpdate();
+            base.StateFixedUpdate();
             
             Rigidbody.velocity = Vector2.zero;
             
             if (EnemyComponent.IsPlayerAttackable) EnemyComponent.ChangeState(EnemyComponent.AttackState);
-            if (EnemyComponent.IsPlayerVisible) EnemyComponent.ChangeState(EnemyComponent.FollowState);
+            if (EnemyComponent.IsPlayerFollowable) EnemyComponent.ChangeState(EnemyComponent.FollowState);
         }
 
         void StartTurnAroundRoutine()

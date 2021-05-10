@@ -5,9 +5,9 @@ namespace HotlineHyrule.Entities.EnemyStates
 
     public class EnemyStateDyingComponent : EnemyStateBaseComponent
     {
-        public override void Setup()
+        public override void EnterState()
         {
-            base.Setup();
+            base.EnterState();
 
             Rigidbody.simulated = false;
 

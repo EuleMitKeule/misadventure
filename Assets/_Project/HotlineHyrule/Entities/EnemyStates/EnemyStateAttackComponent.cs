@@ -7,25 +7,25 @@ namespace HotlineHyrule.Entities.EnemyStates
     {
         Coroutine AttackCoroutine { get; set; }
 
-        public override void Setup()
+        public override void EnterState()
         {
-            base.Setup();
+            base.EnterState();
             
             if (Animator) Animator.SetBool("isMoving", false);
 
             StartAttackRoutine();
         }
 
-        public override void Exit()
+        public override void ExitState()
         {
-            base.Exit();
+            base.ExitState();
 
             StopAttackRoutine();
         }
 
-        public override void FixedStateUpdate()
+        public override void StateFixedUpdate()
         {
-            base.FixedStateUpdate();
+            base.StateFixedUpdate();
 
             Rigidbody.velocity = Vector2.zero;
             transform.rotation = EnemyComponent.FollowRotation;
@@ -33,7 +33,8 @@ namespace HotlineHyrule.Entities.EnemyStates
             if (!EnemyComponent.IsPlayerAttackable)
             {
                 StopAttackRoutine();
-                if (EnemyComponent.IsPlayerVisible)
+
+                if (EnemyComponent.IsPlayerFollowable)
                 {
                     EnemyComponent.ChangeState(EnemyComponent.FollowState);
                 }
@@ -44,10 +45,7 @@ namespace HotlineHyrule.Entities.EnemyStates
             }
         }
 
-        void StartAttackRoutine()
-        {
-            AttackCoroutine ??= StartCoroutine(AttackRoutine());
-        }
+        void StartAttackRoutine() => AttackCoroutine ??= StartCoroutine(AttackRoutine());
 
         void StopAttackRoutine()
         {
@@ -68,7 +66,6 @@ namespace HotlineHyrule.Entities.EnemyStates
                 }
 
                 yield return new WaitForSeconds(WeaponComponent.AttackDelay);
-
             }
         }
     }

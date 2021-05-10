@@ -9,9 +9,9 @@ namespace HotlineHyrule.Entities.EnemyStates
 
         public Vector3 LastSeenPosition { get; set; }
 
-        public override void Setup()
+        public override void EnterState()
         {
-            base.Setup();
+            base.EnterState();
             
             if (Animator) Animator.SetBool("isMoving", true);
 
@@ -21,9 +21,9 @@ namespace HotlineHyrule.Entities.EnemyStates
             PathfindingComponent.DestinationReached += OnDestinationReached;
         }
 
-        public override void Exit()
+        public override void ExitState()
         {
-            base.Exit();
+            base.ExitState();
             
             PathfindingComponent.ClearDestination();
         }
@@ -35,7 +35,7 @@ namespace HotlineHyrule.Entities.EnemyStates
             Debug.DrawLine(transform.position, LastSeenPosition, Color.yellow);
         }
 
-        public override void FixedStateUpdate()
+        public override void StateFixedUpdate()
         {
             Rigidbody.velocity = PathfindingComponent.CurrentDirection * followSpeed;
             if (Rigidbody.velocity != Vector2.zero) transform.rotation = EnemyComponent.WalkRotation;
@@ -45,7 +45,7 @@ namespace HotlineHyrule.Entities.EnemyStates
                 EnemyComponent.ChangeState(EnemyComponent.AttackState);
             }
 
-            if (EnemyComponent.IsPlayerVisible)
+            if (EnemyComponent.IsPlayerFollowable)
             {
                 EnemyComponent.ChangeState(EnemyComponent.FollowState);
             }

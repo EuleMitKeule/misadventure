@@ -21,16 +21,16 @@ namespace HotlineHyrule.Entities.EnemyStates
         // float LookAngle => Mathf.Atan2(LookDirection.y, LookDirection.x) * Mathf.Rad2Deg + 90f;
         // Quaternion LookRotation => Quaternion.Euler(0f, 0f, LookAngle);
 
-        public override void Setup()
+        public override void EnterState()
         {
-            base.Setup();
+            base.EnterState();
             
             if (Animator) Animator.SetBool("isMoving", true);
         }
         
-        public override void FixedStateUpdate()
+        public override void StateFixedUpdate()
         {
-            base.FixedStateUpdate();
+            base.StateFixedUpdate();
 
             Rigidbody.velocity = EnemyComponent.PlayerDirection * moveSpeed;
             transform.rotation = EnemyComponent.FollowRotation;
@@ -40,7 +40,7 @@ namespace HotlineHyrule.Entities.EnemyStates
                 EnemyComponent.ChangeState(EnemyComponent.AttackState);
             }
 
-            if (!EnemyComponent.IsPlayerVisible)
+            if (!EnemyComponent.IsPlayerFollowable)
             {
                 EnemyComponent.ChangeState(EnemyComponent.SearchState);
             }
