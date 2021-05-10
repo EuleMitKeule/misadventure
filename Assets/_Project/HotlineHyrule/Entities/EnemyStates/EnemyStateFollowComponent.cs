@@ -1,5 +1,4 @@
-﻿using HotlineHyrule.Entities.EnemyStates.HelperComponents;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace HotlineHyrule.Entities.EnemyStates
 {
