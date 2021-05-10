@@ -38,7 +38,7 @@ namespace HotlineHyrule.Entities
         /// </summary>
         [SerializeField] float wallCheckDistance;
         /// <summary>
-        /// Total angle of the vision cone.
+        /// Total angle of the vision arc.
         /// </summary>
         [SerializeField] float followAngle;
         /// <summary>
@@ -56,21 +56,60 @@ namespace HotlineHyrule.Entities
         [Header("Effects")]
         [SerializeField] GameObject damageParticleSystemPrefab;
 
+        /// <summary>
+        /// The player's current position.
+        /// </summary>
         public Vector3 PlayerPosition => Locator.PlayerComponent.transform.position;
+        /// <summary>
+        /// The direction vector to the player.
+        /// </summary>
         public Vector3 PlayerDirection => transform.position.DirectionTo(PlayerPosition);
 
-        float WalkAngle => Vector3.SignedAngle(Vector3.up, Rigidbody.velocity, Vector3.forward);
+        /// <summary>
+        /// The absolute angle of the current movement direction.
+        /// </summary>
+        float MovementAngle => Vector3.SignedAngle(Vector3.up, Rigidbody.velocity, Vector3.forward);
+        /// <summary>
+        /// The absolute angle of the current player direction.
+        /// </summary>
         float FollowAngle => Vector3.SignedAngle(Vector3.up, PlayerDirection, Vector3.forward);
+        /// <summary>
+        /// The relative angle of the current player direction.
+        /// </summary>
         float PlayerAngle => Vector3.SignedAngle(transform.up, PlayerDirection, Vector3.forward);
-        public Quaternion WalkRotation => Quaternion.Euler(0f, 0f, WalkAngle);
+        /// <summary>
+        /// The absolute rotation towards the current movement angle.
+        /// </summary>
+        public Quaternion WalkRotation => Quaternion.Euler(0f, 0f, MovementAngle);
+        /// <summary>
+        /// The absolute rotation towards the current player direction.
+        /// </summary>
         public Quaternion FollowRotation => Quaternion.Euler(0f, 0f, FollowAngle);
 
+        /// <summary>
+        /// Whether the player angle is inside the vision arc.
+        /// </summary>
         bool IsPlayerInAngle => Mathf.Abs(PlayerAngle) < followAngle;
+        /// <summary>
+        /// Whether the distance to the player is inside the follow range.
+        /// </summary>
         bool IsPlayerInFollowRange => transform.position.DistanceTo(PlayerPosition) <= followRange;
+        /// /// <summary>
+        /// Whether the distance to the player is inside the attack range.
+        /// </summary>
         bool IsPlayerInAttackRange => transform.position.DistanceTo(PlayerPosition) <= attackRange;
+        /// <summary>
+        /// Whether the enemy is currently able to follow the player.
+        /// </summary>
         public bool IsPlayerFollowable => IsPlayerInFollowRange && IsPlayerInAngle && IsPlayerVisible;
+        /// <summary>
+        /// Whether the enemy is currently able to attack the player.
+        /// </summary>
         public bool IsPlayerAttackable => IsPlayerInAttackRange && IsPlayerInAngle && IsPlayerVisible;
 
+        /// <summary>
+        /// Whether the player is in front of any walls.
+        /// </summary>
         bool IsPlayerVisible =>
             Physics2D.Raycast(
                 transform.position,
@@ -78,7 +117,9 @@ namespace HotlineHyrule.Entities
                 followRange,
                 wallMask | 1 << PhysicsLayer.PLAYER
             ).transform.gameObject.layer.IsPlayer();
-
+        /// <summary>
+        /// Whether the enemy has a wall to its left.
+        /// </summary>
         public bool IsWallLeft =>
             Physics2D.BoxCast(
                 transform.position,
@@ -88,6 +129,9 @@ namespace HotlineHyrule.Entities
                 wallCheckDistance,
                 wallMask
             );
+        /// <summary>
+        /// Whether the enemy has a wall to its right.
+        /// </summary>
         public bool IsWallRight =>
             Physics2D.BoxCast(
                 transform.position,
@@ -97,6 +141,9 @@ namespace HotlineHyrule.Entities
                 wallCheckDistance,
                 wallMask
             );
+        /// <summary>
+        /// Whether the enemy has a wall above.
+        /// </summary>
         public bool IsWallAbove =>
             Physics2D.BoxCast(
                 transform.position,
@@ -140,12 +187,12 @@ namespace HotlineHyrule.Entities
 
         void FixedUpdate()
         {
-            if (state) state.StateFixedUpdate();
+            if (state) state.FixedUpdateState();
         }
 
         void Update()
         {
-            if (state) state.StateUpdate();
+            if (state) state.UpdateState();
 
 #if UNITY_EDITOR
             if (IsPlayerFollowable) Debug.DrawLine(transform.position, PlayerPosition, IsPlayerAttackable ? Color.green : Color.red);
@@ -189,7 +236,7 @@ namespace HotlineHyrule.Entities
 
         void OnCollisionEnter2D(Collision2D other)
         {
-            if (state) state.StateOnCollisionEnter2D(other);
+            if (state) state.OnCollisionEnterState(other);
         }
         
 #if UNITY_EDITOR

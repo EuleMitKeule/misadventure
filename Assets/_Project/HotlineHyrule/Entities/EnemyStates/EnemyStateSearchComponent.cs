@@ -28,14 +28,14 @@ namespace HotlineHyrule.Entities.EnemyStates
             PathfindingComponent.ClearDestination();
         }
 
-        public override void StateUpdate()
+        public override void UpdateState()
         {
-            base.StateUpdate();
+            base.UpdateState();
             
             Debug.DrawLine(transform.position, LastSeenPosition, Color.yellow);
         }
 
-        public override void StateFixedUpdate()
+        public override void FixedUpdateState()
         {
             Rigidbody.velocity = PathfindingComponent.CurrentDirection * followSpeed;
             if (Rigidbody.velocity != Vector2.zero) transform.rotation = EnemyComponent.WalkRotation;

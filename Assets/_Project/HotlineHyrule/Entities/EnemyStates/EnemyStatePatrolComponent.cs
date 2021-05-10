@@ -27,16 +27,16 @@ namespace HotlineHyrule.Entities.EnemyStates
             Rigidbody.velocity = Vector2.zero;
         }
 
-        public override void StateOnCollisionEnter2D(Collision2D other)
+        public override void OnCollisionEnterState(Collision2D other)
         {
             if (!other.gameObject.layer.IsEnemy()) return;
 
             transform.Rotate(Vector3.forward, 90f);
         }
 
-        public override void StateFixedUpdate()
+        public override void FixedUpdateState()
         {
-            base.StateFixedUpdate();
+            base.FixedUpdateState();
             
             Rigidbody.velocity = transform.up * moveSpeed;
 

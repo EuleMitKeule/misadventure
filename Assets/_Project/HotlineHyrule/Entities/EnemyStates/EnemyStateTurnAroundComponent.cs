@@ -25,9 +25,9 @@ namespace HotlineHyrule.Entities.EnemyStates
             StopTurnAroundCoroutine();
         }
 
-        public override void StateFixedUpdate()
+        public override void FixedUpdateState()
         {
-            base.StateFixedUpdate();
+            base.FixedUpdateState();
             
             Rigidbody.velocity = Vector2.zero;
             

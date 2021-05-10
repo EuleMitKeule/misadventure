@@ -28,9 +28,9 @@ namespace HotlineHyrule.Entities.EnemyStates
             if (Animator) Animator.SetBool("isMoving", true);
         }
         
-        public override void StateFixedUpdate()
+        public override void FixedUpdateState()
         {
-            base.StateFixedUpdate();
+            base.FixedUpdateState();
 
             Rigidbody.velocity = EnemyComponent.PlayerDirection * moveSpeed;
             transform.rotation = EnemyComponent.FollowRotation;
