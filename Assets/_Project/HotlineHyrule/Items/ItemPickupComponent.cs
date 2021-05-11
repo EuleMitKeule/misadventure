@@ -65,6 +65,10 @@ namespace HotlineHyrule.Items
             ConsumeItem(closestItemComponent);
         }
 
+        /// <summary>
+        /// Applies the item's effects and destroys the item object.
+        /// </summary>
+        /// <param name="itemComponent"></param>
         void ConsumeItem(ItemComponent itemComponent)
         {
             var items = itemComponent.itemDatas;
@@ -98,6 +102,10 @@ namespace HotlineHyrule.Items
             Destroy(itemComponent.gameObject);
         }
 
+        /// <summary>
+        /// Spawns the item's particle systems.
+        /// </summary>
+        /// <param name="consumableItemData"></param>
         void SpawnParticleSystem(ConsumableItemData consumableItemData)
         {
             if (!consumableItemData.consumeParticleSystemPrefab) return;
