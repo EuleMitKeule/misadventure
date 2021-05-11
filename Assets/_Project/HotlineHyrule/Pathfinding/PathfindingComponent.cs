@@ -8,17 +8,49 @@ namespace HotlineHyrule.Pathfinding
 {
     public class PathfindingComponent : MonoBehaviour
     {
-        [SerializeField] public bool hasWaypoint;
-        [SerializeField] public Vector3Int currentWaypoint;
-        [SerializeField] public List<Vector3Int> currentPath;
+        /// <summary>
+        /// The distance to cell center points that needs to be undershot for the cell to count as reached.
+        /// </summary>
         [SerializeField] public float travelThreshold;
 
+        /// <summary>
+        /// Whether the entity currently has a waypoint to be reached.
+        /// </summary>
+        public bool HasWaypoint { get; private set; }
+        /// <summary>
+        /// The cell position the entity is currently located at.
+        /// </summary>
         Vector3Int CurrentCell { get; set; }
-        public Vector3 CurrentDirection => hasWaypoint ? (currentWaypoint.ToWorld() - transform.position).normalized : Vector3.zero;
-        bool IsAtWaypoint => (transform.position - currentWaypoint.ToWorld()).magnitude <= travelThreshold;
+        /// <summary>
+        /// The next cell position that needs to be reached.
+        /// </summary>
+        Vector3Int CurrentWaypoint { get; set; }
+        /// <summary>
+        /// The path that is currently processed by the entity.
+        /// </summary>
+        List<Vector3Int> CurrentPath { get; set; }
 
+        /// <summary>
+        /// The direction vector towards the current waypoint.
+        /// </summary>
+        public Vector3 CurrentDirection =>
+            HasWaypoint ? (CurrentWaypoint.ToWorld() - transform.position).normalized : Vector3.zero;
+        /// <summary>
+        /// Whether the entity is currently located at its next waypoint.
+        /// </summary>
+        bool IsAtWaypoint => (transform.position - CurrentWaypoint.ToWorld()).magnitude <= travelThreshold;
+
+        /// <summary>
+        /// Invoked when a new destination is assigned.
+        /// </summary>
         public event EventHandler<CellEventArgs> DestinationChanged;
+        /// <summary>
+        /// Invoked when the current destination is reached.
+        /// </summary>
         public event EventHandler<CellEventArgs> DestinationReached;
+        /// <summary>
+        /// Invoked when the entity's cell position has changed.
+        /// </summary>
         public event EventHandler<CellEventArgs> CellPositionChanged;
 
         void Awake()
@@ -38,20 +70,20 @@ namespace HotlineHyrule.Pathfinding
 
         void OnCellPositionChanged(object sender, CellEventArgs e)
         {
-            if (!hasWaypoint) return;
+            if (!HasWaypoint) return;
             if (!IsAtWaypoint) return;
 
-            if (currentPath.Count == 0)
+            if (CurrentPath.Count == 0)
             {
-                hasWaypoint = false;
+                HasWaypoint = false;
 
-                DestinationReached?.Invoke(this, new CellEventArgs(currentWaypoint));
+                DestinationReached?.Invoke(this, new CellEventArgs(CurrentWaypoint));
 
                 return;
             }
 
-            currentWaypoint = currentPath[0];
-            currentPath.RemoveAt(0);
+            CurrentWaypoint = CurrentPath[0];
+            CurrentPath.RemoveAt(0);
         }
 
         /// <summary>
@@ -60,26 +92,29 @@ namespace HotlineHyrule.Pathfinding
         /// <param name="destinationCell">The path's destination cell position</param>
         public void SetDestination(Vector3Int destinationCell)
         {
-            currentPath = Pathfinder.FindPath(CurrentCell, destinationCell);
+            CurrentPath = Pathfinder.FindPath(CurrentCell, destinationCell);
 
-            if (currentPath.Count == 0)
+            if (CurrentPath.Count == 0)
             {
                 DestinationReached?.Invoke(this, new CellEventArgs(destinationCell));
                 return;
             }
 
-            currentWaypoint = currentPath[0];
-            currentPath.RemoveAt(0);
-            hasWaypoint = true;
+            CurrentWaypoint = CurrentPath[0];
+            CurrentPath.RemoveAt(0);
+            HasWaypoint = true;
 
             OnCellPositionChanged(this, new CellEventArgs(CurrentCell));
 
             DestinationChanged?.Invoke(this, new CellEventArgs(destinationCell));
         }
 
+        /// <summary>
+        /// Stops the current path traversal process.
+        /// </summary>
         public void ClearDestination()
         {
-            hasWaypoint = false;
+            HasWaypoint = false;
         }
         
         /// <summary>

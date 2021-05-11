@@ -5,7 +5,10 @@ namespace HotlineHyrule.Pathfinding
 {
     public class CellEventArgs : EventArgs
     {
-        public Vector3Int CellPosition { get; set; }
+        /// <summary>
+        /// The position in cell space.
+        /// </summary>
+        public Vector3Int CellPosition { get; }
 
         public CellEventArgs(Vector3Int cellPosition)
         {
