@@ -41,7 +41,7 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// The current mouse position in world space.
         /// </summary>
-        Vector2 MousePosition => CameraMain.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector2 MousePosition => MainCamera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         /// <summary>
         /// The direction from player to look target.
         /// </summary>
@@ -87,7 +87,7 @@ namespace HotlineHyrule.Entities
         Rigidbody2D Rigidbody { get; set; }
         HealthComponent HealthComponent { get; set; }
         WeaponComponent WeaponComponent { get; set; }
-        Camera CameraMain { get; set; }
+        Camera MainCamera { get; set; }
 
         void Awake()
         {
@@ -97,15 +97,11 @@ namespace HotlineHyrule.Entities
             if (!legsAnimator) legsAnimator = transform.Find("legs").GetComponent<Animator>();
 
             Locator.PlayerComponent = this;
+            MainCamera = Camera.main;
 
             HealthComponent.HealthChanged += OnHealthChanged; 
             
             ResetBuffs();
-        }
-
-        void Start()
-        {
-            CameraMain = Camera.main;
 
             walkAction.Enable();
         }
@@ -138,17 +134,25 @@ namespace HotlineHyrule.Entities
         /// </summary>
         void HandleAnimation()
         {
-            legsAnimator.SetBool("isMoving", IsMoving);
+            var isInMovingState = legsAnimator.GetBool("isMoving");
+            if (isInMovingState != IsMoving) legsAnimator.SetBool("isMoving", IsMoving);
         }
 
+        /// <summary>
+        /// Applies effects of a given movement item.
+        /// </summary>
+        /// <param name="movementItem">The item to consume.</param>
         public void Consume(MovementItemData movementItem)
         {
             MovementItemFactor = movementItem.movementFactor;
             Invoke(nameof(ResetBuffs), movementItem.duration);
         }
 
+        /// <summary>
+        /// Resets any present item effects.
+        /// </summary>
         void ResetBuffs() => (MovementAttackFactor, MovementItemFactor) = (1f, 1f);
-        
+
         void OnHealthChanged(object sender, HealthEventArgs e)
         {
             if (e.HealthDifference >= 0) return;
