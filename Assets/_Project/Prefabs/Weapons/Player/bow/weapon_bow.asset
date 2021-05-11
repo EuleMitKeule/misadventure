@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: weapon_bow
   m_EditorClassIdentifier: 
   itemName: 
+  itemPrefab: {fileID: 87149508903852376, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
   movementFactor: 1
   slowTimeWindow: 0
   attackRate: 2

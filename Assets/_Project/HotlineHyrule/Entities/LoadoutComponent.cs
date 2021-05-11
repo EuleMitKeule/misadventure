@@ -11,13 +11,36 @@ namespace HotlineHyrule.Entities
 {
     public class LoadoutComponent : MonoBehaviour
     {
+        /// <summary>
+        /// The weapon representing not having a weapon equipped.
+        /// </summary>
+        [Header("General")]
         [SerializeField] WeaponData defaultWeapon;
+        /// <summary>
+        /// List of slots in which weapons can be equipped.
+        /// </summary>
         [SerializeField] List<LoadoutSlot> loadoutSlots;
+        /// <summary>
+        /// The input action for changing the selected weapon slot.
+        /// </summary>
+        [Header("Input")]
         [SerializeField] InputAction changeWeaponAction;
-        
-        public LoadoutSlot CurrentLoadoutSlot { get; set; }
+
+        /// <summary>
+        /// The currently selected weapon slot.
+        /// </summary>
+        public LoadoutSlot CurrentLoadoutSlot { get; private set; }
+        /// <summary>
+        /// The index of the currently selected weapon slot.
+        /// </summary>
         int CurrentLoadoutSlotIndex => loadoutSlots.IndexOf(CurrentLoadoutSlot);
+        /// <summary>
+        /// The index of the next weapon slot.
+        /// </summary>
         int NextLoadoutSlotIndex => (CurrentLoadoutSlotIndex + 1) % loadoutSlots.Count;
+        /// <summary>
+        /// The index of the previous weapon slot.
+        /// </summary>
         int PreviousLoadoutSlotIndex => (CurrentLoadoutSlotIndex + loadoutSlots.Count - 1) % loadoutSlots.Count;
             
         WeaponComponent WeaponComponent { get; set; }
@@ -46,18 +69,26 @@ namespace HotlineHyrule.Entities
             changeWeaponAction.Enable();
         }
 
+        /// <summary>
+        /// Changes the currently equipped weapon slot.
+        /// </summary>
+        /// <param name="slotIndex">The index of the slot to change to.</param>
         void ChangeSlot(int slotIndex)
         {
             CurrentLoadoutSlot = loadoutSlots[slotIndex];
             Apply();
         }
 
+        /// <summary>
+        /// Equips the weapon inside the selected loadout slot.
+        /// </summary>
         void Apply() => WeaponComponent.SetWeapon(CurrentLoadoutSlot.weaponData);
 
         void OnAttackStarted(object sender, EventArgs e)
         {
             if (!CurrentLoadoutSlot.weaponData) return;
             if (CurrentLoadoutSlot.weaponData.hasInfiniteCharges) return;
+
             CurrentLoadoutSlot.weaponCharges -= 1;
         }
 
@@ -65,6 +96,7 @@ namespace HotlineHyrule.Entities
         {
             if (!CurrentLoadoutSlot.weaponData) return;
             if (CurrentLoadoutSlot.weaponData.hasInfiniteCharges) return;
+
             if (CurrentLoadoutSlot.weaponCharges <= 0)
             {
                 CurrentLoadoutSlot.weaponData = defaultWeapon;
@@ -72,16 +104,24 @@ namespace HotlineHyrule.Entities
             }
         }
 
-        public void Equip(WeaponData newWeaponData, DroppedWeaponComponent newDroppedWeaponComponent)
+        /// <summary>
+        /// Equips a weapon to the currently selected weapon slot.
+        /// </summary>
+        /// <param name="newWeaponData">The weapon data to equip.</param>
+        /// <param name="weaponCharges">The number of weapon charges left on the weapon.</param>
+        public void Equip(WeaponData newWeaponData, int weaponCharges)
         {
             DropWeapon();
             
             CurrentLoadoutSlot.weaponData = newWeaponData;
-            CurrentLoadoutSlot.weaponCharges = newDroppedWeaponComponent.weaponCharges;
+            CurrentLoadoutSlot.weaponCharges = weaponCharges;
             
             ChangeSlot(CurrentLoadoutSlotIndex);
         }
 
+        /// <summary>
+        /// Spawns the droppped weapon prefab of the currently equipped weapon.
+        /// </summary>
         public void DropWeapon()
         {
             if (!CurrentLoadoutSlot.weaponData.droppedWeaponPrefab) return;
@@ -93,10 +133,15 @@ namespace HotlineHyrule.Entities
             if (droppedWeaponComponent) droppedWeaponComponent.weaponCharges = CurrentLoadoutSlot.weaponCharges;
         }
 
-        public void Unequip(int slotIndex = -1)
+        /// <summary>
+        /// Unequips the currently selected weapon slot.
+        /// </summary>
+        /// <param name="shouldDropWeapon">Whether the weapon should be dropped.</param>
+        public void Unequip(bool shouldDropWeapon)
         {
-            var isValidIndex = slotIndex >= 0 && slotIndex < loadoutSlots.Count;
-            loadoutSlots[isValidIndex ? slotIndex : CurrentLoadoutSlotIndex].weaponData = defaultWeapon;
+            if (shouldDropWeapon) DropWeapon();
+
+            loadoutSlots[CurrentLoadoutSlotIndex].weaponData = defaultWeapon;
 
             Apply();
         }

@@ -7,7 +7,7 @@ namespace HotlineHyrule.Weapons
     public class MeleeWeaponData : WeaponData
     {
         /// <summary>
-        /// The damage a hit of the weapon deals.
+        /// The damage value to deal to entites on impact.
         /// </summary>
         [SerializeField] public int damage;
     }

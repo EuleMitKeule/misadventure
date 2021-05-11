@@ -94,6 +94,8 @@ namespace HotlineHyruleEditor
             var weaponAnimator = weaponPrefab.AddComponent<Animator>();
             weaponAnimator.runtimeAnimatorController = weaponController;
 
+            weaponPrefab.AddComponent<WeaponAnimationComponent>();
+
             var weaponData = CreateInstance<WeaponData>();
             
             //create weapon data
@@ -146,7 +148,6 @@ namespace HotlineHyruleEditor
                 projectileRigidbody.angularDrag = 0f;
                 projectileRigidbody.gravityScale = 0f;
                 projectileRigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-                projectileRigidbody.interpolation = RigidbodyInterpolation2D.Interpolate;
 
                 projectilePrefab.AddComponent<CapsuleCollider2D>();
 

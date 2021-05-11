@@ -65,6 +65,8 @@ namespace HotlineHyrule.Sound
 
         public void PlaySound(AudioClip clip)
         {
+            if (!clip) return;
+            
             _effectAudioSource.PlayOneShot(clip);
         }
 

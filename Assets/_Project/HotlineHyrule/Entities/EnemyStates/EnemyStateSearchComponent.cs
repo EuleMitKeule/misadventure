@@ -5,13 +5,16 @@ namespace HotlineHyrule.Entities.EnemyStates
 {
     public class EnemyStateSearchComponent : EnemyStateBaseComponent
     {
-        [SerializeField] float followSpeed;
+        /// <summary>
+        /// The movement speed of the enemy while searching.
+        /// </summary>
+        [SerializeField] float moveSpeed;
 
         public Vector3 LastSeenPosition { get; set; }
 
-        public override void Setup()
+        public override void EnterState()
         {
-            base.Setup();
+            base.EnterState();
 
             LastSeenPosition = EnemyComponent.PlayerPosition;
             PathfindingComponent.SetDestination(Locator.LevelComponent.Grid.WorldToCell(LastSeenPosition));
@@ -19,23 +22,25 @@ namespace HotlineHyrule.Entities.EnemyStates
             PathfindingComponent.DestinationReached += OnDestinationReached;
         }
 
-        public override void Exit()
+        public override void ExitState()
         {
-            base.Exit();
+            base.ExitState();
             
             PathfindingComponent.ClearDestination();
         }
 
-        public override void StateUpdate()
+        public override void UpdateState()
         {
-            base.StateUpdate();
-            
+            base.UpdateState();
+
+#if UNITY_EDITOR
             Debug.DrawLine(transform.position, LastSeenPosition, Color.yellow);
+#endif
         }
 
-        public override void FixedStateUpdate()
+        public override void FixedUpdateState()
         {
-            Rigidbody.velocity = PathfindingComponent.CurrentDirection * followSpeed;
+            EnemyComponent.SetVelocity(PathfindingComponent.CurrentDirection * moveSpeed);
             if (Rigidbody.velocity != Vector2.zero) transform.rotation = EnemyComponent.WalkRotation;
 
             if (EnemyComponent.IsPlayerAttackable)
@@ -43,7 +48,7 @@ namespace HotlineHyrule.Entities.EnemyStates
                 EnemyComponent.ChangeState(EnemyComponent.AttackState);
             }
 
-            if (EnemyComponent.IsPlayerVisible)
+            if (EnemyComponent.IsPlayerFollowable)
             {
                 EnemyComponent.ChangeState(EnemyComponent.FollowState);
             }
