@@ -26,6 +26,9 @@ TextureImporter:
   - first:
       213: -7694892459522351488
     second: sprite_tileset_forest_details_7
+  - first:
+      213: 3239675392637630234
+    second: sprite_tileset_forest_details_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -278,6 +281,27 @@ TextureImporter:
       bones: []
       spriteID: 08e965dc310463590800000000000000
       internalID: -7694892459522351488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_forest_details_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a177db5ea93a5fc20800000000000000
+      internalID: 3239675392637630234
       vertices: []
       indices: 
       edges: []
