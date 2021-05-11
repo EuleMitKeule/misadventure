@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 7492512237567023214}
   - component: {fileID: 7492512237567023206}
   - component: {fileID: 7492512237567023204}
+  - component: {fileID: 1769910642343352168}
   - component: {fileID: 7492512237567023210}
   - component: {fileID: 7313200447267734173}
   - component: {fileID: 8249268261262953780}
@@ -68,7 +69,6 @@ GameObject:
   - component: {fileID: 5802242549573311712}
   - component: {fileID: 794638678}
   - component: {fileID: 3469506423157028055}
-  - component: {fileID: 3089981348205039177}
   - component: {fileID: -3355742661877872154}
   - component: {fileID: 3844134658638800442}
   m_Layer: 7
@@ -224,6 +224,19 @@ MonoBehaviour:
   followRange: 15
   attackRange: 10
   damageParticleSystemPrefab: {fileID: 2442639310212140477, guid: bbd2f2170baf96d41814258f53875278, type: 3}
+--- !u!114 &1769910642343352168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7492512237567023215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605c0e77ae88bb9428603f7a4e190712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathParticleSystemPrefab: {fileID: 32106695664497314, guid: 55aef061e5074ee4089868d4090f134f, type: 3}
 --- !u!114 &7492512237567023210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,23 +336,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7492512237567023215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f87f991acc4644c9b70b16fae54585f7, type: 3}
+  m_Script: {fileID: 11500000, guid: cd9d1fec35b7acb46b3150a040910f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 10
---- !u!114 &3089981348205039177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7492512237567023215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bba672451cc4893a236d6461b37be9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deathParticleSystemPrefab: {fileID: 32106695664497314, guid: 55aef061e5074ee4089868d4090f134f, type: 3}
+  priority: 0
+  moveSpeed: 3
 --- !u!114 &-3355742661877872154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,11 +350,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7492512237567023215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65fdb4ec4b9441cdb78784124161e4b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 006b1793f05aab24da0080795e5111d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  moveSpeed: 3
 --- !u!114 &3844134658638800442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,7 +363,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7492512237567023215}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa9efcf869ed43feafc81fc529f20c01, type: 3}
+  m_Script: {fileID: 11500000, guid: b04d054b1a4293b45bdeb499daf89d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
