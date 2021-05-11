@@ -223,7 +223,7 @@ namespace HotlineHyrule.Entities
 
         public void SetVelocity(Vector2 velocity)
         {
-            if (IsInMovementAnim != (velocity == Vector2.zero))
+            if (IsInMovementAnim != (velocity != Vector2.zero))
             {
                 if (Animator) Animator.SetBool("isMoving", velocity != Vector2.zero);
             }
