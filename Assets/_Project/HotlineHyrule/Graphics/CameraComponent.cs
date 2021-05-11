@@ -12,12 +12,25 @@ namespace HotlineHyrule.Graphics
         /// </summary>
         [Range(0, 1)] [SerializeField] float followDamping;
 
-        Transform Transform { get; set; }
+        /// <summary>
+        /// The player's current position.
+        /// </summary>
+        Vector2 TargetPosition => Locator.PlayerComponent.transform.position;
+        /// <summary>
+        /// The next smoothed transition position the camera should apply.
+        /// </summary>
+        Vector2 SmoothedTargetPosition =>
+            Vector2.Lerp(transform.position, TargetPosition, Time.deltaTime * 1 / followDamping);
+        /// <summary>
+        /// The smoothed target position on the camera's plane.
+        /// </summary>
+        Vector3 SmoothedCameraPosition =>
+            new Vector3(SmoothedTargetPosition.x, SmoothedTargetPosition.y, transform.position.z);
+
         Camera Camera { get; set; }
 
         void Awake()
         {
-            Transform = transform;
             Camera = GetComponent<Camera>();
 
             Locator.CameraComponent = this;
@@ -25,11 +38,7 @@ namespace HotlineHyrule.Graphics
 
         void LateUpdate()
         {
-            var targetPosition = (Vector2)Locator.PlayerComponent.transform.position;
-
-            targetPosition = Vector2.Lerp(transform.position, targetPosition, Time.deltaTime * 1 / followDamping);
-
-            Transform.position = new Vector3(targetPosition.x, targetPosition.y, Transform.position.z);
+            transform.position = SmoothedCameraPosition;
         }
     }
 }
