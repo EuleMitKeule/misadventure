@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: weapon_enemy_pine_cone
   m_EditorClassIdentifier: 
   itemName: 
+  itemPrefab: {fileID: 6459073364223741991, guid: a7e79bdda3252584c858ee4129919af8, type: 3}
   movementFactor: 1
   slowTimeWindow: 0
   attackRate: 0.5
