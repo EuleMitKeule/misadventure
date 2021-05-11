@@ -167,19 +167,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnPoint: {x: 0, y: 0}
-  state: {fileID: 0}
-  wallCheckDistance: 0.3
-  wallMask:
-    serializedVersion: 2
-    m_Bits: 512
-  sightRangeCollider: {fileID: 0}
   itemDrops:
   - data: {fileID: 11400000, guid: 3d73b0030c67d364e8b5b56b97ed0986, type: 2}
     dropRate: 0.5
-  attackRange: 11
-  followRange: 15
+  state: {fileID: 0}
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 512
+  wallCheckDistance: 0.3
   followAngle: 60
-  bloodParticleSystem: {fileID: 2442639310212140477, guid: bbd2f2170baf96d41814258f53875278, type: 3}
+  followRange: 15
+  attackRange: 11
+  damageParticleSystemPrefab: {fileID: 2442639310212140477, guid: bbd2f2170baf96d41814258f53875278, type: 3}
 --- !u!114 &2062065906351252788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,9 +205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a9d49be98e72c14490f17dfb2880448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasWaypoint: 0
-  currentWaypoint: {x: 0, y: 0, z: 0}
-  currentPath: []
   travelThreshold: 0.15
 --- !u!114 &2062065906351252795
 MonoBehaviour:
@@ -290,7 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  followSpeed: 3
+  moveSpeed: 0
 --- !u!114 &5637998966262946660
 MonoBehaviour:
   m_ObjectHideFlags: 0
