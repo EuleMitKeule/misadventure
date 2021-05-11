@@ -3,7 +3,7 @@ using UnityEngine;
 namespace HotlineHyrule.Graphics
 {
     [RequireComponent(typeof(ParticleSystem))]
-    public class ParticleSystemComponent : MonoBehaviour
+    public class ParticleSystemAnimationComponent : MonoBehaviour
     {
         ParticleSystem ParticleSystem { get; set; }
 
