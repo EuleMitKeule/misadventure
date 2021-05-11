@@ -5,6 +5,9 @@ namespace HotlineHyrule.Entities
 {
     public class EnemyAnimationComponent : MonoBehaviour
     {
+        /// <summary>
+        /// The particle system to spawn when the enemy dies.
+        /// </summary>
         [SerializeField] GameObject deathParticleSystemPrefab;
 
         public void SpawnDeathParticleSystem()

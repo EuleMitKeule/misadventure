@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: 7492512237567023204}
   - component: {fileID: 7492512237567023210}
   - component: {fileID: 7313200447267734173}
+  - component: {fileID: 8249268261262953780}
   - component: {fileID: 7492512237567023205}
   - component: {fileID: 5802242549573311712}
   - component: {fileID: 794638678}
@@ -70,7 +71,6 @@ GameObject:
   - component: {fileID: 3089981348205039177}
   - component: {fileID: -3355742661877872154}
   - component: {fileID: 3844134658638800442}
-  - component: {fileID: 8249268261262953780}
   m_Layer: 7
   m_Name: enemy_humanoid_base
   m_TagString: Untagged
@@ -214,33 +214,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnPoint: {x: 0, y: 0}
+  itemDrops: []
   state: {fileID: 0}
-  wallCheckDistance: 0.3
   wallMask:
     serializedVersion: 2
     m_Bits: 512
-  sightRangeCollider: {fileID: 0}
-  itemDrops:
-    DefaultKey: {fileID: 0}
-    _Buckets: ffffffffffffffffffffffff
-    _HashCodes: 000000000000000000000000
-    _Next: 000000000000000000000000
-    _Count: 0
-    _Version: 0
-    _FreeList: -1
-    _FreeCount: 0
-    _Keys:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    _Values:
-    - 0
-    - 0
-    - 0
-  attackRange: 10
-  followRange: 15
+  wallCheckDistance: 0.3
   followAngle: 60
-  bloodParticleSystem: {fileID: 2442639310212140477, guid: bbd2f2170baf96d41814258f53875278, type: 3}
+  followRange: 15
+  attackRange: 10
+  damageParticleSystemPrefab: {fileID: 2442639310212140477, guid: bbd2f2170baf96d41814258f53875278, type: 3}
 --- !u!114 &7492512237567023210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,10 +250,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a9d49be98e72c14490f17dfb2880448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasWaypoint: 0
-  currentWaypoint: {x: 0, y: 0, z: 0}
-  currentPath: []
   travelThreshold: 0.15
+--- !u!114 &8249268261262953780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7492512237567023215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc02a9332fd21e4a8d86815c5707eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponOffset: {x: 0, y: 0, z: 0}
+  weaponData: {fileID: 0}
+  attackAction:
+    m_Name: Attack
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 2fd2595f-e962-4f50-93f0-c8c6742e1ece
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
 --- !u!114 &7492512237567023205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  followSpeed: 3
+  moveSpeed: 3
 --- !u!114 &3844134658638800442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,25 +368,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 0
   turnDelay: 1
---- !u!114 &8249268261262953780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7492512237567023215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bc02a9332fd21e4a8d86815c5707eb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponOffset: {x: 0, y: 0, z: 0}
-  weaponData: {fileID: 0}
-  attackAction:
-    m_Name: Attack
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 2fd2595f-e962-4f50-93f0-c8c6742e1ece
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []

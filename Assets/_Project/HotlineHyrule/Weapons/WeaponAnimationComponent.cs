@@ -15,6 +15,9 @@ namespace HotlineHyrule.Weapons
             LoadoutComponent = GetComponentInParent<LoadoutComponent>();
         }
 
+        /// <summary>
+        /// Performs a ranged attack.
+        /// </summary>
         public void PerformRangedAttack()
         {
             if (!WeaponComponent) return;
@@ -22,11 +25,34 @@ namespace HotlineHyrule.Weapons
             WeaponComponent.PerformRangedAttack();
         }
 
+        /// <summary>
+        /// Performs a melee attack.
+        /// </summary>
+        public void PerformMeleeAttack()
+        {
+            if (!WeaponComponent) return;
+
+            WeaponComponent.PerformMeleeAttack();
+        }
+
+        /// <summary>
+        /// Unequips the current weapon without dropping it.
+        /// </summary>
         public void Unequip()
         {
             if (!LoadoutComponent) return;
 
-            LoadoutComponent.Unequip();
+            LoadoutComponent.Unequip(false);
+        }
+
+        /// <summary>
+        /// Unequips and drops the current weapon.
+        /// </summary>
+        public void UnequipAndDrop()
+        {
+            if (!LoadoutComponent) return;
+
+            LoadoutComponent.Unequip(true);
         }
     }
 }

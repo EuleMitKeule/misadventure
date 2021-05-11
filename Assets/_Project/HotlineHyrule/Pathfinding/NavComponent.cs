@@ -6,11 +6,18 @@ namespace HotlineHyrule.Pathfinding
 {
     public class NavComponent : MonoBehaviour
     {
+        /// <summary>
+        /// Tilemaps that entities can walk on.
+        /// </summary>
         [SerializeField] public List<Tilemap> walkableTilemaps;
+        /// <summary>
+        /// Tilemaps that entities can not walk on.
+        /// </summary>
         [SerializeField] public List<Tilemap> unwalkableTilemaps;
-        [SerializeField] Tile tileNavGreen;
-        [SerializeField] Tile tileNavRed;
 
+        /// <summary>
+        /// Cell positions that entities can walk on.
+        /// </summary>
         public List<Vector3Int> NavMap { get; set; }
 
         void Awake()
@@ -20,7 +27,10 @@ namespace HotlineHyrule.Pathfinding
             
             Pathfinder.InitializeNavMap(NavMap);
         }
-        
+
+        /// <summary>
+        /// Generates a nav map containing walkable cell positions.
+        /// </summary>
         [ContextMenu("Generate Nav Map")]
         void GenerateNavMap()
         {

@@ -7,7 +7,13 @@ namespace HotlineHyrule.Weapons
 {
     public class ProjectileComponent : MonoBehaviour
     {
+        /// <summary>
+        /// The ranged weapon associated with this projectile object.
+        /// </summary>
         [SerializeField] public RangedWeaponData rangedWeaponData;
+        /// <summary>
+        /// The projectile associated with this projectile object.
+        /// </summary>
         [SerializeField] public ProjectileData projectileData;
 
         /// <summary>
@@ -27,20 +33,56 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         RaycastHit2D ImpactRaycastHit =>
             Physics2D.Raycast(ImpactRaycastOrigin, Transform.up, ImpactRaycastDistance, projectileData.impactMask);
-        int DamageBonus { get; set; }
-        float DamageFactor { get; set; }
-        LinearProjectileData LinearProjectileData => (LinearProjectileData)projectileData;
-        CurvedProjectileData CurvedProjectileData => (CurvedProjectileData)projectileData;
-        bool IsLinearProjectile => projectileData is LinearProjectileData;
-        bool IsCurvedProjectile => projectileData is CurvedProjectileData;
-        float StartSpeed =>
-            (CurvedProjectileData.range + Mathf.Pow(Rigidbody.velocity.magnitude, 2f) * Rigidbody.drag * Mathf.Pow(CurvedProjectileData.flightTime * TIME_FACTOR, 2f)) /
-            (CurvedProjectileData.flightTime * TIME_FACTOR);
-        float StartDrag => 1 / (CurvedProjectileData.flightTime * TIME_FACTOR);
-        const float TIME_FACTOR = 1 / 4.638f;
 
+        /// <summary>
+        /// Adds to the absolute damage the projectile deals on impact.
+        /// </summary>
+        int DamageBonus { get; set; }
+        /// <summary>
+        /// Multiplies the absolute damage the projectile deals on impact.
+        /// </summary>
+        float DamageFactor { get; set; }
+        /// <summary>
+        /// The number of charges remaining on the ranged weapon after firing this projectile.
+        /// </summary>
         int WeaponCharges { get; set; }
+        /// <summary>
+        /// The number of entity penetrations remaining until impact.
+        /// </summary>
         int Penetrations { get; set; }
+
+        /// <summary>
+        /// Whether the projectile associated with this projectile object is linear.
+        /// </summary>
+        bool IsLinearProjectile => projectileData is LinearProjectileData;
+        /// <summary>
+        /// Whether the projectile associated with this projectile object is curved.
+        /// </summary>
+        bool IsCurvedProjectile => projectileData is CurvedProjectileData;
+        /// <summary>
+        /// The linear projectile associated with this projectile object.
+        /// </summary>
+        LinearProjectileData LinearProjectileData => (LinearProjectileData)projectileData;
+        /// <summary>
+        /// The curved projectile associated with this projectile object.
+        /// </summary>
+        CurvedProjectileData CurvedProjectileData => (CurvedProjectileData)projectileData;
+
+        /// <summary>
+        /// The speed amount the curved projectile should start with.
+        /// </summary>
+        float CurvedStartSpeed =>
+            (CurvedProjectileData.range + Mathf.Pow(Rigidbody.velocity.magnitude, 2f) *
+            Rigidbody.drag * Mathf.Pow(CurvedProjectileData.flightTime * TIME_FACTOR, 2f)) /
+            (CurvedProjectileData.flightTime * TIME_FACTOR);
+        /// <summary>
+        /// The linear drag amount the curved projectile should start with.
+        /// </summary>
+        float StartDrag => 1 / (CurvedProjectileData.flightTime * TIME_FACTOR);
+        /// <summary>
+        /// Scales drag time towards real time.
+        /// </summary>
+        const float TIME_FACTOR = 1 / 4.638f;
 
         Transform Transform { get; set; }
         SpriteRenderer SpriteRenderer { get; set; }
@@ -117,7 +159,7 @@ namespace HotlineHyrule.Weapons
             else if (projectileData is CurvedProjectileData)
             {
                 Rigidbody.drag = StartDrag;
-                Rigidbody.velocity = Transform.up * StartSpeed;
+                Rigidbody.velocity = Transform.up * CurvedStartSpeed;
             }
             
             DamageBonus = damageBonus;
