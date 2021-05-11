@@ -8,7 +8,11 @@ namespace HotlineHyrule.Pathfinding
     public static class Pathfinder
     {
         static Dictionary<Vector3Int, NavNode> NavMap { get; set; }
-        
+
+        /// <summary>
+        /// Initializes the pathfinder with a nav map.
+        /// </summary>
+        /// <param name="navMap">The nav map to intialize with.</param>
         public static void InitializeNavMap(List<Vector3Int> navMap)
         {
             NavMap = new Dictionary<Vector3Int, NavNode>();
@@ -20,7 +24,13 @@ namespace HotlineHyrule.Pathfinding
                 NavMap.Add(position, navNode);
             }
         }
-        
+
+        /// <summary>
+        /// Calculates a traversable path from the start cell to the end cell.
+        /// </summary>
+        /// <param name="startPosition">The cell position to start the path from.</param>
+        /// <param name="endPosition">The cell position to end the path at.</param>
+        /// <returns>A list of cell positions to be traversed.</returns>
         public static List<Vector3Int> FindPath(Vector3Int startPosition, Vector3Int endPosition)
         {
             NavMap.TryGetValue(startPosition, out var startNode);
@@ -82,6 +92,12 @@ namespace HotlineHyrule.Pathfinding
             return null;
         }
 
+        /// <summary>
+        /// Transforms a path to a list of directions.
+        /// </summary>
+        /// <param name="from">The cell position to start from.</param>
+        /// <param name="waypoints">The path to transform.</param>
+        /// <returns>A list of direction vectors.</returns>
         public static List<Vector3Int> GetDirections(Vector3Int from, IEnumerable<Vector3Int> waypoints)
         {
             var directions = new List<Vector3Int>();
@@ -97,28 +113,21 @@ namespace HotlineHyrule.Pathfinding
             return directions;
         }
 
-        public static List<Vector3Int> RetracePath(NavNode startNavNode, NavNode endNavNode)
+        /// <summary>
+        /// Creates a path by traversing nodes via their parent node.
+        /// </summary>
+        /// <param name="startNavNode">The nav node the path starts from.</param>
+        /// <param name="endNavNode">The nav the path ends at.</param>
+        /// <returns>The retraced path.</returns>
+        static List<Vector3Int> RetracePath(NavNode startNavNode, NavNode endNavNode)
         {
             var path = new List<Vector3Int>();
             var currentNode = endNavNode;
 
-            var lastCurrentNode = currentNode;
-            try
+            while (!currentNode.Equals(startNavNode))
             {
-                while (!currentNode.Equals(startNavNode))
-                {
-                    lastCurrentNode = currentNode;
-                    path.Add(currentNode.Position);
-                    currentNode = currentNode.Parent;
-                }
-            }
-            catch (Exception)
-            {
-                Debug.Log($"Position: {lastCurrentNode.Position}");
-                Debug.Log($"CostF: {lastCurrentNode.CostF}");
-                Debug.Log($"Parent: {lastCurrentNode.Parent}");
-                Debug.Log($"IsStartNode: {lastCurrentNode.Equals(startNavNode)}");
-                Debug.Log($"IsEndNode: {lastCurrentNode.Equals(endNavNode)}");
+                path.Add(currentNode.Position);
+                currentNode = currentNode.Parent;
             }
 
             path.Reverse();
@@ -126,7 +135,12 @@ namespace HotlineHyrule.Pathfinding
             return path;
         }
 
-        public static NavNode FindLowestCostNode(IEnumerable<NavNode> nodes)
+        /// <summary>
+        /// Finds the node with the lowest total cost value.
+        /// </summary>
+        /// <param name="nodes">The list of nodes to search.</param>
+        /// <returns>The node with lowest total cost value.</returns>
+        static NavNode FindLowestCostNode(IEnumerable<NavNode> nodes)
         {
             var nodeList = nodes.ToList();
             var lowestCostNode = nodeList[0];
@@ -143,7 +157,13 @@ namespace HotlineHyrule.Pathfinding
             return lowestCostNode;
         }
 
-        public static int GetDistance(NavNode from, NavNode to)
+        /// <summary>
+        /// Calculates the distance cost between to nodes.
+        /// </summary>
+        /// <param name="from">The node to start from.</param>
+        /// <param name="to">The node to end at.</param>
+        /// <returns>The distance cost value.</returns>
+        static int GetDistance(NavNode from, NavNode to)
         {
             var connection = new Vector3Int(
                 Mathf.Abs(to.Position.x - from.Position.x),
@@ -159,7 +179,13 @@ namespace HotlineHyrule.Pathfinding
             return distance;
         }
 
-        public static List<NavNode> GetNeighbours(NavNode from, Dictionary<Vector3Int, NavNode> nodes)
+        /// <summary>
+        /// Finds the nodes traversable neighbour nodes.
+        /// </summary>
+        /// <param name="from">The node to search.</param>
+        /// <param name="nodes">A list of traversable nodes.</param>
+        /// <returns>The list of neighbour nodes.</returns>
+        static List<NavNode> GetNeighbours(NavNode from, Dictionary<Vector3Int, NavNode> nodes)
         {
             var neighbours = new List<NavNode>();
             var walkableNeighbours = new List<NavNode>();

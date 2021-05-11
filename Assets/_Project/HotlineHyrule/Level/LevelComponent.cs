@@ -11,10 +11,24 @@ namespace HotlineHyrule.Level
         /// <summary>
         /// The cell position the player respawns at.
         /// </summary>
+        [Header("General")]
         [SerializeField] public Vector2Int playerRespawnPosition;
+        /// <summary>
+        /// Whether to enable the rain effect.
+        /// </summary>
+        [Header("Effects")]
         [SerializeField] bool isRaining;
+        /// /// <summary>
+        /// Whether to enable the snow effect.
+        /// </summary>
         [SerializeField] bool isSnowing;
+        /// <summary>
+        /// The prefab of the rain effect.
+        /// </summary>
         [SerializeField] GameObject rainEffectPrefab;
+        /// <summary>
+        /// The prefab of the snow effect.
+        /// </summary>
         [SerializeField] GameObject snowEffectPrefab;
 
         public Grid Grid { get; private set; }
