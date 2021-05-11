@@ -25,8 +25,14 @@ namespace HotlineHyrule.Entities
         /// </summary>
         [Header("Animation")]
         [SerializeField] float moveAnimationThreshold;
+        /// <summary>
+        /// The animator of the player's legs.
+        /// </summary>
         [SerializeField] Animator legsAnimator;
-        [SerializeField] GameObject bloodParticleSystem;
+        /// <summary>
+        /// The particle system to spawn when taking damage.
+        /// </summary>
+        [SerializeField] GameObject damageParticleSystemPrefab;
 
         /// <summary>
         /// The movement input action.
@@ -93,7 +99,7 @@ namespace HotlineHyrule.Entities
         {
             Rigidbody = GetComponent<Rigidbody2D>();
             HealthComponent = GetComponent<HealthComponent>();
-            WeaponComponent = GetComponentInChildren<WeaponComponent>();
+            WeaponComponent = GetComponent<WeaponComponent>();
             if (!legsAnimator) legsAnimator = transform.Find("legs").GetComponent<Animator>();
 
             Locator.PlayerComponent = this;
@@ -157,7 +163,7 @@ namespace HotlineHyrule.Entities
         {
             if (e.HealthDifference >= 0) return;
 
-            if (bloodParticleSystem) Instantiate(bloodParticleSystem, transform.position, Quaternion.identity);
+            if (damageParticleSystemPrefab) Instantiate(damageParticleSystemPrefab, transform.position, Quaternion.identity);
         }
     }
 }
