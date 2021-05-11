@@ -159,8 +159,18 @@ namespace HotlineHyrule.Entities
             {
                 if (bloodParticleSystem) Instantiate(bloodParticleSystem, transform.position, Quaternion.identity);
             }
-            
-            if (e.NewHealth <= 0) ChangeState(DyingState);
+
+            if (e.NewHealth <= 0)
+            {
+                ChangeState(DyingState);
+                foreach (var item in itemDrops)
+                {
+                    if (Random.value <= item.dropRate)
+                    { 
+                        Instantiate(item.data.itemPrefab, transform.position, Quaternion.identity);
+                    }
+                }
+            }
         }
 
         void OnTriggerStay2D(Collider2D other)
@@ -181,17 +191,6 @@ namespace HotlineHyrule.Entities
         {
             if (other.gameObject.layer != LayerMask.NameToLayer("enemy")) return;
             transform.Rotate(Vector3.forward, 90f);
-        }
-
-        void OnDestroy()
-        {
-            foreach (var item in itemDrops)
-            {
-                if (Random.value <= item.dropRate)
-                { 
-                    Instantiate(item.data.itemPrefab, transform.position, Quaternion.identity);
-                }
-            }
         }
         
 #if UNITY_EDITOR
