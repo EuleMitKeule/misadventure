@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: weapon_wand_fire
   m_EditorClassIdentifier: 
   itemName: 
+  itemPrefab: {fileID: 87149508903852376, guid: d06348ec007e6064db5cc6810d2ec1e5, type: 3}
   movementFactor: 0.5
   slowTimeWindow: 0.5
   attackRate: 1.5
@@ -24,3 +25,4 @@ MonoBehaviour:
   deadzoneRadius: 1
   projectilePrefab: {fileID: 7320460730021520237, guid: 544655ebf7a0f3b4b95f34ca0ab95bee, type: 3}
   spawnPosition: {x: 0, y: 1}
+  weaponFiredSound: {fileID: 8300000, guid: 8db2144109b18444b9d092a1cb23254e, type: 3}

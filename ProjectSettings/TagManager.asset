@@ -13,14 +13,14 @@ TagManager:
   - UI
   - player
   - enemy
-  - projectile
+  - playerProjectile
   - wall
   - item
   - enemyProjectile
   - enemySightRange
   - enemyFollowRange
   - enemyHitbox
-  - 
+  - mapBorders
   - 
   - 
   - 
@@ -44,7 +44,7 @@ TagManager:
   - name: ground
     uniqueID: 36160119
     locked: 0
-  - name: Item
+  - name: item
     uniqueID: 1503095659
     locked: 0
   - name: projectile
@@ -64,4 +64,7 @@ TagManager:
     locked: 0
   - name: effects
     uniqueID: 61649585
+    locked: 0
+  - name: ui
+    uniqueID: 472863783
     locked: 0

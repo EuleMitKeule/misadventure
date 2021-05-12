@@ -5,36 +5,66 @@ namespace HotlineHyrule.Entities.EnemyStates
 {
     public class EnemyStateAttackComponent : EnemyStateBaseComponent
     {
-        public override void Setup()
-        {
-            base.Setup();
+        Coroutine AttackCoroutine { get; set; }
 
-            StartCoroutine(PerformAttackRoutine());
+        public override void EnterState()
+        {
+            base.EnterState();
+
+            StartAttackRoutine();
         }
 
-        public override void FixedStateUpdate()
+        public override void ExitState()
         {
-            base.FixedStateUpdate();
-            Rigidbody.velocity = Vector2.zero;
+            base.ExitState();
+
+            StopAttackRoutine();
         }
 
-        IEnumerator PerformAttackRoutine()
+        public override void FixedUpdateState()
         {
-            if (Animator) Animator.SetTrigger("attack");
+            base.FixedUpdateState();
 
-            yield return new WaitForSeconds(0.5f);
+            EnemyComponent.SetVelocity(Vector2.zero);
+            transform.rotation = EnemyComponent.FollowRotation;
 
-            if (WeaponComponent) WeaponComponent.PerformAttack();
+            if (!EnemyComponent.IsPlayerAttackable)
+            {
+                StopAttackRoutine();
 
-            // var instance = Instantiate(projectileObj, transform.position, Quaternion.Euler(transform.eulerAngles));
-            // var projectileComponent = instance.GetComponent<ProjectileComponent>();
-            // if (projectileComponent) projectileComponent.Fire(Vector2.zero);
+                if (EnemyComponent.IsPlayerFollowable)
+                {
+                    EnemyComponent.ChangeState(EnemyComponent.FollowState);
+                }
+                else
+                {
+                    EnemyComponent.ChangeState(EnemyComponent.SearchState ? EnemyComponent.SearchState : EnemyComponent.PatrolState);
+                }
+            }
+        }
 
-            yield return new WaitForSeconds(0.5f);
+        void StartAttackRoutine() => AttackCoroutine ??= StartCoroutine(AttackRoutine());
 
-            // _animator.SetTrigger("enterPatrolState");
+        void StopAttackRoutine()
+        {
+            if (AttackCoroutine == null) return;
+            
+            StopCoroutine(AttackCoroutine);
+            AttackCoroutine = null;
+        }
 
-            EnemyComponent.ChangeState(EnemyComponent.FollowState);
+        IEnumerator AttackRoutine()
+        {
+            while (true)
+            {
+                if (WeaponComponent.CanAttack)
+                {
+                    if (Animator) Animator.SetTrigger("attack");
+                    if (WeaponComponent) WeaponComponent.PerformAttack();   
+                }
+
+                yield return new WaitForSeconds(WeaponComponent.AttackDelay);
+            }
         }
     }
 }

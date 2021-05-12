@@ -12,42 +12,58 @@ namespace HotlineHyrule.Weapons
     /// <summary>
     /// Handles the behavior of the weapon it's attached to.
     /// </summary>
-    public class  WeaponComponent : MonoBehaviour
+    public class WeaponComponent : MonoBehaviour
     {
         /// <summary>
-        /// The weapon data corresponding to this weapon.
+        /// The position offset of the weapon object.
+        /// </summary>
+        [SerializeField] Vector3 weaponOffset;
+        /// <summary>
+        /// The currently equipped weapon.
         /// </summary>
         [SerializeField] public WeaponData weaponData;
         /// <summary>
-        /// The attack input action.
+        /// The input action to perform an attack.
         /// </summary>
         [SerializeField] InputAction attackAction;
 
-        /// <summary>
-        /// The last point in time the weapon was used at.
-        /// </summary>
-        float LastAttackTime { get; set; }
-
-        float _attackSpeed;
+        float _attackSpeedFactor;
         float _particleSimulationSpeed;
-        float AttackSpeed
+        /// <summary>
+        /// Multiplies the attack interval.
+        /// </summary>
+        float AttackSpeedFactor
         {
-            get => _attackSpeed;
+            get => _attackSpeedFactor;
             set
             {
-                _attackSpeed = value;
-                if (WeaponAnimator) WeaponAnimator.SetFloat("attackSpeed", _attackSpeed);
+                _attackSpeedFactor = value;
+                if (WeaponAnimator) WeaponAnimator.SetFloat("attackSpeed", _attackSpeedFactor);
                 if (ParticleSystem)
                 {
                     var mainModule = ParticleSystem.main;
                     _particleSimulationSpeed = mainModule.simulationSpeed;
-                    mainModule.simulationSpeed *= AttackSpeed;
+                    mainModule.simulationSpeed *= AttackSpeedFactor;
                 }
             }
         }
-
+        /// <summary>
+        /// Multiplies the amount of damage the weapon deals.
+        /// </summary>
         float DamageFactor { get; set; }
+        /// <summary>
+        /// Adds to the amount of damage the weapon deals.
+        /// </summary>
         int DamageBonus { get; set; }
+        /// <summary>
+        /// The last point in time the weapon was used at.
+        /// </summary>
+        float LastAttackTime { get; set; }
+        /// <summary>
+        /// The currently equipped weapon object.
+        /// </summary>
+        GameObject WeaponObject { get; set; }
+
         /// <summary>
         /// Whether the weapon component's parent is the player.
         /// </summary>
@@ -56,10 +72,17 @@ namespace HotlineHyrule.Weapons
         /// Whether the attack input is currently being registered.
         /// </summary>
         bool IsRequestingAttack => attackAction.ReadValue<float>() != 0f;
+        public float AttackDelay => 1 / weaponData.attackRate / AttackSpeedFactor;
         /// <summary>
         /// Whether enough time has passed since the last usage for the weapon to be used again.
         /// </summary>
-        bool CanAttack => Time.time >= LastAttackTime + 1 / weaponData.attackRate / AttackSpeed;
+        public bool CanAttack =>
+            weaponData.attackRate == 0 || Time.time >= LastAttackTime + AttackDelay;
+
+        /// <summary>
+        /// The currently equipped weapon object's transform.
+        /// </summary>
+        Transform WeaponTransform => WeaponObject.transform;
         /// <summary>
         /// Whether the current weapon is a ranged one.
         /// </summary>
@@ -69,60 +92,57 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         public bool HasMeleeWeapon => weaponData is MeleeWeaponData;
         /// <summary>
-        /// The ranged weapon data of the ranged weapon.
+        /// The currently equipped ranged weapon.
         /// </summary>
         public RangedWeaponData RangedWeaponData => (RangedWeaponData)weaponData;
+        /// <summary>
+        /// The currently equipped melee weapon.
+        /// </summary>
         MeleeWeaponData MeleeWeaponData => (MeleeWeaponData)weaponData;
+
+        /// <summary>
+        /// The weapon object's current world position
+        /// </summary>
+        public Vector3 WeaponPosition => WeaponTransform.position;
         /// <summary>
         /// The offset of the projectile spawn position relative to the weapon position.
         /// </summary>
         Vector3 ProjectileSpawnOffset =>
-            Transform.right * RangedWeaponData.spawnPosition.x +
-            Transform.up * RangedWeaponData.spawnPosition.y;
+            WeaponTransform.right * RangedWeaponData.spawnPosition.x +
+            WeaponTransform.up * RangedWeaponData.spawnPosition.y;
         /// <summary>
         /// The spawn position of the projectile.
         /// </summary>
-        Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + Transform.position;
-
+        Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + WeaponTransform.position;
+        /// <summary>
+        /// Spawns a new projectile object.
+        /// </summary>
         GameObject InstantiateProjectile => Instantiate(RangedWeaponData.projectilePrefab, ProjectileSpawnPosition,
-            Transform.rotation);
+            WeaponTransform.rotation);
 
-        Rigidbody2D GetParentRigidbody
-        {
-            get
-            {
-                var rigidbodies = GetComponentsInParent<Rigidbody2D>();
-
-                var parentRigidbody = Rigidbody ?
-                    (rigidbodies.Length >= 2 ? rigidbodies[1] : null) :
-                    (rigidbodies.Length >= 1) ? rigidbodies[0] : null;
-
-                return parentRigidbody;
-            }
-        }
-
+        /// <summary>
+        /// Invoked when an attack is performed.
+        /// </summary>
         public event EventHandler<EventArgs> AttackStarted;
+        /// <summary>
+        /// Invoked when an attack is finished.
+        /// </summary>
         public event EventHandler<EventArgs> AttackFinished;
-        
-        GameObject WeaponObject { get; set; }
-        Transform Transform { get; set; }
+
         SpriteRenderer SpriteRenderer { get; set; }
         Animator WeaponAnimator { get; set; }
-        Rigidbody Rigidbody { get; set; }
-        Rigidbody2D ParentRigidbody { get; set; }
+        Rigidbody2D Rigidbody { get; set; }
         PlayerComponent PlayerComponent { get; set; }
         ParticleSystem ParticleSystem { get; set; }
         LoadoutComponent LoadoutComponent { get; set; }
 
         void Awake()
         {
-            Transform = transform;
             SpriteRenderer = GetComponent<SpriteRenderer>();
-            Rigidbody = GetComponent<Rigidbody>();
-            ParentRigidbody = GetParentRigidbody;
-            PlayerComponent = GetComponentInParent<PlayerComponent>();
+            Rigidbody = GetComponent<Rigidbody2D>();
+            PlayerComponent = GetComponent<PlayerComponent>();
             ParticleSystem = GetComponentInChildren<ParticleSystem>();
-            LoadoutComponent = GetComponentInParent<LoadoutComponent>();
+            LoadoutComponent = GetComponent<LoadoutComponent>();
 
             AttackFinished += OnAttackFinished;
 
@@ -146,8 +166,18 @@ namespace HotlineHyrule.Weapons
             if (WeaponObject) Destroy(WeaponObject);
             
             weaponData = newWeaponData;
-            WeaponObject = Instantiate(weaponData.weaponPrefab, Transform);
+            WeaponObject = Instantiate(weaponData.weaponPrefab, transform);
+            WeaponTransform.localPosition = weaponOffset;
             WeaponAnimator = WeaponObject.GetComponent<Animator>();
+        }
+
+        /// <summary>
+        /// Changes the weapon object's absolute rotation.
+        /// </summary>
+        /// <param name="angle">The angle to set the rotation to.</param>
+        public void SetWeaponRotation(float angle)
+        {
+            WeaponTransform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
 
         /// <summary>
@@ -155,46 +185,53 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         public void PerformAttack()
         {
-            // if (!weaponData) return;
+            if (!weaponData) return;
             if (!CanAttack) return;
+
             LastAttackTime = Time.time;
 
-            Invoke(nameof(InvokeAttackFinished), weaponData.slowTimeWindow / weaponData.attackRate / AttackSpeed);
-            
             if (IsPlayer) PlayerComponent.MovementAttackFactor = weaponData.movementFactor; //TODO enable for enemy
             
             if (WeaponAnimator) WeaponAnimator.SetTrigger("attack");
             
+            var time = WeaponAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+            Invoke(nameof(InvokeAttackFinished), time);
+            
             AttackStarted?.Invoke(this, EventArgs.Empty);
-
-            if (HasRangedWeapon) PerformRangedAttack();
-            else if (HasMeleeWeapon) PerformMeleeAttack();
         }
 
         /// <summary>
         /// Performs a ranged attack with the equipped ranged weapon.
         /// </summary>
-        void PerformRangedAttack()
+        public void PerformRangedAttack()
         {
             if (!HasRangedWeapon) return;
-
+            
             FireProjectile();
         }
 
+        /// <summary>
+        /// Fires a new instance of the projectile associated with the equipped ranged weapon.
+        /// </summary>
         void FireProjectile()
         {
             var projectileObject = InstantiateProjectile;
 
             var projectileComponent = projectileObject.GetComponent<ProjectileComponent>();
             if (projectileComponent) projectileComponent.Fire(
-                ParentRigidbody.velocity, 
+                Rigidbody.velocity, 
                 IsPlayer ? LoadoutComponent.CurrentLoadoutSlot.weaponCharges : 0, 
                 DamageBonus, 
                 DamageFactor, 
-                AttackSpeed);
+                AttackSpeedFactor);
+            
+            Locator.SoundComponent.PlaySound(RangedWeaponData.weaponFiredSound);
         }
 
-        void PerformMeleeAttack()
+        /// <summary>
+        /// Performs a melee attack with the equpped melee weapon.
+        /// </summary>
+        public void PerformMeleeAttack()
         {
             if (!HasMeleeWeapon) return;
         }
@@ -219,17 +256,24 @@ namespace HotlineHyrule.Weapons
 
         void InvokeAttackFinished() => AttackFinished?.Invoke(this, EventArgs.Empty);
 
+        /// <summary>
+        /// Applies item effects of a given attack item.
+        /// </summary>
+        /// <param name="attackItem">The attack item to consume.</param>
         public void Consume(AttackItemData attackItem)
         {
-            AttackSpeed = attackItem.attackSpeed;
+            AttackSpeedFactor = attackItem.attackSpeed;
             DamageFactor = attackItem.damageFactor;
             DamageBonus = attackItem.damageBonus;
             Invoke(nameof(ResetBuffs), attackItem.duration);
         }
 
+        /// <summary>
+        /// Resets all currently applied attack item buffs.
+        /// </summary>
         void ResetBuffs()
         {
-            (AttackSpeed, DamageFactor, DamageBonus) = (1, 1, 0);
+            (AttackSpeedFactor, DamageFactor, DamageBonus) = (1, 1, 0);
 
             if (ParticleSystem)
             {

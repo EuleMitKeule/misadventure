@@ -9,6 +9,6 @@ namespace HotlineHyrule.Extensions
         /// </summary>
         /// <param name="cellPosition"></param>
         /// <returns></returns>
-        public static Vector3 ToWorld(this Vector3Int cellPosition) => cellPosition + Vector3.one * 0.5f;
+        public static Vector3 ToWorld(this Vector3Int cellPosition) => cellPosition + (Vector3)Vector2.one * 0.5f;
     }
 }

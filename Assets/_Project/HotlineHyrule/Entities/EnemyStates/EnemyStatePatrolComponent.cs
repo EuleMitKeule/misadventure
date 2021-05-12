@@ -9,54 +9,57 @@ namespace HotlineHyrule.Entities.EnemyStates
     public class EnemyStatePatrolComponent : EnemyStateBaseComponent
     {
         /// <summary>
-        /// Move speed of the enemy
+        /// The movement speed of the enemy while patrolling.
         /// </summary>
         [SerializeField] float moveSpeed;
 
-        public override void Setup()
+        public override void ExitState()
         {
-            base.Setup();
+            base.ExitState();
 
-            if (Animator) Animator.SetBool("isMoving", true);
+            EnemyComponent.SetVelocity(Vector2.zero);
         }
 
-        public override void FixedStateUpdate()
+        public override void OnCollisionEnterState(Collision2D other)
         {
-            Rigidbody.velocity = transform.up * moveSpeed;
+            if (!other.gameObject.layer.IsEnemy()) return;
 
-            if (!EnemyComponent.HasWallAbove) return;
-
-            if (EnemyComponent.HasWallLeft &! EnemyComponent.HasWallRight)
-            {
-                transform.eulerAngles += Vector3.forward * -90f;
-                return;
-            }
-
-            if (EnemyComponent.HasWallRight &! EnemyComponent.HasWallLeft)
-            {
-                transform.eulerAngles += Vector3.forward * 90f;
-                return;
-            }
-
-            if (EnemyComponent.HasWallLeft && EnemyComponent.HasWallRight)
-            {
-                transform.eulerAngles += Vector3.forward * 180f;
-            }
-
-            var isTurningLeft = Random.Range(0, 2) == 1;
-            transform.eulerAngles += Vector3.forward * (isTurningLeft ? 90f : -90f);
+            transform.Rotate(Vector3.forward, 90f);
         }
 
-        public override void Exit()
+        public override void FixedUpdateState()
         {
-            base.Exit();
-            Rigidbody.velocity = Vector2.zero;
-        }
+            base.FixedUpdateState();
 
-        public override void OnLookingAtPlayer()
-        {
-            base.OnLookingAtPlayer();
-            EnemyComponent.ChangeState(EnemyComponent.ShootProjectileState);
+            EnemyComponent.SetVelocity(transform.up * moveSpeed);
+
+            if (EnemyComponent.IsPlayerFollowable)
+            {
+                if (EnemyComponent.FollowState) EnemyComponent.ChangeState(EnemyComponent.FollowState);
+            }
+
+            if (EnemyComponent.IsWallAbove)
+            {
+                if (EnemyComponent.IsWallLeft &! EnemyComponent.IsWallRight)
+                {
+                    transform.eulerAngles += Vector3.forward * -90f;
+                    return;
+                }
+
+                if (EnemyComponent.IsWallRight &! EnemyComponent.IsWallLeft)
+                {
+                    transform.eulerAngles += Vector3.forward * 90f;
+                    return;
+                }
+
+                if (EnemyComponent.IsWallLeft && EnemyComponent.IsWallRight)
+                {
+                    transform.eulerAngles += Vector3.forward * 180f;
+                }
+
+                var isTurningLeft = Random.Range(0, 2) == 1;
+                transform.eulerAngles += Vector3.forward * (isTurningLeft ? 90f : -90f);
+            }
         }
     }
 }

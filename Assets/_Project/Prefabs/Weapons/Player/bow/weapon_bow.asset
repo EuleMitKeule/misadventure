@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: weapon_bow
   m_EditorClassIdentifier: 
   itemName: 
+  itemPrefab: {fileID: 87149508903852376, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
   movementFactor: 1
   slowTimeWindow: 0
   attackRate: 2
@@ -24,3 +25,4 @@ MonoBehaviour:
   deadzoneRadius: 1
   projectilePrefab: {fileID: 8636156419958803353, guid: 07c24f9187b030848977eb21dc349ec5, type: 3}
   spawnPosition: {x: 0.0313, y: 0.56}
+  weaponFiredSound: {fileID: 8300000, guid: 730fd8cd09c673f468f9c3fd091ec962, type: 3}

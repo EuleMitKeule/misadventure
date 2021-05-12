@@ -44,8 +44,8 @@ namespace HotlineHyruleTests.Entities
             var healthComponent = GetDummy();
             healthComponent.HealthChanged += OnHealthChanged;
 
-            healthComponent.Health = 50;
             healthComponent.Health = 75;
+            healthComponent.Health = 50;
             
             Assert.AreEqual(true, _wasSuccessful);
             _wasSuccessful = false;
@@ -53,7 +53,7 @@ namespace HotlineHyruleTests.Entities
 
         void OnHealthChanged(object sender, HealthEventArgs e)
         {
-            _wasSuccessful = e.NewHealth == 75 && e.HealthDifference == 25;
+            _wasSuccessful = e.NewHealth == 50 && e.HealthDifference == -25;
         }
 
         [Test]

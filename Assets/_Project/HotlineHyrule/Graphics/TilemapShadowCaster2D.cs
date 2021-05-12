@@ -100,31 +100,39 @@ namespace HotlineHyrule.Graphics
             {
                 var combinedPolygon = new List<Vector2>();
 
-                var innerRightBottom = innerPolygon
-                    .Where(point =>
-                        Math.Abs(Math.Round(point.x) - innerPolygon.Max(p => p.x)) < float.Epsilon)
-                    .OrderBy(point => point.y).First();
+                var innerIndex = 0;
+                var outerIndex = 0;
+                var closestDistance = 0f;
 
-                var outerRightBottom = outerPolygon
-                    .Where(point =>
-                        Math.Abs(Math.Round(point.x) - outerPolygon.Max(p => p.x)) < float.Epsilon)
-                    .OrderBy(point => point.y).First();
+                for (var i = 0; i < innerPolygon.Length; i++)
+                {
+                    var innerPoint = innerPolygon[i];
 
-                var indexOfInnerRightBottom = innerPolygon.ToList().IndexOf(innerRightBottom);
-                var indexOfOuterRightBottom = outerPolygon.ToList().IndexOf(outerRightBottom);
+                    for (var j = 0; j < outerPolygon.Length; j++)
+                    {
+                        var outerPoint = outerPolygon[j];
+                        var distance = (innerPoint - outerPoint).magnitude;
+
+                        if (!(distance < closestDistance)) continue;
+
+                        innerIndex = i;
+                        outerIndex = j;
+                        closestDistance = distance;
+                    }
+                }
 
                 var firstInnerPolygon = (from point in innerPolygon
-                    where innerPolygon.ToList().IndexOf(point) <= indexOfInnerRightBottom
+                    where innerPolygon.ToList().IndexOf(point) <= innerIndex
                     select point);
                 var secondInnerPolygon = (from point in innerPolygon
-                    where innerPolygon.ToList().IndexOf(point) >= indexOfInnerRightBottom
+                    where innerPolygon.ToList().IndexOf(point) >= innerIndex
                     select point);
 
                 var firstOuterPolygon = (from point in outerPolygon
-                    where outerPolygon.ToList().IndexOf(point) <= indexOfOuterRightBottom
+                    where outerPolygon.ToList().IndexOf(point) <= outerIndex
                     select point);
                 var secondOuterPolygon = (from point in outerPolygon
-                    where outerPolygon.ToList().IndexOf(point) >= indexOfOuterRightBottom
+                    where outerPolygon.ToList().IndexOf(point) >= outerIndex
                     select point);
 
                 combinedPolygon.AddRange(firstOuterPolygon);

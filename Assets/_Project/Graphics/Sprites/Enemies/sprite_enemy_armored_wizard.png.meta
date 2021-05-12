@@ -20,6 +20,15 @@ TextureImporter:
   - first:
       213: 4776811047509498735
     second: sprite_enemy_armored_wizard_5
+  - first:
+      213: -2521458339305504907
+    second: sprite_enemy_armored_wizard_6
+  - first:
+      213: -2348507802066357943
+    second: sprite_enemy_armored_wizard_7
+  - first:
+      213: -5596943982096182074
+    second: sprite_enemy_armored_wizard_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -114,10 +123,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
+        width: 20
         height: 24
       alignment: 9
-      pivot: {x: 0.5, y: 0.35}
+      pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -133,12 +142,12 @@ TextureImporter:
       name: sprite_enemy_armored_wizard_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 20
         y: 0
-        width: 16
+        width: 20
         height: 24
       alignment: 9
-      pivot: {x: 0.5, y: 0.35}
+      pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -154,12 +163,12 @@ TextureImporter:
       name: sprite_enemy_armored_wizard_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 40
         y: 0
-        width: 16
+        width: 20
         height: 24
       alignment: 9
-      pivot: {x: 0.5, y: 0.35}
+      pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -175,12 +184,12 @@ TextureImporter:
       name: sprite_enemy_armored_wizard_3
       rect:
         serializedVersion: 2
-        x: 48
+        x: 60
         y: 0
-        width: 16
+        width: 20
         height: 24
       alignment: 9
-      pivot: {x: 0.5, y: 0.35}
+      pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -196,12 +205,12 @@ TextureImporter:
       name: sprite_enemy_armored_wizard_4
       rect:
         serializedVersion: 2
-        x: 64
+        x: 80
         y: 0
-        width: 16
+        width: 20
         height: 24
       alignment: 9
-      pivot: {x: 0.5, y: 0.35}
+      pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -217,12 +226,12 @@ TextureImporter:
       name: sprite_enemy_armored_wizard_5
       rect:
         serializedVersion: 2
-        x: 80
+        x: 100
         y: 0
-        width: 16
+        width: 20
         height: 24
       alignment: 9
-      pivot: {x: 0.5, y: 0.35}
+      pivot: {x: 0.5, y: 0.33333334}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -230,6 +239,69 @@ TextureImporter:
       bones: []
       spriteID: f6b17fdc654aa4240800000000000000
       internalID: 4776811047509498735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_enemy_armored_wizard_6
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 20
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57fbfb9effaf10dd0800000000000000
+      internalID: -2521458339305504907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_enemy_armored_wizard_7
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 20
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 941f991d89c686fd0800000000000000
+      internalID: -2348507802066357943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_enemy_armored_wizard_8
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 20
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c495672a19a352b0800000000000000
+      internalID: -5596943982096182074
       vertices: []
       indices: 
       edges: []
