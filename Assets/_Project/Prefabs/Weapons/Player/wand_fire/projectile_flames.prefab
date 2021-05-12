@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7320460730021520234}
   - component: {fileID: 7320460730021520235}
   - component: {fileID: 7320460730021520214}
-  - component: {fileID: 3184425719602560471}
+  - component: {fileID: 6946295450808576847}
   m_Layer: 8
   m_Name: projectile_flames
   m_TagString: Untagged
@@ -4887,10 +4887,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7320460730021520237}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd83fce18722314f859c8cf7b95583b, type: 3}
+  m_Script: {fileID: 11500000, guid: 261465b5c13226c4bbff10a34fcde221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3184425719602560471
+  rangedWeaponData: {fileID: 11400000, guid: 3d73b0030c67d364e8b5b56b97ed0986, type: 2}
+  projectileData: {fileID: 11400000, guid: 687a5c806367e194b92b8eaa299fc992, type: 2}
+--- !u!114 &6946295450808576847
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4899,8 +4901,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7320460730021520237}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 261465b5c13226c4bbff10a34fcde221, type: 3}
+  m_Script: {fileID: 11500000, guid: c0292a3d917c97048a10e42d8c263b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangedWeaponData: {fileID: 11400000, guid: 3d73b0030c67d364e8b5b56b97ed0986, type: 2}
-  projectileData: {fileID: 11400000, guid: 687a5c806367e194b92b8eaa299fc992, type: 2}
