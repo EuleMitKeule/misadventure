@@ -17,11 +17,11 @@ PrefabInstance:
       objectReference: {fileID: 32106695664497314, guid: 55aef061e5074ee4089868d4090f134f, type: 3}
     - target: {fileID: 3210816406309924212, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.062
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6108195585538764472, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_Offset.y
-      value: -0.05
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6584715816111582176, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: weaponData
