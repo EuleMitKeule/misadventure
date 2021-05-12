@@ -53,6 +53,7 @@ namespace HotlineHyrule.Entities
                 for (int i = 0; i <= enemyMaxCount; i++)
                 {
                     SpawnRandomEnemyPrefeb(bounds);
+                    Debug.Log("Spawn enemy: " + i);
                 }
 
                 //Coroutine für die Wellen implementieren
