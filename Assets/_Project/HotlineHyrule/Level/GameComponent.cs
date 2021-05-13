@@ -43,13 +43,19 @@ namespace HotlineHyrule.Level
 
         void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
         {
-            if (!Locator.LevelComponent) return;
-
             SetupGame();
         }
 
         void SetupGame()
         {
+            if (!Locator.LevelComponent) return;
+
+            if (!Locator.LevelComponent.levelData)
+            {
+                Debug.LogWarning($"The loaded level {Locator.LevelComponent.name} has no level data assigned.");
+                return;
+            }
+
             var levelData = Locator.LevelComponent.levelData;
             LevelLoaded?.Invoke(this, new LevelEventArgs(levelData));
         }
