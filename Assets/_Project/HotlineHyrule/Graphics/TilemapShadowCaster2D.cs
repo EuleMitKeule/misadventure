@@ -21,7 +21,7 @@ namespace HotlineHyrule.Graphics
 
         CompositeCollider2D CompositeCollider { get; set; }
 
-        void Awake()
+        void Start()
         {
             if (!generateOnAwake) return;
 
