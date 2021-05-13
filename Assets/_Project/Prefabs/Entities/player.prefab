@@ -128,6 +128,8 @@ GameObject:
   - component: {fileID: 1512549236598669730}
   - component: {fileID: 1512549236598669731}
   - component: {fileID: 3404418848414812570}
+  - component: {fileID: 7870156206676490698}
+  - component: {fileID: 3682796833932595627}
   m_Layer: 6
   m_Name: player
   m_TagString: Player
@@ -254,9 +256,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   moveDamping: 2
+  dodgeForce: 12
+  dodgeDuration: 0.075
   moveAnimationThreshold: 0.1
   legsAnimator: {fileID: 0}
-  bloodParticleSystem: {fileID: 2442639310212140477, guid: bbd2f2170baf96d41814258f53875278, type: 3}
+  damageParticleSystemPrefab: {fileID: 2442639310212140477, guid: bbd2f2170baf96d41814258f53875278, type: 3}
   walkAction:
     m_Name: Walk
     m_Type: 0
@@ -305,6 +309,22 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Walk
       m_Flags: 8
+  dodgeAction:
+    m_Name: Dodge
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a8d5cfe9-a216-42ef-85b8-96721cfdb497
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 9ac2b92d-d259-478f-92c2-5111894e1a90
+      m_Path: <Keyboard>/shift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Dodge
+      m_Flags: 0
 --- !u!114 &1512549236598669735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,6 +476,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnPointData: {fileID: 11400000, guid: de1fcebe76547625aad4764fcae66e63, type: 2}
+--- !u!114 &7870156206676490698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512549236598669737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881f576ae77c409085ff01d98fdbd7af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3682796833932595627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512549236598669737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf8def8b9984029a132c3575666f879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1512549237048204808
 GameObject:
   m_ObjectHideFlags: 0
