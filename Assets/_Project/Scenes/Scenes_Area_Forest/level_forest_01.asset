@@ -15,3 +15,4 @@ MonoBehaviour:
   areaName: level info 1
   areaText: das ist der erste test
   questData: {fileID: 0}
+  playerSpawnPosition: {x: -6, y: -14, z: 0}

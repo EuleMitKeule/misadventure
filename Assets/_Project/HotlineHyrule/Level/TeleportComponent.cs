@@ -1,7 +1,4 @@
-using System;
-using HotlineHyrule.Entities;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace HotlineHyrule.Level
 {
@@ -9,7 +6,7 @@ namespace HotlineHyrule.Level
     {
         void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.layer != LayerMask.NameToLayer("player")) return;
+            if (!other.gameObject.layer.IsPlayer()) return;
 
             Locator.GameComponent.LoadNextScene();
         }

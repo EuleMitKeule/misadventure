@@ -17,8 +17,8 @@ TagManager:
   - wall
   - item
   - enemyProjectile
-  - enemySightRange
-  - enemyFollowRange
+  - 
+  - 
   - enemyHitbox
   - mapBorders
   - 
