@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace HotlineHyrule.Level
 {
@@ -13,6 +14,7 @@ namespace HotlineHyrule.Level
         /// </summary>
         [Header("General")]
         [SerializeField] public Vector2Int playerRespawnPosition;
+        [SerializeField] public LevelData levelData;
         /// <summary>
         /// Whether to enable the rain effect.
         /// </summary>
@@ -30,6 +32,7 @@ namespace HotlineHyrule.Level
         /// The prefab of the snow effect.
         /// </summary>
         [SerializeField] GameObject snowEffectPrefab;
+
 
         public Grid Grid { get; private set; }
         

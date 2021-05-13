@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using HotlineHyrule.Entities;
+using HotlineHyrule.Level;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,12 @@ namespace HotlineHyrule.UserInterface
 
         List<GameObject> _healthIcons = new List<GameObject>();
 
-        void Start()
+        void Awake()
+        {
+            Locator.GameComponent.LevelLoaded += OnLevelLoaded;
+        }
+
+        void OnLevelLoaded(object sender, LevelEventArgs e)
         {
             var healthComponent = Locator.PlayerComponent.GetComponent<HealthComponent>();
             SetHealthTo(healthComponent.Health);
