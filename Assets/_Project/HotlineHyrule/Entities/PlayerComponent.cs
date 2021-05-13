@@ -24,7 +24,13 @@ namespace HotlineHyrule.Entities
         /// The force to apply when performing a dodge move.
         /// </summary>
         [SerializeField] public float dodgeForce = 1f;
+        /// <summary>
+        /// The duration a dodge move takes.
+        /// </summary>
         [SerializeField] public float dodgeDuration = 1f;
+        /// <summary>
+        /// The delay between dodge moves.
+        /// </summary>
         [SerializeField] public float dodgeDelay = 2f;
 
         /// <summary>
