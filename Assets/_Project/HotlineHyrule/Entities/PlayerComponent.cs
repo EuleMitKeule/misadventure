@@ -1,5 +1,6 @@
 using HotlineHyrule.Entities.PlayerStates;
 using HotlineHyrule.Items;
+using HotlineHyrule.Level;
 using HotlineHyrule.Weapons;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -131,6 +132,14 @@ namespace HotlineHyrule.Entities
             walkAction.Enable();
 
             SetState(IdleState);
+
+            GameComponent.LevelUnloaded += OnLevelUnloaded;
+        }
+
+        void OnLevelUnloaded(object sender, LevelEventArgs e)
+        {
+            dodgeAction.Disable();
+            walkAction.Disable();
         }
 
         void Update()

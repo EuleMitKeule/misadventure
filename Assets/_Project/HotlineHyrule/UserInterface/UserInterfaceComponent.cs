@@ -15,7 +15,7 @@ namespace HotlineHyrule.UserInterface
                 if (mainCanvasObject) mainCanvas = mainCanvasObject.GetComponent<Canvas>();
             }
 
-            Locator.GameComponent.LevelLoaded += OnLevelLoaded;
+            GameComponent.LevelLoaded += OnLevelLoaded;
         }
 
         void OnLevelLoaded(object sender, LevelEventArgs e)

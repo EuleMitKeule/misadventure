@@ -127,7 +127,6 @@ GameObject:
   - component: {fileID: 1512549236598669729}
   - component: {fileID: 1512549236598669730}
   - component: {fileID: 1512549236598669731}
-  - component: {fileID: 3404418848414812570}
   - component: {fileID: 7870156206676490698}
   - component: {fileID: 3682796833932595627}
   m_Layer: 6
@@ -463,19 +462,6 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Attack
       m_Flags: 0
---- !u!114 &3404418848414812570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1512549236598669737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a8eecfc96054cfa8e1e81424afc66f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnPointData: {fileID: 11400000, guid: de1fcebe76547625aad4764fcae66e63, type: 2}
 --- !u!114 &7870156206676490698
 MonoBehaviour:
   m_ObjectHideFlags: 0

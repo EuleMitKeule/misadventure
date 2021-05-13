@@ -8,5 +8,6 @@ namespace HotlineHyrule.Level
         [SerializeField] public string areaName;
         [TextArea] [SerializeField] public string areaText;
         [SerializeField] public QuestData questData;
+        [SerializeField] public Vector3Int playerSpawnPosition;
     }
 }

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using HotlineHyrule.Attributes;
-using UnityEditor;
+using HotlineHyrule.Level;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace HotlineHyrule.Level
+namespace HotlineHyrule
 {
     public class GameComponent : MonoBehaviour
     {
@@ -13,22 +13,22 @@ namespace HotlineHyrule.Level
 
         int CurrentSceneIndex => scenes.IndexOf(SceneManager.GetActiveScene().name);
 
-        public event EventHandler<LevelEventArgs> LevelLoaded;
-        public event EventHandler<LevelEventArgs> LevelUnloaded;
+        bool IsLevel => scenes.Contains(SceneManager.GetActiveScene().name);
+
+        public static event EventHandler<LevelEventArgs> LevelLoaded;
+        public static event EventHandler<LevelEventArgs> LevelUnloaded;
 
         void Awake()
         {
             DontDestroyOnLoad(gameObject);
             Locator.GameComponent = this;
+
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        void Start()
+        void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
         {
-            if (scenes.Contains(SceneManager.GetActiveScene().name))
-            {
-                SetupGame();
-            }
+            if (IsLevel) SetupGame();
         }
 
         [ContextMenu("Load Next Scene")]
@@ -41,9 +41,12 @@ namespace HotlineHyrule.Level
             SceneManager.LoadScene(scenes[nextSceneIndex]);
         }
 
-        void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+        public void ReloadScene()
         {
-            SetupGame();
+            var currentLevelComponent = Locator.LevelComponent;
+            if (currentLevelComponent) LevelUnloaded?.Invoke(this, new LevelEventArgs(currentLevelComponent.levelData));
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         void SetupGame()

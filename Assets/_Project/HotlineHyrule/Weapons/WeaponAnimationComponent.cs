@@ -1,5 +1,6 @@
 using System;
 using HotlineHyrule.Entities;
+using HotlineHyrule.Items;
 using UnityEngine;
 
 namespace HotlineHyrule.Weapons
