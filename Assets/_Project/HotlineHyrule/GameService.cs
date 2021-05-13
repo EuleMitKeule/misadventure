@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace HotlineHyrule.Level
+namespace HotlineHyrule
 {
     public static class GameService
     {

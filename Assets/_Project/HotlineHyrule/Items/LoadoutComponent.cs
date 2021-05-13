@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
+using HotlineHyrule.Entities;
+using HotlineHyrule.Level;
 using HotlineHyrule.Weapons;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Linq;
-using System.Runtime.ExceptionServices;
-using HotlineHyrule.Items;
 
-namespace HotlineHyrule.Entities
+namespace HotlineHyrule.Items
 {
     public class LoadoutComponent : MonoBehaviour
     {
@@ -67,6 +66,13 @@ namespace HotlineHyrule.Entities
             changeWeaponAction.started += _ => 
                 ChangeSlot(changeWeaponAction.ReadValue<float>() > 0 ? NextLoadoutSlotIndex : PreviousLoadoutSlotIndex);
             changeWeaponAction.Enable();
+
+            GameComponent.LevelUnloaded += OnLevelUnloaded;
+        }
+
+        void OnLevelUnloaded(object sender, LevelEventArgs e)
+        {
+            changeWeaponAction.Disable();
         }
 
         /// <summary>

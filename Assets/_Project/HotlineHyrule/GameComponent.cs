@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using HotlineHyrule.Attributes;
-using UnityEditor;
+using HotlineHyrule.Level;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace HotlineHyrule.Level
+namespace HotlineHyrule
 {
     public class GameComponent : MonoBehaviour
     {
