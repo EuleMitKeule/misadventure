@@ -25,6 +25,7 @@ namespace HotlineHyrule.Entities
         /// </summary>
         [SerializeField] public float dodgeForce = 1f;
         [SerializeField] public float dodgeDuration = 1f;
+        [SerializeField] public float dodgeDelay = 2f;
 
         /// <summary>
         /// The minimum amount of velocity that is considered movement for animation purposes.
@@ -50,6 +51,7 @@ namespace HotlineHyrule.Entities
         /// </summary>
         [SerializeField] InputAction dodgeAction;
 
+        float NextDodgeTime { get; set; }
         /// <summary>
         /// The damped input axis.
         /// </summary>
@@ -166,6 +168,9 @@ namespace HotlineHyrule.Entities
 
         void OnButtonDodge(InputAction.CallbackContext context)
         {
+            if (Time.time < NextDodgeTime) return;
+            NextDodgeTime = Time.time + dodgeDelay;
+
             SetState(DodgeState);
         }
 
