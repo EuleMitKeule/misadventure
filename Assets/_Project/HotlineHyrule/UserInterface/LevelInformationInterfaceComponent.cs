@@ -7,7 +7,7 @@ namespace HotlineHyrule.UserInterface
     {
         void Awake()
         {
-            Locator.GameComponent.LevelLoaded += OnLevelLoaded;
+            GameComponent.LevelLoaded += OnLevelLoaded;
         }
 
         void OnLevelLoaded(object sender, LevelEventArgs e)

@@ -1,4 +1,5 @@
 ﻿using System;
+using HotlineHyrule.Extensions;
 using UnityEngine;
 
 namespace HotlineHyrule.Level
@@ -33,7 +34,6 @@ namespace HotlineHyrule.Level
         /// </summary>
         [SerializeField] GameObject snowEffectPrefab;
 
-
         public Grid Grid { get; private set; }
         
         void Awake()
@@ -48,6 +48,13 @@ namespace HotlineHyrule.Level
                 if (isRaining) Instantiate(rainEffectPrefab, mainCamera.transform);
                 if (isSnowing) Instantiate(snowEffectPrefab, mainCamera.transform);
             }
+
+            GameComponent.LevelLoaded += OnLevelLoaded;
+        }
+
+        void OnLevelLoaded(object sender, LevelEventArgs e)
+        {
+            Locator.PlayerComponent.transform.position = e.LevelData.playerSpawnPosition.ToWorld();
         }
     }
 }

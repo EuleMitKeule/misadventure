@@ -7,7 +7,7 @@ namespace HotlineHyrule.Level
     public static class GameService
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        public static void Initialize()
+        static void Initialize()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
@@ -19,12 +19,12 @@ namespace HotlineHyrule.Level
 
         static void SetupLevel()
         {
-            if (!Locator.LevelComponent) return;
-
             if (Locator.GameComponent) return;
 
             var gamePrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Project/Prefabs/game.prefab");
             PrefabUtility.InstantiatePrefab(gamePrefab, SceneManager.GetActiveScene());
+
+            Locator.GameComponent.ReloadScene();
         }
     }
 }

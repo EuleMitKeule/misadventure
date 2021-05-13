@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef8e344c6f547ca9fe6a43879e7446a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCanvas: {fileID: 0}
 --- !u!1 &798222154784294095
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,5 +453,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenes:
-  - scene_level_info
-  - scene_level_info2
+  - scene_forest_01
+  - scene_forest_02
