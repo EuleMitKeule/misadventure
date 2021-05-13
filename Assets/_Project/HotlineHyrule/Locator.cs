@@ -12,6 +12,11 @@ namespace HotlineHyrule
     public static class Locator
     {
         /// <summary>
+        /// The current game component.
+        /// </summary>
+        public static GameComponent GameComponent { get; set; }
+
+        /// <summary>
         /// The player's player component.
         /// </summary>
         public static PlayerComponent PlayerComponent { get; set; }
