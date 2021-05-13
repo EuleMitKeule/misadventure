@@ -30,7 +30,6 @@ namespace HotlineHyruleEditor
                 }
 
                 var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene);
-                EditorSceneManager.SaveScene(scene, $"Assets/_Project/Scenes/scene_{Name}.unity");
 
                 var cameraPrefab =
                     AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Project/Prefabs/Level/camera_main.prefab");
@@ -46,11 +45,6 @@ namespace HotlineHyruleEditor
 
                 PrefabUtility.UnpackPrefabInstance(gridObject, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
 
-                var mapBoundsObject = gridObject.transform.Find("collider_map_bounds");
-                var mapBoundsCollider = mapBoundsObject.GetComponent<Collider2D>();
-                var cinemachineConfiner2D = cameraObject.GetComponentInChildren<CinemachineConfiner2D>();
-                cinemachineConfiner2D.m_BoundingShape2D = mapBoundsCollider;
-
                 var levelData = CreateInstance<LevelData>();
                 AssetDatabase.CreateAsset(levelData, $"Assets/_Project/Scenes/level_{Name}.asset");
 
@@ -61,9 +55,18 @@ namespace HotlineHyruleEditor
                     AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Project/Prefabs/Entities/player.prefab");
                 var playerObject = (GameObject) PrefabUtility.InstantiatePrefab(playerPrefab, scene);
 
+                var mapBoundsObject = gridObject.transform.Find("collider_map_bounds");
+                var mapBoundsCollider = mapBoundsObject.GetComponent<Collider2D>();
+                var cinemachineConfiner2D = cameraObject.GetComponentInChildren<CinemachineConfiner2D>();
+                cinemachineConfiner2D.m_BoundingShape2D = mapBoundsCollider;
+
+                var cinemachineVirtualCamera = cameraObject.GetComponentInChildren<CinemachineVirtualCamera>();
+                cinemachineVirtualCamera.Follow = playerObject.transform;
+
                 _ = new GameObject("enemies");
                 _ = new GameObject("items");
 
+                EditorSceneManager.SaveScene(scene, $"Assets/_Project/Scenes/scene_{Name}.unity");
                 AssetDatabase.SaveAssets();
             }
         }
