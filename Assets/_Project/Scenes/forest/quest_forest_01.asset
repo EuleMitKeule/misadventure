@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1634ab00f9b94a66bf6a7eaacdc248f4, type: 3}
-  m_Name: level_forest_01
+  m_Script: {fileID: 11500000, guid: d025365663e24b5e9c27cc08146942f0, type: 3}
+  m_Name: quest_forest_01
   m_EditorClassIdentifier: 
-  areaName: level info 1
-  areaText: das ist der erste test
-  questData: {fileID: 11400000, guid: 4a85513b797617749a98e595028a0c48, type: 2}
-  playerSpawnPosition: {x: -6, y: -14, z: 0}
+  questText: 
+  killTarget: 5

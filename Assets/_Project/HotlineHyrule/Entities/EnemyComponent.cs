@@ -165,6 +165,8 @@ namespace HotlineHyrule.Entities
                 wallMask
             );
 
+        public static event EventHandler<EventArgs> EnemyKilled;
+
         Rigidbody2D Rigidbody { get; set; }
         Collider2D Collider { get; set; }
         Animator Animator { get; set; }
@@ -258,6 +260,8 @@ namespace HotlineHyrule.Entities
                         Instantiate(item.data.itemPrefab, transform.position, Quaternion.identity);
                     }
                 }
+
+                EnemyKilled?.Invoke(this, EventArgs.Empty);
             }
         }
 
