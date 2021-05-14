@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using HotlineHyrule.Attributes;
+using HotlineHyrule.Entities;
 using HotlineHyrule.Level;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,8 +13,9 @@ namespace HotlineHyrule
     {
         [Scene] [SerializeField] public List<string> scenes;
 
-        int CurrentSceneIndex => scenes.IndexOf(SceneManager.GetActiveScene().name);
+        [SerializeField] PlayerStateData playerStateData;
 
+        int CurrentSceneIndex => scenes.IndexOf(SceneManager.GetActiveScene().name);
         bool IsLevel => scenes.Contains(SceneManager.GetActiveScene().name);
 
         public static event EventHandler<LevelEventArgs> LevelLoaded;
@@ -23,44 +26,67 @@ namespace HotlineHyrule
             DontDestroyOnLoad(gameObject);
             Locator.GameComponent = this;
 
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            LevelUnloaded += OnLevelUnloaded;
         }
 
-        void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+        void OnLevelUnloaded(object sender, LevelEventArgs e)
         {
-            if (IsLevel) SetupGame();
+            if (e.PlayerStateData) playerStateData = e.PlayerStateData;
         }
 
         [ContextMenu("Load Next Scene")]
         public void LoadNextScene()
         {
             var currentLevelComponent = Locator.LevelComponent;
-            if (currentLevelComponent) LevelUnloaded?.Invoke(this, new LevelEventArgs(currentLevelComponent.levelData));
+
+            if (currentLevelComponent)
+            {
+                var stateData =
+                    Locator.PlayerComponent ? Locator.PlayerComponent.GetStateData() : PlayerStateData.Empty;
+                var levelEventArgs = new LevelEventArgs(currentLevelComponent.levelData, stateData);
+                LevelUnloaded?.Invoke(this, levelEventArgs);
+            }
 
             var nextSceneIndex = CurrentSceneIndex == -1 ? 0 : (CurrentSceneIndex + 1) % scenes.Count;
-            SceneManager.LoadScene(scenes[nextSceneIndex]);
+            StartCoroutine(LoadSceneRoutine(scenes[nextSceneIndex]));
         }
 
         public void ReloadScene()
         {
             var currentLevelComponent = Locator.LevelComponent;
-            if (currentLevelComponent) LevelUnloaded?.Invoke(this, new LevelEventArgs(currentLevelComponent.levelData));
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (currentLevelComponent)
+            {
+                var stateData =
+                    Locator.PlayerComponent ? Locator.PlayerComponent.GetStateData() : PlayerStateData.Empty;
+                var levelEventArgs = new LevelEventArgs(currentLevelComponent.levelData, stateData);
+                LevelUnloaded?.Invoke(this, levelEventArgs);
+            }
+
+            StartCoroutine(LoadSceneRoutine(SceneManager.GetActiveScene().name));
         }
 
-        void SetupGame()
+        IEnumerator LoadSceneRoutine(string sceneName)
         {
-            if (!Locator.LevelComponent) return;
+            var asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+            while (!asyncLoad.isDone)
+            {
+                yield return null;
+            }
+
+            if (!IsLevel) yield break;
+
+            if (!Locator.LevelComponent) yield break;
 
             if (!Locator.LevelComponent.levelData)
             {
                 Debug.LogWarning($"The loaded level {Locator.LevelComponent.name} has no level data assigned.");
-                return;
+                yield break;
             }
 
             var levelData = Locator.LevelComponent.levelData;
-            LevelLoaded?.Invoke(this, new LevelEventArgs(levelData));
+            LevelLoaded?.Invoke(this, new LevelEventArgs(levelData, playerStateData));
         }
     }
 }

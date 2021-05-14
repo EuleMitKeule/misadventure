@@ -116,6 +116,7 @@ namespace HotlineHyrule.Entities
         Rigidbody2D Rigidbody { get; set; }
         HealthComponent HealthComponent { get; set; }
         WeaponComponent WeaponComponent { get; set; }
+        LoadoutComponent LoadoutComponent { get; set; }
         Camera MainCamera { get; set; }
 
         void Awake()
@@ -123,6 +124,7 @@ namespace HotlineHyrule.Entities
             Rigidbody = GetComponent<Rigidbody2D>();
             HealthComponent = GetComponent<HealthComponent>();
             WeaponComponent = GetComponent<WeaponComponent>();
+            LoadoutComponent = GetComponent<LoadoutComponent>();
             IdleState = GetComponent<PlayerIdleStateComponent>();
             DodgeState = GetComponent<PlayerDodgeStateComponent>();
             if (!legsAnimator) legsAnimator = transform.Find("legs").GetComponent<Animator>();
@@ -141,13 +143,24 @@ namespace HotlineHyrule.Entities
 
             SetState(IdleState);
 
+            GameComponent.LevelLoaded += OnLevelLoaded;
             GameComponent.LevelUnloaded += OnLevelUnloaded;
+        }
+
+        void OnLevelLoaded(object sender, LevelEventArgs e)
+        {
+            if (!e.PlayerStateData) return;
+
+            HealthComponent.Health = e.PlayerStateData.currentHealth;
         }
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)
         {
             dodgeAction.Disable();
             walkAction.Disable();
+
+            GameComponent.LevelLoaded -= OnLevelLoaded;
+            GameComponent.LevelUnloaded -= OnLevelUnloaded;
         }
 
         void Update()
@@ -218,6 +231,16 @@ namespace HotlineHyrule.Entities
             if (e.HealthDifference >= 0) return;
 
             if (damageParticleSystemPrefab) Instantiate(damageParticleSystemPrefab, transform.position, Quaternion.identity);
+        }
+
+        public PlayerStateData GetStateData()
+        {
+            var stateData = ScriptableObject.CreateInstance<PlayerStateData>();
+            stateData.currentHealth = HealthComponent.Health;
+            stateData.loadoutSlots = LoadoutComponent.loadoutSlots;
+            stateData.currentLoadoutSlot = LoadoutComponent.CurrentLoadoutSlot;
+
+            return stateData;
         }
     }
 }
