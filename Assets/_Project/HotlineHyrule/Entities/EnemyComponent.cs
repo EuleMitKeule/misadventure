@@ -114,13 +114,21 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// Whether the player is in front of any walls.
         /// </summary>
-        bool IsPlayerVisible =>
-            Physics2D.Raycast(
-                transform.position,
-                PlayerDirection,
-                followRange,
-                wallMask | 1 << PhysicsLayer.PLAYER
-            ).transform.gameObject.layer.IsPlayer();
+        bool IsPlayerVisible
+        {
+            get
+            {
+                var raycastHit = Physics2D.Raycast(
+                    transform.position,
+                    PlayerDirection,
+                    followRange,
+                    wallMask | 1 << PhysicsLayer.PLAYER
+                );
+
+                return raycastHit && raycastHit.transform.gameObject.layer.IsPlayer();
+            }
+        }
+
         /// <summary>
         /// Whether the enemy has a wall to its left.
         /// </summary>
