@@ -4,6 +4,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using HotlineHyrule.Entities;
 using HotlineHyrule.Extensions;
 using HotlineHyrule.Items;
+using HotlineHyrule.Level;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -146,9 +147,9 @@ namespace HotlineHyrule.Weapons
 
             AttackFinished += OnAttackFinished;
 
+            if (weaponData) SetWeapon(weaponData);
             ResetBuffs();
             
-            if (weaponData) SetWeapon(weaponData);
             attackAction.Enable();
         }
 
@@ -166,6 +167,10 @@ namespace HotlineHyrule.Weapons
             if (WeaponObject) Destroy(WeaponObject);
             
             weaponData = newWeaponData;
+
+            if (!weaponData) return;
+            // if (this == null) return;
+
             WeaponObject = Instantiate(weaponData.weaponPrefab, transform);
             WeaponTransform.localPosition = weaponOffset;
             WeaponAnimator = WeaponObject.GetComponent<Animator>();

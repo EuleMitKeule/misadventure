@@ -18,7 +18,7 @@ namespace HotlineHyrule.Items
         /// <summary>
         /// List of slots in which weapons can be equipped.
         /// </summary>
-        [SerializeField] List<LoadoutSlot> loadoutSlots;
+        [SerializeField] public List<LoadoutSlot> loadoutSlots;
         /// <summary>
         /// The input action for changing the selected weapon slot.
         /// </summary>
@@ -28,7 +28,7 @@ namespace HotlineHyrule.Items
         /// <summary>
         /// The currently selected weapon slot.
         /// </summary>
-        public LoadoutSlot CurrentLoadoutSlot { get; private set; }
+        public LoadoutSlot CurrentLoadoutSlot { get; set; }
         /// <summary>
         /// The index of the currently selected weapon slot.
         /// </summary>
@@ -67,12 +67,25 @@ namespace HotlineHyrule.Items
                 ChangeSlot(changeWeaponAction.ReadValue<float>() > 0 ? NextLoadoutSlotIndex : PreviousLoadoutSlotIndex);
             changeWeaponAction.Enable();
 
+            GameComponent.LevelLoaded += OnLevelLoaded;
             GameComponent.LevelUnloaded += OnLevelUnloaded;
+        }
+
+        void OnLevelLoaded(object sender, LevelEventArgs e)
+        {
+            if (!e.PlayerStateData) return;
+
+            loadoutSlots = e.PlayerStateData.loadoutSlots;
+            CurrentLoadoutSlot = e.PlayerStateData.currentLoadoutSlot;
+            Apply();
         }
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)
         {
             changeWeaponAction.Disable();
+
+            GameComponent.LevelLoaded -= OnLevelLoaded;
+            GameComponent.LevelUnloaded -= OnLevelUnloaded;
         }
 
         /// <summary>

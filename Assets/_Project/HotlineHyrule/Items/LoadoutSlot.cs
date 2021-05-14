@@ -1,9 +1,8 @@
 using System;
 using HotlineHyrule.Weapons;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace HotlineHyrule.Entities
+namespace HotlineHyrule.Items
 {
     [Serializable]
     public class LoadoutSlot
