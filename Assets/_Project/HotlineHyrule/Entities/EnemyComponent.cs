@@ -110,7 +110,6 @@ namespace HotlineHyrule.Entities
         /// Whether the enemy is currently able to attack the player.
         /// </summary>
         public bool IsPlayerAttackable => IsPlayerInAttackRange && IsPlayerInAngle && IsPlayerVisible;
-
         /// <summary>
         /// Whether the player is in front of any walls.
         /// </summary>
@@ -241,6 +240,8 @@ namespace HotlineHyrule.Entities
 
         void OnHealthChanged(object sender, HealthEventArgs e)
         {
+            if (state) state.OnHealthChanged(sender, e);
+
             if (e.IsDamage)
             {
                 if (damageParticleSystemPrefab) Instantiate(damageParticleSystemPrefab, transform.position, Quaternion.identity);

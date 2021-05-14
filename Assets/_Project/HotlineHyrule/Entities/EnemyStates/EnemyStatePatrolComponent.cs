@@ -61,5 +61,10 @@ namespace HotlineHyrule.Entities.EnemyStates
                 transform.eulerAngles += Vector3.forward * (isTurningLeft ? 90f : -90f);
             }
         }
+
+        public override void OnHealthChanged(object sender, HealthEventArgs e)
+        {
+            transform.rotation = EnemyComponent.FollowRotation;
+        }
     }
 }
