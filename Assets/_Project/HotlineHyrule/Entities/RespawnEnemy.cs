@@ -17,17 +17,19 @@ namespace HotlineHyrule.Entities
         [SerializeField] public bool useLevelBounds;
         [SerializeField] Vector3 spawnPos;
         //[SerializeField] public BoundsInt spawnBounds;       
-        [SerializeField] public int enemyMaxCount;
+        [SerializeField] public int spawnObjectsMaxCount;
         
         [SerializeField] public bool useSpawnWaves;
         [SerializeField] public bool randomSpawnPositionPerWaves;
 
         [SerializeField] public int spawnWavesCount;
+        [SerializeField] public int waveIntervallTime;
         [SerializeField] [Range(0, 1)] public float intervallRandomnes;
-        [SerializeField] public int spawnCountPerWave;
+        [SerializeField] public int spawnObjectsPerWave;
         [SerializeField] [Range(0, 1)] public float spawnCounterRandomnes; //Gegner dürfen nicht an der selben Stelle innerhalb einer Welle gespawnd werden
 
-        private int enemyCount;
+        private int spwanedObjectsCount;
+        private int wave;
 
         //Spawn per wave
         //spawn at time
@@ -37,35 +39,82 @@ namespace HotlineHyrule.Entities
         // Start is called before the first frame update
         void Start()
         {
-          
-            //
-            if (enemyMaxCount <= 0)
-            {
-                Debug.Log("Error Anazahl Gegner nicht angegeben! Gegneranzahl: " + enemyMaxCount);
-            }
-            else
-            {
 
-                // BoundsInt bounds = useLevelBounds ? Locator.LevelComponent.LevelBounds() : spawnBounds;
-
-                BoundsInt bounds = useLevelBounds ? Locator.LevelComponent.LevelBounds() : spawnTilemap.cellBounds;
-
-                for (int i = 0; i <= enemyMaxCount; i++)
-                {
-                    SpawnRandomEnemyPrefeb(bounds);
-                    Debug.Log("Spawn enemy: " + i);
-                }
-
-                //Coroutine für die Wellen implementieren
-            }
+            //Grenzen zum Spawnen festlegen:
+            BoundsInt bounds = useLevelBounds ? Locator.LevelComponent.LevelBounds() : spawnTilemap.cellBounds;
             
+            StartCoroutine(SpawnMaster(bounds));
         }
 
         // Update is called once per frame
         void Update()
         {
-
+           
         }
+
+        IEnumerator SpawnMaster(BoundsInt bounds)
+        {
+            //Wenn kein Max-Anzahl an Spawn-Objekte definiert
+            if (spawnObjectsMaxCount <= 0)
+            {
+                yield return new WaitForSeconds(0.5f);
+                Debug.LogWarning("Warning: Max-Anazahl Spawn-Objekte nicht angegeben! " + spawnObjectsMaxCount);
+                
+            }
+            else
+            {
+                //Art von Spawnen waehlen
+                if (!useSpawnWaves)
+                {
+                    //Randomisierte spawnen von maximaler Anzahl an Elementen-Objekten
+                    Debug.Log("Spawn begint in 2 sec.");
+                    yield return new WaitForSeconds(2);
+
+                    for (int i = 0; i <= spawnObjectsMaxCount; i++)
+                    {                       
+                        SpawnRandomEnemyPrefeb(bounds);
+                        Debug.Log("Spawn enemy: " + i);
+
+                    }
+                }
+                else
+                {
+                    //Wellenartige Spawnen
+                    if (spawnWavesCount > 0)
+                    {
+                        Debug.Log("Wavespawn begint in 2 sec.");
+                        yield return new WaitForSeconds(2);
+
+                        while (wave < spawnWavesCount)
+                        {
+                            if ((spwanedObjectsCount+ spawnObjectsPerWave) <= spawnObjectsMaxCount)
+                            {
+                                for (int i = 0; i < spawnObjectsPerWave; i++)
+                                {
+
+                                    SpawnRandomEnemyPrefeb(bounds);
+                                    Debug.Log("Spawn enemy: " + spwanedObjectsCount);
+                                }
+                                wave += 1;
+                            }                            
+                            Debug.Log("Wave: " + wave);
+                            yield return new WaitForSeconds(waveIntervallTime);
+                            
+                        }
+                        yield return null;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Warning: Spawn Wavescounter ist nicht gesetzt!");
+                    }
+                    
+
+                }
+                                                              
+            }
+        }
+
+    
 
         void SpawnRandomEnemyPrefeb(BoundsInt spawnBounds)
         {
@@ -100,7 +149,7 @@ namespace HotlineHyrule.Entities
             // mit Rotation freischalten spawnPoints[spawnPointIndex].rotation
             rotation = Random.Range(0, 360);
             var spawnObj = Instantiate(enemyPrefab_rnd[0], spawnPosition.ToWorld(), Quaternion.Euler(0,0,rotation));
-            enemyCount += 1;
+            spwanedObjectsCount += 1;
             var healthComponent = spawnObj.GetComponent<HealthComponent>();
             healthComponent.HealthChanged += onHealthChanged;
         }
@@ -108,9 +157,9 @@ namespace HotlineHyrule.Entities
         private void onHealthChanged(object sender, HealthEventArgs e)
         {
             if(e.NewHealth == 0){
-                enemyCount -= 1;
+                spwanedObjectsCount -= 1;
                 Debug.Log("Kill");
-                Debug.Log("Enemy count: " + enemyCount);
+                Debug.Log("Enemy count: " + spwanedObjectsCount);
             }
         }
     }
