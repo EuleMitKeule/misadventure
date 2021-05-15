@@ -1,3 +1,4 @@
+using HotlineHyrule.Quests;
 using UnityEngine;
 
 namespace HotlineHyrule.Level

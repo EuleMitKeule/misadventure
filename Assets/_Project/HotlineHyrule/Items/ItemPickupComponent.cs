@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HotlineHyrule.Entities;
@@ -37,6 +38,8 @@ namespace HotlineHyrule.Items
             OverlappingItems
             .OrderBy(element => (element.transform.position - transform.position).magnitude)
             .FirstOrDefault();
+
+        public event EventHandler<ItemEventArgs> ItemConsumed;
 
         HealthComponent HealthComponent { get; set; }
         LoadoutComponent LoadoutComponent { get; set; }
@@ -105,6 +108,8 @@ namespace HotlineHyrule.Items
                         MovementComponent.Consume(movementItemData);
                         break;
                 }
+
+                ItemConsumed?.Invoke(this, new ItemEventArgs(itemData));
             }
 
             Destroy(itemComponent.gameObject);

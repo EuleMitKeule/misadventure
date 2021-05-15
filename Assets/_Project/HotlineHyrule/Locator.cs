@@ -2,6 +2,7 @@ using HotlineHyrule.Entities;
 using HotlineHyrule.Graphics;
 using HotlineHyrule.Level;
 using HotlineHyrule.Pathfinding;
+using HotlineHyrule.Quests;
 using HotlineHyrule.Sound;
 
 namespace HotlineHyrule
@@ -40,5 +41,10 @@ namespace HotlineHyrule
         /// The current level's sound component.
         /// </summary>
         public static SoundComponent SoundComponent { get; set; }
+
+        /// <summary>
+        /// The current level's quest component.
+        /// </summary>
+        public static QuestComponent QuestComponent { get; set; }
     }
 }

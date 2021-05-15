@@ -7,7 +7,7 @@ namespace HotlineHyrule.Level
     [Serializable]
     public struct TileObject
     {
-        public Tile Tile;
-        public GameObject Prefab;
+        [SerializeField] public Tile tile;
+        [SerializeField] public GameObject prefab;
     }
 }
