@@ -1,5 +1,4 @@
-﻿using System;
-using HotlineHyrule.Extensions;
+﻿using HotlineHyrule.Extensions;
 using UnityEngine;
 
 namespace HotlineHyrule.Level

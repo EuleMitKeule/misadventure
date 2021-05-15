@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d025365663e24b5e9c27cc08146942f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 72112766fd8a400786090afb9f205301, type: 3}
   m_Name: quest_forest_01
   m_EditorClassIdentifier: 
   questText: 
-  killTarget: 5
+  questTargets: []

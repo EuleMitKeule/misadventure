@@ -23,9 +23,9 @@ namespace HotlineHyrule.Level
                     foreach (var cellPosition in tilemap.cellBounds.allPositionsWithin)
                     {
                         var tile = tilemap.GetTile(cellPosition);
-                        if (tileObject.Tile != tile) continue;
+                        if (tileObject.tile != tile) continue;
 
-                        var newObject = Instantiate(tileObject.Prefab, tilemap.transform);
+                        var newObject = Instantiate(tileObject.prefab, tilemap.transform);
                         newObject.transform.position = cellPosition.ToWorld();
                     }
                 }
