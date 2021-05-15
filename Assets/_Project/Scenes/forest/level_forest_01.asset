@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1634ab00f9b94a66bf6a7eaacdc248f4, type: 3}
   m_Name: level_forest_01
   m_EditorClassIdentifier: 
-  areaName: level info 1
-  areaText: das ist der erste test
+  areaName: Forest Clearing
+  areaText: We found a large clearing in the forest and decided to explore.
   questData: {fileID: 11400000, guid: 4a85513b797617749a98e595028a0c48, type: 2}
   playerSpawnPosition: {x: -6, y: -14, z: 0}

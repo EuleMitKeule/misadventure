@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HotlineHyrule.Quests
 {
-    [CreateAssetMenu(menuName = "Quests/New Quest")]
+    [CreateAssetMenu(menuName = "Quest/New Quest")]
     public class QuestData : ScriptableObject
     {
         [TextArea] [SerializeField] public string questText;
