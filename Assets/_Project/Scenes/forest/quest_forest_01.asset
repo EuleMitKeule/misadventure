@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questText: This area of the forest had a bunch of gnomes gathered around a big
     treasure.
+  questTargetText: We decided to kill them all and steal their prized posessions.
   questTargets:
   - id: 0
   - id: 1
