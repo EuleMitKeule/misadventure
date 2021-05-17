@@ -5,6 +5,7 @@ using HotlineHyrule.Entities;
 using HotlineHyrule.Items;
 using HotlineHyrule.Level;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace HotlineHyrule.Quests
 {
@@ -14,6 +15,7 @@ namespace HotlineHyrule.Quests
 
         List<KillQuestTarget> KillQuestTargets => QuestData.questTargets.OfType<KillQuestTarget>().ToList();
         List<SearchQuestTarget> SearchQuestTargets => QuestData.questTargets.OfType<SearchQuestTarget>().ToList();
+        List<TreasureQuestTarget> TreasureQuestTargets => QuestData.questTargets.OfType<TreasureQuestTarget>().ToList();
 
         public bool IsQuestFinished => QuestData.questTargets.Where(e => e.isRequired).All(IsCompleted);
 
@@ -24,12 +26,15 @@ namespace HotlineHyrule.Quests
         public event EventHandler<QuestTargetEventArgs> QuestTargetReached;
 
         LevelComponent LevelComponent { get; set; }
+        Tilemap TreasureTilemap { get; set; }
 
         void Awake()
         {
             Locator.QuestComponent = this;
 
             LevelComponent = GetComponent<LevelComponent>();
+            var treasureTilemapObject = transform.Find("tilemap_treasure");
+            if (treasureTilemapObject) TreasureTilemap = treasureTilemapObject.GetComponent<Tilemap>();
 
             EnemyComponent.EnemyKilled += OnEnemyKilled;
             GameComponent.LevelLoaded += OnLevelLoaded;
@@ -44,6 +49,16 @@ namespace HotlineHyrule.Quests
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
+            foreach (var treasureQuestTarget in TreasureQuestTargets)
+            {
+                if (!treasureQuestTarget.treasurePrefab) continue;
+
+                var treasureSpots = new List<Vector3Int>();
+                foreach (var cellPosition in TreasureTilemap.cellBounds.allPositionsWithin)
+                {
+                    treasureSpots.Add(cellPosition);
+                }
+            }
         }
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)

@@ -11,11 +11,6 @@ namespace HotlineHyrule.UserInterface
             GameComponent.LevelLoaded += OnLevelLoaded;
         }
 
-        void Start()
-        {
-            Locator.QuestComponent.QuestTargetReached += OnQuestTargetReached;
-        }
-
         void OnQuestTargetReached(object sender, QuestTargetEventArgs e)
         {
             Debug.Log(e.QuestTarget.targetText);
@@ -23,6 +18,8 @@ namespace HotlineHyrule.UserInterface
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
+            if (Locator.QuestComponent) Locator.QuestComponent.QuestTargetReached += OnQuestTargetReached;
+
             if (!e.LevelData) return;
             Debug.Log(e.LevelData.areaName);
             Debug.Log(e.LevelData.areaText);
