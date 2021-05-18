@@ -1,16 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using HotlineHyrule.Entities;
+using HotlineHyrule.Extensions;
 using HotlineHyrule.Items;
 using HotlineHyrule.Level;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = System.Random;
 
 namespace HotlineHyrule.Quests
 {
     public class QuestComponent : MonoBehaviour
     {
+        // [HideInInspector] public List<TreasureQuestSettings> treasureQuestSettings; 
+        
         QuestData QuestData => LevelComponent ? LevelComponent.levelData.questData : QuestData.Empty;
 
         List<KillQuestTarget> KillQuestTargets => QuestData.questTargets.OfType<KillQuestTarget>().ToList();
@@ -21,12 +26,30 @@ namespace HotlineHyrule.Quests
 
         int KilledEnemies { get; set; }
         List<ItemData> FoundItems { get; set; } = new List<ItemData>();
+        List<QuestTarget> ReachedTargets { get; set; } = new List<QuestTarget>();
 
         public event EventHandler<QuestEventArgs> QuestCompleted;
         public event EventHandler<QuestTargetEventArgs> QuestTargetReached;
 
         LevelComponent LevelComponent { get; set; }
-        Tilemap TreasureTilemap { get; set; }
+
+        // void OnValidate()
+        // {
+        //     if (!QuestData) return;
+        //     if (!QuestData.questTargets.Any(e => e is TreasureQuestTarget)) return;
+        //
+        //     treasureQuestSettings = new List<TreasureQuestSettings>();
+        //     
+        //     foreach (var treasureQuestTarget in TreasureQuestTargets)
+        //     {
+        //         var treasureQuestSetting = new TreasureQuestSettings
+        //         {
+        //             treasureQuestTarget = treasureQuestTarget
+        //         };
+        //         
+        //         treasureQuestSettings.Add(treasureQuestSetting);
+        //     }
+        // }
 
         void Awake()
         {
@@ -34,7 +57,6 @@ namespace HotlineHyrule.Quests
 
             LevelComponent = GetComponent<LevelComponent>();
             var treasureTilemapObject = transform.Find("tilemap_treasure");
-            if (treasureTilemapObject) TreasureTilemap = treasureTilemapObject.GetComponent<Tilemap>();
 
             EnemyComponent.EnemyKilled += OnEnemyKilled;
             GameComponent.LevelLoaded += OnLevelLoaded;
@@ -51,13 +73,28 @@ namespace HotlineHyrule.Quests
         {
             foreach (var treasureQuestTarget in TreasureQuestTargets)
             {
-                if (!treasureQuestTarget.treasurePrefab) continue;
+                if (!treasureQuestTarget.treasureItem) continue;
+                if (!treasureQuestTarget.treasureItem.itemPrefab) continue;
 
-                var treasureSpots = new List<Vector3Int>();
-                foreach (var cellPosition in TreasureTilemap.cellBounds.allPositionsWithin)
+                var treasureTilemapObject = transform.Find(treasureQuestTarget.treasureTilemapName);
+                if (!treasureTilemapObject)
                 {
+                    Debug.LogWarning($"{treasureQuestTarget.treasureTilemapName} could not be found.");
+                    continue;
+                }
+
+                var treasureTilemap = treasureTilemapObject.GetComponent<Tilemap>(); 
+                var treasureSpots = new List<Vector3Int>();
+                
+                foreach (var cellPosition in treasureTilemap.cellBounds.allPositionsWithin)
+                {
+                    if (!treasureTilemap.HasTile(cellPosition)) continue;
                     treasureSpots.Add(cellPosition);
                 }
+
+                var randomIndex = new Random().Next(treasureSpots.Count);
+                var treasureSpot = treasureSpots.ElementAt(randomIndex);
+                Instantiate(treasureQuestTarget.treasureItem.itemPrefab, treasureSpot.ToWorld(), Quaternion.identity);
             }
         }
 
@@ -74,25 +111,49 @@ namespace HotlineHyrule.Quests
 
             var questTarget = KillQuestTargets.Find(target => KilledEnemies >= target.killTarget);
 
+            if (ReachedTargets.Contains(questTarget)) return;
+
             if (questTarget != null)
             {
+                ReachedTargets.Add(questTarget);
                 QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(questTarget));
             }
         }
 
         void OnItemConsumed(object sender, ItemEventArgs e)
         {
-            if (SearchQuestTargets.All(target => target.item != e.ItemData)) return;
-
-            var questTarget = SearchQuestTargets.Find(target => target.item == e.ItemData);
-            QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(questTarget));
-
+            if (SearchQuestTargets.All(target => target.item != e.ItemData) &&
+                TreasureQuestTargets.All(target => target.treasureItem != e.ItemData)) return;
+            
             FoundItems.Add(e.ItemData);
+
+            var searchQuestTarget = SearchQuestTargets.Find(target => target.item == e.ItemData);
+            var treasureQuestTarget = TreasureQuestTargets.Find(target => target.treasureItem == e.ItemData);
+
+            if (searchQuestTarget != null)
+            {
+                if (ReachedTargets.Contains(searchQuestTarget)) return;
+            
+                ReachedTargets.Add(searchQuestTarget);
+                QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(searchQuestTarget));       
+            }
+
+            if (treasureQuestTarget != null)
+            {
+                if (ReachedTargets.Contains(treasureQuestTarget)) return;
+            
+                ReachedTargets.Add(treasureQuestTarget);
+                QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(treasureQuestTarget));       
+            }
         }
 
-        bool IsCompleted(QuestTarget questTarget)
-        {
-            return false;
-        }
+        bool IsCompleted(QuestTarget questTarget) => ReachedTargets.Contains(questTarget);
+    }
+
+    [Serializable]
+    public class TreasureQuestSettings
+    {
+        [SerializeField] public TreasureQuestTarget treasureQuestTarget;
+        [SerializeField] public Tilemap treasureTilemap;
     }
 }
