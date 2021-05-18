@@ -1,3 +1,4 @@
+using System;
 using HotlineHyrule.Entities.PlayerStates;
 using HotlineHyrule.Items;
 using HotlineHyrule.Level;
@@ -113,6 +114,8 @@ namespace HotlineHyrule.Entities
         public PlayerBaseStateComponent IdleState { get; private set; }
         public PlayerBaseStateComponent DodgeState { get; private set; }
 
+        public event EventHandler MovementStarted;
+
         Rigidbody2D Rigidbody { get; set; }
         HealthComponent HealthComponent { get; set; }
         WeaponComponent WeaponComponent { get; set; }
@@ -208,7 +211,13 @@ namespace HotlineHyrule.Entities
         void HandleAnimation()
         {
             var isInMovingState = legsAnimator.GetBool("isMoving");
-            if (isInMovingState != IsMoving) legsAnimator.SetBool("isMoving", IsMoving);
+            
+            if (isInMovingState != IsMoving)
+            {
+                if (IsMoving) MovementStarted?.Invoke(this, EventArgs.Empty);
+
+                legsAnimator.SetBool("isMoving", IsMoving);
+            }
         }
 
         /// <summary>
