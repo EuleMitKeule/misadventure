@@ -9,10 +9,10 @@ using UnityEngine.Tilemaps;
 
 namespace HotlineHyrule.Entities
 {
-    public class RespawnEnemy : MonoBehaviour
+    public class RespawnObjectComponent : MonoBehaviour
     {
                 
-        [SerializeField] public List<GameObject> enemyPrefab_rnd; // Prefabs sind als liste und randomisiert aussuchen, 
+        [SerializeField] public List<GameObject> spawnObjectList; // Prefabs sind als liste und randomisiert aussuchen, 
         [SerializeField] public Tilemap spawnTilemap;
         [SerializeField] private bool useManualPosition; //useLevelBounds
         [SerializeField] Vector3Int spawnManualPosition;
@@ -28,7 +28,7 @@ namespace HotlineHyrule.Entities
         [SerializeField] private int spawnObjectsPerWave;
         [SerializeField] [Range(0, 1)] private float spawnCounterRandomnes; //Gegner dürfen nicht an der selben Stelle innerhalb einer Welle gespawnd werden
 
-        private int spwanedObjectsCount;
+        private int spawnedObjectsCount;
         private int wave;
 
         //Spawn per wave
@@ -106,7 +106,7 @@ namespace HotlineHyrule.Entities
                             spawnRandomCountPerWave = spawnCounterRandomnes != 0 ? Random.Range(spawnObjectsPerWave - randomSpawnWeight, spawnObjectsPerWave + randomSpawnWeight) : spawnObjectsPerWave;
                             Debug.Log("RandomCount to spawn: " + spawnRandomCountPerWave);
 
-                            if ((spwanedObjectsCount+ spawnRandomCountPerWave) <= spawnObjectsMaxCount)
+                            if ((spawnedObjectsCount+ spawnRandomCountPerWave) <= spawnObjectsMaxCount)
                             {
                                 for (int i = 0; i < spawnRandomCountPerWave; i++)
                                 {
@@ -168,11 +168,11 @@ namespace HotlineHyrule.Entities
 
             // Instanz von Object-prefab an einer randomisierten Position spawnen ohne Rotation.
             // mit Rotation freischalten spawnPoints[spawnPointIndex].rotation
-            prefabIndex = Random.Range(0, enemyPrefab_rnd.Count);
+            prefabIndex = Random.Range(0, spawnObjectList.Count);
             rotation = Random.Range(0, 360);
 
-            var spawnObj = Instantiate(enemyPrefab_rnd[prefabIndex], spawnPosition.ToWorld(), Quaternion.Euler(0,0,rotation));
-            spwanedObjectsCount += 1;
+            var spawnObj = Instantiate(spawnObjectList[prefabIndex], spawnPosition.ToWorld(), Quaternion.Euler(0,0,rotation));
+            spawnedObjectsCount += 1;
             var healthComponent = spawnObj.GetComponent<HealthComponent>();
             healthComponent.HealthChanged += onHealthChanged;
         }
@@ -210,8 +210,8 @@ namespace HotlineHyrule.Entities
             // Instanz von Enemy-prefab an einer randomisierten Position spawnen ohne Rotation.
             // mit Rotation freischalten spawnPoints[spawnPointIndex].rotation
             rotation = Random.Range(0, 360);
-            var spawnObj = Instantiate(enemyPrefab_rnd[0], spawnManualPostion.ToWorld(), Quaternion.Euler(0, 0, rotation));
-            spwanedObjectsCount += 1;
+            var spawnObj = Instantiate(spawnObjectList[0], spawnManualPostion.ToWorld(), Quaternion.Euler(0, 0, rotation));
+            spawnedObjectsCount += 1;
             var healthComponent = spawnObj.GetComponent<HealthComponent>();
             healthComponent.HealthChanged += onHealthChanged;
         }
@@ -219,9 +219,9 @@ namespace HotlineHyrule.Entities
         private void onHealthChanged(object sender, HealthEventArgs e)
         {
             if(e.NewHealth == 0){
-                spwanedObjectsCount -= 1;
+                spawnedObjectsCount -= 1;
                 Debug.Log("Kill");
-                Debug.Log("Enemy count: " + spwanedObjectsCount);
+                Debug.Log("Enemy count: " + spawnedObjectsCount);
             }
         }
     }
