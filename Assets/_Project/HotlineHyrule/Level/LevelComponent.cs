@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.Tilemaps;
+﻿using HotlineHyrule.Extensions;
+using UnityEngine;
 
 namespace HotlineHyrule.Level
 {
@@ -14,11 +14,7 @@ namespace HotlineHyrule.Level
         /// </summary>
         [Header("General")]
         [SerializeField] public Vector2Int playerRespawnPosition;
-
-        [SerializeField] public Tilemap wallTilemap;
-        [SerializeField] public Tilemap groundTilemap;
-
-
+        [SerializeField] public LevelData levelData;
         /// <summary>
         /// Whether to enable the rain effect.
         /// </summary>
@@ -38,36 +34,26 @@ namespace HotlineHyrule.Level
         [SerializeField] GameObject snowEffectPrefab;
 
         public Grid Grid { get; private set; }
-
+        
         void Awake()
         {
+            Locator.LevelComponent = this;
+            Grid = GetComponent<Grid>();
 
-          Locator.LevelComponent = this;
+            var mainCamera = Camera.main;
 
-          if(!wallTilemap)
-          {
-              wallTilemap = GameObject.Find("tilemap_wall").GetComponent<Tilemap>();
-          }
-          if (!groundTilemap)
-          {
-              groundTilemap = GameObject.Find("tilemap_ground").GetComponent<Tilemap>();
-          }
+            if (mainCamera)
+            {
+                if (isRaining) Instantiate(rainEffectPrefab, mainCamera.transform);
+                if (isSnowing) Instantiate(snowEffectPrefab, mainCamera.transform);
+            }
 
-          Grid = GetComponent<Grid>();
-
-          var mainCamera = Camera.main;
-
-          if (mainCamera)
-          {
-              if (isRaining) Instantiate(rainEffectPrefab, mainCamera.transform);
-              if (isSnowing) Instantiate(snowEffectPrefab, mainCamera.transform);
-          }
+            GameComponent.LevelLoaded += OnLevelLoaded;
         }
 
-
-        public bool IsWall(Vector3Int position) => wallTilemap.HasTile(position);
-        public bool IsWall(Vector3 position) => wallTilemap.HasTile(wallTilemap.WorldToCell(position));
-
-        public BoundsInt LevelBounds() => groundTilemap.cellBounds;
+        void OnLevelLoaded(object sender, LevelEventArgs e)
+        {
+            Locator.PlayerComponent.transform.position = e.LevelData.playerSpawnPosition.ToWorld();
+        }
     }
 }

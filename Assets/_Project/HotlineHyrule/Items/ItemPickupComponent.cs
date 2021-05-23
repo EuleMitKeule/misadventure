@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HotlineHyrule.Entities;
+using HotlineHyrule.Level;
 using HotlineHyrule.Weapons;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -37,6 +39,8 @@ namespace HotlineHyrule.Items
             .OrderBy(element => (element.transform.position - transform.position).magnitude)
             .FirstOrDefault();
 
+        public event EventHandler<ItemEventArgs> ItemConsumed;
+
         HealthComponent HealthComponent { get; set; }
         LoadoutComponent LoadoutComponent { get; set; }
         IMovementComponent MovementComponent { get; set; }
@@ -52,6 +56,13 @@ namespace HotlineHyrule.Items
             pickupAction.started += OnButtonPickup;
             
             pickupAction.Enable();
+
+            GameComponent.LevelUnloaded += OnLevelUnloaded;
+        }
+
+        void OnLevelUnloaded(object sender, LevelEventArgs e)
+        {
+            pickupAction.Disable();
         }
 
         void OnButtonPickup(InputAction.CallbackContext context)
@@ -97,6 +108,8 @@ namespace HotlineHyrule.Items
                         MovementComponent.Consume(movementItemData);
                         break;
                 }
+
+                ItemConsumed?.Invoke(this, new ItemEventArgs(itemData));
             }
 
             Destroy(itemComponent.gameObject);

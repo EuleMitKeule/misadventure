@@ -2,7 +2,8 @@
     "name": "HotlineHyruleEditor",
     "rootNamespace": "",
     "references": [
-        "GUID:983c8d43262bcce40838e14b96502e23"
+        "GUID:983c8d43262bcce40838e14b96502e23",
+        "GUID:4307f53044263cf4b835bd812fc161a4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [

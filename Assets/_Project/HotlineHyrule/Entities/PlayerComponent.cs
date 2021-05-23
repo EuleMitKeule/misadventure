@@ -1,4 +1,6 @@
+using HotlineHyrule.Entities.PlayerStates;
 using HotlineHyrule.Items;
+using HotlineHyrule.Level;
 using HotlineHyrule.Weapons;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,12 +15,23 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// The player's movement speed.
         /// </summary>
-        [Header("Physics")]
-        [SerializeField] float movementSpeed;
+        [Header("Physics")] [SerializeField] public float movementSpeed;
         /// <summary>
         /// The damping value applied to the movement axis.
         /// </summary>
         [SerializeField] float moveDamping;
+        /// <summary>
+        /// The force to apply when performing a dodge move.
+        /// </summary>
+        [SerializeField] public float dodgeForce = 1f;
+        /// <summary>
+        /// The duration a dodge move takes.
+        /// </summary>
+        [SerializeField] public float dodgeDuration = 1f;
+        /// <summary>
+        /// The delay between dodge moves.
+        /// </summary>
+        [SerializeField] public float dodgeDelay = 2f;
 
         /// <summary>
         /// The minimum amount of velocity that is considered movement for animation purposes.
@@ -39,11 +52,16 @@ namespace HotlineHyrule.Entities
         /// </summary>
         [Header("Input")]
         [SerializeField] InputAction walkAction;
+        /// <summary>
+        /// The input action to perform a dodge move.
+        /// </summary>
+        [SerializeField] InputAction dodgeAction;
 
+        float NextDodgeTime { get; set; }
         /// <summary>
         /// The damped input axis.
         /// </summary>
-        Vector2 WalkAxis { get; set; }
+        public Vector2 WalkAxis { get; set; }
         /// <summary>
         /// The current mouse position in world space.
         /// </summary>
@@ -80,7 +98,7 @@ namespace HotlineHyrule.Entities
         /// The position of the look target clamped to the outside of the deadzone.
         /// </summary>
         Vector2 ClampedMousePosition => IsInDeadzone ? DeadzonedMousePosition : MousePosition;
-        bool IsMoving => Rigidbody.velocity.magnitude > moveAnimationThreshold;
+        public bool IsMoving => Rigidbody.velocity.magnitude > moveAnimationThreshold;
         /// <summary>
         /// Multiplies the player's movement speed.
         /// </summary>
@@ -88,11 +106,17 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// Multiplies the player's movement speed.
         /// </summary>
-        float MovementItemFactor { get; set; }
-        
+        public float MovementItemFactor { get; set; }
+
+        PlayerBaseStateComponent State { get; set; }
+
+        public PlayerBaseStateComponent IdleState { get; private set; }
+        public PlayerBaseStateComponent DodgeState { get; private set; }
+
         Rigidbody2D Rigidbody { get; set; }
         HealthComponent HealthComponent { get; set; }
         WeaponComponent WeaponComponent { get; set; }
+        LoadoutComponent LoadoutComponent { get; set; }
         Camera MainCamera { get; set; }
 
         void Awake()
@@ -100,6 +124,9 @@ namespace HotlineHyrule.Entities
             Rigidbody = GetComponent<Rigidbody2D>();
             HealthComponent = GetComponent<HealthComponent>();
             WeaponComponent = GetComponent<WeaponComponent>();
+            LoadoutComponent = GetComponent<LoadoutComponent>();
+            IdleState = GetComponent<PlayerIdleStateComponent>();
+            DodgeState = GetComponent<PlayerDodgeStateComponent>();
             if (!legsAnimator) legsAnimator = transform.Find("legs").GetComponent<Animator>();
 
             Locator.PlayerComponent = this;
@@ -109,7 +136,31 @@ namespace HotlineHyrule.Entities
             
             ResetBuffs();
 
+            dodgeAction.started += OnButtonDodge;
+
+            dodgeAction.Enable();
             walkAction.Enable();
+
+            SetState(IdleState);
+
+            GameComponent.LevelLoaded += OnLevelLoaded;
+            GameComponent.LevelUnloaded += OnLevelUnloaded;
+        }
+
+        void OnLevelLoaded(object sender, LevelEventArgs e)
+        {
+            if (!e.PlayerStateData) return;
+
+            HealthComponent.Health = e.PlayerStateData.currentHealth;
+        }
+
+        void OnLevelUnloaded(object sender, LevelEventArgs e)
+        {
+            dodgeAction.Disable();
+            walkAction.Disable();
+
+            GameComponent.LevelLoaded -= OnLevelLoaded;
+            GameComponent.LevelUnloaded -= OnLevelUnloaded;
         }
 
         void Update()
@@ -123,7 +174,23 @@ namespace HotlineHyrule.Entities
 
         void FixedUpdate()
         {
-            Rigidbody.velocity = WalkAxis * (movementSpeed * MovementAttackFactor * MovementItemFactor);
+            if (State) State.FixedUpdateState();
+        }
+
+        public void SetState(PlayerBaseStateComponent state)
+        {
+            if (!state) return;
+            if (State) State.ExitState();
+            State = state;
+            State.EnterState();
+        }
+
+        void OnButtonDodge(InputAction.CallbackContext context)
+        {
+            if (Time.time < NextDodgeTime) return;
+            NextDodgeTime = Time.time + dodgeDelay;
+
+            SetState(DodgeState);
         }
 
         /// <summary>
@@ -164,6 +231,16 @@ namespace HotlineHyrule.Entities
             if (e.HealthDifference >= 0) return;
 
             if (damageParticleSystemPrefab) Instantiate(damageParticleSystemPrefab, transform.position, Quaternion.identity);
+        }
+
+        public PlayerStateData GetStateData()
+        {
+            var stateData = ScriptableObject.CreateInstance<PlayerStateData>();
+            stateData.currentHealth = HealthComponent.Health;
+            stateData.loadoutSlots = LoadoutComponent.loadoutSlots;
+            stateData.currentLoadoutSlot = LoadoutComponent.CurrentLoadoutSlot;
+
+            return stateData;
         }
     }
 }

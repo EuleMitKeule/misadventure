@@ -110,17 +110,24 @@ namespace HotlineHyrule.Entities
         /// Whether the enemy is currently able to attack the player.
         /// </summary>
         public bool IsPlayerAttackable => IsPlayerInAttackRange && IsPlayerInAngle && IsPlayerVisible;
-
         /// <summary>
         /// Whether the player is in front of any walls.
         /// </summary>
-        bool IsPlayerVisible =>
-            Physics2D.Raycast(
-                transform.position,
-                PlayerDirection,
-                followRange,
-                wallMask | 1 << PhysicsLayer.PLAYER
-            ).transform.gameObject.layer.IsPlayer();
+        bool IsPlayerVisible
+        {
+            get
+            {
+                var raycastHit = Physics2D.Raycast(
+                    transform.position,
+                    PlayerDirection,
+                    followRange,
+                    wallMask | 1 << PhysicsLayer.PLAYER
+                );
+
+                return raycastHit && raycastHit.transform.gameObject.layer.IsPlayer();
+            }
+        }
+
         /// <summary>
         /// Whether the enemy has a wall to its left.
         /// </summary>
@@ -157,6 +164,8 @@ namespace HotlineHyrule.Entities
                 wallCheckDistance,
                 wallMask
             );
+
+        public static event EventHandler<EventArgs> EnemyKilled;
 
         Rigidbody2D Rigidbody { get; set; }
         Collider2D Collider { get; set; }
@@ -233,6 +242,8 @@ namespace HotlineHyrule.Entities
 
         void OnHealthChanged(object sender, HealthEventArgs e)
         {
+            if (state) state.OnHealthChanged(sender, e);
+
             if (e.IsDamage)
             {
                 if (damageParticleSystemPrefab) Instantiate(damageParticleSystemPrefab, transform.position, Quaternion.identity);
@@ -249,6 +260,8 @@ namespace HotlineHyrule.Entities
                         Instantiate(item.data.itemPrefab, transform.position, Quaternion.identity);
                     }
                 }
+
+                EnemyKilled?.Invoke(this, EventArgs.Empty);
             }
         }
 

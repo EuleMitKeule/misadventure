@@ -2,6 +2,7 @@ using HotlineHyrule.Entities;
 using HotlineHyrule.Graphics;
 using HotlineHyrule.Level;
 using HotlineHyrule.Pathfinding;
+using HotlineHyrule.Quests;
 using HotlineHyrule.Sound;
 
 namespace HotlineHyrule
@@ -11,6 +12,11 @@ namespace HotlineHyrule
     /// </summary>
     public static class Locator
     {
+        /// <summary>
+        /// The current game component.
+        /// </summary>
+        public static GameComponent GameComponent { get; set; }
+
         /// <summary>
         /// The player's player component.
         /// </summary>
@@ -35,5 +41,10 @@ namespace HotlineHyrule
         /// The current level's sound component.
         /// </summary>
         public static SoundComponent SoundComponent { get; set; }
+
+        /// <summary>
+        /// The current level's quest component.
+        /// </summary>
+        public static QuestComponent QuestComponent { get; set; }
     }
 }

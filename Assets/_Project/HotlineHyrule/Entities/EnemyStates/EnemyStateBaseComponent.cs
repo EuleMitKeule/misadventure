@@ -32,5 +32,6 @@ namespace HotlineHyrule.Entities.EnemyStates
         public virtual void UpdateState() { }
         public virtual void FixedUpdateState() { }
         public virtual void OnCollisionEnterState(Collision2D other) { }
+        public virtual void OnHealthChanged(object sender, HealthEventArgs e) { }
     }
 }

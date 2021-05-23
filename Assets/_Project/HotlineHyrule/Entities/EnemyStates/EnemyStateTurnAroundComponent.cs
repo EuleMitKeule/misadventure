@@ -65,5 +65,10 @@ namespace HotlineHyrule.Entities.EnemyStates
             StopCoroutine(TurnAroundCoroutine);
             TurnAroundCoroutine = null;
         }
+
+        public override void OnHealthChanged(object sender, HealthEventArgs e)
+        {
+            transform.rotation = EnemyComponent.FollowRotation;
+        }
     }
 }
