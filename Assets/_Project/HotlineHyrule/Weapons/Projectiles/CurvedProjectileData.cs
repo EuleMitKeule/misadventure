@@ -16,6 +16,6 @@ namespace HotlineHyrule.Weapons.Projectiles
         /// <summary>
         /// The minimum speed amount that counts as movement.
         /// </summary>
-        [Range(0.01f, 0.5f)] [SerializeField] public float movementThreshold = 0.1f;
+        [Range(0.01f, 2.5f)] [SerializeField] public float movementThreshold = 0.5f;
     }
 }
