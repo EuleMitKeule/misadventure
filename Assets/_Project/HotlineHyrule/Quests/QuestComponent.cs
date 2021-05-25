@@ -25,8 +25,8 @@ namespace HotlineHyrule.Quests
         public bool IsQuestFinished => QuestData.questTargets.Where(e => e.isRequired).All(IsCompleted);
 
         public int KilledEnemies { get; set; }
-        List<ItemData> FoundItems { get; set; } = new List<ItemData>();
-        List<QuestTarget> ReachedTargets { get; set; } = new List<QuestTarget>();
+        List<ItemData> FoundItems { get; } = new List<ItemData>();
+        List<QuestTarget> ReachedTargets { get; } = new List<QuestTarget>();
 
         public event EventHandler<QuestEventArgs> QuestCompleted;
         public event EventHandler<QuestTargetEventArgs> QuestTargetReached;
@@ -37,9 +37,6 @@ namespace HotlineHyrule.Quests
         void Awake()
         {
             Locator.QuestComponent = this;
-
-            LevelComponent = GetComponent<LevelComponent>();
-            var treasureTilemapObject = transform.Find("tilemap_treasure");
 
             EnemyComponent.EnemyKilled += OnEnemyKilled;
             GameComponent.LevelLoaded += OnLevelLoaded;
@@ -54,6 +51,12 @@ namespace HotlineHyrule.Quests
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
+            if (e.IsMenu) return;
+            if (!e.LevelData) return;
+            if (!e.LevelData.questData) return;
+
+            LevelComponent = GetComponent<LevelComponent>();
+
             foreach (var treasureQuestTarget in TreasureQuestTargets)
             {
                 if (!treasureQuestTarget.treasureItem) continue;

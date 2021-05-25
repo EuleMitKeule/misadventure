@@ -16,7 +16,7 @@ namespace HotlineHyrule.UserInterface
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
-            if (!e.LevelData)
+            if (e.IsMenu)
             {
                 CanvasGroup.alpha = 1f;
                 CanvasGroup.interactable = true;

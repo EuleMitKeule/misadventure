@@ -21,6 +21,12 @@ namespace HotlineHyrule.UserInterface
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
+            for (var i = 0; i < transform.childCount; i++)
+            {
+                var child = transform.GetChild(i);
+                Destroy(child.gameObject);
+            }
+
             if (!e.LevelData) return;
             if (!e.LevelData.questData) return;
             if (!questTargetPrefab) return;
@@ -74,6 +80,8 @@ namespace HotlineHyrule.UserInterface
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)
         {
+            if (e.IsMenu) return;
+
             Locator.QuestComponent.QuestTargetReached -= OnQuestTargetReached;
         }
 

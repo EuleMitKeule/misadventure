@@ -60,7 +60,7 @@ MonoBehaviour:
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
   m_ShadowIntensityEnabled: 1
-  m_ShadowIntensity: 1
+  m_ShadowIntensity: 0.75
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_Vertices:
@@ -123,12 +123,12 @@ GameObject:
   - component: {fileID: 1512549236598669733}
   - component: {fileID: 1512549236598669734}
   - component: {fileID: 1512549236598669735}
-  - component: {fileID: 1512549236598669728}
   - component: {fileID: 1512549236598669729}
   - component: {fileID: 1512549236598669730}
   - component: {fileID: 1512549236598669731}
   - component: {fileID: 7870156206676490698}
   - component: {fileID: 3682796833932595627}
+  - component: {fileID: 873636419}
   m_Layer: 6
   m_Name: player
   m_TagString: Player
@@ -257,6 +257,7 @@ MonoBehaviour:
   moveDamping: 2
   dodgeForce: 12
   dodgeDuration: 0.075
+  dodgeDelay: 2
   moveAnimationThreshold: 0.1
   legsAnimator: {fileID: 0}
   damageParticleSystemPrefab: {fileID: 2442639310212140477, guid: bbd2f2170baf96d41814258f53875278, type: 3}
@@ -338,34 +339,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   startHealth: 100
---- !u!114 &1512549236598669728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1512549236598669737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99186eca80c1458c940d8b522d84e757, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnAction:
-    m_Name: Respawn
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: 5bb4a3b5-078e-4390-b7af-1d3e554e2b0d
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: afa66fe2-be52-4876-a8e0-95d95188cc67
-      m_Path: <Keyboard>/r
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Respawn
-      m_Flags: 0
 --- !u!114 &1512549236598669729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,6 +457,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cdf8def8b9984029a132c3575666f879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &873636419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512549236598669737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ef7f764665460d8a7924973a172a46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1512549237048204808

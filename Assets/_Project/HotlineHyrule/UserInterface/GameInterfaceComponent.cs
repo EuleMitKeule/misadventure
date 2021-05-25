@@ -1,4 +1,5 @@
 using System;
+using HotlineHyrule.Entities;
 using HotlineHyrule.Level;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace HotlineHyrule.UserInterface
         void Awake()
         {
             Animator = GetComponent<Animator>();
+
             if (!levelInfoParent) levelInfoParent = transform.Find("parent_level_info").gameObject;
             if (levelInfoParent) LevelInfoAnimator = levelInfoParent.GetComponent<Animator>();
 
@@ -23,8 +25,7 @@ namespace HotlineHyrule.UserInterface
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
-            if (!e.LevelData) return;
-            if (!e.LevelData.questData) return;
+            if (e.IsMenu) return;
 
             Locator.PlayerComponent.MovementStarted += OnMovementStarted;
 
@@ -33,6 +34,7 @@ namespace HotlineHyrule.UserInterface
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)
         {
+            if (e.IsMenu) return;
             Locator.PlayerComponent.MovementStarted -= OnMovementStarted;
         }
 

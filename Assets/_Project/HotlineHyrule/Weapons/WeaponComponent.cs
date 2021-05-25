@@ -26,7 +26,7 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// The input action to perform an attack.
         /// </summary>
-        [SerializeField] InputAction attackAction;
+        [SerializeField] public InputAction attackAction;
 
         float _attackSpeedFactor;
         float _particleSimulationSpeed;

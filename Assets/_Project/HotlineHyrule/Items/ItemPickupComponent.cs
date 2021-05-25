@@ -24,7 +24,8 @@ namespace HotlineHyrule.Items
         /// The input action to pickup items.
         /// </summary>
         [Header("Input")]
-        [SerializeField] InputAction pickupAction;
+        [SerializeField]
+        public InputAction pickupAction;
 
         /// <summary>
         /// List of items that are currently in range.
