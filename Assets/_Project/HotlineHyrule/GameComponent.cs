@@ -51,6 +51,11 @@ namespace HotlineHyrule
             StartCoroutine(LoadSceneRoutine(scenes[nextSceneIndex]));
         }
 
+        public void LoadMenuScene()
+        {
+            SceneManager.LoadScene("scene_menu");
+        }
+
         public void ReloadScene()
         {
             var currentLevelComponent = Locator.LevelComponent;
