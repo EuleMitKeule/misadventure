@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using HotlineHyrule.Entities;
 using HotlineHyrule.Level;
 using HotlineHyrule.Weapons;
@@ -23,7 +24,8 @@ namespace HotlineHyrule.Items
         /// The input action for changing the selected weapon slot.
         /// </summary>
         [Header("Input")]
-        [SerializeField] InputAction changeWeaponAction;
+        [SerializeField]
+        public InputAction changeWeaponAction;
 
         /// <summary>
         /// The currently selected weapon slot.
@@ -54,11 +56,9 @@ namespace HotlineHyrule.Items
                 WeaponComponent.AttackFinished += OnAttackFinished;
             }
 
-            for (var i = 0; i < loadoutSlots.Count; i++)
+            foreach (var loadoutSlot in loadoutSlots.Where(loadoutSlot => !loadoutSlot.weaponData))
             {
-                var loadoutSlot = loadoutSlots[i];
-
-                if (!loadoutSlot.weaponData) loadoutSlot.weaponData = defaultWeapon;
+                loadoutSlot.weaponData = defaultWeapon;
             }
 
             ChangeSlot(0);
@@ -73,6 +73,7 @@ namespace HotlineHyrule.Items
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
+            if (e.IsMenu) return;
             if (!e.PlayerStateData) return;
 
             loadoutSlots = e.PlayerStateData.loadoutSlots;
@@ -101,7 +102,10 @@ namespace HotlineHyrule.Items
         /// <summary>
         /// Equips the weapon inside the selected loadout slot.
         /// </summary>
-        void Apply() => WeaponComponent.SetWeapon(CurrentLoadoutSlot.weaponData);
+        void Apply()
+        {
+            WeaponComponent.SetWeapon(CurrentLoadoutSlot.weaponData);
+        }
 
         void OnAttackStarted(object sender, EventArgs e)
         {

@@ -24,6 +24,8 @@ namespace HotlineHyrule.UserInterface
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
+            if (e.IsMenu) return;
+
             var healthComponent = Locator.PlayerComponent.GetComponent<HealthComponent>();
             SetHealthTo(healthComponent.Health);
 

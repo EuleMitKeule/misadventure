@@ -53,6 +53,8 @@ namespace HotlineHyrule.Level
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
+            if (e.IsMenu) return;
+
             Locator.PlayerComponent.transform.position = e.LevelData.playerSpawnPosition.ToWorld();
         }
     }

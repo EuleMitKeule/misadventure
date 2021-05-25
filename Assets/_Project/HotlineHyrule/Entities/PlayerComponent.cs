@@ -52,11 +52,11 @@ namespace HotlineHyrule.Entities
         /// The movement input action.
         /// </summary>
         [Header("Input")]
-        [SerializeField] InputAction walkAction;
+        [SerializeField] public InputAction walkAction;
         /// <summary>
         /// The input action to perform a dodge move.
         /// </summary>
-        [SerializeField] InputAction dodgeAction;
+        [SerializeField] public InputAction dodgeAction;
 
         float NextDodgeTime { get; set; }
         /// <summary>
@@ -113,6 +113,7 @@ namespace HotlineHyrule.Entities
 
         public PlayerBaseStateComponent IdleState { get; private set; }
         public PlayerBaseStateComponent DodgeState { get; private set; }
+        public PlayerBaseStateComponent DeathState { get; private set; }
 
         public event EventHandler MovementStarted;
 
@@ -128,8 +129,11 @@ namespace HotlineHyrule.Entities
             HealthComponent = GetComponent<HealthComponent>();
             WeaponComponent = GetComponent<WeaponComponent>();
             LoadoutComponent = GetComponent<LoadoutComponent>();
+
             IdleState = GetComponent<PlayerIdleStateComponent>();
             DodgeState = GetComponent<PlayerDodgeStateComponent>();
+            DeathState = GetComponent<PlayerDeathStateComponent>();
+
             if (!legsAnimator) legsAnimator = transform.Find("legs").GetComponent<Animator>();
 
             Locator.PlayerComponent = this;
@@ -152,9 +156,12 @@ namespace HotlineHyrule.Entities
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
-            if (!e.PlayerStateData) return;
+            if (e.IsMenu) return;
 
-            HealthComponent.Health = e.PlayerStateData.currentHealth;
+            if (e.PlayerStateData)
+            {
+                HealthComponent.Health = e.PlayerStateData.currentHealth;
+            }
         }
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)
@@ -170,9 +177,7 @@ namespace HotlineHyrule.Entities
         {
             ProcessInput();
             HandleAnimation();
-            
-            Rigidbody.rotation = LookAngle;
-            if (WeaponComponent.HasRangedWeapon) WeaponComponent.SetWeaponRotation(WeaponAngle);
+            HandleRotation();
         }
 
         void FixedUpdate()
@@ -211,13 +216,21 @@ namespace HotlineHyrule.Entities
         void HandleAnimation()
         {
             var isInMovingState = legsAnimator.GetBool("isMoving");
-            
+
             if (isInMovingState != IsMoving)
             {
                 if (IsMoving) MovementStarted?.Invoke(this, EventArgs.Empty);
 
                 legsAnimator.SetBool("isMoving", IsMoving);
             }
+        }
+
+        void HandleRotation()
+        {
+            if (State == DeathState) return;
+
+            Rigidbody.rotation = LookAngle;
+            if (WeaponComponent.HasRangedWeapon) WeaponComponent.SetWeaponRotation(WeaponAngle);
         }
 
         /// <summary>
@@ -237,9 +250,15 @@ namespace HotlineHyrule.Entities
 
         void OnHealthChanged(object sender, HealthEventArgs e)
         {
-            if (e.HealthDifference >= 0) return;
+            if (e.IsDamage)
+            {
+                if (damageParticleSystemPrefab) Instantiate(damageParticleSystemPrefab, transform.position, Quaternion.identity);
+            }
 
-            if (damageParticleSystemPrefab) Instantiate(damageParticleSystemPrefab, transform.position, Quaternion.identity);
+            if (e.IsKilled)
+            {
+                SetState(DeathState);
+            }
         }
 
         public PlayerStateData GetStateData()
