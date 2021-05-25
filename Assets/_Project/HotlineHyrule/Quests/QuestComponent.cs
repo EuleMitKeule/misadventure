@@ -24,32 +24,15 @@ namespace HotlineHyrule.Quests
 
         public bool IsQuestFinished => QuestData.questTargets.Where(e => e.isRequired).All(IsCompleted);
 
-        int KilledEnemies { get; set; }
+        public int KilledEnemies { get; set; }
         List<ItemData> FoundItems { get; set; } = new List<ItemData>();
         List<QuestTarget> ReachedTargets { get; set; } = new List<QuestTarget>();
 
         public event EventHandler<QuestEventArgs> QuestCompleted;
         public event EventHandler<QuestTargetEventArgs> QuestTargetReached;
+        public event EventHandler<QuestTargetEventArgs> QuestTargetChanged;
 
         LevelComponent LevelComponent { get; set; }
-
-        // void OnValidate()
-        // {
-        //     if (!QuestData) return;
-        //     if (!QuestData.questTargets.Any(e => e is TreasureQuestTarget)) return;
-        //
-        //     treasureQuestSettings = new List<TreasureQuestSettings>();
-        //     
-        //     foreach (var treasureQuestTarget in TreasureQuestTargets)
-        //     {
-        //         var treasureQuestSetting = new TreasureQuestSettings
-        //         {
-        //             treasureQuestTarget = treasureQuestTarget
-        //         };
-        //         
-        //         treasureQuestSettings.Add(treasureQuestSetting);
-        //     }
-        // }
 
         void Awake()
         {
@@ -108,6 +91,11 @@ namespace HotlineHyrule.Quests
         void OnEnemyKilled(object sender, EventArgs e)
         {
             KilledEnemies += 1;
+
+            foreach (var killQuestTarget in KillQuestTargets)
+            {
+                QuestTargetChanged?.Invoke(this, new QuestTargetEventArgs(killQuestTarget));
+            }
 
             var questTarget = KillQuestTargets.Find(target => KilledEnemies >= target.killTarget);
 

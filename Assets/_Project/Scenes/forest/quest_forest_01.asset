@@ -26,7 +26,7 @@ MonoBehaviour:
       data:
         isRequired: 0
         targetText: We killed most of the gnomes.
-        shortTargetText: Kill 5 gnomes
+        shortTargetText: Kill {x} gnomes
         killTarget: 5
     00000001:
       type: {class: SearchQuestTarget, ns: HotlineHyrule.Quests, asm: HotlineHyrule}
@@ -43,6 +43,6 @@ MonoBehaviour:
       data:
         isRequired: 1
         targetText: We found the legendary diamond.
-        shortTargetText: Collect the other treasure
+        shortTargetText: Find and collect the treasure
         treasureItem: {fileID: 11400000, guid: 3892f96f76b10fd42920f24c8d3dafcf, type: 2}
         treasureTilemapName: tilemap_treasure

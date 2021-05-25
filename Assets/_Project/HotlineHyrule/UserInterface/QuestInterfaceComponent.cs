@@ -27,6 +27,7 @@ namespace HotlineHyrule.UserInterface
 
             QuestData = e.LevelData.questData;
             Locator.QuestComponent.QuestTargetReached += OnQuestTargetReached;
+            Locator.QuestComponent.QuestTargetChanged += OnQuestTargetChanged;
 
             TargetToTargetObject = new Dictionary<QuestTarget, GameObject>();
 
@@ -34,12 +35,41 @@ namespace HotlineHyrule.UserInterface
             {
                 var questTargetObject = Instantiate(questTargetPrefab, transform);
                 var label = questTargetObject.GetComponentInChildren<TextMeshProUGUI>();
+                var parsedTargetText = questTarget.shortTargetText;
+
+                if (questTarget is KillQuestTarget killQuestTarget &&
+                    parsedTargetText.Contains("{x}"))
+                {
+                    var remainingKillTarget =
+                        Mathf.Max(killQuestTarget.killTarget - Locator.QuestComponent.KilledEnemies, 0);
+                    parsedTargetText = parsedTargetText.Replace("{x}", remainingKillTarget.ToString());
+                }
+
                 var questTargetText =
-                    $"{(questTarget.isRequired ? "" : "(")}{questTarget.shortTargetText}{(questTarget.isRequired ? "" : ")")}";
+                    $"{(questTarget.isRequired ? "" : "(")}{parsedTargetText}{(questTarget.isRequired ? "" : ")")}";
                 label.text = $"{questTargetText} ~";
                 
                 TargetToTargetObject.Add(questTarget, questTargetObject);
             }
+        }
+
+        void OnQuestTargetChanged(object sender, QuestTargetEventArgs e)
+        {
+            var targetObject = TargetToTargetObject[e.QuestTarget];
+            var label = targetObject.GetComponentInChildren<TextMeshProUGUI>();
+            var parsedTargetText = e.QuestTarget.shortTargetText;
+
+            if (e.QuestTarget is KillQuestTarget killQuestTarget &&
+                parsedTargetText.Contains("{x}"))
+            {
+                var remainingKillTarget =
+                    Mathf.Max(killQuestTarget.killTarget - Locator.QuestComponent.KilledEnemies, 0);
+                parsedTargetText = parsedTargetText.Replace("{x}", remainingKillTarget.ToString());
+            }
+
+            var questTargetText =
+                $"{(e.QuestTarget.isRequired ? "" : "(")}{parsedTargetText}{(e.QuestTarget.isRequired ? "" : ")")}";
+            label.text = $"{questTargetText} ~";
         }
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)
