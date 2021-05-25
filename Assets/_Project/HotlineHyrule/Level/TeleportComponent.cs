@@ -8,6 +8,8 @@ namespace HotlineHyrule.Level
         {
             if (!other.gameObject.layer.IsPlayer()) return;
 
+            if (!Locator.QuestComponent.IsQuestFinished) return;
+
             Locator.GameComponent.LoadNextScene();
         }
     }

@@ -8,5 +8,6 @@ namespace HotlineHyrule.Quests
     {
         [SerializeField] public bool isRequired;
         [TextArea] [SerializeField] public string targetText;
+        [TextArea] [SerializeField] public string shortTargetText;
     }
 }

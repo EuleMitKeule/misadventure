@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: item_diamond
   m_EditorClassIdentifier: 
   itemName: 
-  itemPrefab: {fileID: 0}
+  itemPrefab: {fileID: 6326030864420231853, guid: 72ddfc50968ebfa4ca08e6128eee23f3, type: 3}

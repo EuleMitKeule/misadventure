@@ -11,7 +11,7 @@ namespace HotlineHyrule.UserInterface
         {
             if (!mainCanvas)
             {
-                var mainCanvasObject = transform.Find("canvas_main");
+                var mainCanvasObject = transform.Find("canvas_game");
                 if (mainCanvasObject) mainCanvas = mainCanvasObject.GetComponent<Canvas>();
             }
 

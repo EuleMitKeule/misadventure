@@ -7,6 +7,7 @@ namespace HotlineHyrule.Quests
     public class QuestData : ScriptableObject
     {
         [TextArea] [SerializeField] public string questText;
+        [TextArea] [SerializeField] public string questTargetText;
         [SerializeReference] public List<QuestTarget> questTargets;
 
         public static QuestData Empty => CreateInstance<QuestData>();
