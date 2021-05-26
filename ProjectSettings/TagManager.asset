@@ -56,6 +56,9 @@ TagManager:
   - name: enemy
     uniqueID: 870712003
     locked: 0
+  - name: water
+    uniqueID: 1685992943
+    locked: 0
   - name: wall
     uniqueID: 2349538259
     locked: 0
