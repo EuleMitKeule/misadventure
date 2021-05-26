@@ -110,7 +110,6 @@ namespace HotlineHyrule.Quests
                 var rewards = items.Take(QuestData.questRewardCount).ToList();
 
                 RewardComponent.Rewards = rewards;
-                foreach (var reward in rewards) Debug.Log(reward);
             }
             else
             {
