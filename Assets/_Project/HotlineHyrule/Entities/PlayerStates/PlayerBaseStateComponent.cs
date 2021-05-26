@@ -11,6 +11,7 @@ namespace HotlineHyrule.Entities.PlayerStates
         protected WeaponComponent WeaponComponent { get; private set; }
         protected LoadoutComponent LoadoutComponent { get; private set; }
         protected ItemPickupComponent ItemPickupComponent { get; private set; }
+        protected HealthComponent HealthComponent { get; private set; }
 
         protected virtual void Awake()
         {
@@ -19,6 +20,7 @@ namespace HotlineHyrule.Entities.PlayerStates
             WeaponComponent = GetComponent<WeaponComponent>();
             LoadoutComponent = GetComponent<LoadoutComponent>();
             ItemPickupComponent = GetComponent<ItemPickupComponent>();
+            HealthComponent = GetComponent<HealthComponent>();
         }
 
         public virtual void EnterState() { }

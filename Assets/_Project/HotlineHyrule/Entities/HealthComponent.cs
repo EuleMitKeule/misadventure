@@ -29,6 +29,7 @@ namespace HotlineHyrule.Entities
             get { return _health; }
             set
             {
+                if (IsInvincible) return;
                 var lastHealth = _health;
                 _health = Mathf.Clamp(value, 0, maxHealth);
 
@@ -36,6 +37,8 @@ namespace HotlineHyrule.Entities
                 HealthChanged?.Invoke(this, healthEventArgs);
             }
         }
+
+        public bool IsInvincible { get; set; }
 
         /// <summary>
         /// Is invoked when the health value has changed.

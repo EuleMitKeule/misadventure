@@ -9,6 +9,7 @@ namespace HotlineHyrule.Quests
         [TextArea] [SerializeField] public string questText;
         [TextArea] [SerializeField] public string questTargetText;
         [SerializeReference] public List<QuestTarget> questTargets;
+        [SerializeField] public bool finishLevelOnCompletion;
 
         public static QuestData Empty => CreateInstance<QuestData>();
     }

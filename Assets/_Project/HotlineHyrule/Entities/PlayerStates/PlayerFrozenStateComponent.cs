@@ -3,12 +3,14 @@ using UnityEngine.InputSystem;
 
 namespace HotlineHyrule.Entities.PlayerStates
 {
-    public class PlayerDeathStateComponent : PlayerBaseStateComponent
+    public class PlayerFrozenStateComponent : PlayerBaseStateComponent
     {
 
         public override void EnterState()
         {
             base.EnterState();
+
+            HealthComponent.IsInvincible = true;
 
             PlayerComponent.walkAction.Disable();
             PlayerComponent.dodgeAction.Disable();
@@ -22,6 +24,19 @@ namespace HotlineHyrule.Entities.PlayerStates
             base.FixedUpdateState();
 
             Rigidbody.velocity = Vector2.zero;
+        }
+
+        public override void ExitState()
+        {
+            base.ExitState();
+
+            HealthComponent.IsInvincible = false;
+
+            PlayerComponent.walkAction.Enable();
+            PlayerComponent.dodgeAction.Enable();
+            WeaponComponent.attackAction.Enable();
+            LoadoutComponent.changeWeaponAction.Enable();
+            ItemPickupComponent.pickupAction.Enable();
         }
     }
 }

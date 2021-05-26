@@ -113,7 +113,7 @@ namespace HotlineHyrule.Entities
 
         public PlayerBaseStateComponent IdleState { get; private set; }
         public PlayerBaseStateComponent DodgeState { get; private set; }
-        public PlayerBaseStateComponent DeathState { get; private set; }
+        public PlayerBaseStateComponent FrozenState { get; private set; }
 
         public event EventHandler MovementStarted;
 
@@ -132,7 +132,7 @@ namespace HotlineHyrule.Entities
 
             IdleState = GetComponent<PlayerIdleStateComponent>();
             DodgeState = GetComponent<PlayerDodgeStateComponent>();
-            DeathState = GetComponent<PlayerDeathStateComponent>();
+            FrozenState = GetComponent<PlayerFrozenStateComponent>();
 
             if (!legsAnimator) legsAnimator = transform.Find("legs").GetComponent<Animator>();
 
@@ -145,11 +145,6 @@ namespace HotlineHyrule.Entities
 
             dodgeAction.started += OnButtonDodge;
 
-            dodgeAction.Enable();
-            walkAction.Enable();
-
-            SetState(IdleState);
-
             GameComponent.LevelLoaded += OnLevelLoaded;
             GameComponent.LevelUnloaded += OnLevelUnloaded;
         }
@@ -158,10 +153,14 @@ namespace HotlineHyrule.Entities
         {
             if (e.IsMenu) return;
 
+            Locator.LevelComponent.LevelFinished += OnLevelFinished;
+
             if (e.PlayerStateData)
             {
                 HealthComponent.Health = e.PlayerStateData.currentHealth;
             }
+
+            SetState(FrozenState);
         }
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)
@@ -171,6 +170,11 @@ namespace HotlineHyrule.Entities
 
             GameComponent.LevelLoaded -= OnLevelLoaded;
             GameComponent.LevelUnloaded -= OnLevelUnloaded;
+        }
+
+        void OnLevelFinished(object sender, EventArgs e)
+        {
+            SetState(FrozenState);
         }
 
         void Update()
@@ -227,7 +231,7 @@ namespace HotlineHyrule.Entities
 
         void HandleRotation()
         {
-            if (State == DeathState) return;
+            if (State == FrozenState) return;
 
             Rigidbody.rotation = LookAngle;
             if (WeaponComponent.HasRangedWeapon) WeaponComponent.SetWeaponRotation(WeaponAngle);
@@ -257,7 +261,7 @@ namespace HotlineHyrule.Entities
 
             if (e.IsKilled)
             {
-                SetState(DeathState);
+                SetState(FrozenState);
             }
         }
 
