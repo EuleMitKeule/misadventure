@@ -43,18 +43,20 @@ namespace HotlineHyrule.Quests
             GameComponent.LevelUnloaded += OnLevelUnloaded;
         }
 
+        void Start()
+        {
+            var itemPickupComponent = Locator.PlayerComponent.GetComponent<ItemPickupComponent>();
+            itemPickupComponent.ItemConsumed += OnItemConsumed;
+
+            Locator.LevelComponent.LevelFinished += OnLevelFinished;
+        }
+
         void OnQuestTargetReached(object sender, QuestTargetEventArgs e)
         {
             if (!IsQuestFinished) return;
             if (!QuestData.finishLevelOnCompletion) return;
 
             LevelComponent.FinishLevel();
-        }
-
-        void Start()
-        {
-            var itemPickupComponent = Locator.PlayerComponent.GetComponent<ItemPickupComponent>();
-            itemPickupComponent.ItemConsumed += OnItemConsumed;
         }
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
@@ -97,11 +99,10 @@ namespace HotlineHyrule.Quests
             EnemyComponent.EnemyKilled -= OnEnemyKilled;
             GameComponent.LevelLoaded -= OnLevelLoaded;
             GameComponent.LevelUnloaded -= OnLevelUnloaded;
+        }
 
-            if (e.IsMenu) return;
-            if (!QuestData) return;
-            if (QuestData.questTargets == null) return;
-
+        void OnLevelFinished(object sender, EventArgs e)
+        {
             if (IsCompleted)
             {
                 var rnd = new Random();
@@ -110,6 +111,10 @@ namespace HotlineHyrule.Quests
 
                 RewardComponent.Rewards = rewards;
                 foreach (var reward in rewards) Debug.Log(reward);
+            }
+            else
+            {
+                RewardComponent.Rewards = new List<ItemData>();
             }
         }
 
