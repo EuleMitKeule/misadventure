@@ -28,7 +28,6 @@ namespace HotlineHyrule.Quests
         List<ItemData> FoundItems { get; } = new List<ItemData>();
         List<QuestTarget> ReachedTargets { get; } = new List<QuestTarget>();
 
-        public event EventHandler<QuestEventArgs> QuestCompleted;
         public event EventHandler<QuestTargetEventArgs> QuestTargetReached;
         public event EventHandler<QuestTargetEventArgs> QuestTargetChanged;
 
