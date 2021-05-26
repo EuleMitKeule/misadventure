@@ -14,8 +14,6 @@ namespace HotlineHyrule.Quests
 {
     public class QuestComponent : MonoBehaviour
     {
-        // [HideInInspector] public List<TreasureQuestSettings> treasureQuestSettings; 
-        
         QuestData QuestData => LevelComponent ? LevelComponent.levelData.questData : QuestData.Empty;
 
         List<KillQuestTarget> KillQuestTargets => QuestData.questTargets.OfType<KillQuestTarget>().ToList();
@@ -137,13 +135,6 @@ namespace HotlineHyrule.Quests
             }
         }
 
-        bool IsCompleted(QuestTarget questTarget) => ReachedTargets.Contains(questTarget);
-    }
-
-    [Serializable]
-    public class TreasureQuestSettings
-    {
-        [SerializeField] public TreasureQuestTarget treasureQuestTarget;
-        [SerializeField] public Tilemap treasureTilemap;
+        public bool IsCompleted(QuestTarget questTarget) => ReachedTargets.Contains(questTarget);
     }
 }

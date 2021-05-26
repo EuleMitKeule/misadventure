@@ -18,7 +18,7 @@ namespace HotlineHyrule.UserInterface
 
         void OnQuestTargetReached(object sender, QuestTargetEventArgs e)
         {
-            Debug.Log(e.QuestTarget.targetReachedText);
+
         }
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
