@@ -35,9 +35,19 @@ namespace HotlineHyrule.Quests
         {
             Locator.QuestComponent = this;
 
+            QuestTargetReached += OnQuestTargetReached;
+
             EnemyComponent.EnemyKilled += OnEnemyKilled;
             GameComponent.LevelLoaded += OnLevelLoaded;
             GameComponent.LevelUnloaded += OnLevelUnloaded;
+        }
+
+        void OnQuestTargetReached(object sender, QuestTargetEventArgs e)
+        {
+            if (!IsQuestFinished) return;
+            if (!QuestData.finishLevelOnCompletion) return;
+
+            LevelComponent.FinishLevel();
         }
 
         void Start()
