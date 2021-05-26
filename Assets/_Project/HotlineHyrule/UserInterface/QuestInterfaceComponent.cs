@@ -82,7 +82,7 @@ namespace HotlineHyrule.UserInterface
         {
             if (e.IsMenu) return;
 
-            Locator.QuestComponent.QuestTargetReached -= OnQuestTargetReached;
+            if (Locator.QuestComponent) Locator.QuestComponent.QuestTargetReached -= OnQuestTargetReached;
         }
 
         void OnQuestTargetReached(object sender, QuestTargetEventArgs e)
