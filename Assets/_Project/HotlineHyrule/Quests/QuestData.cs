@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using HotlineHyrule.Items;
 using UnityEngine;
 
 namespace HotlineHyrule.Quests
@@ -10,6 +11,8 @@ namespace HotlineHyrule.Quests
         [TextArea] [SerializeField] public string questTargetText;
         [SerializeReference] public List<QuestTarget> questTargets;
         [SerializeField] public bool finishLevelOnCompletion;
+        [SerializeField] public List<ItemData> questRewards;
+        [SerializeField] public int questRewardCount;
 
         public static QuestData Empty => CreateInstance<QuestData>();
     }

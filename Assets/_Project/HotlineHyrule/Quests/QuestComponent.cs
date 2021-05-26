@@ -20,7 +20,8 @@ namespace HotlineHyrule.Quests
         List<SearchQuestTarget> SearchQuestTargets => QuestData.questTargets.OfType<SearchQuestTarget>().ToList();
         List<TreasureQuestTarget> TreasureQuestTargets => QuestData.questTargets.OfType<TreasureQuestTarget>().ToList();
 
-        public bool IsQuestFinished => QuestData.questTargets.Where(e => e.isRequired).All(IsCompleted);
+        public bool IsQuestFinished => QuestData.questTargets.Where(e => e.isRequired).All(IsReached);
+        public bool IsCompleted => QuestData.questTargets.All(e => ReachedTargets.Contains(e));
 
         public int KilledEnemies { get; set; }
         List<ItemData> FoundItems { get; } = new List<ItemData>();
@@ -96,6 +97,20 @@ namespace HotlineHyrule.Quests
             EnemyComponent.EnemyKilled -= OnEnemyKilled;
             GameComponent.LevelLoaded -= OnLevelLoaded;
             GameComponent.LevelUnloaded -= OnLevelUnloaded;
+
+            if (e.IsMenu) return;
+            if (!QuestData) return;
+            if (QuestData.questTargets == null) return;
+
+            if (IsCompleted)
+            {
+                var rnd = new Random();
+                var items = QuestData.questRewards.OrderBy(x => rnd.Next()).ToList();
+                var rewards = items.Take(QuestData.questRewardCount).ToList();
+
+                RewardComponent.Rewards = rewards;
+                foreach (var reward in rewards) Debug.Log(reward);
+            }
         }
 
         void OnEnemyKilled(object sender, EventArgs e)
@@ -145,6 +160,6 @@ namespace HotlineHyrule.Quests
             }
         }
 
-        public bool IsCompleted(QuestTarget questTarget) => ReachedTargets.Contains(questTarget);
+        public bool IsReached(QuestTarget questTarget) => ReachedTargets.Contains(questTarget);
     }
 }
