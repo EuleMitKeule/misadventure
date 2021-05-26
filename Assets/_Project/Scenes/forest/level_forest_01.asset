@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaName: Forest Clearing
   areaText: We found a large clearing in the forest and decided to explore.
+  areaFinishedText: We left the clearing behind us and looked forward to our next
+    adventure.
   questData: {fileID: 11400000, guid: 4a85513b797617749a98e595028a0c48, type: 2}
   playerSpawnPosition: {x: -6, y: -14, z: 0}

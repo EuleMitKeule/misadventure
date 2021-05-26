@@ -1,5 +1,8 @@
-﻿using HotlineHyrule.Extensions;
+﻿using System;
+using HotlineHyrule.Extensions;
+using HotlineHyrule.Input;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace HotlineHyrule.Level
 {
@@ -33,13 +36,18 @@ namespace HotlineHyrule.Level
         /// </summary>
         [SerializeField] GameObject snowEffectPrefab;
 
+        DefaultControls DefaultControls { get; set; }
+
+        public event EventHandler<EventArgs> LevelFinished;
+
         public Grid Grid { get; private set; }
-        
+
         void Awake()
         {
+            DefaultControls = new DefaultControls();
             Locator.LevelComponent = this;
             Grid = GetComponent<Grid>();
-
+            
             var mainCamera = Camera.main;
 
             if (mainCamera)
@@ -48,6 +56,8 @@ namespace HotlineHyrule.Level
                 if (isSnowing) Instantiate(snowEffectPrefab, mainCamera.transform);
             }
 
+            DefaultControls.map_default.action_finish.performed += OnButtonFinish;
+            
             GameComponent.LevelLoaded += OnLevelLoaded;
         }
 
@@ -56,6 +66,18 @@ namespace HotlineHyrule.Level
             if (e.IsMenu) return;
 
             Locator.PlayerComponent.transform.position = e.LevelData.playerSpawnPosition.ToWorld();
+        }
+
+        public void FinishLevel()
+        {
+            LevelFinished?.Invoke(this, EventArgs.Empty);
+            DefaultControls.map_default.action_finish.Enable();
+        }
+
+        void OnButtonFinish(InputAction.CallbackContext context)
+        {
+            DefaultControls.map_default.action_finish.Disable();
+            Locator.GameComponent.LoadNextScene();
         }
     }
 }
