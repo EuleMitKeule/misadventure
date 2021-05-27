@@ -1,9 +1,8 @@
 using HotlineHyrule.Extensions;
-using HotlineHyrule.Level;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace HotlineHyrule.Graphics.Tiles
+namespace HotlineHyrule.Tiles
 {
     [CreateAssetMenu(menuName = "2D/Tiles/Prefab Tile")]
     public class PrefabTile : TileBase
