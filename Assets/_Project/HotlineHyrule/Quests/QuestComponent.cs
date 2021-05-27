@@ -20,7 +20,8 @@ namespace HotlineHyrule.Quests
         List<SearchQuestTarget> SearchQuestTargets => QuestData.questTargets.OfType<SearchQuestTarget>().ToList();
         List<TreasureQuestTarget> TreasureQuestTargets => QuestData.questTargets.OfType<TreasureQuestTarget>().ToList();
 
-        public bool IsQuestFinished => QuestData.questTargets.Where(e => e.isRequired).All(IsCompleted);
+        public bool IsQuestFinished => QuestData.questTargets.Where(e => e.isRequired).All(IsReached);
+        public bool IsCompleted => QuestData.questTargets.All(e => ReachedTargets.Contains(e));
 
         public int KilledEnemies { get; set; }
         List<ItemData> FoundItems { get; } = new List<ItemData>();
@@ -35,6 +36,8 @@ namespace HotlineHyrule.Quests
         {
             Locator.QuestComponent = this;
 
+            QuestTargetReached += OnQuestTargetReached;
+
             EnemyComponent.EnemyKilled += OnEnemyKilled;
             GameComponent.LevelLoaded += OnLevelLoaded;
             GameComponent.LevelUnloaded += OnLevelUnloaded;
@@ -44,6 +47,16 @@ namespace HotlineHyrule.Quests
         {
             var itemPickupComponent = Locator.PlayerComponent.GetComponent<ItemPickupComponent>();
             itemPickupComponent.ItemConsumed += OnItemConsumed;
+
+            Locator.LevelComponent.LevelFinished += OnLevelFinished;
+        }
+
+        void OnQuestTargetReached(object sender, QuestTargetEventArgs e)
+        {
+            if (!IsQuestFinished) return;
+            if (!QuestData.finishLevelOnCompletion) return;
+
+            LevelComponent.FinishLevel();
         }
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
@@ -86,6 +99,22 @@ namespace HotlineHyrule.Quests
             EnemyComponent.EnemyKilled -= OnEnemyKilled;
             GameComponent.LevelLoaded -= OnLevelLoaded;
             GameComponent.LevelUnloaded -= OnLevelUnloaded;
+        }
+
+        void OnLevelFinished(object sender, EventArgs e)
+        {
+            if (IsCompleted)
+            {
+                var rnd = new Random();
+                var items = QuestData.questRewards.OrderBy(x => rnd.Next()).ToList();
+                var rewards = items.Take(QuestData.questRewardCount).ToList();
+
+                RewardComponent.Rewards = rewards;
+            }
+            else
+            {
+                RewardComponent.Rewards = new List<ItemData>();
+            }
         }
 
         void OnEnemyKilled(object sender, EventArgs e)
@@ -135,6 +164,6 @@ namespace HotlineHyrule.Quests
             }
         }
 
-        public bool IsCompleted(QuestTarget questTarget) => ReachedTargets.Contains(questTarget);
+        public bool IsReached(QuestTarget questTarget) => ReachedTargets.Contains(questTarget);
     }
 }

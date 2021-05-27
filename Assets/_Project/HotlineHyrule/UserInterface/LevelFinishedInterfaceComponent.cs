@@ -44,7 +44,7 @@ namespace HotlineHyrule.UserInterface
 
             foreach (var questTarget in Locator.LevelComponent.levelData.questData.questTargets)
             {
-                var reachedText = Locator.QuestComponent.IsCompleted(questTarget)
+                var reachedText = Locator.QuestComponent.IsReached(questTarget)
                     ? questTarget.targetReachedText
                     : questTarget.targetNotReachedText;
 
