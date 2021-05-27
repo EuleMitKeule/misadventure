@@ -105,8 +105,7 @@ namespace HotlineHyrule.Quests
         {
             if (IsCompleted)
             {
-                var rnd = new Random();
-                var items = QuestData.questRewards.OrderBy(x => rnd.Next()).ToList();
+                var items = QuestData.questRewards.OrderBy(x => Guid.NewGuid()).ToList();
                 var rewards = items.Take(QuestData.questRewardCount).ToList();
 
                 RewardComponent.Rewards = rewards;
