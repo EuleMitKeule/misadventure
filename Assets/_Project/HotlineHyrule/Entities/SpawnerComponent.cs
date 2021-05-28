@@ -61,15 +61,18 @@ namespace HotlineHyrule.Entities
             {
                 var maxOffset = (int)(entitiesPerWave * entitiesPerWaveOffset);
                 var offset = Random.Range(-maxOffset, maxOffset + 1);
-                
-                for (var i = 0; i < entitiesPerWave + offset; i++)
+
+                if ((CurrentEntities + entitiesPerWave + offset) <= maxEntities)
                 {
-                    if (!CanSpawn) break;
-                    SpawnEntityAtRandom();
+                    for (var i = 0; i < entitiesPerWave + offset; i++)
+                    {
+                        if (!CanSpawn) break;
+                        SpawnEntityAtRandom();
+                    }
+
+                    CurrentWave += 1;
                 }
-
-                CurrentWave += 1;
-
+                Debug.Log("Wave: " + CurrentWave);
                 var maxTimeOffset = waveTime * waveTimeOffset;
                 var timeOffset = Random.Range(-maxTimeOffset, maxTimeOffset);
 
