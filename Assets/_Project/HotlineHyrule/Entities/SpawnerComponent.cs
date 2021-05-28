@@ -6,6 +6,8 @@ using Random = UnityEngine.Random;
 using HotlineHyrule.Level;
 using HotlineHyrule.Extensions;
 using UnityEngine.Tilemaps;
+using System.Linq;
+using HotlineHyrule.Weapons;
 
 namespace HotlineHyrule.Entities
 {
@@ -15,6 +17,7 @@ namespace HotlineHyrule.Entities
         [SerializeField] public List<GameObject> entities; 
         [SerializeField] public Tilemap spawnTilemap;       
         [SerializeField] public int maxEntities;
+        [SerializeField] public bool spawnOnAwake;
 
         [SerializeField] bool useWaves;
         [SerializeField] int waveLimit;
@@ -23,7 +26,7 @@ namespace HotlineHyrule.Entities
         [SerializeField] int entitiesPerWave;
         [SerializeField] [Range(0, 1)] float entitiesPerWaveOffset;
         
-        int CurrentEntities { get; set; }
+        public int CurrentEntities { get; set; }
         int CurrentWave { get; set; }
 
         bool CanSpawn => CurrentEntities < maxEntities;
@@ -42,17 +45,19 @@ namespace HotlineHyrule.Entities
                 return;
             }
 
-            if (!useWaves)
+            
+            if (!useWaves && spawnOnAwake)
             {
                 for (var i = 0; i <= maxEntities; i++)
                 {
                     SpawnEntityAtRandom();
                 }
-
-                return;
             }
+            else if(useWaves)
+            {
+                StartCoroutine(WaveRoutine());
+            }                  
             
-            StartCoroutine(WaveRoutine());
         }
 
         IEnumerator WaveRoutine()
@@ -61,15 +66,18 @@ namespace HotlineHyrule.Entities
             {
                 var maxOffset = (int)(entitiesPerWave * entitiesPerWaveOffset);
                 var offset = Random.Range(-maxOffset, maxOffset + 1);
-                
-                for (var i = 0; i < entitiesPerWave + offset; i++)
+
+                if ((CurrentEntities + entitiesPerWave + offset) <= maxEntities)
                 {
-                    if (!CanSpawn) break;
-                    SpawnEntityAtRandom();
+                    for (var i = 0; i < entitiesPerWave + offset; i++)
+                    {
+                        if (!CanSpawn) break;
+                        SpawnEntityAtRandom();
+                    }
+
+                    CurrentWave += 1;
                 }
-
-                CurrentWave += 1;
-
+                Debug.Log("Wave: " + CurrentWave);
                 var maxTimeOffset = waveTime * waveTimeOffset;
                 var timeOffset = Random.Range(-maxTimeOffset, maxTimeOffset);
 
@@ -115,6 +123,62 @@ namespace HotlineHyrule.Entities
             if (healthComponent) healthComponent.HealthChanged += OnHealthChanged;
             
             CurrentEntities += 1;
+        }
+
+        public void SpawnAround(Vector3 position, int radius, int amount)
+        {
+            var cellposition = spawnTilemap.WorldToCell(position);
+            var tiles = new List<Vector3Int>();
+
+            for (int x = (-radius); x <= radius; x++)
+            {
+                for (int y = -radius; y <= radius; y++)
+                {
+                    Vector3Int tempPosition = new Vector3Int(x, y, 0);
+
+                    if (tempPosition == Vector3Int.zero) continue;
+                    
+                    float distance = Mathf.Sqrt(Mathf.Pow(x,2) + Mathf.Pow(y,2));
+
+                    if (distance > radius) continue;
+
+                    var actuallPostion = cellposition + tempPosition;
+
+                    if (!spawnTilemap.HasTile(actuallPostion)) continue;
+
+                    tiles.Add(actuallPostion);                    
+                }
+            }
+            tiles = tiles.OrderBy(e => Guid.NewGuid()).ToList();
+
+            int spawnAmount = Mathf.Min(tiles.Count, amount);
+
+            for(int i=0; i < spawnAmount; i++)
+            {
+                if (!CanSpawn) break;
+
+                var spawnPosition = tiles[i];
+
+                var entityIndex = Random.Range(0, entities.Count);
+                var rotation = Random.Range(0, 360);
+
+                var entity = Instantiate(
+                    entities[entityIndex],
+                    spawnPosition.ToWorld(),
+                    Quaternion.Euler(0, 0, rotation)
+                );
+
+                var weaponComponent = GetComponentInParent<WeaponComponent>();
+                if (weaponComponent)
+                {
+                    var healthComponent = entity.GetComponent<HealthComponent>();
+                    if (healthComponent) weaponComponent.RegisterConjuringCallback(healthComponent);
+                }
+                
+                CurrentEntities += 1;
+
+            }
+
         }
 
         void OnHealthChanged(object sender, HealthEventArgs e)
