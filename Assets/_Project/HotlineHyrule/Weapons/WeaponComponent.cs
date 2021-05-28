@@ -7,6 +7,7 @@ using HotlineHyrule.Items;
 using HotlineHyrule.Level;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 namespace HotlineHyrule.Weapons
@@ -129,6 +130,9 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         GameObject InstantiateProjectile => Instantiate(RangedWeaponData.projectilePrefab, ProjectileSpawnPosition,
             WeaponTransform.rotation);
+        
+        int ConjuredEntities { get; set; }
+        SpawnerComponent SpawnerComponent { get; set; }
 
         /// <summary>
         /// Invoked when an attack is performed.
@@ -173,6 +177,13 @@ namespace HotlineHyrule.Weapons
         /// <param name="newWeaponData"></param>
         public void SetWeapon(WeaponData newWeaponData)
         {
+            if (HasConjuringWeapon)
+            {
+                var spawnerComponent = WeaponObject.GetComponent<SpawnerComponent>();
+                if (!spawnerComponent) return;
+                ConjuredEntities = spawnerComponent.CurrentEntities;
+            }
+
             if (WeaponObject) Destroy(WeaponObject);
             
             weaponData = newWeaponData;
@@ -182,6 +193,23 @@ namespace HotlineHyrule.Weapons
             WeaponObject = Instantiate(weaponData.weaponPrefab, transform);
             WeaponTransform.localPosition = weaponOffset;
             WeaponAnimator = WeaponObject.GetComponent<Animator>();
+
+            if (HasConjuringWeapon)
+            {
+                SpawnerComponent = WeaponObject.GetComponent<SpawnerComponent>();
+                if (!SpawnerComponent) return;
+
+                SpawnerComponent.CurrentEntities = ConjuredEntities;
+
+                var spawnTilemapObject = GameObject.Find(ConjuringWeaponData.spawnTilemapName);
+                if (!spawnTilemapObject) return;
+
+                var spawnTilemap = spawnTilemapObject.GetComponent<Tilemap>();
+                if (!spawnTilemap) return;
+
+                SpawnerComponent.spawnTilemap = spawnTilemap;
+
+            }
         }
 
         /// <summary>
@@ -259,7 +287,7 @@ namespace HotlineHyrule.Weapons
             var maxOffset = (int)(ConjuringWeaponData.conjuringAmount * ConjuringWeaponData.conjuringAmountOffset);
             var offset = Random.Range(-maxOffset, maxOffset + 1);
             var amount = ConjuringWeaponData.conjuringAmount + offset;
-            // spawnerComponent.SpawnAround(transform.position, ConjuringWeaponData.conjuringRadius, amount);
+            spawnerComponent.SpawnAround(transform.position, ConjuringWeaponData.conjuringRadius, amount);
         }
 
         void OnAttackFinished(object sender, EventArgs e)
@@ -307,5 +335,23 @@ namespace HotlineHyrule.Weapons
                 mainModule.simulationSpeed = _particleSimulationSpeed;
             }
         }
+
+        public void RegisterConjuringCallback(HealthComponent healthComponent)
+        {
+            healthComponent.HealthChanged += (sender, e) =>
+            {
+                if (!e.IsKilled) return;
+                if (!SpawnerComponent)
+                {
+                    ConjuredEntities -= 1;
+                }
+                else
+                {
+                    SpawnerComponent.CurrentEntities -= 1;
+                }                 
+            };
+        }
+
+       
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using HotlineHyrule;
+using HotlineHyrule.Entities;
 using HotlineHyrule.Items;
 using HotlineHyrule.Weapons;
 using HotlineHyrule.Weapons.Projectiles;
@@ -15,7 +16,7 @@ namespace HotlineHyruleEditor
     public class WeaponCreatorWindow : EditorWindow
     {
         enum EntityType { Player, Enemy }
-        enum WeaponType { Melee, Ranged }
+        enum WeaponType { Melee, Ranged, Conjuring }
         enum ProjectileType { Linear, Curved }
         static string Name { get; set; }
         static EntityType SelectedEntityType { get; set; }
@@ -23,6 +24,8 @@ namespace HotlineHyruleEditor
         static ProjectileType SelectedProjectileType { get; set; }
         static bool IsPlayer => SelectedEntityType == EntityType.Player;
         static bool IsRanged => SelectedWeaponType == WeaponType.Ranged;
+        static bool IsMelee => SelectedWeaponType == WeaponType.Melee;
+        static bool IsConjuring => SelectedWeaponType == WeaponType.Conjuring;
         static bool IsCurved => SelectedProjectileType == ProjectileType.Curved;
         
         [MenuItem("Window/Weapon Creator")]
@@ -188,7 +191,7 @@ namespace HotlineHyruleEditor
                 
                 DestroyImmediate(projectilePrefab);
             }
-            else
+            else if (IsMelee)
             {
                 var meleeWeaponData = CreateInstance<MeleeWeaponData>();
                 weaponData = meleeWeaponData;
@@ -203,7 +206,21 @@ namespace HotlineHyruleEditor
                 
                 AssetDatabase.CreateAsset(meleeWeaponData, $"{prefabPath}/weapon_{Name}.asset");
             }
+            else if (IsConjuring)
+            {
+                var conjuringWeaponData = CreateInstance<ConjuringWeaponData>();
+                weaponData = conjuringWeaponData;
+                conjuringWeaponData.weaponPrefab = weaponPrefab;
+
+                weaponPrefab.AddComponent<SpawnerComponent>();
                 
+                PrefabUtility.SaveAsPrefabAsset(weaponPrefab, $"{prefabPath}/weapon_{Name}.prefab");
+
+                conjuringWeaponData.weaponPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{prefabPath}/weapon_{Name}.prefab");
+
+                AssetDatabase.CreateAsset(conjuringWeaponData, $"{prefabPath}/weapon_{Name}.asset");
+            }
+
             //create dropped weapon prefab
             if (IsPlayer)
             {
