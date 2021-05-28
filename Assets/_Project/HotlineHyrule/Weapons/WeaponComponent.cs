@@ -7,6 +7,7 @@ using HotlineHyrule.Items;
 using HotlineHyrule.Level;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace HotlineHyrule.Weapons
 {
@@ -93,6 +94,10 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         public bool HasMeleeWeapon => weaponData is MeleeWeaponData;
         /// <summary>
+        /// Whether the current weapon is a conjuring one.
+        /// </summary>
+        public bool HasConjuringWeapon => weaponData is ConjuringWeaponData;
+        /// <summary>
         /// The currently equipped ranged weapon.
         /// </summary>
         public RangedWeaponData RangedWeaponData => (RangedWeaponData)weaponData;
@@ -100,6 +105,10 @@ namespace HotlineHyrule.Weapons
         /// The currently equipped melee weapon.
         /// </summary>
         MeleeWeaponData MeleeWeaponData => (MeleeWeaponData)weaponData;
+        /// <summary>
+        /// The currently equipped conjuring weapon.
+        /// </summary>
+        ConjuringWeaponData ConjuringWeaponData => (ConjuringWeaponData) weaponData;
 
         /// <summary>
         /// The weapon object's current world position
@@ -169,7 +178,6 @@ namespace HotlineHyrule.Weapons
             weaponData = newWeaponData;
 
             if (!weaponData) return;
-            // if (this == null) return;
 
             WeaponObject = Instantiate(weaponData.weaponPrefab, transform);
             WeaponTransform.localPosition = weaponOffset;
@@ -239,6 +247,19 @@ namespace HotlineHyrule.Weapons
         public void PerformMeleeAttack()
         {
             if (!HasMeleeWeapon) return;
+        }
+
+        public void PerformConjuringAttack()
+        {
+            if (!HasConjuringWeapon) return;
+
+            var spawnerComponent = WeaponObject.GetComponent<SpawnerComponent>();
+            if (!spawnerComponent) return;
+
+            var maxOffset = (int)(ConjuringWeaponData.conjuringAmount * ConjuringWeaponData.conjuringAmountOffset);
+            var offset = Random.Range(-maxOffset, maxOffset + 1);
+            var amount = ConjuringWeaponData.conjuringAmount + offset;
+            // spawnerComponent.SpawnAround(transform.position, ConjuringWeaponData.conjuringRadius, amount);
         }
 
         void OnAttackFinished(object sender, EventArgs e)
