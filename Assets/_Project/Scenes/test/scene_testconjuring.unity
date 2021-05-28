@@ -27873,7 +27873,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entities:
-  - {fileID: 58351699886775796, guid: 6dbde50ff42a4f6428a82107b9f6a6d6, type: 3}
   - {fileID: 27959096091732440, guid: 9bdef63d360f2304d997e05349a5d882, type: 3}
   spawnTilemap: {fileID: 281538186}
   maxEntities: 10
