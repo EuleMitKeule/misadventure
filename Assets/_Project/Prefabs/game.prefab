@@ -2056,7 +2056,6 @@ GameObject:
   - component: {fileID: 2033685506}
   - component: {fileID: 2033685507}
   - component: {fileID: 9197079450681321079}
-  - component: {fileID: 8576912214543174454}
   m_Layer: 5
   m_Name: parent_death
   m_TagString: Untagged
@@ -2143,50 +2142,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8576912214543174454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2033685504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bbab728ebb34328ad58ebe2be1bd3a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  restartAction:
-    m_Name: Restart
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: adfa089f-653e-4e87-a65b-8ee0dd2cb2ba
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 372f770c-ffc5-4e8f-8b83-c134d54da5d7
-      m_Path: <Keyboard>/r
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Restart
-      m_Flags: 0
-  exitAction:
-    m_Name: Exit
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 0a910199-7bda-48ba-918c-42fef139044c
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: a41fa1a1-17a9-46e9-9e28-92f69cdb30c2
-      m_Path: <Keyboard>/escape
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Exit
-      m_Flags: 0
 --- !u!1 &2036982585
 GameObject:
   m_ObjectHideFlags: 0
@@ -2461,6 +2416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelInfoParent: {fileID: 1327884684}
   levelFinishedParent: {fileID: 0}
+  deathParent: {fileID: 0}
 --- !u!1 &798222154745908282
 GameObject:
   m_ObjectHideFlags: 0
@@ -2828,6 +2784,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8366423192119765289}
   - component: {fileID: 8366423192119765288}
+  - component: {fileID: 5336618903236965245}
   m_Layer: 0
   m_Name: game
   m_TagString: Untagged
@@ -2869,3 +2826,47 @@ MonoBehaviour:
   - scene_forest_01
   - scene_forest_01
   playerStateData: {fileID: 0}
+--- !u!114 &5336618903236965245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8366423192119765287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbab728ebb34328ad58ebe2be1bd3a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restartAction:
+    m_Name: Restart
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e88d9461-74e2-45e8-a3d0-4c6b4a15d4d2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 850b11ea-581c-4cbe-badb-88e6d0529a6b
+      m_Path: <Keyboard>/r
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Restart
+      m_Flags: 0
+  exitAction:
+    m_Name: Exit
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 903304e7-e8f5-40d2-ab12-483636cfef12
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b0743303-1272-46b8-8c61-8275b174f047
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Exit
+      m_Flags: 0

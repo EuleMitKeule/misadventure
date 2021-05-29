@@ -10,6 +10,8 @@ namespace HotlineHyrule.Entities.PlayerStates
         {
             base.EnterState();
 
+            Debug.Log("Entered Frozen State");
+
             HealthComponent.IsInvincible = true;
 
             PlayerComponent.walkAction.Disable();

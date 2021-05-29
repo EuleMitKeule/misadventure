@@ -9,10 +9,12 @@ namespace HotlineHyrule.UserInterface
     {
         [SerializeField] public GameObject levelInfoParent;
         [SerializeField] public GameObject levelFinishedParent;
+        [SerializeField] public GameObject deathParent;
 
         Animator Animator { get; set; }
         Animator LevelInfoAnimator { get; set; }
         Animator LevelFinishedAnimator { get; set; }
+        Animator DeathAnimator { get; set; }
 
         void Awake()
         {
@@ -22,6 +24,8 @@ namespace HotlineHyrule.UserInterface
             if (levelInfoParent) LevelInfoAnimator = levelInfoParent.GetComponent<Animator>();
             if (!levelFinishedParent) levelFinishedParent = transform.Find("parent_level_finished").gameObject;
             if (levelFinishedParent) LevelFinishedAnimator = levelFinishedParent.GetComponent<Animator>();
+            if (!deathParent) deathParent = transform.Find("parent_death").gameObject;
+            if (deathParent) DeathAnimator = deathParent.GetComponent<Animator>();
 
             GameComponent.LevelLoaded += OnLevelLoaded;
             GameComponent.LevelUnloaded += OnLevelUnloaded;
@@ -29,10 +33,19 @@ namespace HotlineHyrule.UserInterface
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
-            if (e.IsMenu) return;
+            if (e.IsMenu)
+            {
+                Animator.SetBool("showFinished", false);
+                Animator.SetBool("showDeath", false);
+                Animator.SetBool("showInfo", false);
+                return;
+            }
 
             Locator.LevelComponent.LevelFinished += OnLevelFinished;
             Locator.PlayerComponent.MovementStarted += OnMovementStarted;
+
+            var healthComponent = Locator.PlayerComponent.GetComponent<HealthComponent>();
+            healthComponent.HealthChanged += OnHealthChanged;
 
             Animator.SetBool("showInfo", true);
         }
@@ -40,6 +53,8 @@ namespace HotlineHyrule.UserInterface
         void OnLevelUnloaded(object sender, LevelEventArgs e)
         {
             Animator.SetBool("showFinished", false);
+            Animator.SetBool("showDeath", false);
+            Animator.SetBool("showInfo", false);
 
             if (e.IsMenu) return;
             Locator.PlayerComponent.MovementStarted -= OnMovementStarted;
@@ -48,6 +63,13 @@ namespace HotlineHyrule.UserInterface
         void OnLevelFinished(object sender, EventArgs e)
         {
             Animator.SetBool("showFinished", true);
+        }
+
+        void OnHealthChanged(object sender, HealthEventArgs e)
+        {
+            if (!e.IsKilled) return;
+
+            Animator.SetBool("showDeath", true);
         }
 
         void OnMovementStarted(object sender, EventArgs e)
@@ -75,8 +97,19 @@ namespace HotlineHyrule.UserInterface
             if (LevelFinishedAnimator) LevelFinishedAnimator.SetTrigger("hide");
         }
 
+        public void ShowDeath()
+        {
+            if (DeathAnimator) DeathAnimator.SetBool("show", true);
+        }
+
+        public void HideDeath()
+        {
+            if (DeathAnimator) DeathAnimator.SetBool("show", false);
+        }
+
         public void EnablePlayerMovement()
         {
+            Debug.Log("Enabling player movement");
             if (Locator.PlayerComponent) Locator.PlayerComponent.SetState(Locator.PlayerComponent.IdleState);
         }
     }
