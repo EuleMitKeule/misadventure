@@ -1,0 +1,82 @@
+using HotlineHyrule.Extensions;
+using HotlineHyrule.Pathfinding;
+using UnityEngine;
+
+namespace HotlineHyrule.Entities.EnemyStates
+{
+    public class EnemyGuardStateComponent : EnemyBaseStateComponent
+    {
+        [SerializeField] float moveSpeed;
+
+        Vector3Int GuardPosition { get; set; }
+        float GuardRotation { get; set; }
+        bool IsAtGuardPosition { get; set; }
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            if (!Locator.LevelComponent) return;
+            var grid = Locator.LevelComponent.GetComponent<Grid>();
+            if (!grid) return;
+            GuardPosition = grid.WorldToCell(transform.position);
+            GuardRotation = transform.eulerAngles.z;
+        }
+
+        void OnDestinationReached(object sender, CellEventArgs e)
+        {
+            IsAtGuardPosition = true;
+            transform.rotation = Quaternion.Euler(0f, 0f, GuardRotation);
+        }
+
+        public override void EnterState()
+        {
+            base.EnterState();
+
+            if (PathfindingComponent) PathfindingComponent.DestinationReached += OnDestinationReached;
+
+            IsAtGuardPosition = false;
+
+            if (!PathfindingComponent) return;
+            PathfindingComponent.SetDestination(GuardPosition);
+        }
+
+        public override void ExitState()
+        {
+            if (PathfindingComponent) PathfindingComponent.DestinationReached -= OnDestinationReached;
+            PathfindingComponent.ClearDestination();
+        }
+
+        public override void FixedUpdateState()
+        {
+            base.FixedUpdateState();
+
+            if (EnemyComponent.IsPlayerAttackable)
+            {
+                if (EnemyComponent.AttackState) EnemyComponent.ChangeState(EnemyComponent.AttackState);
+            }
+
+            if (EnemyComponent.IsPlayerFollowable)
+            {
+                if (EnemyComponent.FollowState) EnemyComponent.ChangeState(EnemyComponent.FollowState);
+            }
+
+            if (IsAtGuardPosition)
+            {
+                EnemyComponent.SetVelocity(Vector2.zero);
+            }
+            else
+            {
+                EnemyComponent.SetVelocity(PathfindingComponent.CurrentDirection * moveSpeed);
+                if (Rigidbody.velocity != Vector2.zero) transform.rotation = EnemyComponent.WalkRotation;
+            }
+        }
+
+        public override void OnHealthChanged(object sender, HealthEventArgs e)
+        {
+            base.OnHealthChanged(sender, e);
+
+            transform.rotation = EnemyComponent.FollowRotation;
+        }
+    }
+}

@@ -132,7 +132,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 870712003
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -218,7 +218,7 @@ MonoBehaviour:
   state: {fileID: 0}
   wallMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 528
   wallCheckDistance: 0.3
   followAngle: 60
   followRange: 15

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HotlineHyrule.Entities.EnemyStates
 {
-    public class EnemyStateAttackComponent : EnemyStateBaseComponent
+    public class EnemyAttackStateComponent : EnemyBaseStateComponent
     {
         Coroutine AttackCoroutine { get; set; }
 
@@ -38,7 +38,10 @@ namespace HotlineHyrule.Entities.EnemyStates
                 }
                 else
                 {
-                    EnemyComponent.ChangeState(EnemyComponent.SearchState ? EnemyComponent.SearchState : EnemyComponent.PatrolState);
+                    var passiveState = EnemyComponent.PatrolState
+                        ? EnemyComponent.PatrolState
+                        : EnemyComponent.GuardState;
+                    EnemyComponent.ChangeState(EnemyComponent.SearchState ? EnemyComponent.SearchState : passiveState);
                 }
             }
         }

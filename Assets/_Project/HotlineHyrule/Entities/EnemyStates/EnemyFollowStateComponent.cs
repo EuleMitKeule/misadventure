@@ -2,7 +2,7 @@
 
 namespace HotlineHyrule.Entities.EnemyStates
 {
-    public class EnemyStateFollowComponent : EnemyStateBaseComponent
+    public class EnemyFollowStateComponent : EnemyBaseStateComponent
     {
         /// <summary>
         /// The movement speed for enemy while following.
