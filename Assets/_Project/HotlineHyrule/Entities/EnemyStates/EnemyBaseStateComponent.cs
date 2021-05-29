@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace HotlineHyrule.Entities.EnemyStates
 {
-    public abstract class EnemyStateBaseComponent : MonoBehaviour
+    public abstract class EnemyBaseStateComponent : MonoBehaviour
     {
         /// <summary>
         /// (Future) Priority value if enemy can change between multiple states
@@ -18,7 +18,7 @@ namespace HotlineHyrule.Entities.EnemyStates
         protected PathfindingComponent PathfindingComponent { get; private set; }
         protected Animator Animator { get; private set; }
 
-        void Awake()
+        protected virtual void Awake()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
             EnemyComponent = GetComponent<EnemyComponent>();

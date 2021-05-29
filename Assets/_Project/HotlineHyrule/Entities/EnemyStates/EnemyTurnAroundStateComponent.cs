@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HotlineHyrule.Entities.EnemyStates
 {
-    public class EnemyStateTurnAroundComponent : EnemyStateBaseComponent
+    public class EnemyTurnAroundStateComponent : EnemyBaseStateComponent
     {
         [SerializeField] float turnDelay;
 
@@ -35,7 +35,10 @@ namespace HotlineHyrule.Entities.EnemyStates
 
         void StartTurnAroundRoutine()
         {
-            if (TurnAroundCoroutine != null) EnemyComponent.ChangeState(EnemyComponent.PatrolState);
+            var passiveState = EnemyComponent.PatrolState
+                ? EnemyComponent.PatrolState
+                : EnemyComponent.GuardState;
+            if (TurnAroundCoroutine != null) EnemyComponent.ChangeState(passiveState);
 
             TurnAroundCoroutine ??= StartCoroutine(TurnAroundRoutine());
         }
@@ -55,7 +58,10 @@ namespace HotlineHyrule.Entities.EnemyStates
             transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z + 90f);
 
             TurnAroundCoroutine = null;
-            EnemyComponent.ChangeState(EnemyComponent.PatrolState);
+            var passiveState = EnemyComponent.PatrolState
+                ? EnemyComponent.PatrolState
+                : EnemyComponent.GuardState;
+            EnemyComponent.ChangeState(passiveState);
         }
 
         void StopTurnAroundCoroutine()

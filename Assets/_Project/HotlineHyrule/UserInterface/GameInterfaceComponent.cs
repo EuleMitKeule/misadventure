@@ -109,7 +109,6 @@ namespace HotlineHyrule.UserInterface
 
         public void EnablePlayerMovement()
         {
-            Debug.Log("Enabling player movement");
             if (Locator.PlayerComponent) Locator.PlayerComponent.SetState(Locator.PlayerComponent.IdleState);
         }
     }

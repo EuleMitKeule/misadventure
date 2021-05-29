@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HotlineHyrule.Entities.EnemyStates
 {
-    public class EnemyStateSearchComponent : EnemyStateBaseComponent
+    public class EnemySearchStateComponent : EnemyBaseStateComponent
     {
         /// <summary>
         /// The movement speed of the enemy while searching.
@@ -19,13 +19,14 @@ namespace HotlineHyrule.Entities.EnemyStates
             LastSeenPosition = EnemyComponent.PlayerPosition;
             PathfindingComponent.SetDestination(Locator.LevelComponent.Grid.WorldToCell(LastSeenPosition));
 
-            PathfindingComponent.DestinationReached += OnDestinationReached;
+            if (PathfindingComponent) PathfindingComponent.DestinationReached += OnDestinationReached;
         }
 
         public override void ExitState()
         {
             base.ExitState();
-            
+
+            if (PathfindingComponent) PathfindingComponent.DestinationReached -= OnDestinationReached;
             PathfindingComponent.ClearDestination();
         }
 

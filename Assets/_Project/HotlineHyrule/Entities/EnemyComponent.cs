@@ -28,7 +28,7 @@ namespace HotlineHyrule.Entities
         /// The enemy's current state.
         /// </summary>
         [Header("AI")]
-        [SerializeField] public EnemyStateBaseComponent state;
+        [SerializeField] public EnemyBaseStateComponent state;
         /// <summary>
         /// Layers that count as wall.
         /// </summary>
@@ -172,12 +172,13 @@ namespace HotlineHyrule.Entities
         Animator Animator { get; set; }
         HealthComponent HealthComponent { get; set; }
 
-        public EnemyStateBaseComponent PatrolState { get; private set; }
-        public EnemyStateBaseComponent SearchState { get; private set; }
-        public EnemyStateBaseComponent TurnAroundState { get; private set; }
-        public EnemyStateBaseComponent AttackState { get; private set; }
-        public EnemyStateBaseComponent FollowState { get; private set; }
-        public EnemyStateBaseComponent DyingState { get; private set; }
+        public EnemyBaseStateComponent PatrolState { get; private set; }
+        public EnemyBaseStateComponent GuardState { get; private set; }
+        public EnemyBaseStateComponent SearchState { get; private set; }
+        public EnemyBaseStateComponent TurnAroundState { get; private set; }
+        public EnemyBaseStateComponent AttackState { get; private set; }
+        public EnemyBaseStateComponent FollowState { get; private set; }
+        public EnemyBaseStateComponent DyingState { get; private set; }
 
         void Awake()
         {
@@ -185,19 +186,21 @@ namespace HotlineHyrule.Entities
             Collider = GetComponent<Collider2D>();
             Animator = GetComponent<Animator>();
             HealthComponent = GetComponent<HealthComponent>();
-            PatrolState = GetComponent<EnemyStatePatrolComponent>();
-            SearchState = GetComponent<EnemyStateSearchComponent>();
-            TurnAroundState = GetComponent<EnemyStateTurnAroundComponent>();
-            AttackState = GetComponent<EnemyStateAttackComponent>();
-            FollowState = GetComponent<EnemyStateFollowComponent>();
-            DyingState = GetComponent<EnemyStateDyingComponent>();
+            PatrolState = GetComponent<EnemyPatrolStateComponent>();
+            GuardState = GetComponent<EnemyGuardStateComponent>();
+            SearchState = GetComponent<EnemySearchStateComponent>();
+            TurnAroundState = GetComponent<EnemyTurnAroundStateComponent>();
+            AttackState = GetComponent<EnemyAttackStateComponent>();
+            FollowState = GetComponent<EnemyFollowStateComponent>();
+            DyingState = GetComponent<EnemyDyingStateComponent>();
 
             HealthComponent.HealthChanged += OnHealthChanged;
         }
 
         void Start()
         {
-            ChangeState(PatrolState);
+            var passiveState = PatrolState ? PatrolState : GuardState;
+            ChangeState(passiveState);
         }
 
         void FixedUpdate()
@@ -220,7 +223,7 @@ namespace HotlineHyrule.Entities
         /// Changes the enemy's state. Also exits the current one and sets up the new one
         /// </summary>
         /// <param name="newState">The new state the enemy shall get</param>
-        public void ChangeState(EnemyStateBaseComponent newState)
+        public void ChangeState(EnemyBaseStateComponent newState)
         {
             if (!newState) return;
             if (state && newState.priority < state.priority) return;

@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 namespace HotlineHyrule.Entities.EnemyStates
 {
     [RequireComponent(typeof(EnemyComponent))]
-    public class EnemyStatePatrolComponent : EnemyStateBaseComponent
+    public class EnemyPatrolStateComponent : EnemyBaseStateComponent
     {
         /// <summary>
         /// The movement speed of the enemy while patrolling.
