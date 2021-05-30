@@ -15,11 +15,12 @@ MonoBehaviour:
   questText: This area of the forest had a bunch of gnomes gathered around a big
     treasure.
   questTargetText: We decided to kill them all and steal their prized posessions.
+  finishLevelOnCompletion: 0
   questTargets:
   - id: 0
   - id: 1
   - id: 2
-  finishLevelOnCompletion: 0
+  - id: 3
   questRewards:
   - {fileID: 11400000, guid: f58cd77d387f2b34090679534b827f5d, type: 2}
   - {fileID: 11400000, guid: c8b0562d0fc150a429d13edc73d10d01, type: 2}
@@ -31,19 +32,11 @@ MonoBehaviour:
       type: {class: KillQuestTarget, ns: HotlineHyrule.Quests, asm: HotlineHyrule}
       data:
         isRequired: 0
-        targetReachedText: We killed each and every gnome.
-        targetNotReachedText: We fled from the gnomes.
-        shortTargetText: Kill {x} gnomes
-        killTarget: 5
+        targetReachedText: We killed each and every enemy.
+        targetNotReachedText: We couldn't kill all of them.
+        shortTargetText: Kill {x} enemies
+        killTarget: 7
     00000001:
-      type: {class: SearchQuestTarget, ns: HotlineHyrule.Quests, asm: HotlineHyrule}
-      data:
-        isRequired: 0
-        targetReachedText: We picked up a pine cone.
-        targetNotReachedText: We couldn't find any pine cones.
-        shortTargetText: Pick up a pine cone
-        item: {fileID: 11400000, guid: 0dc7175a284f8ac4e9c83ba8cc220be6, type: 2}
-    00000002:
       type: {class: TreasureQuestTarget, ns: HotlineHyrule.Quests, asm: HotlineHyrule}
       data:
         isRequired: 1
@@ -55,3 +48,20 @@ MonoBehaviour:
         shortTargetText: Find and collect the treasure
         treasureItem: {fileID: 11400000, guid: 3892f96f76b10fd42920f24c8d3dafcf, type: 2}
         treasureTilemapName: tilemap_treasure
+    00000002:
+      type: {class: UseWeaponQuestTarget, ns: HotlineHyrule.Quests, asm: HotlineHyrule}
+      data:
+        isRequired: 0
+        targetReachedText: We used a pine cone.
+        targetNotReachedText: We couldn't use a pine cone.
+        shortTargetText: Throw back a pine cone
+        weapon: {fileID: 11400000, guid: 0dc7175a284f8ac4e9c83ba8cc220be6, type: 2}
+    00000003:
+      type: {class: KillSpecificQuestTarget, ns: HotlineHyrule.Quests, asm: HotlineHyrule}
+      data:
+        isRequired: 0
+        targetReachedText: We killed 5 gnomes.
+        targetNotReachedText: We spared the gnomes.
+        shortTargetText: Kill {x} gnomes
+        killTarget: 5
+        enemyName: forest_gnome
