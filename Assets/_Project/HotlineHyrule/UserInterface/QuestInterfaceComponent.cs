@@ -33,7 +33,7 @@ namespace HotlineHyrule.UserInterface
 
             QuestData = e.LevelData.questData;
             Locator.QuestComponent.QuestTargetReached += OnQuestTargetReached;
-            Locator.QuestComponent.QuestTargetChanged += OnQuestTargetChanged;
+            Locator.QuestComponent.KillQuestTargetChanged += OnKillQuestTargetChanged;
 
             TargetToTargetObject = new Dictionary<QuestTarget, GameObject>();
 
@@ -47,7 +47,7 @@ namespace HotlineHyrule.UserInterface
                     parsedTargetText.Contains("{x}"))
                 {
                     var remainingKillTarget =
-                        Mathf.Max(killQuestTarget.killTarget - Locator.QuestComponent.KilledEnemies, 0);
+                        Mathf.Max(killQuestTarget.killTarget - Locator.QuestComponent.TotalKilledEnemies, 0);
                     parsedTargetText = parsedTargetText.Replace("{x}", remainingKillTarget.ToString());
                 }
 
@@ -59,7 +59,7 @@ namespace HotlineHyrule.UserInterface
             }
         }
 
-        void OnQuestTargetChanged(object sender, QuestTargetEventArgs e)
+        void OnKillQuestTargetChanged(object sender, KillQuestTargetEventArgs e)
         {
             var targetObject = TargetToTargetObject[e.QuestTarget];
             var label = targetObject.GetComponentInChildren<TextMeshProUGUI>();
@@ -69,7 +69,7 @@ namespace HotlineHyrule.UserInterface
                 parsedTargetText.Contains("{x}"))
             {
                 var remainingKillTarget =
-                    Mathf.Max(killQuestTarget.killTarget - Locator.QuestComponent.KilledEnemies, 0);
+                    Mathf.Max(killQuestTarget.killTarget - e.KillCount, 0);
                 parsedTargetText = parsedTargetText.Replace("{x}", remainingKillTarget.ToString());
             }
 

@@ -165,7 +165,7 @@ namespace HotlineHyrule.Entities
                 wallMask
             );
 
-        public static event EventHandler<EventArgs> EnemyKilled;
+        public static event EventHandler<EntityEventArgs> EnemyKilled;
 
         Rigidbody2D Rigidbody { get; set; }
         Collider2D Collider { get; set; }
@@ -264,7 +264,8 @@ namespace HotlineHyrule.Entities
                     }
                 }
 
-                EnemyKilled?.Invoke(this, EventArgs.Empty);
+                var entityEventArgs = new EntityEventArgs(gameObject);
+                EnemyKilled?.Invoke(this, entityEventArgs);
             }
         }
 

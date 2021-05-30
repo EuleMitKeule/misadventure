@@ -137,7 +137,7 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// Invoked when an attack is performed.
         /// </summary>
-        public event EventHandler<EventArgs> AttackStarted;
+        public event EventHandler<WeaponEventArgs> AttackStarted;
         /// <summary>
         /// Invoked when an attack is finished.
         /// </summary>
@@ -237,8 +237,9 @@ namespace HotlineHyrule.Weapons
             
             var time = WeaponAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
             Invoke(nameof(InvokeAttackFinished), time);
-            
-            AttackStarted?.Invoke(this, EventArgs.Empty);
+
+            var weaponEventArgs = new WeaponEventArgs(weaponData);
+            AttackStarted?.Invoke(this, weaponEventArgs);
         }
 
         /// <summary>
