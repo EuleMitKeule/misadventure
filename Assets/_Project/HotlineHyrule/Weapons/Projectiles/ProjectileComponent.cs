@@ -152,20 +152,20 @@ namespace HotlineHyrule.Weapons
             Destroy(gameObject);
         }
 
-        public void Fire(Vector2 entityVelocity, int weaponCharges, int damageBonus, float damageFactor, float attackSpeed)
+        public void Fire(Vector3 direction, Vector2 entityVelocity, int weaponCharges, int damageBonus, float damageFactor, float attackSpeed)
         {
             if (projectileData is LinearProjectileData linearProjectileData)
             {
                 var velocity = linearProjectileData.movementSpeed == 0f
                     ? entityVelocity
-                    : (Vector2)Transform.up * linearProjectileData.movementSpeed;
+                    : (Vector2)direction * linearProjectileData.movementSpeed;
 
                 Rigidbody.velocity = velocity;
             }
             else if (projectileData is CurvedProjectileData)
             {
                 Rigidbody.drag = StartDrag;
-                Rigidbody.velocity = Transform.up * CurvedStartSpeed;
+                Rigidbody.velocity = direction * CurvedStartSpeed;
             }
             
             DamageBonus = damageBonus;

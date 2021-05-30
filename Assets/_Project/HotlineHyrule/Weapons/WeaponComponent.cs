@@ -125,11 +125,6 @@ namespace HotlineHyrule.Weapons
         /// The spawn position of the projectile.
         /// </summary>
         Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + WeaponTransform.position;
-        /// <summary>
-        /// Spawns a new projectile object.
-        /// </summary>
-        GameObject InstantiateProjectile => Instantiate(RangedWeaponData.projectilePrefab, ProjectileSpawnPosition,
-            WeaponTransform.rotation);
         
         int ConjuredEntities { get; set; }
         SpawnerComponent SpawnerComponent { get; set; }
@@ -248,19 +243,40 @@ namespace HotlineHyrule.Weapons
         public void PerformRangedAttack()
         {
             if (!HasRangedWeapon) return;
+
+            StartCoroutine(PerformRangedAttackRoutine());
+        }
+
+        IEnumerator PerformRangedAttackRoutine()
+        {
+            var angleDifference = RangedWeaponData.projectileAngle / RangedWeaponData.projectileCount;
+            var startAngle = RangedWeaponData.projectileAngleOffset - RangedWeaponData.projectileAngle / 2 + angleDifference / 2;
             
-            FireProjectile();
+            for (var i = 0; i < RangedWeaponData.projectileCount; i++)
+            {
+                var angle = startAngle + i * angleDifference;
+                var absoluteAngle = WeaponTransform.eulerAngles.z + angle;
+                var direction = Vector3.up.RotateAroundZ(absoluteAngle);
+            
+                FireProjectile(direction);
+
+                yield return new WaitForSeconds(RangedWeaponData.projectileDelay);
+            }
         }
 
         /// <summary>
         /// Fires a new instance of the projectile associated with the equipped ranged weapon.
         /// </summary>
-        void FireProjectile()
+        void FireProjectile(Vector3 direction)
         {
-            var projectileObject = InstantiateProjectile;
+            var fireAngle = Vector3.SignedAngle(Vector3.up, direction, Vector3.forward);
+            
+            var projectileObject = Instantiate(RangedWeaponData.projectilePrefab, ProjectileSpawnPosition,
+                Quaternion.Euler(0f, 0f, fireAngle));
 
             var projectileComponent = projectileObject.GetComponent<ProjectileComponent>();
             if (projectileComponent) projectileComponent.Fire(
+                direction,
                 Rigidbody.velocity, 
                 IsPlayer ? LoadoutComponent.CurrentLoadoutSlot.weaponCharges : 0, 
                 DamageBonus, 
