@@ -84,7 +84,7 @@ namespace HotlineHyrule.Quests
                 var treasureTilemapObject = transform.Find(treasureQuestTarget.treasureTilemapName);
                 if (!treasureTilemapObject)
                 {
-                    Debug.LogWarning($"{treasureQuestTarget.treasureTilemapName} could not be found.");
+                    Logging.LogWarning($"{treasureQuestTarget.treasureTilemapName} could not be found.");
                     continue;
                 }
 

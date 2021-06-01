@@ -35,13 +35,13 @@ namespace HotlineHyrule.Entities
         {
             if (maxEntities <= 0)
             {
-                Debug.LogWarning($"You need to set a maximum entity limit for the spawner {name}.");
+                Logging.LogWarning($"You need to set a maximum entity limit for the spawner {name}.");
                 return;
             }
 
             if (entities == null || entities.Count == 0)
             {
-                Debug.LogWarning($"You need to assign entity prefabs for the spawner {name}.");
+                Logging.LogWarning($"You need to assign entity prefabs for the spawner {name}.");
                 return;
             }
 
@@ -77,7 +77,7 @@ namespace HotlineHyrule.Entities
 
                     CurrentWave += 1;
                 }
-                Debug.Log("Wave: " + CurrentWave);
+
                 var maxTimeOffset = waveTime * waveTimeOffset;
                 var timeOffset = Random.Range(-maxTimeOffset, maxTimeOffset);
 

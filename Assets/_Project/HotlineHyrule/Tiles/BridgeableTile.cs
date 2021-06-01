@@ -16,18 +16,16 @@ namespace HotlineHyrule.Tiles
 
             var bridgeTilemapObject = GameObject.Find(bridgeTilemapName);
 
-            if (bridgeTilemapObject)
-            {
-                var bridgeTilemap = bridgeTilemapObject.GetComponent<Tilemap>();
+            if (!bridgeTilemapObject) return;
 
-                if (bridgeTilemap != null)
-                {
-                    var bridgeSprite = bridgeTilemap.GetSprite(position);
+            var bridgeTilemap = bridgeTilemapObject.GetComponent<Tilemap>();
 
-                    tileData.colliderType =
-                        bridgeSprites.Contains(bridgeSprite) ? Tile.ColliderType.None : tileData.colliderType;
-                }
-            }
+            if (bridgeTilemap == null) return;
+
+            var bridgeSprite = bridgeTilemap.GetSprite(position);
+
+            tileData.colliderType =
+                bridgeSprites.Contains(bridgeSprite) ? Tile.ColliderType.None : tileData.colliderType;
         }
     }
 }

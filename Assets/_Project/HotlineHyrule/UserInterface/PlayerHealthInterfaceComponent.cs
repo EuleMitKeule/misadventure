@@ -22,7 +22,6 @@ namespace HotlineHyrule.UserInterface
 
         void Awake()
         {
-            Debug.Log(Mathf.RoundToInt(0.5f));
             GameComponent.LevelLoaded += OnLevelLoaded;
         }
 

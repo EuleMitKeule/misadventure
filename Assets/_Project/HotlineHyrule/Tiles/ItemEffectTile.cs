@@ -12,12 +12,10 @@ namespace HotlineHyrule.Tiles
 
         public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject instantiatedGameObject)
         {
-            if (instantiatedGameObject)
-            {
-                var tileEffectComponent = instantiatedGameObject.GetComponent<TileEffectComponent>();
-                if (tileEffectComponent) tileEffectComponent.itemEffects = itemEffects;
-            }
+            if (!instantiatedGameObject) return base.StartUp(position, tilemap, instantiatedGameObject);
 
+            var tileEffectComponent = instantiatedGameObject.GetComponent<TileEffectComponent>();
+            if (tileEffectComponent) tileEffectComponent.itemEffects = itemEffects;
 
             return base.StartUp(position, tilemap, instantiatedGameObject);
         }
