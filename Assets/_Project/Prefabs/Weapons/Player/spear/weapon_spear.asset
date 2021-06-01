@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: weapon_spear
   m_EditorClassIdentifier: 
   itemName: 
+  itemPrefab: {fileID: 0}
   movementFactor: 1
   slowTimeWindow: 0
   attackRate: 1
@@ -25,3 +26,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 8636156419958803353, guid: b3e3606a20fe6924e887e9d19ded1b10, type: 3}
   spawnPosition: {x: 0, y: 0}
   weaponFiredSound: {fileID: 8300000, guid: 730fd8cd09c673f468f9c3fd091ec962, type: 3}
+  projectileCount: 1
+  projectileAngle: 0
+  projectileAngleOffset: 0
+  projectileDelay: 0

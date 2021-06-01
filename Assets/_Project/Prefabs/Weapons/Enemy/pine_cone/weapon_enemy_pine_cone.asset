@@ -26,3 +26,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6451201564170486767, guid: 812ae0eb8d571ee45a520776ee8d28cc, type: 3}
   spawnPosition: {x: 0.345, y: 0.28}
   weaponFiredSound: {fileID: 0}
+  projectileCount: 1
+  projectileAngle: 0
+  projectileAngleOffset: 0
+  projectileDelay: 0

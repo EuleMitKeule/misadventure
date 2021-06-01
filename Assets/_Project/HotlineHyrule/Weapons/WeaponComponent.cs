@@ -249,10 +249,13 @@ namespace HotlineHyrule.Weapons
 
         IEnumerator PerformRangedAttackRoutine()
         {
+            if (!HasRangedWeapon) yield break;
+
             var angleDifference = RangedWeaponData.projectileAngle / RangedWeaponData.projectileCount;
             var startAngle = RangedWeaponData.projectileAngleOffset - RangedWeaponData.projectileAngle / 2 + angleDifference / 2;
-            
-            for (var i = 0; i < RangedWeaponData.projectileCount; i++)
+            var projectileCount = RangedWeaponData.projectileCount;
+
+            for (var i = 0; i < projectileCount; i++)
             {
                 var angle = startAngle + i * angleDifference;
                 var absoluteAngle = WeaponTransform.eulerAngles.z + angle;
