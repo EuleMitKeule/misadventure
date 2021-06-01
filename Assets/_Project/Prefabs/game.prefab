@@ -2513,6 +2513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad49f8feae17d9244a5ec3395b138708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scalingFactor: 0.2
   healthContainerObject: {fileID: 798222154784294095}
   heartPrefab: {fileID: 4367992660821445956, guid: 468f83c9a3e0370458b95f336d03d100, type: 3}
   fullHeartSprite: {fileID: -82400937575883739, guid: c8631c5137881514a9fb810439ac683f, type: 3}
