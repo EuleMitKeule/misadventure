@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: weapon_player_pine_cone
   m_EditorClassIdentifier: 
   itemName: 
+  itemPrefab: {fileID: 0}
   movementFactor: 1
   slowTimeWindow: 0
   attackRate: 1
@@ -25,3 +26,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6451201564170486767, guid: e5a5e2efae46c234fb413f4b0dc1afed, type: 3}
   spawnPosition: {x: 0.03, y: 0.37}
   weaponFiredSound: {fileID: 0}
+  projectileCount: 1
+  projectileAngle: 0
+  projectileAngleOffset: 0
+  projectileDelay: 0

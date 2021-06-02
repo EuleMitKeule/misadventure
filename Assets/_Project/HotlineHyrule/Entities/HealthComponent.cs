@@ -29,6 +29,7 @@ namespace HotlineHyrule.Entities
             get { return _health; }
             set
             {
+                if (IsInvincible) return;
                 var lastHealth = _health;
                 _health = Mathf.Clamp(value, 0, maxHealth);
 
@@ -36,8 +37,8 @@ namespace HotlineHyrule.Entities
                 HealthChanged?.Invoke(this, healthEventArgs);
             }
         }
-        
-        RespawnComponent RespawnComponent { get; set; }
+
+        public bool IsInvincible { get; set; }
 
         /// <summary>
         /// Is invoked when the health value has changed.
@@ -46,10 +47,6 @@ namespace HotlineHyrule.Entities
 
         void Awake()
         {
-            RespawnComponent = GetComponent<RespawnComponent>();
-            
-            if (RespawnComponent) RespawnComponent.Respawned += OnRespawned;
-
             ResetHealth();
         }
 
@@ -57,16 +54,6 @@ namespace HotlineHyrule.Entities
         /// Resets health to the start value, clamped to [0, maxHealth].
         /// </summary>
         void ResetHealth() => Health = startHealth;
-
-        /// <summary>
-        /// Resets health to the start value when the entity has respawned.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void OnRespawned(object sender, EventArgs e)
-        {
-            ResetHealth();
-        }
 
         public void Consume(HealthItemData healthItem)
         {

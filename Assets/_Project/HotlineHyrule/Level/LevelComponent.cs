@@ -1,5 +1,8 @@
-﻿using HotlineHyrule.Extensions;
+﻿using System;
+using HotlineHyrule.Extensions;
+using HotlineHyrule.Input;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace HotlineHyrule.Level
 {
@@ -16,15 +19,6 @@ namespace HotlineHyrule.Level
         [SerializeField] public Vector2Int playerRespawnPosition;
         [SerializeField] public LevelData levelData;
         /// <summary>
-        /// Whether to enable the rain effect.
-        /// </summary>
-        [Header("Effects")]
-        [SerializeField] bool isRaining;
-        /// /// <summary>
-        /// Whether to enable the snow effect.
-        /// </summary>
-        [SerializeField] bool isSnowing;
-        /// <summary>
         /// The prefab of the rain effect.
         /// </summary>
         [SerializeField] GameObject rainEffectPrefab;
@@ -33,27 +27,48 @@ namespace HotlineHyrule.Level
         /// </summary>
         [SerializeField] GameObject snowEffectPrefab;
 
+        DefaultControls DefaultControls { get; set; }
+
+        public event EventHandler<EventArgs> LevelFinished;
+
         public Grid Grid { get; private set; }
-        
+
         void Awake()
         {
+            DefaultControls = new DefaultControls();
             Locator.LevelComponent = this;
             Grid = GetComponent<Grid>();
-
+            
             var mainCamera = Camera.main;
 
             if (mainCamera)
             {
-                if (isRaining) Instantiate(rainEffectPrefab, mainCamera.transform);
-                if (isSnowing) Instantiate(snowEffectPrefab, mainCamera.transform);
+                if (levelData.isRaining) Instantiate(rainEffectPrefab, mainCamera.transform);
+                if (levelData.isSnowing) Instantiate(snowEffectPrefab, mainCamera.transform);
             }
 
+            DefaultControls.map_default.action_finish.performed += OnButtonFinish;
+            
             GameComponent.LevelLoaded += OnLevelLoaded;
         }
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
+            if (e.IsMenu) return;
+
             Locator.PlayerComponent.transform.position = e.LevelData.playerSpawnPosition.ToWorld();
+        }
+
+        public void FinishLevel()
+        {
+            LevelFinished?.Invoke(this, EventArgs.Empty);
+            DefaultControls.map_default.action_finish.Enable();
+        }
+
+        void OnButtonFinish(InputAction.CallbackContext context)
+        {
+            DefaultControls.map_default.action_finish.Disable();
+            Locator.GameComponent.LoadNextScene();
         }
     }
 }

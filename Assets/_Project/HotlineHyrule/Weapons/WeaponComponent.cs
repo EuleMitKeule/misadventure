@@ -7,6 +7,8 @@ using HotlineHyrule.Items;
 using HotlineHyrule.Level;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 namespace HotlineHyrule.Weapons
 {
@@ -26,7 +28,7 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// The input action to perform an attack.
         /// </summary>
-        [SerializeField] InputAction attackAction;
+        [SerializeField] public InputAction attackAction;
 
         float _attackSpeedFactor;
         float _particleSimulationSpeed;
@@ -93,6 +95,10 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         public bool HasMeleeWeapon => weaponData is MeleeWeaponData;
         /// <summary>
+        /// Whether the current weapon is a conjuring one.
+        /// </summary>
+        public bool HasConjuringWeapon => weaponData is ConjuringWeaponData;
+        /// <summary>
         /// The currently equipped ranged weapon.
         /// </summary>
         public RangedWeaponData RangedWeaponData => (RangedWeaponData)weaponData;
@@ -100,6 +106,10 @@ namespace HotlineHyrule.Weapons
         /// The currently equipped melee weapon.
         /// </summary>
         MeleeWeaponData MeleeWeaponData => (MeleeWeaponData)weaponData;
+        /// <summary>
+        /// The currently equipped conjuring weapon.
+        /// </summary>
+        ConjuringWeaponData ConjuringWeaponData => (ConjuringWeaponData) weaponData;
 
         /// <summary>
         /// The weapon object's current world position
@@ -115,16 +125,14 @@ namespace HotlineHyrule.Weapons
         /// The spawn position of the projectile.
         /// </summary>
         Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + WeaponTransform.position;
-        /// <summary>
-        /// Spawns a new projectile object.
-        /// </summary>
-        GameObject InstantiateProjectile => Instantiate(RangedWeaponData.projectilePrefab, ProjectileSpawnPosition,
-            WeaponTransform.rotation);
+        
+        int ConjuredEntities { get; set; }
+        SpawnerComponent SpawnerComponent { get; set; }
 
         /// <summary>
         /// Invoked when an attack is performed.
         /// </summary>
-        public event EventHandler<EventArgs> AttackStarted;
+        public event EventHandler<WeaponEventArgs> AttackStarted;
         /// <summary>
         /// Invoked when an attack is finished.
         /// </summary>
@@ -164,16 +172,39 @@ namespace HotlineHyrule.Weapons
         /// <param name="newWeaponData"></param>
         public void SetWeapon(WeaponData newWeaponData)
         {
+            if (HasConjuringWeapon)
+            {
+                var spawnerComponent = WeaponObject.GetComponent<SpawnerComponent>();
+                if (!spawnerComponent) return;
+                ConjuredEntities = spawnerComponent.CurrentEntities;
+            }
+
             if (WeaponObject) Destroy(WeaponObject);
             
             weaponData = newWeaponData;
 
             if (!weaponData) return;
-            // if (this == null) return;
 
             WeaponObject = Instantiate(weaponData.weaponPrefab, transform);
             WeaponTransform.localPosition = weaponOffset;
             WeaponAnimator = WeaponObject.GetComponent<Animator>();
+
+            if (HasConjuringWeapon)
+            {
+                SpawnerComponent = WeaponObject.GetComponent<SpawnerComponent>();
+                if (!SpawnerComponent) return;
+
+                SpawnerComponent.CurrentEntities = ConjuredEntities;
+
+                var spawnTilemapObject = GameObject.Find(ConjuringWeaponData.spawnTilemapName);
+                if (!spawnTilemapObject) return;
+
+                var spawnTilemap = spawnTilemapObject.GetComponent<Tilemap>();
+                if (!spawnTilemap) return;
+
+                SpawnerComponent.spawnTilemap = spawnTilemap;
+
+            }
         }
 
         /// <summary>
@@ -201,8 +232,9 @@ namespace HotlineHyrule.Weapons
             
             var time = WeaponAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
             Invoke(nameof(InvokeAttackFinished), time);
-            
-            AttackStarted?.Invoke(this, EventArgs.Empty);
+
+            var weaponEventArgs = new WeaponEventArgs(weaponData);
+            AttackStarted?.Invoke(this, weaponEventArgs);
         }
 
         /// <summary>
@@ -211,19 +243,43 @@ namespace HotlineHyrule.Weapons
         public void PerformRangedAttack()
         {
             if (!HasRangedWeapon) return;
+
+            StartCoroutine(PerformRangedAttackRoutine());
+        }
+
+        IEnumerator PerformRangedAttackRoutine()
+        {
+            if (!HasRangedWeapon) yield break;
+
+            var angleDifference = RangedWeaponData.projectileAngle / RangedWeaponData.projectileCount;
+            var startAngle = RangedWeaponData.projectileAngleOffset - RangedWeaponData.projectileAngle / 2 + angleDifference / 2;
+            var projectileCount = RangedWeaponData.projectileCount;
+
+            for (var i = 0; i < projectileCount; i++)
+            {
+                var angle = startAngle + i * angleDifference;
+                var absoluteAngle = WeaponTransform.eulerAngles.z + angle;
+                var direction = Vector3.up.RotateAroundZ(absoluteAngle);
             
-            FireProjectile();
+                FireProjectile(direction);
+
+                yield return new WaitForSeconds(RangedWeaponData.projectileDelay);
+            }
         }
 
         /// <summary>
         /// Fires a new instance of the projectile associated with the equipped ranged weapon.
         /// </summary>
-        void FireProjectile()
+        void FireProjectile(Vector3 direction)
         {
-            var projectileObject = InstantiateProjectile;
+            var fireAngle = Vector3.SignedAngle(Vector3.up, direction, Vector3.forward);
+            
+            var projectileObject = Instantiate(RangedWeaponData.projectilePrefab, ProjectileSpawnPosition,
+                Quaternion.Euler(0f, 0f, fireAngle));
 
             var projectileComponent = projectileObject.GetComponent<ProjectileComponent>();
             if (projectileComponent) projectileComponent.Fire(
+                direction,
                 Rigidbody.velocity, 
                 IsPlayer ? LoadoutComponent.CurrentLoadoutSlot.weaponCharges : 0, 
                 DamageBonus, 
@@ -239,6 +295,19 @@ namespace HotlineHyrule.Weapons
         public void PerformMeleeAttack()
         {
             if (!HasMeleeWeapon) return;
+        }
+
+        public void PerformConjuringAttack()
+        {
+            if (!HasConjuringWeapon) return;
+
+            var spawnerComponent = WeaponObject.GetComponent<SpawnerComponent>();
+            if (!spawnerComponent) return;
+
+            var maxOffset = (int)(ConjuringWeaponData.conjuringAmount * ConjuringWeaponData.conjuringAmountOffset);
+            var offset = Random.Range(-maxOffset, maxOffset + 1);
+            var amount = ConjuringWeaponData.conjuringAmount + offset;
+            spawnerComponent.SpawnAround(transform.position, ConjuringWeaponData.conjuringRadius, amount);
         }
 
         void OnAttackFinished(object sender, EventArgs e)
@@ -286,5 +355,23 @@ namespace HotlineHyrule.Weapons
                 mainModule.simulationSpeed = _particleSimulationSpeed;
             }
         }
+
+        public void RegisterConjuringCallback(HealthComponent healthComponent)
+        {
+            healthComponent.HealthChanged += (sender, e) =>
+            {
+                if (!e.IsKilled) return;
+                if (!SpawnerComponent)
+                {
+                    ConjuredEntities -= 1;
+                }
+                else
+                {
+                    SpawnerComponent.CurrentEntities -= 1;
+                }                 
+            };
+        }
+
+       
     }
 }

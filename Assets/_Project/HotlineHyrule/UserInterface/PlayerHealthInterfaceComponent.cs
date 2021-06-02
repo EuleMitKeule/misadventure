@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using HotlineHyrule.Entities;
 using HotlineHyrule.Level;
@@ -8,12 +9,14 @@ namespace HotlineHyrule.UserInterface
 {
     public class PlayerHealthInterfaceComponent : MonoBehaviour
     {
+        [SerializeField] float scalingFactor = 0.1f;
         [SerializeField] GameObject healthContainerObject;
         [SerializeField] GameObject heartPrefab;
         public Sprite fullHeartSprite;
         public Sprite halfHeartSprite;
 
-        int _health = 0;
+        int MaxHealth { get; set; }
+        int CurrentHealth { get; set; }
 
         List<GameObject> HealthIcons { get; } = new List<GameObject>();
 
@@ -24,7 +27,10 @@ namespace HotlineHyrule.UserInterface
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
+            if (e.IsMenu) return;
+
             var healthComponent = Locator.PlayerComponent.GetComponent<HealthComponent>();
+            MaxHealth = healthComponent.maxHealth;
             SetHealthTo(healthComponent.Health);
 
             healthComponent.HealthChanged += OnPlayerHealthChanged;
@@ -32,61 +38,28 @@ namespace HotlineHyrule.UserInterface
 
         void SetHealthTo(int amount)
         {
-            if (_health < amount) AddHealth(amount - _health);
-            else SubtractHealth(_health - amount);
-        }
+            if (MaxHealth == 0) return;
 
-        void AddHealth(int amount)
-        {
-            if (amount <= 0) return;
+            var wantedHeartCount = Mathf.RoundToInt(amount * scalingFactor);
 
-            var remaining = amount;
+            var realHeartCount = wantedHeartCount / 2f;
+            var roundedHeartCount = (int)Math.Round(realHeartCount, 0, MidpointRounding.AwayFromZero);
+            var remainder = realHeartCount - (int) realHeartCount;
 
-            if (_health % 2 == 1)
+            var isLastHalf = remainder >= 0.5f;
+
+            foreach (var icon in HealthIcons)
             {
-                HealthIcons[^1].GetComponent<Image>().sprite = fullHeartSprite;
-                remaining -= 1;
+                Destroy(icon);
             }
 
-            for (var i = 0; i < (remaining + 1) / 2; ++i)
+            for (var i = 0; i < roundedHeartCount; i++)
             {
                 var heartObject = Instantiate(heartPrefab, healthContainerObject.transform);
-
                 HealthIcons.Add(heartObject);
             }
 
-            _health += amount;
-
-            if (_health % 2 == 1)
-            {
-                var heartImage = HealthIcons[^1].GetComponent<Image>();
-                heartImage.sprite = halfHeartSprite;
-            }
-        }
-
-        void SubtractHealth(int amount)
-        {
-            if (amount <= 0) return;
-
-            var cappedAmount = _health < amount ? _health : amount;
-            var remaining = cappedAmount;
-
-            if (_health % 2 == 1)
-            {
-                Destroy(HealthIcons[^1]);
-                HealthIcons.RemoveAt(HealthIcons.Count - 1);
-                remaining -= 1;
-            }
-
-            for (var i = 0; i < remaining / 2; ++i)
-            {
-                Destroy(HealthIcons[^1]);
-                HealthIcons.RemoveAt(HealthIcons.Count - 1);
-            }
-
-            _health -= cappedAmount;
-
-            if (_health % 2 == 1)
+            if (isLastHalf && HealthIcons.Count != 0)
             {
                 var heartImage = HealthIcons[^1].GetComponent<Image>();
                 heartImage.sprite = halfHeartSprite;

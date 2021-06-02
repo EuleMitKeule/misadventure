@@ -1,3 +1,4 @@
+using System;
 using HotlineHyrule.Entities.PlayerStates;
 using HotlineHyrule.Items;
 using HotlineHyrule.Level;
@@ -51,11 +52,11 @@ namespace HotlineHyrule.Entities
         /// The movement input action.
         /// </summary>
         [Header("Input")]
-        [SerializeField] InputAction walkAction;
+        [SerializeField] public InputAction walkAction;
         /// <summary>
         /// The input action to perform a dodge move.
         /// </summary>
-        [SerializeField] InputAction dodgeAction;
+        [SerializeField] public InputAction dodgeAction;
 
         float NextDodgeTime { get; set; }
         /// <summary>
@@ -112,6 +113,9 @@ namespace HotlineHyrule.Entities
 
         public PlayerBaseStateComponent IdleState { get; private set; }
         public PlayerBaseStateComponent DodgeState { get; private set; }
+        public PlayerBaseStateComponent FrozenState { get; private set; }
+
+        public event EventHandler MovementStarted;
 
         Rigidbody2D Rigidbody { get; set; }
         HealthComponent HealthComponent { get; set; }
@@ -125,8 +129,11 @@ namespace HotlineHyrule.Entities
             HealthComponent = GetComponent<HealthComponent>();
             WeaponComponent = GetComponent<WeaponComponent>();
             LoadoutComponent = GetComponent<LoadoutComponent>();
+
             IdleState = GetComponent<PlayerIdleStateComponent>();
             DodgeState = GetComponent<PlayerDodgeStateComponent>();
+            FrozenState = GetComponent<PlayerFrozenStateComponent>();
+
             if (!legsAnimator) legsAnimator = transform.Find("legs").GetComponent<Animator>();
 
             Locator.PlayerComponent = this;
@@ -138,20 +145,22 @@ namespace HotlineHyrule.Entities
 
             dodgeAction.started += OnButtonDodge;
 
-            dodgeAction.Enable();
-            walkAction.Enable();
-
-            SetState(IdleState);
-
             GameComponent.LevelLoaded += OnLevelLoaded;
             GameComponent.LevelUnloaded += OnLevelUnloaded;
         }
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
-            if (!e.PlayerStateData) return;
+            if (e.IsMenu) return;
 
-            HealthComponent.Health = e.PlayerStateData.currentHealth;
+            Locator.LevelComponent.LevelFinished += OnLevelFinished;
+
+            if (e.PlayerStateData)
+            {
+                HealthComponent.Health = e.PlayerStateData.currentHealth;
+            }
+
+            SetState(FrozenState);
         }
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)
@@ -163,13 +172,16 @@ namespace HotlineHyrule.Entities
             GameComponent.LevelUnloaded -= OnLevelUnloaded;
         }
 
+        void OnLevelFinished(object sender, EventArgs e)
+        {
+            SetState(FrozenState);
+        }
+
         void Update()
         {
             ProcessInput();
             HandleAnimation();
-            
-            Rigidbody.rotation = LookAngle;
-            if (WeaponComponent.HasRangedWeapon) WeaponComponent.SetWeaponRotation(WeaponAngle);
+            HandleRotation();
         }
 
         void FixedUpdate()
@@ -208,7 +220,21 @@ namespace HotlineHyrule.Entities
         void HandleAnimation()
         {
             var isInMovingState = legsAnimator.GetBool("isMoving");
-            if (isInMovingState != IsMoving) legsAnimator.SetBool("isMoving", IsMoving);
+
+            if (isInMovingState != IsMoving)
+            {
+                if (IsMoving) MovementStarted?.Invoke(this, EventArgs.Empty);
+
+                legsAnimator.SetBool("isMoving", IsMoving);
+            }
+        }
+
+        void HandleRotation()
+        {
+            if (State == FrozenState) return;
+
+            Rigidbody.rotation = LookAngle;
+            if (WeaponComponent.HasRangedWeapon) WeaponComponent.SetWeaponRotation(WeaponAngle);
         }
 
         /// <summary>
@@ -228,9 +254,15 @@ namespace HotlineHyrule.Entities
 
         void OnHealthChanged(object sender, HealthEventArgs e)
         {
-            if (e.HealthDifference >= 0) return;
+            if (e.IsDamage)
+            {
+                if (damageParticleSystemPrefab) Instantiate(damageParticleSystemPrefab, transform.position, Quaternion.identity);
+            }
 
-            if (damageParticleSystemPrefab) Instantiate(damageParticleSystemPrefab, transform.position, Quaternion.identity);
+            if (e.IsKilled)
+            {
+                SetState(FrozenState);
+            }
         }
 
         public PlayerStateData GetStateData()

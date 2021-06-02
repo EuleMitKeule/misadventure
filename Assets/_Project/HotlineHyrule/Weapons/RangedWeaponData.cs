@@ -27,5 +27,10 @@ namespace HotlineHyrule.Weapons
         /// The sound that is played when the weapon is fired.
         /// </summary>
         [SerializeField] public AudioClip weaponFiredSound;
+
+        [SerializeField] public int projectileCount;
+        [SerializeField] public float projectileAngle;
+        [SerializeField] public float projectileAngleOffset;
+        [SerializeField] public float projectileDelay;
     }
 }

@@ -24,7 +24,8 @@ namespace HotlineHyrule.Items
         /// The input action to pickup items.
         /// </summary>
         [Header("Input")]
-        [SerializeField] InputAction pickupAction;
+        [SerializeField]
+        public InputAction pickupAction;
 
         /// <summary>
         /// List of items that are currently in range.
@@ -80,7 +81,7 @@ namespace HotlineHyrule.Items
         /// Applies the item's effects and destroys the item object.
         /// </summary>
         /// <param name="itemComponent"></param>
-        void ConsumeItem(ItemComponent itemComponent)
+        public void ConsumeItem(ItemComponent itemComponent)
         {
             var items = itemComponent.itemDatas;
 
@@ -113,6 +114,33 @@ namespace HotlineHyrule.Items
             }
 
             Destroy(itemComponent.gameObject);
+        }
+
+        /// <summary>
+        /// Applies the item effect.
+        /// </summary>
+        /// <param name="itemData"></param>
+        public void ConsumeItem(ConsumableItemData itemData)
+        {
+            SpawnParticleSystem(itemData);
+
+            switch (itemData)
+            {
+                case HealthItemData healthItemData:
+                    if (!HealthComponent) return;
+                    HealthComponent.Consume(healthItemData);
+                    break;
+                case AttackItemData attackItemData:
+                    if (!WeaponComponent) return;
+                    WeaponComponent.Consume(attackItemData);
+                    break;
+                case MovementItemData movementItemData:
+                    if (MovementComponent == null) return;
+                    MovementComponent.Consume(movementItemData);
+                    break;
+            }
+
+            ItemConsumed?.Invoke(this, new ItemEventArgs(itemData));
         }
 
         /// <summary>

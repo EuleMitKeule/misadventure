@@ -23,6 +23,8 @@ namespace HotlineHyrule
 
         void Awake()
         {
+            if (Locator.GameComponent) Destroy(gameObject);
+
             DontDestroyOnLoad(gameObject);
             Locator.GameComponent = this;
 
@@ -42,13 +44,23 @@ namespace HotlineHyrule
             if (currentLevelComponent)
             {
                 var stateData =
-                    Locator.PlayerComponent ? Locator.PlayerComponent.GetStateData() : PlayerStateData.Empty;
-                var levelEventArgs = new LevelEventArgs(currentLevelComponent.levelData, stateData);
+                    Locator.PlayerComponent ? Locator.PlayerComponent.GetStateData() : null;
+                var levelEventArgs = new LevelEventArgs(currentLevelComponent.levelData, stateData, false);
                 LevelUnloaded?.Invoke(this, levelEventArgs);
+            }
+            else
+            {
+                LevelUnloaded?.Invoke(this, new LevelEventArgs(null, null, true));
             }
 
             var nextSceneIndex = CurrentSceneIndex == -1 ? 0 : (CurrentSceneIndex + 1) % scenes.Count;
             StartCoroutine(LoadSceneRoutine(scenes[nextSceneIndex]));
+        }
+
+        public void LoadMenuScene()
+        {
+            playerStateData = null;
+            StartCoroutine(LoadSceneRoutine("scene_menu"));
         }
 
         public void ReloadScene()
@@ -58,12 +70,31 @@ namespace HotlineHyrule
             if (currentLevelComponent)
             {
                 var stateData =
-                    Locator.PlayerComponent ? Locator.PlayerComponent.GetStateData() : PlayerStateData.Empty;
-                var levelEventArgs = new LevelEventArgs(currentLevelComponent.levelData, stateData);
+                    Locator.PlayerComponent ? Locator.PlayerComponent.GetStateData() : null;
+                var levelEventArgs = new LevelEventArgs(currentLevelComponent.levelData, stateData, false);
                 LevelUnloaded?.Invoke(this, levelEventArgs);
+            }
+            else
+            {
+                LevelUnloaded?.Invoke(this, new LevelEventArgs(null, null, true));
             }
 
             StartCoroutine(LoadSceneRoutine(SceneManager.GetActiveScene().name));
+        }
+
+        public void LoadFirstScene()
+        {
+            playerStateData = null;
+
+            var currentLevelComponent = Locator.LevelComponent;
+
+            if (currentLevelComponent)
+            {
+                var levelEventArgs = new LevelEventArgs(currentLevelComponent.levelData, null, false);
+                LevelUnloaded?.Invoke(this, levelEventArgs);
+            }
+
+            StartCoroutine(LoadSceneRoutine(scenes[0]));
         }
 
         IEnumerator LoadSceneRoutine(string sceneName)
@@ -75,18 +106,19 @@ namespace HotlineHyrule
                 yield return null;
             }
 
-            if (!IsLevel) yield break;
-
-            if (!Locator.LevelComponent) yield break;
-
-            if (!Locator.LevelComponent.levelData)
+            if (IsLevel)
             {
-                Debug.LogWarning($"The loaded level {Locator.LevelComponent.name} has no level data assigned.");
-                yield break;
+                if (!Locator.LevelComponent.levelData)
+                {
+                    Logging.LogWarning($"The loaded level {Locator.LevelComponent.name} has no level data assigned.");
+                    yield break;
+                }
             }
 
-            var levelData = Locator.LevelComponent.levelData;
-            LevelLoaded?.Invoke(this, new LevelEventArgs(levelData, playerStateData));
+            var levelData = Locator.LevelComponent ? Locator.LevelComponent.levelData : null;
+            var isMenu = sceneName == "scene_menu";
+
+            LevelLoaded?.Invoke(this, new LevelEventArgs(levelData, playerStateData, isMenu));
         }
     }
 }

@@ -7,6 +7,8 @@ namespace HotlineHyrule.Quests
     public class QuestTarget
     {
         [SerializeField] public bool isRequired;
-        [TextArea] [SerializeField] public string targetText;
+        [TextArea] [SerializeField] public string targetReachedText;
+        [TextArea] [SerializeField] public string targetNotReachedText;
+        [TextArea] [SerializeField] public string shortTargetText;
     }
 }

@@ -44,11 +44,17 @@ TagManager:
   - name: ground
     uniqueID: 36160119
     locked: 0
+  - name: water
+    uniqueID: 3244950095
+    locked: 0
   - name: item
     uniqueID: 1503095659
     locked: 0
   - name: projectile
     uniqueID: 3603694441
+    locked: 0
+  - name: platform
+    uniqueID: 3859457953
     locked: 0
   - name: player
     uniqueID: 631342383

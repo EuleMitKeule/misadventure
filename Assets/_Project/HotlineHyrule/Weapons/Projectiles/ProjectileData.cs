@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace HotlineHyrule.Weapons.Projectiles
 {
@@ -28,5 +30,13 @@ namespace HotlineHyrule.Weapons.Projectiles
         /// The particle system to spawn on impact.
         /// </summary>
         [SerializeField] public GameObject impactParticleSystem;
+        /// <summary>
+        /// Tiles to spawn when exploding.
+        /// </summary>
+        [SerializeField] public List<TileBase> weaponEffectTiles;
+        /// <summary>
+        /// The name of the tilemap to spawn the tiles on.
+        /// </summary>
+        [SerializeField] public string weaponEffectTilemapName = "tilemap_weapon_effect";
     }
 }

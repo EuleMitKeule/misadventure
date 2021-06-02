@@ -1,7 +1,13 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using HotlineHyrule.Entities;
 using HotlineHyrule.Weapons.Projectiles;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 namespace HotlineHyrule.Weapons
 {
@@ -146,20 +152,20 @@ namespace HotlineHyrule.Weapons
             Destroy(gameObject);
         }
 
-        public void Fire(Vector2 entityVelocity, int weaponCharges, int damageBonus, float damageFactor, float attackSpeed)
+        public void Fire(Vector3 direction, Vector2 entityVelocity, int weaponCharges, int damageBonus, float damageFactor, float attackSpeed)
         {
             if (projectileData is LinearProjectileData linearProjectileData)
             {
                 var velocity = linearProjectileData.movementSpeed == 0f
                     ? entityVelocity
-                    : (Vector2)Transform.up * linearProjectileData.movementSpeed;
+                    : (Vector2)direction * linearProjectileData.movementSpeed;
 
                 Rigidbody.velocity = velocity;
             }
             else if (projectileData is CurvedProjectileData)
             {
                 Rigidbody.drag = StartDrag;
-                Rigidbody.velocity = Transform.up * CurvedStartSpeed;
+                Rigidbody.velocity = direction * CurvedStartSpeed;
             }
             
             DamageBonus = damageBonus;
@@ -187,8 +193,8 @@ namespace HotlineHyrule.Weapons
         {
             Rigidbody.simulated = false;
 
-            var particleSystem = projectileData.impactParticleSystem;
-            if (particleSystem) Instantiate(particleSystem, transform.position, Quaternion.identity);
+            var impactParticleSystem = projectileData.impactParticleSystem;
+            if (impactParticleSystem) Instantiate(impactParticleSystem, transform.position, Quaternion.identity);
 
             if (projectileData.isSticky) if (other) Transform.SetParent(other);
 
@@ -217,6 +223,46 @@ namespace HotlineHyrule.Weapons
 
             var droppedWeaponComponent = droppedWeaponObject.GetComponent<DroppedWeaponComponent>();
             if (droppedWeaponComponent) droppedWeaponComponent.weaponCharges = WeaponCharges;
+        }
+
+        public void SpawnEffectTiles(int count)
+        {
+            var weaponEffectTilemapObject = GameObject.Find(projectileData.weaponEffectTilemapName);
+            if (!weaponEffectTilemapObject) return;
+
+            var weaponEffectTilemap = weaponEffectTilemapObject.GetComponent<Tilemap>();
+            if (!weaponEffectTilemap) return;
+
+            count = Mathf.Clamp(count, 0, 4);
+
+            var effectTiles = new List<TileBase>();
+
+            for (var i = 0; i < count; i++)
+            {
+                var rnd = Random.Range(0, projectileData.weaponEffectTiles.Count);
+                var effectTile = projectileData.weaponEffectTiles[rnd];
+                effectTiles.Add(effectTile);
+            }
+
+            var directions =
+                new List<Vector3Int>
+                {
+                    Vector3Int.left,
+                    Vector3Int.right,
+                    Vector3Int.up,
+                    Vector3Int.down,
+                }
+                .OrderBy(e => Guid.NewGuid())
+                .Take(count);
+
+            var cellPosition = weaponEffectTilemap.WorldToCell(transform.position);
+            var positions = directions.Select(e => cellPosition + e).ToList();
+
+            for (var i = 0; i < positions.Count; i++)
+            {
+                var position = positions[i];
+                weaponEffectTilemap.SetTile(position, effectTiles[i]);
+            }
         }
     }
 }
