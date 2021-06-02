@@ -18,6 +18,6 @@ namespace HotlineHyrule.Entities.PlayerStates
 
         }
 
-        void ChangeState() => PlayerComponent.SetState(PlayerComponent.IdleState);
+        void ChangeState() => SetState<PlayerIdleStateComponent>();
     }
 }

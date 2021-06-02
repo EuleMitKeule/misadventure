@@ -1,4 +1,7 @@
-﻿using HotlineHyrule.Pathfinding;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using HotlineHyrule.Pathfinding;
 using HotlineHyrule.Weapons;
 using UnityEngine;
 
@@ -6,12 +9,22 @@ namespace HotlineHyrule.Entities.EnemyStates
 {
     public abstract class EnemyBaseStateComponent : MonoBehaviour
     {
-        /// <summary>
-        /// (Future) Priority value if enemy can change between multiple states
-        /// (the higher the value the higher the priority)
-        /// </summary>
-        public int priority;
+        public event Action<Type> ChangeRequested;
+        protected void SetState<TStateType>() where TStateType : EnemyBaseStateComponent =>
+            ChangeRequested?.Invoke(typeof(TStateType));
+        protected void SetState(Type stateType) =>
+            ChangeRequested?.Invoke(stateType);
 
+        protected Type PassiveState =>
+            States.First(e =>
+                e is EnemyPatrolStateComponent ||
+                e is EnemyGuardStateComponent)
+                .GetType();
+
+        protected Type AfterAttackState =>
+            States.Find(e => e is EnemySearchStateComponent)?.GetType() ?? PassiveState;
+
+        protected List<EnemyBaseStateComponent> States { get; private set; }
         protected Rigidbody2D Rigidbody { get; private set; }
         protected EnemyComponent EnemyComponent { get; private set; }
         protected WeaponComponent WeaponComponent { get; private set; }
@@ -20,6 +33,7 @@ namespace HotlineHyrule.Entities.EnemyStates
 
         protected virtual void Awake()
         {
+            States = GetComponents<EnemyBaseStateComponent>().ToList();
             Rigidbody = GetComponent<Rigidbody2D>();
             EnemyComponent = GetComponent<EnemyComponent>();
             WeaponComponent = GetComponent<WeaponComponent>();
