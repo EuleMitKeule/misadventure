@@ -34,14 +34,11 @@ namespace HotlineHyrule.Entities.EnemyStates
 
                 if (EnemyComponent.IsPlayerFollowable)
                 {
-                    EnemyComponent.ChangeState(EnemyComponent.FollowState);
+                    SetState<EnemyFollowStateComponent>();
                 }
                 else
                 {
-                    var passiveState = EnemyComponent.PatrolState
-                        ? EnemyComponent.PatrolState
-                        : EnemyComponent.GuardState;
-                    EnemyComponent.ChangeState(EnemyComponent.SearchState ? EnemyComponent.SearchState : passiveState);
+                    SetState(AfterAttackState);
                 }
             }
         }

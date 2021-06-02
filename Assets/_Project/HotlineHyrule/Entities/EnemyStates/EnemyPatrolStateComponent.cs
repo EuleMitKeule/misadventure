@@ -35,7 +35,7 @@ namespace HotlineHyrule.Entities.EnemyStates
 
             if (EnemyComponent.IsPlayerFollowable)
             {
-                if (EnemyComponent.FollowState) EnemyComponent.ChangeState(EnemyComponent.FollowState);
+                SetState<EnemyFollowStateComponent>();
             }
 
             if (EnemyComponent.IsWallAbove)
