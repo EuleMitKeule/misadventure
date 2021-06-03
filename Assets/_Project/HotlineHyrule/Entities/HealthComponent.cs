@@ -45,7 +45,7 @@ namespace HotlineHyrule.Entities
         /// </summary>
         public event EventHandler<HealthEventArgs> HealthChanged;
 
-        void Awake()
+        void Start()
         {
             ResetHealth();
         }
@@ -53,7 +53,7 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// Resets health to the start value, clamped to [0, maxHealth].
         /// </summary>
-        void ResetHealth() => Health = startHealth;
+        public void ResetHealth() => Health = startHealth;
 
         public void Consume(HealthItemData healthItem)
         {

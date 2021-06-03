@@ -6,9 +6,9 @@ namespace HotlineHyrule.Entities
     {
         public int Index { get; }
         public Vector2 Position { get; }
-        public float Rotation { get; }
+        public Quaternion Rotation { get; }
 
-        public CaterpillarNode(int index, Vector2 position, float rotation)
+        public CaterpillarNode(int index, Vector2 position, Quaternion rotation)
         {
             Index = index;
             Position = position;

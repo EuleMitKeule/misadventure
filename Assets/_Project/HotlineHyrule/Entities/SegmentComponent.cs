@@ -1,103 +1,36 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using HotlineHyrule.Extensions;
+using UnityEditor.Graphs;
 using UnityEngine;
 
 namespace HotlineHyrule.Entities
 {
-    // public class SegmentComponent : MonoBehaviour
-    // {
-    //     [SerializeField] bool isHead;
-    //     [SerializeField] Transform parentSegment;
-    //     [SerializeField] float followDamping;
-    //     [SerializeField] float rotationDamping;
-    //     [SerializeField] float movementThreshold;
-    //     [SerializeField] float minDistance;
-    //
-    //
-    //     public Vector3 LastPosition { get; set; }
-    //     Vector3? TargetPosition { get; set; }
-    //     public Quaternion? TargetRotation { get; set; }
-    //     public float TraveledDistance { get; set; }
-    //
-    //     Rigidbody2D Rigidbody { get; set; }
-    //     SegmentComponent ParentSegmentComponent { get; set; }
-    //
-    //     void Awake()
-    //     {
-    //         Rigidbody = GetComponent<Rigidbody2D>();
-    //         LastPosition = transform.position;
-    //
-    //         SetParentSegment(parentSegment);
-    //     }
-    //
-    //     void SetParentSegment(Transform newParentSegment)
-    //     {
-    //         parentSegment = newParentSegment;
-    //
-    //         if (parentSegment)
-    //         {
-    //             ParentSegmentComponent = parentSegment.GetComponent<SegmentComponent>();
-    //         }
-    //     }
-    //
-    //     void FixedUpdate()
-    //     {
-    //         TraveledDistance = LastPosition.DistanceTo(transform.position);
-    //
-    //         if (TargetRotation.HasValue)
-    //         {
-    //             transform.rotation =
-    //                 Quaternion.Lerp(transform.rotation, TargetRotation.Value, Time.fixedDeltaTime / rotationDamping);
-    //         }
-    //
-    //         if (TargetPosition.HasValue)
-    //         {
-    //             transform.position =
-    //                 Vector3.Lerp(transform.position, TargetPosition.Value, Time.fixedDeltaTime / followDamping);
-    //         }
-    //
-    //         if (parentSegment)
-    //         {
-    //             var targetDirection = parentSegment.up;
-    //             TargetPosition = parentSegment.position - targetDirection * minDistance;
-    //
-    //             TargetRotation = ParentSegmentComponent.TargetRotation;
-    //         }
-    //
-    //         if (isHead)
-    //         {
-    //             var traveledDirection = LastPosition.DirectionTo(transform.position);
-    //
-    //             if (traveledDirection != Vector3.zero && TraveledDistance >= movementThreshold)
-    //             {
-    //                 var lookAngle = Vector3.SignedAngle(Vector3.up, traveledDirection, Vector3.forward);
-    //                 TargetRotation = Quaternion.Euler(0f, 0f, lookAngle);
-    //             }
-    //         }
-    //
-    //         LastPosition = transform.position;
-    //     }
-    // }
-
     public class SegmentComponent : MonoBehaviour
     {
         [SerializeField] float nodeDistance;
         [SerializeField] float segmentDistance;
+        [SerializeField] float headRotationDamping;
+        [SerializeField] float headMovementThreshold;
         [SerializeField] SegmentComponent parentSegment;
         [SerializeField] SegmentComponent childSegment;
         
-        LinkedList<CaterpillarNode> Nodes { get; } = new LinkedList<CaterpillarNode>();
+        public LinkedList<CaterpillarNode> Nodes { get; } = new LinkedList<CaterpillarNode>();
         LinkedListNode<CaterpillarNode> TargetNode { get; set; }
         LinkedListNode<CaterpillarNode> LastNode { get; set; }
-        public SegmentComponent ParentSegment { get; private set; }
-        public SegmentComponent ChildSegment { get; private set; }
+        public SegmentComponent ParentSegment { get; set; }
+        public SegmentComponent ChildSegment { get; set; }
         SegmentComponent HeadSegment { get; set; }
+        public SegmentComponent Head => IsHead ? this : HeadSegment;
+        Quaternion TargetHeadRotation { get; set; }
         public bool IsHead => !ParentSegment;
         bool IsTail => !ChildSegment;
         int MinNodeDifference => Mathf.RoundToInt(segmentDistance / nodeDistance);
         float TraveledDistance => transform.position.DistanceTo(LastNode.Value.Position);
         float TraveledDistancePerNode => TraveledDistance / nodeDistance;
+        Vector2 LastPosition { get; set; }
         event EventHandler<NodeEventArgs> TargetNodeReached;
 
         void Awake()
@@ -112,16 +45,29 @@ namespace HotlineHyrule.Entities
             
             if (!IsHead) return;
             
-            AddNode();
+            AddNodeAt(transform.position);
         }
 
-        void FixedUpdate()
+        void Update()
         {
             if (IsHead)
             {
+                transform.rotation = Quaternion.Lerp(transform.rotation, TargetHeadRotation, TraveledDistancePerNode * headRotationDamping);
+                
+                var traveledDirection = LastPosition.DirectionTo(transform.position);
+                var traveledDistance = LastPosition.DistanceTo(transform.position);
+                
+                if (traveledDirection != Vector2.zero && traveledDistance >= headMovementThreshold)
+                {
+                    var lookAngle = Vector3.SignedAngle(Vector3.up, traveledDirection, Vector3.forward);
+                    TargetHeadRotation = Quaternion.Euler(0f, 0f, lookAngle);   
+                }
+                
                 if (TraveledDistance < nodeDistance) return;
 
                 AddNode();
+
+                LastPosition = transform.position;
                 return;
             }
 
@@ -130,14 +76,18 @@ namespace HotlineHyrule.Entities
             var position = Vector2.Lerp(LastNode.Value.Position, TargetNode.Value.Position,
                 HeadSegment.TraveledDistancePerNode);
             transform.position = position;
+
+            var rotation = Quaternion.Lerp(LastNode.Value.Rotation, TargetNode.Value.Rotation,
+                HeadSegment.TraveledDistancePerNode);
+            transform.rotation = rotation;
         }
 
         void SetParentSegment(SegmentComponent segment)
         {
-            if (!segment) return;
             if (ParentSegment) ParentSegment.TargetNodeReached -= OnParentTargetNodeReached;
-            
             ParentSegment = segment;
+            
+            if (!segment) return;
             ParentSegment.TargetNodeReached += OnParentTargetNodeReached;
         }
 
@@ -172,6 +122,13 @@ namespace HotlineHyrule.Entities
             var difference = e.Node.Value.Index - TargetNode.Value.Index;
 
             if (difference < MinNodeDifference) return;
+
+            if (IsTail &&
+                LastNode != null &&
+                LastNode.Previous == null)
+            {
+                HeadSegment.Nodes.RemoveFirst();
+            }
             
             LastNode = TargetNode;
             TargetNode = TargetNode.Next ?? TargetNode;
@@ -181,12 +138,68 @@ namespace HotlineHyrule.Entities
 
         void AddNode()
         {
-            var node = new CaterpillarNode(Nodes.Count, transform.position, transform.eulerAngles.z);
+            var direction = LastNode.Value.Position.DirectionTo(transform.position);
+            var nodeCount = Mathf.FloorToInt(TraveledDistancePerNode);
+            var lastNode = LastNode;
+            
+            for (var i = 1; i <= nodeCount; i++)
+            {
+                var position = lastNode.Value.Position + direction * (i * nodeDistance);
+                AddNodeAt(position);
+            }
+        }
+
+        void AddNodeAt(Vector2 position)
+        {
+            var index = Nodes.Last?.Value.Index + 1 ?? 0;
+            var node = new CaterpillarNode(index, position, transform.rotation);
             var linkedNode = Nodes.AddLast(node);
-            
+                
             LastNode = linkedNode;
-            
             TargetNodeReached?.Invoke(this, new NodeEventArgs(LastNode));
+        }
+
+        public List<SegmentComponent> GetSegments()
+        {
+            if (!IsHead) return Head.GetSegments();
+
+            var segments = new List<SegmentComponent>();
+            var currentSegment = this;
+
+            do
+            {
+                segments.Add(currentSegment);
+                currentSegment = currentSegment.ChildSegment;
+            }
+            while (currentSegment);
+
+            return segments;
+        }
+
+        [ContextMenu("Split here")]
+        public void SplitHere()
+        {
+            var nodes = Head.Nodes;
+
+            foreach (var node in nodes)
+            {
+                if (node == TargetNode.Value) break;
+
+                Nodes.AddLast(node);
+            }
+            
+            ParentSegment.SetChildSegment(null);
+            SetParentSegment(null);
+
+            var segments = GetSegments();
+            foreach (var segment in segments)
+            {
+                segment.HeadSegment = this;
+                segment.TargetNode = Nodes.Find(segment.TargetNode.Value);
+                segment.LastNode = Nodes.Find(segment.LastNode.Value);
+            }
+            
+            
         }
     }
 }
