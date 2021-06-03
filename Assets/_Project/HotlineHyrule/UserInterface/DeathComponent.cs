@@ -27,6 +27,8 @@ namespace HotlineHyrule.UserInterface
                 return;
             }
 
+            if (!Locator.PlayerComponent) return;
+
             var healthComponent = Locator.PlayerComponent.GetComponent<HealthComponent>();
             healthComponent.HealthChanged += OnHealthChanged;
         }
