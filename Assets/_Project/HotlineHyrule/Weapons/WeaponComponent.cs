@@ -258,6 +258,7 @@ namespace HotlineHyrule.Weapons
             for (var i = 0; i < projectileCount; i++)
             {
                 var angle = startAngle + i * angleDifference;
+                if (RangedWeaponData.flip) angle *= -1f;
                 var absoluteAngle = WeaponTransform.eulerAngles.z + angle;
                 var direction = Vector3.up.RotateAroundZ(absoluteAngle);
             

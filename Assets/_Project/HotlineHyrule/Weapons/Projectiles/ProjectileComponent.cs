@@ -195,10 +195,12 @@ namespace HotlineHyrule.Weapons
 
             var impactParticleSystem = projectileData.impactParticleSystem;
             if (impactParticleSystem) Instantiate(impactParticleSystem, transform.position, Quaternion.identity);
-
-            if (projectileData.isSticky) if (other) Transform.SetParent(other);
-
             if (Animator) Animator.SetTrigger("impact");
+            if (projectileData.isSticky) if (other) 
+                if (other.gameObject.layer == LayerMask.NameToLayer("player") && projectileData.notStickyOnPlayer)
+                    Destroy(gameObject);
+                else
+                    Transform.SetParent(other);
         }
 
         void HandleStop()
