@@ -243,15 +243,6 @@ namespace HotlineHyruleEditor
                 
                 weaponData.droppedWeaponPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{prefabPath}/weapon_{Name}_dropped.prefab");
 
-                // if (weaponData is RangedWeaponData rangedWeaponData)
-                // {
-                //     AssetDatabase.CreateAsset(rangedWeaponData, $"{prefabPath}/weapon_{Name}.asset");
-                // }
-                // else if (weaponData is MeleeWeaponData meleeWeaponData)
-                // {
-                //     AssetDatabase.CreateAsset(meleeWeaponData, $"{prefabPath}/weapon_{Name}.asset");
-                // }
-                
                 DestroyImmediate(droppedWeaponPrefab);
             }
 

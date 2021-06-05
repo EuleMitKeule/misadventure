@@ -25,21 +25,22 @@ namespace HotlineHyruleEditor.GameManager
 
             try
             {
-                scene = EditorSceneManager.OpenScene($"{Path}/{sceneName}.unity");
+                scene = EditorSceneManager.OpenScene($"{CurrentPath}/{sceneName}.unity");
             }
             catch { }
 
             if (!scene.IsValid())
             {
-                Debug.LogWarning($"Could not find scene \"{Path}/{sceneName}.unity\"!");
+                Debug.LogWarning($"Could not find scene \"{CurrentPath}/{sceneName}.unity\"!");
             }
         }
 
-        public override string Path => $"Assets/_Project/Scenes/{GetCurrentSubfolder()}";
+        public override string Path => LevelBuilder.ParentPath;
+        public string CurrentPath => $"{Path}/{GetCurrentSubfolder()}";
 
         public override void CreateNew()
         {
-            var levelData = LevelBuilder.CreateLevel(NameForNew, Path);
+            var levelData = LevelBuilder.CreateLevel(NameForNew, CurrentPath);
 
             SetSelected(levelData);
         }
@@ -83,29 +84,5 @@ namespace HotlineHyruleEditor.GameManager
         }
 
         public override void SetPath(string newPath) { }
-
-        string GetCurrentSubfolder()
-        {
-            if (!Selected) return "";
-
-            var selectedDirectory = GetCurrentDirectory();
-
-            if (System.IO.Path.GetFullPath(selectedDirectory) ==
-                System.IO.Path.GetFullPath(LevelBuilder.ParentPath)) return "";
-
-            var subfolder = System.IO.Path.GetFileName(selectedDirectory);
-
-            return subfolder;
-        }
-
-        string GetCurrentDirectory()
-        {
-            if (!Selected) return "";
-
-            var selectedPath = AssetDatabase.GetAssetPath(Selected);
-            var selectedDirectory = System.IO.Path.GetDirectoryName(selectedPath);
-
-            return selectedDirectory;
-        }
     }
 }

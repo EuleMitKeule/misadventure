@@ -24,11 +24,11 @@ namespace HotlineHyruleEditor.GameManager
         TabState CurrentTabState { get; set; }
         int CurrentEnumIndex { get; set; }
 
-        ScriptableObjectDrawer<ItemData> ItemDrawer { get; set; }
-        ScriptableObjectDrawer<WeaponData> WeaponDrawer { get; set; }
-        public LevelDrawer LevelDrawer { get; set; }
-        public ScriptableObjectDrawer<QuestData> QuestDrawer { get; set; }
-        public LevelOrQuestDrawer LevelOrQuestDrawer { get; set; }
+        public ScriptableObjectDrawer<ItemData> ItemDrawer { get; private set; }
+        public WeaponDrawer WeaponDrawer { get; private set; }
+        public LevelDrawer LevelDrawer { get; private set; }
+        public ScriptableObjectDrawer<QuestData> QuestDrawer { get; private set; }
+        public LevelOrQuestDrawer LevelOrQuestDrawer { get; private set; }
 
         string itemPath = "Assets/_Project/Prefabs/Items";
         string weaponPath = "Assets/_Project/Prefabs/Weapons";
@@ -46,13 +46,12 @@ namespace HotlineHyruleEditor.GameManager
         protected override void Initialize()
         {
             ItemDrawer = new ScriptableObjectDrawer<ItemData>();
-            WeaponDrawer = new ScriptableObjectDrawer<WeaponData>();
+            WeaponDrawer = new WeaponDrawer();
             LevelDrawer = new LevelDrawer();
             QuestDrawer = new ScriptableObjectDrawer<QuestData>();
             LevelOrQuestDrawer = new LevelOrQuestDrawer(this);
 
             ItemDrawer.SetPath(itemPath);
-            WeaponDrawer.SetPath(weaponPath);
             QuestDrawer.SetPath(LevelBuilder.ParentPath);
         }
 
@@ -182,7 +181,7 @@ namespace HotlineHyruleEditor.GameManager
                 case TabState.Enemies:
                     break;
                 case TabState.Weapons:
-                    tree.AddAllAssetsAtPath("Weapons", weaponPath, typeof(WeaponData));
+                    tree.AddAllAssetsAtPath("Weapons", weaponPath, typeof(WeaponData), true);
                     break;
                 case TabState.Items:
                     tree.AddAllAssetsAtPath("Items", itemPath, typeof(ItemData));

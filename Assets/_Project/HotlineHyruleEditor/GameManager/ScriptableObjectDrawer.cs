@@ -1,5 +1,3 @@
-using System;
-using HotlineHyrule.Quests;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
@@ -111,6 +109,30 @@ namespace HotlineHyruleEditor.GameManager
         public virtual void SetPath(string newPath)
         {
             Path = newPath;
+        }
+
+        protected string GetCurrentSubfolder()
+        {
+            if (!Selected) return "";
+
+            var selectedDirectory = GetCurrentDirectory();
+
+            if (System.IO.Path.GetFullPath(selectedDirectory) ==
+                System.IO.Path.GetFullPath(Path)) return "";
+
+            var subfolder = System.IO.Path.GetFileName(selectedDirectory);
+
+            return subfolder;
+        }
+
+        protected string GetCurrentDirectory()
+        {
+            if (!Selected) return "";
+
+            var selectedPath = AssetDatabase.GetAssetPath(Selected);
+            var selectedDirectory = System.IO.Path.GetDirectoryName(selectedPath);
+
+            return selectedDirectory;
         }
     }
 }
