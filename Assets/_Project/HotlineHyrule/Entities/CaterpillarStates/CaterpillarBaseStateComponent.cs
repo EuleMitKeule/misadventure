@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace HotlineHyrule.Entities.CaterpillarStates
 {
-    public abstract class CaterpillarBaseStateComponent : MonoBehaviour
+    public abstract class CaterpillarBaseStateComponent : SerializedMonoBehaviour
     {
+        protected CaterpillarComponent CaterpillarComponent { get; private set; }
         protected Dictionary<SegmentComponent, Rigidbody2D> SegmentToRigidbody { get; } =
             new Dictionary<SegmentComponent, Rigidbody2D>();
         
@@ -36,9 +38,16 @@ namespace HotlineHyrule.Entities.CaterpillarStates
         {
             
         }
+
+        public virtual void FixedUpdateState(SegmentComponent segment)
+        {
+            
+        }
         
         protected virtual void Awake()
         {
+            CaterpillarComponent = GetComponent<CaterpillarComponent>();
+            
             var segments = GetComponentsInChildren<SegmentComponent>();
 
             foreach (var segment in segments)

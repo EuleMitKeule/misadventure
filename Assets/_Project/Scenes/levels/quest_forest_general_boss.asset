@@ -31,6 +31,9 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 1|HotlineHyrule.Quests.KillQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
     - Name: shortTargetText
       Entry: 1
       Data: Kill the Catterpillar

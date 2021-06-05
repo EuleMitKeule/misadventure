@@ -3,6 +3,8 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using HotlineHyrule.Extensions;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEditor.Graphs;
 using UnityEngine;
 
@@ -14,8 +16,8 @@ namespace HotlineHyrule.Entities
         [SerializeField] float segmentDistance;
         [SerializeField] float headRotationDamping;
         [SerializeField] float headMovementThreshold;
-        [SerializeField] SegmentComponent parentSegment;
-        [SerializeField] SegmentComponent childSegment;
+        [SerializeField] float wallCheckDistance;
+        [SerializeField] LayerMask wallMask;
         
         public LinkedList<CaterpillarNode> Nodes { get; } = new LinkedList<CaterpillarNode>();
         LinkedListNode<CaterpillarNode> TargetNode { get; set; }
@@ -25,18 +27,27 @@ namespace HotlineHyrule.Entities
         SegmentComponent HeadSegment { get; set; }
         public SegmentComponent Head => IsHead ? this : HeadSegment;
         Quaternion TargetHeadRotation { get; set; }
+        [ShowInInspector]
+        [ReadOnly]
         public bool IsHead => !ParentSegment;
+        [ShowInInspector]
+        [ReadOnly]
         bool IsTail => !ChildSegment;
+        public RaycastHit2D WallAbove => Physics2D.Raycast(transform.position, LookDirection, wallCheckDistance, wallMask);
+        public RaycastHit2D WallLeft => Physics2D.Raycast(transform.position, LookDirection.Rotate(90f), wallCheckDistance, wallMask);
+        public RaycastHit2D WallRight => Physics2D.Raycast(transform.position, LookDirection.Rotate(-90f), wallCheckDistance, wallMask);
         int MinNodeDifference => Mathf.RoundToInt(segmentDistance / nodeDistance);
         float TraveledDistance => transform.position.DistanceTo(LastNode.Value.Position);
         float TraveledDistancePerNode => TraveledDistance / nodeDistance;
         Vector2 LastPosition { get; set; }
+        public Vector2 LookDirection => Rigidbody.velocity != Vector2.zero ? Rigidbody.velocity : (Vector2)transform.up; 
         event EventHandler<NodeEventArgs> TargetNodeReached;
+        
+        Rigidbody2D Rigidbody { get; set; }
 
         void Awake()
         {
-            SetParentSegment(parentSegment);
-            SetChildSegment(childSegment);
+            Rigidbody = GetComponent<Rigidbody2D>();
         }
 
         void Start()
@@ -82,7 +93,7 @@ namespace HotlineHyrule.Entities
             transform.rotation = rotation;
         }
 
-        void SetParentSegment(SegmentComponent segment)
+        public void SetParentSegment(SegmentComponent segment)
         {
             if (ParentSegment) ParentSegment.TargetNodeReached -= OnParentTargetNodeReached;
             ParentSegment = segment;
@@ -91,7 +102,7 @@ namespace HotlineHyrule.Entities
             ParentSegment.TargetNodeReached += OnParentTargetNodeReached;
         }
 
-        void SetChildSegment(SegmentComponent segment) => ChildSegment = segment;
+        public void SetChildSegment(SegmentComponent segment) => ChildSegment = segment;
 
         SegmentComponent GetHeadSegment()
         {
@@ -183,6 +194,7 @@ namespace HotlineHyrule.Entities
 
             foreach (var node in nodes)
             {
+                if (TargetNode == null) continue;
                 if (node == TargetNode.Value) break;
 
                 Nodes.AddLast(node);
@@ -195,11 +207,13 @@ namespace HotlineHyrule.Entities
             foreach (var segment in segments)
             {
                 segment.HeadSegment = this;
+                
+                if (segment.TargetNode == null) continue;
                 segment.TargetNode = Nodes.Find(segment.TargetNode.Value);
+                
+                if (segment.LastNode == null) continue;
                 segment.LastNode = Nodes.Find(segment.LastNode.Value);
             }
-            
-            
         }
     }
 }

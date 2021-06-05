@@ -1,5 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 
 namespace HotlineHyrule.Quests
@@ -12,6 +13,7 @@ namespace HotlineHyrule.Quests
         [HideLabel]
         [ShowInInspector]
         [EnumToggleButtons]
+        [OdinSerialize]
         RequiredType requiredType = RequiredType.Required;
         public bool IsRequired => requiredType == RequiredType.Required;
         [BoxGroup("General")]
