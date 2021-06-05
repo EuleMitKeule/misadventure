@@ -19,8 +19,9 @@ namespace HotlineHyrule.Entities
         /// The amount of health the entity spawns with.
         /// </summary>
         [SerializeField] public int startHealth;
-        
+
         int _health;
+
         /// <summary>
         /// The amount of health the entity currently has; clamped to [0, maxHealth].
         /// </summary>
@@ -45,7 +46,7 @@ namespace HotlineHyrule.Entities
         /// </summary>
         public event EventHandler<HealthEventArgs> HealthChanged;
 
-        void Start()
+        void Awake()
         {
             ResetHealth();
         }

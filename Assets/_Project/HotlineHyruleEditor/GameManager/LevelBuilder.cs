@@ -20,6 +20,8 @@ namespace HotlineHyruleEditor.GameManager
                 AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Project/Prefabs/Level/camera_main.prefab");
             var cameraObject = (GameObject)PrefabUtility.InstantiatePrefab(cameraPrefab, scene);
 
+            PrefabUtility.UnpackPrefabInstance(cameraObject, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+
             var globalLightPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Project/Prefabs/Level/light_global.prefab");
             var globalLightObject = (GameObject)PrefabUtility.InstantiatePrefab(globalLightPrefab, scene);
 
