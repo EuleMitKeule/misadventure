@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/_Project/Scenes/test/scene_test.unity
+    path: Assets/_Project/Scenes/TestingLevels/scene_test.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/_Project/Scenes/test/scene_test_ai.unity
+    path: Assets/_Project/Scenes/TestingLevels/scene_test_ai.unity
     guid: 0dd05de521fc06a46b5d23cbde889ced
   - enabled: 1
     path: Assets/_Project/Scenes/levels/scene_forest_01.unity
@@ -18,10 +18,10 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/levels/scene_forest_02.unity
     guid: 58c3097d9131003c1a9cb0bae837681f
   - enabled: 1
-    path: Assets/_Project/Scenes/test/scene_level_info.unity
+    path: Assets/_Project/Scenes/TestingLevels/scene_level_info.unity
     guid: 058e41330cdcac54baafb845d1070400
   - enabled: 1
-    path: Assets/_Project/Scenes/test/scene_level_info2.unity
+    path: Assets/_Project/Scenes/TestingLevels/scene_level_info2.unity
     guid: a85b8c2c8b6fa7949ab3fb2e387ec0f4
   - enabled: 1
     path: Assets/_Project/Scenes/scene_menu.unity

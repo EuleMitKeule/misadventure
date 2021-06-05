@@ -52,7 +52,7 @@ namespace HotlineHyrule.UserInterface
                 }
 
                 var questTargetText =
-                    $"{(questTarget.isRequired ? "" : "(")}{parsedTargetText}{(questTarget.isRequired ? "" : ")")}";
+                    $"{(questTarget.IsRequired ? "" : "(")}{parsedTargetText}{(questTarget.IsRequired ? "" : ")")}";
                 label.text = $"{questTargetText} ~";
                 
                 TargetToTargetObject.Add(questTarget, questTargetObject);
@@ -74,7 +74,7 @@ namespace HotlineHyrule.UserInterface
             }
 
             var questTargetText =
-                $"{(e.QuestTarget.isRequired ? "" : "(")}{parsedTargetText}{(e.QuestTarget.isRequired ? "" : ")")}";
+                $"{(e.QuestTarget.IsRequired ? "" : "(")}{parsedTargetText}{(e.QuestTarget.IsRequired ? "" : ")")}";
             label.text = $"{questTargetText} ~";
         }
 
