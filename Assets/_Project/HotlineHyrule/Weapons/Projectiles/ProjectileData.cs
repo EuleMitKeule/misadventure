@@ -23,6 +23,10 @@ namespace HotlineHyrule.Weapons.Projectiles
         /// </summary>
         [SerializeField] public bool isSticky;
         /// <summary>
+        /// Whether projectile should not stick on player even when impact mask for player and sticky are enabled
+        /// </summary>
+        [SerializeField] public bool notStickyOnPlayer;
+        /// <summary>
         /// How often the projectile can penetrate entities.
         /// </summary>
         [SerializeField] public int penetrations;

@@ -24,7 +24,7 @@ namespace HotlineHyrule.Quests
         List<TreasureQuestTarget> TreasureQuestTargets => QuestData.questTargets.OfType<TreasureQuestTarget>().ToList();
         List<UseWeaponQuestTarget> UseWeaponQuestTargets => QuestData.questTargets.OfType<UseWeaponQuestTarget>().ToList();
 
-        public bool IsQuestFinished => QuestData.questTargets.Where(e => e.isRequired).All(IsReached);
+        public bool IsQuestFinished => QuestData.questTargets.Where(e => e.IsRequired).All(IsReached);
         public bool IsCompleted => QuestData.questTargets.All(e => ReachedTargets.Contains(e));
 
         public int TotalKilledEnemies { get; set; }
@@ -81,10 +81,10 @@ namespace HotlineHyrule.Quests
                 if (!treasureQuestTarget.treasureItem) continue;
                 if (!treasureQuestTarget.treasureItem.itemPrefab) continue;
 
-                var treasureTilemapObject = transform.Find(treasureQuestTarget.treasureTilemapName);
+                var treasureTilemapObject = transform.Find(treasureQuestTarget.TreasureTilemapName);
                 if (!treasureTilemapObject)
                 {
-                    Logging.LogWarning($"{treasureQuestTarget.treasureTilemapName} could not be found.");
+                    Logging.LogWarning($"{treasureQuestTarget.TreasureTilemapName} could not be found.");
                     continue;
                 }
 
