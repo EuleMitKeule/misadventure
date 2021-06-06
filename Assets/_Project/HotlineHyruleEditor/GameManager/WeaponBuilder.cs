@@ -18,19 +18,213 @@ namespace HotlineHyruleEditor.GameManager
 
         public static WeaponData Create(string weaponName, WeaponType weaponType, WeaponOwnerType weaponOwnerType, ProjectileType projectileType)
         {
-            var animationOwnerPath = $"{AnimationParentPath}/{weaponOwnerType.ToString()}";
+            var weaponPrefab = CreateWeaponPrefab(weaponName, weaponOwnerType);
+
+            var weaponData = weaponType switch
+            {
+                WeaponType.Ranged => CreateRangedWeapon(weaponName, weaponOwnerType, projectileType, weaponPrefab),
+                WeaponType.Melee => CreateMeleeWeapon(weaponName, weaponOwnerType, weaponPrefab),
+                WeaponType.Conjuring => CreateConjuringWeapon(weaponName, weaponOwnerType, weaponPrefab),
+                _ => ScriptableObject.CreateInstance<WeaponData>(),
+            };
+
+            if (weaponOwnerType == WeaponOwnerType.Player)
+            {
+                CreateDroppedWeapon(weaponName, weaponOwnerType, weaponData);
+            }
+
+            AssetDatabase.SaveAssets();
+
+            return weaponData;
+        }
+
+        static void CreateDroppedWeapon(string weaponName, WeaponOwnerType weaponOwnerType, WeaponData weaponData)
+        {
             var prefabOwnerPath = $"{ParentPath}/{weaponOwnerType.ToString()}";
-            var animationPath = $"{animationOwnerPath}/{weaponName}";
             var prefabPath = $"{prefabOwnerPath}/{weaponName}";
 
-            AssetDatabase.CreateFolder(animationOwnerPath, weaponName);
+            var droppedWeaponPrefab = new GameObject($"weapon_{weaponName}_dropped");
+            droppedWeaponPrefab.layer = PhysicsLayer.ITEM;
+
+            var droppedWeaponSpriteRenderer = droppedWeaponPrefab.AddComponent<SpriteRenderer>();
+            droppedWeaponSpriteRenderer.sortingLayerName = "item";
+
+            var droppedWeaponCollider = droppedWeaponPrefab.AddComponent<CircleCollider2D>();
+            droppedWeaponCollider.isTrigger = true;
+
+            var droppedWeaponItemComponent = droppedWeaponPrefab.AddComponent<ItemComponent>();
+
+            droppedWeaponPrefab.AddComponent<DroppedWeaponComponent>();
+
+            droppedWeaponItemComponent.itemDatas.Add(weaponData);
+
+            PrefabUtility.SaveAsPrefabAsset(droppedWeaponPrefab, $"{prefabPath}/weapon_{weaponName}_dropped.prefab");
+
+            weaponData.itemPrefab =
+                AssetDatabase.LoadAssetAtPath<GameObject>($"{prefabPath}/weapon_{weaponName}_dropped.prefab");
+
+            Object.DestroyImmediate(droppedWeaponPrefab);
+        }
+
+        static ConjuringWeaponData CreateConjuringWeapon(string weaponName, WeaponOwnerType weaponOwnerType, GameObject weaponPrefab)
+        {
+            var prefabOwnerPath = $"{ParentPath}/{weaponOwnerType.ToString()}";
+            var prefabPath = $"{prefabOwnerPath}/{weaponName}";
+
+            var conjuringWeaponData = ScriptableObject.CreateInstance<ConjuringWeaponData>();
+            conjuringWeaponData.weaponPrefab = weaponPrefab;
+
+            weaponPrefab.AddComponent<SpawnerComponent>();
+
+            conjuringWeaponData.weaponPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{prefabPath}/weapon_{weaponName}.prefab");
+
+            AssetDatabase.CreateAsset(conjuringWeaponData, $"{prefabPath}/weapon_{weaponName}.asset");
+
+            return conjuringWeaponData;
+        }
+
+        static MeleeWeaponData CreateMeleeWeapon(string weaponName, WeaponOwnerType weaponOwnerType, GameObject weaponPrefab)
+        {
+            var prefabOwnerPath = $"{ParentPath}/{weaponOwnerType.ToString()}";
+            var prefabPath = $"{prefabOwnerPath}/{weaponName}";
+
+            var meleeWeaponData = ScriptableObject.CreateInstance<MeleeWeaponData>();
+            meleeWeaponData.weaponPrefab = weaponPrefab;
+
+            var weaponHitbox = weaponPrefab.AddComponent<BoxCollider2D>();
+            weaponHitbox.isTrigger = true;
+
+            AssetDatabase.CreateAsset(meleeWeaponData, $"{prefabPath}/weapon_{weaponName}.asset");
+
+            return meleeWeaponData;
+        }
+
+        static RangedWeaponData CreateRangedWeapon(string weaponName, WeaponOwnerType weaponOwnerType,
+            ProjectileType projectileType, GameObject weaponPrefab)
+        {
+            var prefabOwnerPath = $"{ParentPath}/{weaponOwnerType.ToString()}";
+            var prefabPath = $"{prefabOwnerPath}/{weaponName}";
+
+            var rangedWeaponData = ScriptableObject.CreateInstance<RangedWeaponData>();
+
+            AssetDatabase.CreateAsset(rangedWeaponData, $"{prefabPath}/weapon_{weaponName}.asset");
+
+            var (_, projectilePrefab) =
+                CreateProjectile(weaponName, weaponOwnerType, projectileType, rangedWeaponData);
+
+            rangedWeaponData.weaponPrefab = weaponPrefab;
+            rangedWeaponData.projectilePrefab = projectilePrefab;
+
+            return rangedWeaponData;
+        }
+
+        static (ProjectileData, GameObject) CreateProjectile(string weaponName, WeaponOwnerType weaponOwnerType, ProjectileType projectileType, RangedWeaponData rangedWeaponData)
+        {
+            var prefabOwnerPath = $"{ParentPath}/{weaponOwnerType.ToString()}";
+            var prefabPath = $"{prefabOwnerPath}/{weaponName}";
+
+            var projectileDataType = projectileType == ProjectileType.Curved
+                ? typeof(CurvedProjectileData)
+                : typeof(LinearProjectileData);
+            var projectileData = (ProjectileData)ScriptableObject.CreateInstance(projectileDataType);
+
+            AssetDatabase.CreateAsset(projectileData, $"{prefabPath}/projectile_{weaponName}.asset");
+
+            var projectilePrefab = CreateProjectilePrefab(weaponName, weaponOwnerType, projectileType, rangedWeaponData, projectileData);
+
+            return (projectileData, projectilePrefab);
+        }
+
+        static GameObject CreateProjectilePrefab(string weaponName, WeaponOwnerType weaponOwnerType, ProjectileType projectileType, RangedWeaponData rangedWeaponData, ProjectileData projectileData)
+        {
+            var prefabOwnerPath = $"{ParentPath}/{weaponOwnerType.ToString()}";
+            var prefabPath = $"{prefabOwnerPath}/{weaponName}";
+
+            var projectilePrefab = new GameObject($"projectile_{weaponName}");
+            projectilePrefab.layer = weaponOwnerType == WeaponOwnerType.Player
+                ? PhysicsLayer.PROJECTILE
+                : PhysicsLayer.ENEMY_PROJECTILE;
+
+            var projectileSpriteRenderer = projectilePrefab.AddComponent<SpriteRenderer>();
+            projectileSpriteRenderer.sortingLayerName = "projectile";
+
+            var projectileController = CreateProjectileAnimations(weaponName, weaponOwnerType);
+            var projectileAnimator = projectilePrefab.AddComponent<Animator>();
+            projectileAnimator.runtimeAnimatorController = projectileController;
+
+            var projectileRigidbody = projectilePrefab.AddComponent<Rigidbody2D>();
+            projectileRigidbody.angularDrag = 0f;
+            projectileRigidbody.gravityScale = 0f;
+            projectileRigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+
+            projectilePrefab.AddComponent<CapsuleCollider2D>();
+
+            var projectileComponent = projectilePrefab.AddComponent<ProjectileComponent>();
+            projectileComponent.projectileData = projectileData;
+            projectileComponent.rangedWeaponData = rangedWeaponData;
+
+            var enemyLayer = (weaponOwnerType == WeaponOwnerType.Player ? PhysicsLayer.ENEMY : PhysicsLayer.PLAYER);
+            var impactMask = 1 << PhysicsLayer.WALL | 1 << enemyLayer;
+
+            projectileComponent.projectileData.impactMask = impactMask;
+
+            PrefabUtility.SaveAsPrefabAsset(projectilePrefab, $"{prefabPath}/projectile_{weaponName}.prefab");
+
+            Object.DestroyImmediate(projectilePrefab);
+
+            projectilePrefab =
+                AssetDatabase.LoadAssetAtPath<GameObject>($"{prefabPath}/projectile_{weaponName}.prefab");
+
+            return projectilePrefab;
+        }
+
+        static GameObject CreateWeaponPrefab(string weaponName, WeaponOwnerType weaponOwnerType)
+        {
+            var prefabOwnerPath = $"{ParentPath}/{weaponOwnerType.ToString()}";
+            var prefabPath = $"{prefabOwnerPath}/{weaponName}";
+
             AssetDatabase.CreateFolder(prefabOwnerPath, weaponName);
 
-            //create weapon animator controller
-            var weaponBaseController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>("Assets/_Project/Graphics/Animations/Weapons/base/controller_weapon_base.controller");
-            var weaponBaseControllerIdle = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/_project/Graphics/Animations/Weapons/base/animation_weapon_base_idle.anim");
-            var weaponBaseControllerAttack = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/_project/Graphics/Animations/Weapons/base/animation_weapon_base_attack.anim");
-            var weaponBaseControllerImpact = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/_project/Graphics/Animations/Weapons/base/animation_weapon_base_impact.anim");
+            var weaponController = CreateWeaponAnimations(weaponName, weaponOwnerType);
+
+            var weaponLayer = LayerMask.NameToLayer(weaponOwnerType.ToString().ToLower());
+            var weaponSortingLayer = weaponOwnerType.ToString().ToLower();
+
+            var weaponPrefab = new GameObject($"weapon_{weaponName}")
+            {
+                layer = weaponLayer,
+            };
+
+            var weaponSpriteRenderer = weaponPrefab.AddComponent<SpriteRenderer>();
+            weaponSpriteRenderer.sortingLayerName = weaponSortingLayer;
+            weaponSpriteRenderer.sortingOrder = -1;
+
+            var weaponAnimator = weaponPrefab.AddComponent<Animator>();
+            weaponAnimator.runtimeAnimatorController = weaponController;
+
+            weaponPrefab.AddComponent<WeaponAnimationComponent>();
+
+            PrefabUtility.SaveAsPrefabAsset(weaponPrefab, $"{prefabPath}/weapon_{weaponName}.prefab");
+
+            Object.DestroyImmediate(weaponPrefab);
+
+            weaponPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{prefabPath}/weapon_{weaponName}.prefab");
+
+            return weaponPrefab;
+        }
+
+        static AnimatorOverrideController CreateWeaponAnimations(string weaponName, WeaponOwnerType weaponOwnerType)
+        {
+            var animationOwnerPath = $"{AnimationParentPath}/{weaponOwnerType.ToString()}";
+            var animationPath = $"{animationOwnerPath}/{weaponName}";
+            var baseAnimationPath = $"{AnimationParentPath}/base";
+
+            if (!AssetDatabase.IsValidFolder(animationPath)) AssetDatabase.CreateFolder(animationOwnerPath, weaponName);
+
+            var weaponBaseController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>($"{baseAnimationPath}/controller_weapon_base.controller");
+            var weaponBaseControllerIdle = AssetDatabase.LoadAssetAtPath<AnimationClip>($"{baseAnimationPath}/animation_weapon_base_idle.anim");
+            var weaponBaseControllerAttack = AssetDatabase.LoadAssetAtPath<AnimationClip>($"{baseAnimationPath}/animation_weapon_base_attack.anim");
+            var weaponBaseControllerImpact = AssetDatabase.LoadAssetAtPath<AnimationClip>($"{baseAnimationPath}/animation_weapon_base_impact.anim");
 
             var weaponAnimationIdle = new AnimationClip();
             var weaponAnimationAttack = new AnimationClip();
@@ -45,190 +239,52 @@ namespace HotlineHyruleEditor.GameManager
             {
                 new KeyValuePair<AnimationClip, AnimationClip>(weaponBaseControllerIdle, weaponAnimationIdle),
                 new KeyValuePair<AnimationClip, AnimationClip>(weaponBaseControllerAttack, weaponAnimationAttack),
-                new KeyValuePair<AnimationClip, AnimationClip>(weaponBaseControllerImpact, weaponAnimationImpact)
+                new KeyValuePair<AnimationClip, AnimationClip>(weaponBaseControllerImpact, weaponAnimationImpact),
             };
 
             weaponController.ApplyOverrides(weaponOverrides);
             AssetDatabase.CreateAsset(weaponController, $"{animationPath}/controller_weapon_{weaponName}.controller");
 
-            //create weapon prefab
-            var weaponPrefab = new GameObject($"weapon_{weaponName}");
-            weaponPrefab.layer = LayerMask.NameToLayer(weaponOwnerType.ToString().ToLower());
+            return weaponController;
+        }
 
-            var weaponSpriteRenderer = weaponPrefab.AddComponent<SpriteRenderer>();
-            weaponSpriteRenderer.sortingLayerName = weaponOwnerType.ToString().ToLower();
-            weaponSpriteRenderer.sortingOrder = -1;
+        static AnimatorOverrideController CreateProjectileAnimations(string weaponName, WeaponOwnerType weaponOwnerType)
+        {
+            var animationOwnerPath = $"{AnimationParentPath}/{weaponOwnerType.ToString()}";
+            var animationPath = $"{animationOwnerPath}/{weaponName}";
+            var baseAnimationPath = $"{AnimationParentPath}/base";
 
-            var weaponAnimator = weaponPrefab.AddComponent<Animator>();
-            weaponAnimator.runtimeAnimatorController = weaponController;
+            if (!AssetDatabase.IsValidFolder(animationPath)) AssetDatabase.CreateFolder(animationOwnerPath, weaponName);
 
-            weaponPrefab.AddComponent<WeaponAnimationComponent>();
+            var projectileBaseController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>($"{baseAnimationPath}/controller_projectile_base.controller");
+            var projectileBaseControllerIdle = AssetDatabase.LoadAssetAtPath<AnimationClip>($"{baseAnimationPath}/animation_projectile_base_idle.anim");
+            var projectileBaseControllerAttack = AssetDatabase.LoadAssetAtPath<AnimationClip>($"{baseAnimationPath}/animation_projectile_base_attack.anim");
+            var projectileBaseControllerImpact = AssetDatabase.LoadAssetAtPath<AnimationClip>($"{baseAnimationPath}/animation_projectile_base_impact.anim");
+            var projectileBaseControllerStop = AssetDatabase.LoadAssetAtPath<AnimationClip>($"{baseAnimationPath}/animation_projectile_base_stop.anim");
 
-            var weaponData = ScriptableObject.CreateInstance<WeaponData>();
+            var projectileAnimationIdle = new AnimationClip();
+            var projectileAnimationAttack = new AnimationClip();
+            var projectileAnimationImpact = new AnimationClip();
+            var projectileAnimationStop = new AnimationClip();
 
-            switch (weaponType)
+            AssetDatabase.CreateAsset(projectileAnimationIdle, $"{animationPath}/animation_projectile_{weaponName}_idle.anim");
+            AssetDatabase.CreateAsset(projectileAnimationAttack, $"{animationPath}/animation_projectile_{weaponName}_attack.anim");
+            AssetDatabase.CreateAsset(projectileAnimationImpact, $"{animationPath}/animation_projectile_{weaponName}_impact.anim");
+            AssetDatabase.CreateAsset(projectileAnimationStop, $"{animationPath}/animation_projectile_{weaponName}_stop.anim");
+
+            var projectileController = new AnimatorOverrideController(projectileBaseController);
+            var projectileOverrides = new List<KeyValuePair<AnimationClip, AnimationClip>>
             {
-                //create weapon data
-                case WeaponType.Ranged:
-                {
-                    var rangedWeaponData = ScriptableObject.CreateInstance<RangedWeaponData>();
-                    weaponData = rangedWeaponData;
-                    rangedWeaponData.weaponPrefab = weaponPrefab;
+                new KeyValuePair<AnimationClip, AnimationClip>(projectileBaseControllerIdle, projectileAnimationIdle),
+                new KeyValuePair<AnimationClip, AnimationClip>(projectileBaseControllerAttack, projectileAnimationAttack),
+                new KeyValuePair<AnimationClip, AnimationClip>(projectileBaseControllerImpact, projectileAnimationImpact),
+                new KeyValuePair<AnimationClip, AnimationClip>(projectileBaseControllerStop, projectileAnimationStop),
+            };
 
-                    //create projectile animator controller
-                    var projectileBaseController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>("Assets/_Project/Graphics/Animations/Weapons/base/controller_projectile_base.controller");
-                    var projectileBaseControllerIdle = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/_project/Graphics/Animations/Weapons/base/animation_projectile_base_idle.anim");
-                    var projectileBaseControllerAttack = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/_project/Graphics/Animations/Weapons/base/animation_projectile_base_attack.anim");
-                    var projectileBaseControllerImpact = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/_project/Graphics/Animations/Weapons/base/animation_projectile_base_impact.anim");
-                    var projectileBaseControllerStop = AssetDatabase.LoadAssetAtPath<AnimationClip>("Assets/_project/Graphics/Animations/Weapons/base/animation_projectile_base_stop.anim");
+            projectileController.ApplyOverrides(projectileOverrides);
+            AssetDatabase.CreateAsset(projectileController, $"{animationPath}/controller_projectile_{weaponName}.controller");
 
-                    var projectileAnimationIdle = new AnimationClip();
-                    var projectileAnimationAttack = new AnimationClip();
-                    var projectileAnimationImpact = new AnimationClip();
-                    var projectileAnimationStop = new AnimationClip();
-
-                    AssetDatabase.CreateAsset(projectileAnimationIdle, $"{animationPath}/animation_projectile_{weaponName}_idle.anim");
-                    AssetDatabase.CreateAsset(projectileAnimationAttack, $"{animationPath}/animation_projectile_{weaponName}_attack.anim");
-                    AssetDatabase.CreateAsset(projectileAnimationImpact, $"{animationPath}/animation_projectile_{weaponName}_impact.anim");
-                    AssetDatabase.CreateAsset(projectileAnimationStop, $"{animationPath}/animation_projectile_{weaponName}_stop.anim");
-
-                    var projectileController = new AnimatorOverrideController(projectileBaseController);
-                    var projectileOverrides = new List<KeyValuePair<AnimationClip, AnimationClip>>
-                    {
-                        new KeyValuePair<AnimationClip, AnimationClip>(projectileBaseControllerIdle, projectileAnimationIdle),
-                        new KeyValuePair<AnimationClip, AnimationClip>(projectileBaseControllerAttack, projectileAnimationAttack),
-                        new KeyValuePair<AnimationClip, AnimationClip>(projectileBaseControllerImpact, projectileAnimationImpact),
-                        new KeyValuePair<AnimationClip, AnimationClip>(projectileBaseControllerStop, projectileAnimationStop)
-                    };
-
-                    projectileController.ApplyOverrides(projectileOverrides);
-                    AssetDatabase.CreateAsset(projectileController, $"{animationPath}/controller_projectile_{weaponName}.controller");
-
-                    //create projectile prefab
-                    var projectilePrefab = new GameObject($"projectile_{weaponName}");
-                    projectilePrefab.layer = weaponOwnerType == WeaponOwnerType.Player ? PhysicsLayer.PROJECTILE : PhysicsLayer.ENEMY_PROJECTILE;
-
-                    var projectileSpriteRenderer = projectilePrefab.AddComponent<SpriteRenderer>();
-                    projectileSpriteRenderer.sortingLayerName = "projectile";
-
-                    var projectileAnimator = projectilePrefab.AddComponent<Animator>();
-                    projectileAnimator.runtimeAnimatorController = projectileController;
-
-                    var projectileRigidbody = projectilePrefab.AddComponent<Rigidbody2D>();
-                    projectileRigidbody.angularDrag = 0f;
-                    projectileRigidbody.gravityScale = 0f;
-                    projectileRigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-
-                    projectilePrefab.AddComponent<CapsuleCollider2D>();
-
-                    var projectileComponent = projectilePrefab.AddComponent<ProjectileComponent>();
-
-                    //create projectile data
-                    switch (projectileType)
-                    {
-                        case ProjectileType.Curved:
-                        {
-                            var curvedProjectileData = ScriptableObject.CreateInstance<CurvedProjectileData>();
-                            AssetDatabase.CreateAsset(curvedProjectileData, $"{prefabPath}/projectile_{weaponName}.asset");
-
-                            projectileComponent.projectileData = curvedProjectileData;
-                            break;
-                        }
-                        case ProjectileType.Linear:
-                        {
-                            var linearProjectileData = ScriptableObject.CreateInstance<LinearProjectileData>();
-                            AssetDatabase.CreateAsset(linearProjectileData, $"{prefabPath}/projectile_{weaponName}.asset");
-
-                            projectileComponent.projectileData = linearProjectileData;
-                            break;
-                        }
-                    }
-
-                    projectileComponent.projectileData.impactMask = 1 << PhysicsLayer.WALL |
-                                                                    1 << (weaponOwnerType == WeaponOwnerType.Player
-                                                                        ? PhysicsLayer.ENEMY
-                                                                        : PhysicsLayer.PLAYER);
-
-                    PrefabUtility.SaveAsPrefabAsset(projectilePrefab, $"{prefabPath}/projectile_{weaponName}.prefab");
-                    PrefabUtility.SaveAsPrefabAsset(weaponPrefab, $"{prefabPath}/weapon_{weaponName}.prefab");
-
-                    rangedWeaponData.projectilePrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{prefabPath}/projectile_{weaponName}.prefab");
-                    rangedWeaponData.weaponPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{prefabPath}/weapon_{weaponName}.prefab");
-
-                    AssetDatabase.CreateAsset(rangedWeaponData, $"{prefabPath}/weapon_{weaponName}.asset");
-
-                    projectileComponent.rangedWeaponData = rangedWeaponData;
-
-                    PrefabUtility.SaveAsPrefabAsset(projectilePrefab, $"{prefabPath}/projectile_{weaponName}.prefab");
-
-                    Object.DestroyImmediate(projectilePrefab);
-                    break;
-                }
-                case WeaponType.Melee:
-                {
-                    var meleeWeaponData = ScriptableObject.CreateInstance<MeleeWeaponData>();
-                    weaponData = meleeWeaponData;
-                    meleeWeaponData.weaponPrefab = weaponPrefab;
-
-                    var weaponHitbox = weaponPrefab.AddComponent<BoxCollider2D>();
-                    weaponHitbox.isTrigger = true;
-
-                    PrefabUtility.SaveAsPrefabAsset(weaponPrefab, $"{prefabPath}/weapon_{weaponName}.prefab");
-
-                    meleeWeaponData.weaponPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{prefabPath}/weapon_{weaponName}.prefab");
-
-                    AssetDatabase.CreateAsset(meleeWeaponData, $"{prefabPath}/weapon_{weaponName}.asset");
-                    break;
-                }
-                case WeaponType.Conjuring:
-                {
-                    var conjuringWeaponData = ScriptableObject.CreateInstance<ConjuringWeaponData>();
-                    weaponData = conjuringWeaponData;
-                    conjuringWeaponData.weaponPrefab = weaponPrefab;
-
-                    weaponPrefab.AddComponent<SpawnerComponent>();
-
-                    PrefabUtility.SaveAsPrefabAsset(weaponPrefab, $"{prefabPath}/weapon_{weaponName}.prefab");
-
-                    conjuringWeaponData.weaponPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{prefabPath}/weapon_{weaponName}.prefab");
-
-                    AssetDatabase.CreateAsset(conjuringWeaponData, $"{prefabPath}/weapon_{weaponName}.asset");
-                    break;
-                }
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(weaponType), weaponType, null);
-            }
-
-            //create dropped weapon prefab
-            if (weaponOwnerType == WeaponOwnerType.Player)
-            {
-                var droppedWeaponPrefab = new GameObject($"weapon_{weaponName}_dropped");
-                droppedWeaponPrefab.layer = PhysicsLayer.ITEM;
-
-                var droppedWeaponSpriteRenderer = droppedWeaponPrefab.AddComponent<SpriteRenderer>();
-                droppedWeaponSpriteRenderer.sortingLayerName = "item";
-
-                var droppedWeaponCollider = droppedWeaponPrefab.AddComponent<CircleCollider2D>();
-                droppedWeaponCollider.isTrigger = true;
-
-                var droppedWeaponItemComponent = droppedWeaponPrefab.AddComponent<ItemComponent>();
-
-                droppedWeaponPrefab.AddComponent<DroppedWeaponComponent>();
-
-                droppedWeaponItemComponent.itemDatas.Add(weaponData);
-
-                PrefabUtility.SaveAsPrefabAsset(droppedWeaponPrefab, $"{prefabPath}/weapon_{weaponName}_dropped.prefab");
-
-                weaponData.droppedWeaponPrefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{prefabPath}/weapon_{weaponName}_dropped.prefab");
-
-                Object.DestroyImmediate(droppedWeaponPrefab);
-            }
-
-            AssetDatabase.SaveAssets();
-
-            Object.DestroyImmediate(weaponPrefab);
-
-            return weaponData;
+            return projectileController;
         }
 
         public static void Delete(WeaponData weaponData)

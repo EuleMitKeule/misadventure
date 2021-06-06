@@ -30,7 +30,11 @@ namespace HotlineHyruleEditor.GameManager
         [PropertyOrder(1)]
         [InlineEditor(InlineEditorObjectFieldModes.CompletelyHidden)]
         [ShowInInspector]
+        [ShowIf("ShowSelected")]
+        [TitleGroup("Tools/Main/Vertical/Settings")]
         protected T Selected { get; set; }
+
+        protected virtual bool ShowSelected => true;
 
         public virtual string Path { get; protected set; }
 
@@ -84,7 +88,7 @@ namespace HotlineHyruleEditor.GameManager
         }
 
         [LabelText("Delete Object")]
-        [PropertyOrder(2)]
+        [PropertyOrder(-1)]
         [BoxGroup("Tools/Main/Vertical/General")]
         [Button]
         [GUIColor(1, 0.2f, 0)]

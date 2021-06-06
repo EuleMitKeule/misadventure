@@ -5,6 +5,7 @@ using HotlineHyrule.Items;
 using HotlineHyrule.Level;
 using HotlineHyrule.Quests;
 using HotlineHyrule.Weapons;
+using HotlineHyrule.Weapons.Projectiles;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Serialization;
@@ -31,7 +32,6 @@ namespace HotlineHyruleEditor.GameManager
         public LevelOrQuestDrawer LevelOrQuestDrawer { get; private set; }
 
         string itemPath = "Assets/_Project/Prefabs/Items";
-        string weaponPath = "Assets/_Project/Prefabs/Weapons";
 
         object Selected => MenuTree?.Selection?.SelectedValue;
 
@@ -181,7 +181,8 @@ namespace HotlineHyruleEditor.GameManager
                 case TabState.Enemies:
                     break;
                 case TabState.Weapons:
-                    tree.AddAllAssetsAtPath("Weapons", weaponPath, typeof(WeaponData), true);
+                    tree.AddAllAssetsAtPath("Weapons/Enemy", $"{WeaponBuilder.ParentPath}/Enemy", typeof(WeaponData), true, true);
+                    tree.AddAllAssetsAtPath("Weapons/Player", $"{WeaponBuilder.ParentPath}/Player", typeof(WeaponData), true, true);
                     break;
                 case TabState.Items:
                     tree.AddAllAssetsAtPath("Items", itemPath, typeof(ItemData));

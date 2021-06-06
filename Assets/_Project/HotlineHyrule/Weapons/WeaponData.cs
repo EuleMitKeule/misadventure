@@ -26,10 +26,6 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         [SerializeField] public GameObject weaponPrefab;
         /// <summary>
-        /// The dropped weapon object associated with this weapon.
-        /// </summary>
-        [SerializeField] public GameObject droppedWeaponPrefab;
-        /// <summary>
         /// Whether the weapon is limited by charges.
         /// </summary>
         [SerializeField] public bool hasInfiniteCharges;
