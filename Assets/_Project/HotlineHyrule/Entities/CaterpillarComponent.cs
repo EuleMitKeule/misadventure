@@ -19,8 +19,11 @@ namespace HotlineHyrule.Entities
         [OdinSerialize] public float MaxTurnAngle { get; set; }
         [OdinSerialize] float ViewAngle { get; set; }
         [OdinSerialize] public float ViewDistance { get; set; }
+        [OdinSerialize] int Damage { get; set; }
+        [OdinSerialize] float DamageInterval { get; set; }
         [OdinSerialize] public LayerMask ViewPlayerMask { get; set; }
         
+        float NextDamageTime { get; set; }
         List<SegmentComponent> Segments { get; set; }
         Dictionary<SegmentComponent, CaterpillarBaseStateComponent> SegmentToState { get; } = new Dictionary<SegmentComponent, CaterpillarBaseStateComponent>();
         List<CaterpillarBaseStateComponent> States { get; set; }
@@ -45,6 +48,7 @@ namespace HotlineHyrule.Entities
                 SegmentToHealthComponent.Add(segment, healthComponent);
 
                 healthComponent.HealthChanged += OnHealthChanged;
+                segment.PlayerColliding += OnPlayerColliding;
             }
         }
 
@@ -119,6 +123,8 @@ namespace HotlineHyrule.Entities
                 
                 return;
             }
+            
+            SetState<CaterpillarFollowStateComponent>(segment.Head);
 
             if (e.IsKilled)
             {
@@ -130,6 +136,15 @@ namespace HotlineHyrule.Entities
                 
                 Split(segment);
             }
+        }
+
+        void OnPlayerColliding(object sender, PlayerEventArgs e)
+        {
+            if (Time.time < NextDamageTime) return;
+            NextDamageTime = Time.time + 1 / DamageInterval;
+            
+            var healthComponent = e.PlayerComponent.GetComponent<HealthComponent>();
+            healthComponent.Health -= Damage;
         }
 
         void Split(SegmentComponent headSegment)

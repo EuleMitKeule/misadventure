@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using HotlineHyrule.Extensions;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
@@ -18,6 +19,7 @@ namespace HotlineHyrule.Entities
         [SerializeField] float headMovementThreshold;
         [SerializeField] float wallCheckDistance;
         [SerializeField] LayerMask wallMask;
+        [SerializeField] LayerMask playerMask;
         
         public LinkedList<CaterpillarNode> Nodes { get; } = new LinkedList<CaterpillarNode>();
         LinkedListNode<CaterpillarNode> TargetNode { get; set; }
@@ -40,8 +42,9 @@ namespace HotlineHyrule.Entities
         float TraveledDistance => transform.position.DistanceTo(LastNode.Value.Position);
         float TraveledDistancePerNode => TraveledDistance / nodeDistance;
         Vector2 LastPosition { get; set; }
-        public Vector2 LookDirection => Rigidbody.velocity != Vector2.zero ? Rigidbody.velocity : (Vector2)transform.up; 
+        public Vector2 LookDirection => Rigidbody.velocity != Vector2.zero ? Rigidbody.velocity : (Vector2)transform.up;
         event EventHandler<NodeEventArgs> TargetNodeReached;
+        public event EventHandler<PlayerEventArgs> PlayerColliding;
         
         Rigidbody2D Rigidbody { get; set; }
 
@@ -86,7 +89,7 @@ namespace HotlineHyrule.Entities
             
             var position = Vector2.Lerp(LastNode.Value.Position, TargetNode.Value.Position,
                 HeadSegment.TraveledDistancePerNode);
-            transform.position = position;
+            Rigidbody.position = position;
 
             var rotation = Quaternion.Lerp(LastNode.Value.Rotation, TargetNode.Value.Rotation,
                 HeadSegment.TraveledDistancePerNode);
@@ -214,6 +217,14 @@ namespace HotlineHyrule.Entities
                 if (segment.LastNode == null) continue;
                 segment.LastNode = Nodes.Find(segment.LastNode.Value);
             }
+        }
+
+        void OnTriggerStay2D(Collider2D other)
+        {
+            var playerComponent = other.GetComponent<PlayerComponent>();
+            if (!playerComponent) return;
+
+            PlayerColliding?.Invoke(this, new PlayerEventArgs(playerComponent));
         }
     }
 }
