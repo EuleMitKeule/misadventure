@@ -13,29 +13,135 @@ namespace HotlineHyrule.Entities
 {
     public class CaterpillarComponent : SerializedMonoBehaviour
     {
-        [OdinSerialize] int HealthPerHead { get; set; }
-        [OdinSerialize] public float MoveSpeed { get; set; }
-        [OdinSerialize] public float FollowSpeed { get; set; }
-        [OdinSerialize] public float MaxTurnAngle { get; set; }
-        [OdinSerialize] float ViewAngle { get; set; }
-        [OdinSerialize] public float ViewDistance { get; set; }
-        [OdinSerialize] int Damage { get; set; }
-        [OdinSerialize] float DamageInterval { get; set; }
-        [OdinSerialize] public LayerMask ViewPlayerMask { get; set; }
-        
+        [BoxGroup("General")]
+        [OdinSerialize]
+        [MinValue("SegmentCount")]
+        [HideInPlayMode]
+        int Health { get; set; }
+        [BoxGroup("General")]
+        [ShowInInspector]
+        [HideInPlayMode]
+        int HealthPerHead => Health / SegmentCount;
+        [BoxGroup("General")]
+        [ShowInInspector]
+        [HideInEditorMode]
+        [ProgressBar(0f, "Health", 1f, 0f, 0f)]
+        int CurrentHealth { get; set; }
+        [BoxGroup("General")]
+        [OdinSerialize]
+        [MinValue(0)]
+        int Damage { get; set; }
+        [BoxGroup("General")]
+        [OdinSerialize]
+        [MinValue(0f)]
+        [SuffixLabel("1/s")]
+        float DamageFrequency { get; set; }
+        [BoxGroup("AI")]
+        [OdinSerialize]
+        [MinValue(0f)]
+        [SuffixLabel("u/s")]
+        public float MoveSpeed { get; set; }
+        [BoxGroup("AI")]
+        [OdinSerialize]
+        [MinValue(0f)]
+        [SuffixLabel("u/s")]
+        public float FollowSpeed { get; set; }
+        [BoxGroup("AI")]
+        [OdinSerialize]
+        [PropertyRange(0f, 360f)]
+        [SuffixLabel("°")]
+        float ViewAngle { get; set; }
+        [BoxGroup("AI")]
+        [OdinSerialize]
+        [MinValue(float.Epsilon)]
+        [SuffixLabel("u")]
+        public float ViewDistance { get; set; }
+        [BoxGroup("AI")]
+        [OdinSerialize]
+        [LabelText("What is Player")]
+        LayerMask PlayerMask { get; set; }
+        [BoxGroup("Segment")]
+        [OdinSerialize]
+        [Required]
+        [LabelText("Prefab")]
+        [HideInPlayMode]
+        GameObject SegmentPrefab { get; set; }
+        [BoxGroup("Segment")]
+        [OdinSerialize]
+        [MinValue(1)]
+        [LabelText("Count")]
+        [HideInPlayMode]
+        int SegmentCount { get; set; }
+        [BoxGroup("Segment")]
+        [OdinSerialize]
+        [MinValue("NodeDistance")]
+        [LabelText("Distance")]
+        [SuffixLabel("u")]
+        public float SegmentDistance { get; set; }
+        [BoxGroup("Segment")]
+        [OdinSerialize]
+        [MinValue(float.Epsilon)]
+        [LabelText("Path Precision")]
+        [SuffixLabel("u")]
+        public float NodeDistance { get; set; }
+        [BoxGroup("Physics")]
+        [OdinSerialize]
+        [PropertyRange(0f, 360f)]
+        [SuffixLabel("°")]
+        [LabelText("Max Rotation Step")]
+        public float MaxTurnAngle { get; set; }
+        [BoxGroup("Physics")]
+        [OdinSerialize]
+        [MinValue(float.Epsilon)]
+        [SuffixLabel("u")]
+        public float WallCheckDistance { get; set; }
+        [BoxGroup("Physics")]
+        [OdinSerialize]
+        [LabelText("What is Wall")]
+        public LayerMask WallMask { get; set; }
+        [BoxGroup("Physics")]
+        [OdinSerialize]
+        [PropertyRange(0f, 100f)]
+        [SuffixLabel("%")]
+        [LabelText("Head Rotation Damping")]
+        float HeadRotationDampingPercentage { get; set; }
+        public float HeadRotationDamping => 1f - HeadRotationDampingPercentage / 100f;
+        [BoxGroup("Physics")]
+        [OdinSerialize]
+        [MinValue(0f)]
+        [SuffixLabel("u/s")]
+        public float HeadMovementThreshold { get; set; }
+        public LayerMask ViewPlayerMask => PlayerMask | WallMask;
+        [FoldoutGroup("Debug")]
+        [ShowInInspector]
+        [ReadOnly]
         float NextDamageTime { get; set; }
         List<SegmentComponent> Segments { get; set; }
+        [FoldoutGroup("Debug")]
+        [ShowInInspector]
+        [ReadOnly]
         Dictionary<SegmentComponent, CaterpillarBaseStateComponent> SegmentToState { get; } = new Dictionary<SegmentComponent, CaterpillarBaseStateComponent>();
         List<CaterpillarBaseStateComponent> States { get; set; }
+        [FoldoutGroup("Debug")]
+        [ShowInInspector]
+        [ReadOnly]
         Dictionary<SegmentComponent, HealthComponent> SegmentToHealthComponent { get; } =
             new Dictionary<SegmentComponent, HealthComponent>();
 
         void Awake()
         {
-            Segments = GetComponentsInChildren<SegmentComponent>().ToList();
+            Segments = new List<SegmentComponent>();
             States = GetComponents<CaterpillarBaseStateComponent>().ToList();
 
-            for (var i = 0; i < Segments.Count; i++)
+            for (var i = 0; i < SegmentCount; i++)
+            {
+                var segmentObject = Instantiate(SegmentPrefab, transform);
+                var segment = segmentObject.GetComponent<SegmentComponent>();
+                
+                Segments.Add(segment);
+            }
+
+            for (var i = 0; i < SegmentCount; i++)
             {
                 var segment = Segments[i];
 
@@ -50,6 +156,8 @@ namespace HotlineHyrule.Entities
                 healthComponent.HealthChanged += OnHealthChanged;
                 segment.PlayerColliding += OnPlayerColliding;
             }
+
+            CurrentHealth = Health;
         }
 
         void Start()
@@ -141,7 +249,7 @@ namespace HotlineHyrule.Entities
         void OnPlayerColliding(object sender, PlayerEventArgs e)
         {
             if (Time.time < NextDamageTime) return;
-            NextDamageTime = Time.time + 1 / DamageInterval;
+            NextDamageTime = Time.time + 1 / DamageFrequency;
             
             var healthComponent = e.PlayerComponent.GetComponent<HealthComponent>();
             healthComponent.Health -= Damage;
@@ -170,11 +278,16 @@ namespace HotlineHyrule.Entities
 
         void Kill(SegmentComponent segment)
         {
+            CurrentHealth -= HealthPerHead;
+            
             SegmentToState.Remove(segment);
             SegmentToHealthComponent[segment].HealthChanged -= OnHealthChanged;
             SegmentToHealthComponent.Remove(segment);
+            Segments.Remove(segment);
             
             Destroy(segment.gameObject);
+
+            if (Segments.Count == 0) Destroy(gameObject);
         }
         
         public Vector3 GetPlayerDirection(SegmentComponent segment) =>

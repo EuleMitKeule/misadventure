@@ -26,7 +26,11 @@ namespace HotlineHyrule.Entities.CaterpillarStates
 
         public virtual void EnterState(SegmentComponent segment)
         {
-            
+            if (!SegmentToRigidbody.ContainsKey(segment))
+            {
+                var rigidbody = segment.GetComponent<Rigidbody2D>();
+                SegmentToRigidbody.Add(segment, rigidbody);
+            }
         }
 
         public virtual void ExitState(SegmentComponent segment)

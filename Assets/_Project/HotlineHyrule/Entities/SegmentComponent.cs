@@ -13,44 +13,52 @@ namespace HotlineHyrule.Entities
 {
     public class SegmentComponent : MonoBehaviour
     {
-        [SerializeField] float nodeDistance;
-        [SerializeField] float segmentDistance;
-        [SerializeField] float headRotationDamping;
-        [SerializeField] float headMovementThreshold;
-        [SerializeField] float wallCheckDistance;
-        [SerializeField] LayerMask wallMask;
-        [SerializeField] LayerMask playerMask;
-        
         public LinkedList<CaterpillarNode> Nodes { get; } = new LinkedList<CaterpillarNode>();
         LinkedListNode<CaterpillarNode> TargetNode { get; set; }
         LinkedListNode<CaterpillarNode> LastNode { get; set; }
+        [FoldoutGroup("Debug")]
+        [ShowInInspector]
+        [ReadOnly]
         public SegmentComponent ParentSegment { get; set; }
+        [FoldoutGroup("Debug")]
+        [ShowInInspector]
+        [ReadOnly]
         public SegmentComponent ChildSegment { get; set; }
+        [FoldoutGroup("Debug")]
+        [ShowInInspector]
+        [ReadOnly]
         SegmentComponent HeadSegment { get; set; }
         public SegmentComponent Head => IsHead ? this : HeadSegment;
         Quaternion TargetHeadRotation { get; set; }
+        [FoldoutGroup("Debug")]
         [ShowInInspector]
         [ReadOnly]
         public bool IsHead => !ParentSegment;
+        [FoldoutGroup("Debug")]
         [ShowInInspector]
         [ReadOnly]
         bool IsTail => !ChildSegment;
-        public RaycastHit2D WallAbove => Physics2D.Raycast(transform.position, LookDirection, wallCheckDistance, wallMask);
-        public RaycastHit2D WallLeft => Physics2D.Raycast(transform.position, LookDirection.Rotate(90f), wallCheckDistance, wallMask);
-        public RaycastHit2D WallRight => Physics2D.Raycast(transform.position, LookDirection.Rotate(-90f), wallCheckDistance, wallMask);
-        int MinNodeDifference => Mathf.RoundToInt(segmentDistance / nodeDistance);
+        public RaycastHit2D WallAbove => Physics2D.Raycast(
+            transform.position, LookDirection, CaterpillarComponent.WallCheckDistance, CaterpillarComponent.WallMask);
+        public RaycastHit2D WallLeft => Physics2D.Raycast(
+            transform.position, LookDirection.Rotate(90f), CaterpillarComponent.WallCheckDistance, CaterpillarComponent.WallMask);
+        public RaycastHit2D WallRight => Physics2D.Raycast(
+            transform.position, LookDirection.Rotate(-90f), CaterpillarComponent.WallCheckDistance, CaterpillarComponent.WallMask);
+        int MinNodeDifference => Mathf.RoundToInt(CaterpillarComponent.SegmentDistance / CaterpillarComponent.NodeDistance);
         float TraveledDistance => transform.position.DistanceTo(LastNode.Value.Position);
-        float TraveledDistancePerNode => TraveledDistance / nodeDistance;
+        float TraveledDistancePerNode => TraveledDistance / CaterpillarComponent.NodeDistance;
         Vector2 LastPosition { get; set; }
         public Vector2 LookDirection => Rigidbody.velocity != Vector2.zero ? Rigidbody.velocity : (Vector2)transform.up;
         event EventHandler<NodeEventArgs> TargetNodeReached;
         public event EventHandler<PlayerEventArgs> PlayerColliding;
         
         Rigidbody2D Rigidbody { get; set; }
+        CaterpillarComponent CaterpillarComponent { get; set; }
 
         void Awake()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
+            CaterpillarComponent = GetComponentInParent<CaterpillarComponent>();
         }
 
         void Start()
@@ -66,18 +74,19 @@ namespace HotlineHyrule.Entities
         {
             if (IsHead)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, TargetHeadRotation, TraveledDistancePerNode * headRotationDamping);
+                transform.rotation = Quaternion.Lerp(transform.rotation, TargetHeadRotation,
+                    Mathf.Clamp(TraveledDistancePerNode * CaterpillarComponent.HeadRotationDamping, 0.001f, 0.999f));
                 
                 var traveledDirection = LastPosition.DirectionTo(transform.position);
                 var traveledDistance = LastPosition.DistanceTo(transform.position);
                 
-                if (traveledDirection != Vector2.zero && traveledDistance >= headMovementThreshold)
+                if (traveledDirection != Vector2.zero && traveledDistance >= CaterpillarComponent.HeadMovementThreshold)
                 {
                     var lookAngle = Vector3.SignedAngle(Vector3.up, traveledDirection, Vector3.forward);
                     TargetHeadRotation = Quaternion.Euler(0f, 0f, lookAngle);   
                 }
                 
-                if (TraveledDistance < nodeDistance) return;
+                if (TraveledDistance < CaterpillarComponent.NodeDistance) return;
 
                 AddNode();
 
@@ -158,7 +167,7 @@ namespace HotlineHyrule.Entities
             
             for (var i = 1; i <= nodeCount; i++)
             {
-                var position = lastNode.Value.Position + direction * (i * nodeDistance);
+                var position = lastNode.Value.Position + direction * (i * CaterpillarComponent.NodeDistance);
                 AddNodeAt(position);
             }
         }

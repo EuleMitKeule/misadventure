@@ -284,7 +284,7 @@ PrefabInstance:
       objectReference: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
     - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[0]
@@ -292,6 +292,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[1]
+      value: '"path":"Health","value":{"$id":0,"$type":"System.Int32, mscorlib",480}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[2]
       value: '"path":"MoveSpeed","value":{"$id":0,"$type":"System.Single, mscorlib",2.5}'
       objectReference: {fileID: 0}
     - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
