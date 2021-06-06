@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1634ab00f9b94a66bf6a7eaacdc248f4, type: 3}
   m_Name: level_forest_02
   m_EditorClassIdentifier: 
-  areaName: level info 2
-  areaText: das ist der zweite test
+  areaName: Japanese Forest
+  areaText: 
+  areaFinishedText: 
   questData: {fileID: 0}
   playerSpawnPosition: {x: -22, y: -11, z: 0}
