@@ -12,11 +12,6 @@ namespace HotlineHyrule.Level
     [RequireComponent(typeof(Grid))]
     public class LevelComponent : MonoBehaviour
     {
-        /// <summary>
-        /// The cell position the player respawns at.
-        /// </summary>
-        [Header("General")]
-        [SerializeField] public Vector2Int playerRespawnPosition;
         [SerializeField] public LevelData levelData;
         /// <summary>
         /// The prefab of the rain effect.
