@@ -19,6 +19,7 @@ namespace HotlineHyrule.Items
         /// The prefab to spawn when dropping the item.
         /// </summary>
         [OdinSerialize]
+        [PropertyOrder(-1)]
         public GameObject ItemPrefab { get; set; }
     }
 }

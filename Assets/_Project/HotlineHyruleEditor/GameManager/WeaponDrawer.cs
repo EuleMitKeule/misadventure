@@ -189,12 +189,36 @@ namespace HotlineHyruleEditor.GameManager
                 Selected = weaponData;
                 WeaponPrefab = weaponData.GetPrefab();
                 DroppedPrefab = weaponData.GetDroppedPrefab();
+                NameForNew = weaponData.ItemName;
+                RenameName = weaponData.ItemName;
+
+                CurrentWeaponType = weaponData switch
+                {
+                    MeleeWeaponData _ => WeaponBuilder.WeaponType.Melee,
+                    RangedWeaponData _ => WeaponBuilder.WeaponType.Ranged,
+                    ConjuringWeaponData _ => WeaponBuilder.WeaponType.Conjuring,
+                    _ => WeaponBuilder.WeaponType.Melee,
+                };
+
+                CurrentWeaponOwnerType = weaponData.GetWeaponOwnerTypeName() switch
+                {
+                    "Player" => WeaponBuilder.WeaponOwnerType.Player,
+                    "Enemy" => WeaponBuilder.WeaponOwnerType.Enemy,
+                    _ => WeaponBuilder.WeaponOwnerType.Player,
+                };
             }
 
             if (item is RangedWeaponData rangedWeaponData)
             {
                 ProjectileData = rangedWeaponData.GetProjectile();
                 ProjectilePrefab = rangedWeaponData.GetProjectilePrefab();
+
+                CurrentProjectileType = ProjectileData switch
+                {
+                    LinearProjectileData _ => WeaponBuilder.ProjectileType.Linear,
+                    CurvedProjectileData _ => WeaponBuilder.ProjectileType.Curved,
+                    _ => WeaponBuilder.ProjectileType.Linear,
+                };
             }
             else
             {

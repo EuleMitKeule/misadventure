@@ -80,6 +80,8 @@ namespace HotlineHyruleEditor.GameManager
             if (item is LevelData levelData)
             {
                 Selected = levelData;
+                NameForNew = levelData.name.Replace("level_", "");
+                RenameName = levelData.name.Replace("level_", "");
             }
         }
 
