@@ -6,7 +6,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: controller_projectile_arrow
+  m_Name: controller_projectile_bow
   m_Controller: {fileID: 9100000, guid: ede1559477db535418d8bcbccdd98bc8, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 67fe384ccfc50d042bdf8a1f84319129, type: 2}

@@ -9,36 +9,35 @@ namespace HotlineHyrule.Level
     [HideMonoScript]
     public class LevelData : ScriptableObject
     {
-        [TitleGroup("Settings")]
-        [BoxGroup("Settings/Story")]
+        [BoxGroup("Story")]
         [ShowInInspector]
         [LabelText("Name")]
         [LabelWidth(50)]
         public string areaName;
 
-        [BoxGroup("Settings/Story")]
+        [BoxGroup("Story")]
         [TextArea]
         [ShowInInspector]
         [LabelText("Intro Text")]
         public string areaText;
 
-        [BoxGroup("Settings/Story")]
+        [BoxGroup("Story")]
         [TextArea]
         [ShowInInspector]
         [LabelText("Outro Text")]
         public string areaFinishedText;
 
-        [BoxGroup("Settings/Story")]
+        [BoxGroup("Story")]
         [InlineEditor(InlineEditorObjectFieldModes.Boxed)]
         [ShowInInspector]
         public QuestData questData;
 
-        [BoxGroup("Settings/General")]
+        [BoxGroup("General")]
         [LabelText("Spawn Player At", true)]
         [ShowInInspector]
         public Vector3Int playerSpawnPosition;
 
-        [BoxGroup("Settings/Effects")]
+        [BoxGroup("Effects")]
         [EnumToggleButtons]
         [HideLabel]
         [ShowInInspector]

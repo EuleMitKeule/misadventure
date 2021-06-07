@@ -12,8 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610c3210925c4af7b5f91020c0bbdff5, type: 3}
   m_Name: item_attack_fast
   m_EditorClassIdentifier: 
-  itemName: 
-  itemPrefab: {fileID: 1049354374526659905, guid: 0e80989e51f6147499bda94895e08b53, type: 3}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 1049354374526659905, guid: 0e80989e51f6147499bda94895e08b53, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: attack_fast
+    - Name: ItemPrefab
+      Entry: 10
+      Data: 0
   consumeParticleSystemPrefab: {fileID: 0}
   damageFactor: 1
   damageBonus: 0

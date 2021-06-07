@@ -5,6 +5,7 @@ using HotlineHyrule.Items;
 using HotlineHyrule.Level;
 using HotlineHyrule.Quests;
 using HotlineHyrule.Weapons;
+using HotlineHyrule.Weapons.Projectiles;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Serialization;
@@ -24,14 +25,11 @@ namespace HotlineHyruleEditor.GameManager
         TabState CurrentTabState { get; set; }
         int CurrentEnumIndex { get; set; }
 
-        public ScriptableObjectDrawer<ItemData> ItemDrawer { get; private set; }
+        public ItemDrawer ItemDrawer { get; private set; }
         public WeaponDrawer WeaponDrawer { get; private set; }
         public LevelDrawer LevelDrawer { get; private set; }
         public ScriptableObjectDrawer<QuestData> QuestDrawer { get; private set; }
         public LevelOrQuestDrawer LevelOrQuestDrawer { get; private set; }
-
-        string itemPath = "Assets/_Project/Prefabs/Items";
-        string weaponPath = "Assets/_Project/Prefabs/Weapons";
 
         object Selected => MenuTree?.Selection?.SelectedValue;
 
@@ -45,14 +43,15 @@ namespace HotlineHyruleEditor.GameManager
 
         protected override void Initialize()
         {
-            ItemDrawer = new ScriptableObjectDrawer<ItemData>();
+            ItemDrawer = new ItemDrawer();
             WeaponDrawer = new WeaponDrawer();
             LevelDrawer = new LevelDrawer();
             QuestDrawer = new ScriptableObjectDrawer<QuestData>();
             LevelOrQuestDrawer = new LevelOrQuestDrawer(this);
 
-            ItemDrawer.SetPath(itemPath);
             QuestDrawer.SetPath(LevelBuilder.ParentPath);
+
+            OnSelectionChanged(SelectionChangedType.SelectionCleared);
         }
 
         void OnTabStateChanged()
@@ -96,7 +95,7 @@ namespace HotlineHyruleEditor.GameManager
             base.OnGUI();
         }
 
-        protected override void DrawEditors()
+        void OnSelectionChanged(SelectionChangedType selectionChangedType)
         {
             switch (CurrentTabState)
             {
@@ -104,14 +103,21 @@ namespace HotlineHyruleEditor.GameManager
                     LevelDrawer.SetSelected(Selected);
                     QuestDrawer.SetSelected(Selected);
                     break;
-                case TabState.Enemies:
-                    DrawEditor(CurrentEnumIndex);
-                    break;
                 case TabState.Weapons:
                     WeaponDrawer.SetSelected(Selected);
                     break;
                 case TabState.Items:
                     ItemDrawer.SetSelected(Selected);
+                    break;
+            }
+        }
+
+        protected override void DrawEditors()
+        {
+            switch (CurrentTabState)
+            {
+                case TabState.Enemies:
+                    DrawEditor(CurrentEnumIndex);
                     break;
                 case TabState.Sound:
                     DrawEditor(CurrentEnumIndex);
@@ -181,13 +187,15 @@ namespace HotlineHyruleEditor.GameManager
                 case TabState.Enemies:
                     break;
                 case TabState.Weapons:
-                    tree.AddAllAssetsAtPath("Weapons", weaponPath, typeof(WeaponData), true);
+                    tree.AddAllAssetsAtPath("Weapons/Enemy", $"{WeaponBuilder.ParentPath}/Enemy", typeof(WeaponData), true, true);
+                    tree.AddAllAssetsAtPath("Weapons/Player", $"{WeaponBuilder.ParentPath}/Player", typeof(WeaponData), true, true);
                     break;
                 case TabState.Items:
-                    tree.AddAllAssetsAtPath("Items", itemPath, typeof(ItemData));
+                    tree.AddAllAssetsAtPath("Items", ItemBuilder.Path, typeof(ItemData), true);
                     break;
             }
 
+            tree.Selection.SelectionChanged += OnSelectionChanged;
             return tree;
         }
 

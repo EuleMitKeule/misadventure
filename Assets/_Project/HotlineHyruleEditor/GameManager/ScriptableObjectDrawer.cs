@@ -18,19 +18,29 @@ namespace HotlineHyruleEditor.GameManager
         protected string NameForNew { get; set; }
 
         [HideLabel]
-        [PropertySpace(5f)]
+        [PropertySpace]
         [HorizontalGroup("Tools/Main/Vertical/General/Rename", Order = 2)]
-        [PropertyOrder(1)]
+        [PropertyOrder(0)]
         [InlineButton("RenameSelected", "Rename Object")]
         [ShowInInspector]
         [GUIColor(0.65f, 0.65f, 1f)]
         protected virtual string RenameName { get; set; }
 
+        [PropertySpace(5)]
+        [PropertyOrder(-1)]
+        [BoxGroup("Tools/Main/Vertical/General")]
+        [Button]
+        protected void Select() => Selection.activeObject = Selected;
+
         [PropertySpace(10f)]
         [PropertyOrder(1)]
         [InlineEditor(InlineEditorObjectFieldModes.CompletelyHidden)]
         [ShowInInspector]
+        [ShowIf("ShowSelected")]
+        [TitleGroup("Tools/Main/Vertical/Settings")]
         protected T Selected { get; set; }
+
+        protected virtual bool ShowSelected => true;
 
         public virtual string Path { get; protected set; }
 
@@ -88,7 +98,7 @@ namespace HotlineHyruleEditor.GameManager
         [BoxGroup("Tools/Main/Vertical/General")]
         [Button]
         [GUIColor(1, 0.2f, 0)]
-        [PropertySpace(5, 5)]
+        [PropertySpace(SpaceAfter = 5)]
         public virtual void DeleteSelected()
         {
             if (!Selected) return;
@@ -104,6 +114,8 @@ namespace HotlineHyruleEditor.GameManager
             if (!attempt) return;
 
             Selected = attempt;
+            NameForNew = Selected.name;
+            RenameName = Selected.name;
         }
 
         public virtual void SetPath(string newPath)

@@ -10,15 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
-  m_Name: data_weapon_shuriken
+  m_Name: weapon_shuriken
   m_EditorClassIdentifier: 
-  itemName: 
-  itemPrefab: {fileID: 3193329723167763181, guid: d9f0b8168e2ac1a84acd8fa50b85218e, type: 3}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: shuriken
+    - Name: ItemPrefab
+      Entry: 6
+      Data: 
   movementFactor: 1
   slowTimeWindow: 0
   attackRate: 0.8
   weaponPrefab: {fileID: 3193329723167763181, guid: d9f0b8168e2ac1a84acd8fa50b85218e, type: 3}
-  droppedWeaponPrefab: {fileID: 0}
   hasInfiniteCharges: 0
   weaponCharges: 0
   chargeRandomness: 0

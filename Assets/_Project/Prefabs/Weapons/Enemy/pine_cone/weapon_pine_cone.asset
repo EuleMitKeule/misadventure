@@ -10,15 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
-  m_Name: weapon_enemy_pine_cone
+  m_Name: weapon_pine_cone
   m_EditorClassIdentifier: 
-  itemName: 
-  itemPrefab: {fileID: 6459073364223741991, guid: a7e79bdda3252584c858ee4129919af8, type: 3}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 5446931342054602536, guid: b42dba144f9fdfc4d84f441d7882b636, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: pine_cone
+    - Name: ItemPrefab
+      Entry: 10
+      Data: 0
   movementFactor: 1
   slowTimeWindow: 0
   attackRate: 0.5
   weaponPrefab: {fileID: 6459073364223741991, guid: a7e79bdda3252584c858ee4129919af8, type: 3}
-  droppedWeaponPrefab: {fileID: 5446931342054602536, guid: b42dba144f9fdfc4d84f441d7882b636, type: 3}
   hasInfiniteCharges: 1
   weaponCharges: 0
   chargeRandomness: 0
@@ -30,3 +43,4 @@ MonoBehaviour:
   projectileAngle: 0
   projectileAngleOffset: 0
   projectileDelay: 0
+  flip: 0

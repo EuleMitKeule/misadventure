@@ -1,4 +1,6 @@
+using HotlineHyrule.Extensions;
 using HotlineHyrule.Items;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,7 +9,7 @@ namespace HotlineHyrule.Weapons
     /// <summary>
     /// Determines the properties of a weapon.
     /// </summary>
-    public class WeaponData : ItemData
+    public abstract class WeaponData : ItemData
     {
         /// <summary>
         /// Multiplies the player's movement speed.
@@ -26,10 +28,6 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         [SerializeField] public GameObject weaponPrefab;
         /// <summary>
-        /// The dropped weapon object associated with this weapon.
-        /// </summary>
-        [SerializeField] public GameObject droppedWeaponPrefab;
-        /// <summary>
         /// Whether the weapon is limited by charges.
         /// </summary>
         [SerializeField] public bool hasInfiniteCharges;
@@ -41,5 +39,8 @@ namespace HotlineHyrule.Weapons
         /// The percentage amount the weapon charges are randomized.
         /// </summary>
         [Range(0f, 1f)] [SerializeField] public float chargeRandomness;
+
+        public override string ItemName => name.Replace("weapon_", "");
+        protected override bool IsItemNameReadOnly => true;
     }
 }
