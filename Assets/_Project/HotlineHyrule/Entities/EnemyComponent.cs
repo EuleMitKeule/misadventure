@@ -4,6 +4,7 @@ using System.Linq;
 using HotlineHyrule.Entities.EnemyStates;
 using HotlineHyrule.Extensions;
 using HotlineHyrule.Items;
+using HotlineHyrule.Weapons;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -50,6 +51,11 @@ namespace HotlineHyrule.Entities
         /// Range in which the enemy will attack.
         /// </summary>
         [SerializeField] float attackRange;
+        /// <summary>
+        /// Whether a second attack shall be used.
+        /// If enabled, Animation for 'attacking2' will be played instead of 'attacking'
+        /// </summary>
+        public bool UsingAttack2;
 
         /// <summary>
         /// Particle system prefab to spawn when taking damage.
@@ -130,6 +136,11 @@ namespace HotlineHyrule.Entities
         }
 
         /// <summary>
+        /// Get 2D distance towards Player
+        /// </summary>
+        public float PlayerDistance => Vector2.Distance(transform.position, Locator.PlayerComponent.transform.position);
+
+        /// <summary>
         /// Whether the enemy has a wall to its left.
         /// </summary>
         public bool IsWallLeft =>
@@ -172,6 +183,7 @@ namespace HotlineHyrule.Entities
         Collider2D Collider { get; set; }
         Animator Animator { get; set; }
         HealthComponent HealthComponent { get; set; }
+        public WeaponComponent WeaponComponent { get; set; }
 
         List<EnemyBaseStateComponent> States { get; set; }
 
@@ -182,6 +194,8 @@ namespace HotlineHyrule.Entities
             Animator = GetComponent<Animator>();
             HealthComponent = GetComponent<HealthComponent>();
             States = GetComponents<EnemyBaseStateComponent>().ToList();
+
+            WeaponComponent = GetComponent<WeaponComponent>();
 
             HealthComponent.HealthChanged += OnHealthChanged;
         }
@@ -209,13 +223,13 @@ namespace HotlineHyrule.Entities
 #endif
         }
 
-        void SetState<TStateType>() where TStateType : EnemyBaseStateComponent => SetState(typeof(TStateType));
+        public void SetState<TStateType>() where TStateType : EnemyBaseStateComponent => SetState(typeof(TStateType));
 
-        void SetState(Type stateType)
+        public void SetState(Type stateType)
         {
             if (!stateType.IsSubclassOf(typeof(EnemyBaseStateComponent))) return;
 
-            var nextState = States.First(e => e.GetType() == stateType);
+            var nextState = States.Find(e => e.GetType() == stateType || e.GetType().IsSubclassOf(stateType));
             if (!nextState) return;
 
             if (state)
