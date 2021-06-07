@@ -79,7 +79,7 @@ namespace HotlineHyrule.Quests
             foreach (var treasureQuestTarget in TreasureQuestTargets)
             {
                 if (!treasureQuestTarget.treasureItem) continue;
-                if (!treasureQuestTarget.treasureItem.itemPrefab) continue;
+                if (!treasureQuestTarget.treasureItem.ItemPrefab) continue;
 
                 var treasureTilemapObject = transform.Find(treasureQuestTarget.TreasureTilemapName);
                 if (!treasureTilemapObject)
@@ -99,7 +99,7 @@ namespace HotlineHyrule.Quests
 
                 var randomIndex = new Random().Next(treasureSpots.Count);
                 var treasureSpot = treasureSpots.ElementAt(randomIndex);
-                Instantiate(treasureQuestTarget.treasureItem.itemPrefab, treasureSpot.ToWorld(), Quaternion.identity);
+                Instantiate(treasureQuestTarget.treasureItem.ItemPrefab, treasureSpot.ToWorld(), Quaternion.identity);
             }
         }
 

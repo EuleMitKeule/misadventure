@@ -60,7 +60,7 @@ namespace HotlineHyruleEditor.GameManager
 
             PrefabUtility.SaveAsPrefabAsset(droppedWeaponPrefab, $"{prefabPath}/weapon_{weaponName}_dropped.prefab");
 
-            weaponData.itemPrefab =
+            weaponData.ItemPrefab =
                 AssetDatabase.LoadAssetAtPath<GameObject>($"{prefabPath}/weapon_{weaponName}_dropped.prefab");
 
             Object.DestroyImmediate(droppedWeaponPrefab);

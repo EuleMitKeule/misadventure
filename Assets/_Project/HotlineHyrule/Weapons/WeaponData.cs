@@ -1,4 +1,6 @@
+using HotlineHyrule.Extensions;
 using HotlineHyrule.Items;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
@@ -37,5 +39,8 @@ namespace HotlineHyrule.Weapons
         /// The percentage amount the weapon charges are randomized.
         /// </summary>
         [Range(0f, 1f)] [SerializeField] public float chargeRandomness;
+
+        public override string ItemName => name.Replace("weapon_", "");
+        protected override bool IsItemNameReadOnly => true;
     }
 }

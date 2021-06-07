@@ -1,6 +1,8 @@
+using HotlineHyrule.Extensions;
 using HotlineHyrule.Level;
 using HotlineHyrule.Weapons;
 using HotlineHyrule.Weapons.Projectiles;
+using HotlineHyruleEditor.Extensions;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEditor;
@@ -10,52 +12,46 @@ namespace HotlineHyruleEditor.GameManager
 {
     public class WeaponDrawer : ScriptableObjectDrawer<WeaponData>
     {
+        public override string Path => WeaponBuilder.ParentPath;
+        protected override bool ShowSelected =>
+            CurrentTabState == TabState.Weapon && CurrentWeaponTabState == SubTabState.Settings;
+        
         [HideLabel]
         [EnumToggleButtons]
         [ShowInInspector]
-        [ShowIf("IsRanged")]
+        [ShowIf("@Selected is RangedWeaponData")]
         [TitleGroup("Tools/Main/Vertical/Settings")]
         TabState CurrentTabState { get; set; }
 
         [HideLabel]
         [EnumToggleButtons]
         [ShowInInspector]
-        [ShowIf("IsOnWeaponTab")]
+        [ShowIf("@CurrentTabState == TabState.Weapon && Selected != null")]
         [TitleGroup("Tools/Main/Vertical/Settings")]
-        WeaponTabState CurrentWeaponTabState { get; set; }
+        SubTabState CurrentWeaponTabState { get; set; }
 
         [HideLabel]
         [EnumToggleButtons]
         [ShowInInspector]
-        [ShowIf("IsOnProjectileTab")]
+        [ShowIf("@CurrentTabState == TabState.Projectile")]
         [TitleGroup("Tools/Main/Vertical/Settings")]
-        ProjectileTabState CurrentProjectileTabState { get; set; }
-
-        bool IsOnWeaponTab => CurrentTabState == TabState.Weapon;
-        bool IsOnProjectileTab => CurrentTabState == TabState.Projectile;
-
-        protected override bool ShowSelected => IsOnWeaponTab && CurrentWeaponTabState == WeaponTabState.Settings;
-        bool IsRanged => Selected is RangedWeaponData;
-
-        bool ShowWeaponPrefab => IsOnWeaponTab && WeaponPrefab && CurrentWeaponTabState == WeaponTabState.Prefab;
-        bool ShowProjectile => IsRanged && IsOnProjectileTab && ProjectileData && CurrentProjectileTabState == ProjectileTabState.Settings;
-        bool ShowProjectilePrefab => IsRanged && IsOnProjectileTab && ProjectilePrefab && CurrentProjectileTabState == ProjectileTabState.Prefab;
+        SubTabState CurrentProjectileTabState { get; set; }
 
         [ShowInInspector]
         [InlineEditor(InlineEditorObjectFieldModes.CompletelyHidden)]
-        [ShowIf("ShowWeaponPrefab")]
+        [ShowIf("@CurrentTabState == TabState.Weapon && CurrentWeaponTabState == SubTabState.Prefab")]
         [TitleGroup("Tools/Main/Vertical/Settings")]
         GameObject WeaponPrefab { get; set; }
 
         [ShowInInspector]
         [InlineEditor(InlineEditorObjectFieldModes.CompletelyHidden)]
-        [ShowIf("ShowProjectile")]
+        [ShowIf("@Selected is RangedWeaponData && CurrentTabState == TabState.Projectile && CurrentProjectileTabState == SubTabState.Settings")]
         [TitleGroup("Tools/Main/Vertical/Settings")]
         ProjectileData ProjectileData { get; set; }
 
         [ShowInInspector]
         [InlineEditor(InlineEditorObjectFieldModes.CompletelyHidden)]
-        [ShowIf("ShowProjectilePrefab")]
+        [ShowIf("@Selected is RangedWeaponData && CurrentTabState == TabState.Projectile && CurrentProjectileTabState == SubTabState.Prefab")]
         [TitleGroup("Tools/Main/Vertical/Settings")]
         GameObject ProjectilePrefab { get; set; }
 
@@ -74,57 +70,91 @@ namespace HotlineHyruleEditor.GameManager
         WeaponBuilder.WeaponType CurrentWeaponType { get; set; }
 
         [PropertySpace(5)]
-        [HideIf("IsNotRanged")]
+        [ShowIf("@CurrentWeaponType == WeaponBuilder.WeaponType.Ranged")]
         [HideLabel]
         [BoxGroup("Tools/Main/Vertical/Create")]
         [EnumToggleButtons]
         [ShowInInspector]
         WeaponBuilder.ProjectileType CurrentProjectileType { get; set; }
 
-        bool IsNotRanged => CurrentWeaponType != WeaponBuilder.WeaponType.Ranged;
-
-        public override string Path => WeaponBuilder.ParentPath;
-
-        [BoxGroup("Tools/Main/Weapon")]
+        [LabelText("Idle")]
+        [ShowIf("@CurrentTabState == TabState.Weapon && IdleAnimation != null")]
+        [BoxGroup("Tools/Main/Animation")]
         [PropertySpace(5, 5)]
         [PropertyOrder(2)]
         [Button]
-        void DoSomething()
-        {
+        void SelectWeaponIdleAnimation() => SelectAnimation(IdleAnimation);
+        AnimationClip IdleAnimation => Selected ? Selected.GetIdleAnimation() : null;
 
-        }
+        [LabelText("Attack")]
+        [ShowIf("@CurrentTabState == TabState.Weapon && AttackAnimation != null")]
+        [BoxGroup("Tools/Main/Animation")]
+        [PropertySpace(5, 5)]
+        [PropertyOrder(2)]
+        [Button]
+        void SelectWeaponAttackAnimation() => SelectAnimation(AttackAnimation);
+        AnimationClip AttackAnimation => Selected ? Selected.GetAttackAnimation() : null;
+
+        [LabelText("Impact")]
+        [ShowIf("@CurrentTabState == TabState.Weapon && ImpactAnimation != null")]
+        [BoxGroup("Tools/Main/Animation")]
+        [PropertySpace(5, 5)]
+        [PropertyOrder(2)]
+        [Button]
+        void SelectWeaponImpactAnimation() => SelectAnimation(ImpactAnimation);
+        AnimationClip ImpactAnimation => Selected ? Selected.GetImpactAnimation() : null;
+
+        [LabelText("Idle")]
+        [ShowIf("@CurrentTabState == TabState.Projectile && ProjectileIdleAnimation != null")]
+        [BoxGroup("Tools/Main/Animation")]
+        [PropertySpace(5, 5)]
+        [PropertyOrder(2)]
+        [Button]
+        void SelectProjectileIdleAnimation() => SelectAnimation(ProjectileIdleAnimation);
+        AnimationClip ProjectileIdleAnimation =>
+            Selected is RangedWeaponData rangedWeaponData ? rangedWeaponData.GetProjectileIdleAnimation() : null;
+
+        [LabelText("Attack")]
+        [ShowIf("@CurrentTabState == TabState.Projectile && ProjectileAttackAnimation != null")]
+        [BoxGroup("Tools/Main/Animation")]
+        [PropertySpace(5, 5)]
+        [PropertyOrder(2)]
+        [Button]
+        void SelectAttackAttackAnimation() => SelectAnimation(ProjectileAttackAnimation);
+        AnimationClip ProjectileAttackAnimation =>
+            Selected is RangedWeaponData rangedWeaponData ? rangedWeaponData.GetProjectileAttackAnimation() : null;
+
+        [LabelText("Impact")]
+        [ShowIf("@CurrentTabState == TabState.Projectile && ProjectileImpactAnimation != null")]
+        [BoxGroup("Tools/Main/Animation")]
+        [PropertySpace(5, 5)]
+        [PropertyOrder(2)]
+        [Button]
+        void SelectProjectileImpactAnimation() => SelectAnimation(ProjectileImpactAnimation);
+        AnimationClip ProjectileImpactAnimation =>
+            Selected is RangedWeaponData rangedWeaponData ? rangedWeaponData.GetProjectileImpactAnimation() : null;
+
+        [LabelText("Stop")]
+        [ShowIf("@CurrentTabState == TabState.Projectile && ProjectileStopAnimation != null")]
+        [BoxGroup("Tools/Main/Animation")]
+        [PropertySpace(5, 5)]
+        [PropertyOrder(2)]
+        [Button]
+        void SelectProjectileStopAnimation() => SelectAnimation(ProjectileStopAnimation);
+        AnimationClip ProjectileStopAnimation =>
+            Selected is RangedWeaponData rangedWeaponData ? rangedWeaponData.GetProjectileStopAnimation() : null;
 
         public override void CreateNew()
         {
-            var weaponData = WeaponBuilder.Create(NameForNew, CurrentWeaponType, CurrentWeaponOwnerType, CurrentProjectileType);
-
+            var weaponData =
+                WeaponBuilder.Create(NameForNew, CurrentWeaponType, CurrentWeaponOwnerType, CurrentProjectileType);
             SetSelected(weaponData);
         }
 
-        public void CreateNew(
-            string overrideName,
-            string overridePath,
-            WeaponBuilder.WeaponType weaponType,
-            WeaponBuilder.WeaponOwnerType weaponOwnerType,
-            WeaponBuilder.ProjectileType projectileType)
+        public override void CreateNew(string overrideName, string overridePath)
         {
-            if (overrideName == "") return;
-            if (overridePath == "") return;
-
-            var weaponData = WeaponBuilder.Create(overrideName, weaponType, weaponOwnerType, projectileType);
-
-            SetSelected(weaponData);
-        }
-
-        public override void CreateNew(
-            string overrideName,
-            string overridePath)
-        {
-            if (overrideName == "") return;
-            if (overridePath == "") return;
-
-            var weaponData = WeaponBuilder.Create(overrideName, CurrentWeaponType, CurrentWeaponOwnerType, CurrentProjectileType);
-
+            var weaponData =
+                WeaponBuilder.Create(overrideName, CurrentWeaponType, CurrentWeaponOwnerType, CurrentProjectileType);
             SetSelected(weaponData);
         }
 
@@ -132,9 +162,10 @@ namespace HotlineHyruleEditor.GameManager
         {
             if (!Selected) return;
 
-            var message = $"Are you sure you want to delete the Weapon \"{Selected.name}\"?\nThis will also delete all animations and prefabs.";
+            var message =
+                $"Are you sure you want to delete the Weapon \"{Selected.name}\"?\n" +
+                $"This will also delete all animations and prefabs.";
             var isSure = EditorUtility.DisplayDialog("Delete Weapon", message, "Yes", "Cancel");
-
             if (!isSure) return;
 
             WeaponBuilder.Delete(Selected);
@@ -153,65 +184,27 @@ namespace HotlineHyruleEditor.GameManager
             if (item is WeaponData weaponData)
             {
                 Selected = weaponData;
-                WeaponPrefab = GetWeaponPrefab();
+                WeaponPrefab = weaponData.GetPrefab();
             }
 
             if (item is RangedWeaponData rangedWeaponData)
             {
-                ProjectileData = GetProjectileData();
-                ProjectilePrefab = GetProjectilePrefab();
+                ProjectileData = rangedWeaponData.GetProjectile();
+                ProjectilePrefab = rangedWeaponData.GetProjectilePrefab();
+            }
+            else
+            {
+                CurrentTabState = TabState.Weapon;
             }
         }
 
-        ProjectileData GetProjectileData()
-        {
-            var projectileData = ScriptableObject.CreateInstance<ProjectileData>();
-
-            if (!Selected) return projectileData;
-
-            var weaponAssetPath = AssetDatabase.GetAssetPath(Selected);
-            var weaponFile = System.IO.Path.GetFileName(weaponAssetPath);
-            var weaponDirectory = System.IO.Path.GetDirectoryName(weaponAssetPath);
-            var projectileFile = weaponFile.Replace("weapon_", "projectile_");
-
-            var projectileDataPath = $"{weaponDirectory}/{projectileFile}";
-            projectileData = AssetDatabase.LoadAssetAtPath<ProjectileData>(projectileDataPath);
-
-            return projectileData;
-        }
-
-        GameObject GetWeaponPrefab()
-        {
-            if (!Selected) return null;
-
-            var weaponAssetPath = AssetDatabase.GetAssetPath(Selected);
-            var weaponFile = System.IO.Path.GetFileNameWithoutExtension(weaponAssetPath);
-            var weaponDirectory = System.IO.Path.GetDirectoryName(weaponAssetPath);
-
-            var weaponPrefabPath = $"{weaponDirectory}/{weaponFile}.prefab";
-
-            var weaponPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(weaponPrefabPath);
-
-            return weaponPrefab;
-        }
-
-        GameObject GetProjectilePrefab()
-        {
-            if (!Selected) return null;
-
-            var weaponAssetPath = AssetDatabase.GetAssetPath(Selected);
-            var weaponFile = System.IO.Path.GetFileNameWithoutExtension(weaponAssetPath);
-            var weaponDirectory = System.IO.Path.GetDirectoryName(weaponAssetPath);
-            var projectileFile = weaponFile.Replace("weapon_", "projectile_");
-
-            var projectilePrefabPath = $"{weaponDirectory}/{weaponFile}.prefab";
-
-            var weaponPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(projectilePrefabPath);
-
-            return weaponPrefab;
-        }
-
         public override void SetPath(string newPath) { }
+
+        static void SelectAnimation(AnimationClip animation)
+        {
+            Selection.activeObject = animation;
+            EditorApplication.ExecuteMenuItem("Window/Animation/Animation");
+        }
 
         enum TabState
         {
@@ -219,17 +212,10 @@ namespace HotlineHyruleEditor.GameManager
             Projectile,
         }
 
-        enum WeaponTabState
-        {
-            Settings,
-            Prefab,
-        }
-
-        enum ProjectileTabState
+        enum SubTabState
         {
             Settings,
             Prefab,
         }
     }
-
 }

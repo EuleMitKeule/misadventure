@@ -218,9 +218,9 @@ namespace HotlineHyrule.Weapons
         public void DropWeapon()
         {
             if (!rangedWeaponData.hasInfiniteCharges && WeaponCharges <= 0) return;
-            if (!rangedWeaponData.itemPrefab) return;
+            if (!rangedWeaponData.ItemPrefab) return;
 
-            var droppedWeaponObject = Instantiate(rangedWeaponData.itemPrefab, transform.position,
+            var droppedWeaponObject = Instantiate(rangedWeaponData.ItemPrefab, transform.position,
                 transform.rotation);
 
             var droppedWeaponComponent = droppedWeaponObject.GetComponent<DroppedWeaponComponent>();

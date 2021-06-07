@@ -147,11 +147,11 @@ namespace HotlineHyrule.Items
         /// </summary>
         public void DropWeapon()
         {
-            if (!CurrentLoadoutSlot.weaponData.itemPrefab) return;
+            if (!CurrentLoadoutSlot.weaponData.ItemPrefab) return;
             if (CurrentLoadoutSlot.weaponData == defaultWeapon) return;
             
             var droppedWeaponObject =
-                Instantiate(CurrentLoadoutSlot.weaponData.itemPrefab, transform.position, transform.rotation);
+                Instantiate(CurrentLoadoutSlot.weaponData.ItemPrefab, transform.position, transform.rotation);
             var droppedWeaponComponent = droppedWeaponObject.GetComponent<DroppedWeaponComponent>();
             if (droppedWeaponComponent) droppedWeaponComponent.weaponCharges = CurrentLoadoutSlot.weaponCharges;
         }
