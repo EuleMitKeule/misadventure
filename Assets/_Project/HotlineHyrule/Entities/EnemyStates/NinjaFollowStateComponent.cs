@@ -13,7 +13,6 @@ namespace HotlineHyrule.Entities.EnemyStates
         /// </summary>
         [SerializeField] float maxDistanceForUsingAttack2;
         [SerializeField] float maxDistanceForPerformingAttack2;
-        //[SerializeField] EnemyAttackMeleeStateComponent enemyAttackMeleeStateComponent;
         
         protected override void HandleStateRouting()
         {
@@ -23,19 +22,19 @@ namespace HotlineHyrule.Entities.EnemyStates
                 {
                     EnemyComponent.UsingAttack2 = false;
                     EnemyComponent.WeaponComponent.SetWeapon(attack1Weapon);
-                    EnemyComponent.ChangeState(EnemyComponent.AttackState);
+                    SetState<EnemyAttackStateComponent>();
                 }
                 else if (EnemyComponent.PlayerDistance <= maxDistanceForPerformingAttack2)
                 {
                     EnemyComponent.UsingAttack2 = true;
                     EnemyComponent.WeaponComponent.SetWeapon(attack2Weapon);
-                    EnemyComponent.ChangeState(EnemyComponent.AttackState);
+                    SetState<EnemyAttackStateComponent>();
                 }
             }
 
             if (!EnemyComponent.IsPlayerFollowable)
             {
-                EnemyComponent.ChangeState(EnemyComponent.SearchState);
+                SetState<EnemySearchStateComponent>();
             }
         }
     }

@@ -8,7 +8,7 @@ namespace HotlineHyrule.Entities.EnemyStates
         {
             if (Animator) Animator.SetTrigger(EnemyComponent.UsingAttack2 ? "attack2" : "attack");
             if (WeaponComponent) WeaponComponent.PerformAttack();
-            EnemyComponent.ChangeState(EnemyComponent.FollowState);
+            SetState<EnemyFollowStateComponent>();
             yield return null;
         }
     }
