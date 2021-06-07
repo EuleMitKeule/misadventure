@@ -41,6 +41,8 @@ namespace HotlineHyrule.UserInterface
                 return;
             }
 
+            if (!Locator.LevelComponent) return;
+
             Locator.LevelComponent.LevelFinished += OnLevelFinished;
             Locator.PlayerComponent.MovementStarted += OnMovementStarted;
 
@@ -109,7 +111,7 @@ namespace HotlineHyrule.UserInterface
 
         public void EnablePlayerMovement()
         {
-            if (Locator.PlayerComponent) Locator.PlayerComponent.SetState(Locator.PlayerComponent.IdleState);
+            if (Locator.PlayerComponent) Locator.PlayerComponent.EnableMovement();
         }
     }
 }

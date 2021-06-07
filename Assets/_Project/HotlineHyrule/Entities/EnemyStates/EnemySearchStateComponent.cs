@@ -46,18 +46,18 @@ namespace HotlineHyrule.Entities.EnemyStates
 
             if (EnemyComponent.IsPlayerAttackable)
             {
-                EnemyComponent.ChangeState(EnemyComponent.AttackState);
+                SetState<EnemyAttackStateComponent>();
             }
 
             if (EnemyComponent.IsPlayerFollowable)
             {
-                EnemyComponent.ChangeState(EnemyComponent.FollowState);
+                SetState<EnemyFollowStateComponent>();
             }
         }
 
         void OnDestinationReached(object sender, EventArgs e)
         {
-            EnemyComponent.ChangeState(EnemyComponent.TurnAroundState);
+            SetState<EnemyTurnAroundStateComponent>();
         }
 
         public override void OnHealthChanged(object sender, HealthEventArgs e)

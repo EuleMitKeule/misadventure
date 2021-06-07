@@ -43,8 +43,8 @@ namespace HotlineHyrule.Level
 
             if (mainCamera)
             {
-                if (levelData.isRaining) Instantiate(rainEffectPrefab, mainCamera.transform);
-                if (levelData.isSnowing) Instantiate(snowEffectPrefab, mainCamera.transform);
+                if (levelData.IsRaining) Instantiate(rainEffectPrefab, mainCamera.transform);
+                if (levelData.IsSnowing) Instantiate(snowEffectPrefab, mainCamera.transform);
             }
 
             DefaultControls.map_default.action_finish.performed += OnButtonFinish;

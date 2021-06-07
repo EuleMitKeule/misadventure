@@ -23,12 +23,12 @@ namespace HotlineHyrule.Entities.EnemyStates
         {
             if (EnemyComponent.IsPlayerAttackable)
             {
-                EnemyComponent.ChangeState(EnemyComponent.AttackState);
+                SetState<EnemyAttackStateComponent>();
             }
 
             if (!EnemyComponent.IsPlayerFollowable)
             {
-                EnemyComponent.ChangeState(EnemyComponent.SearchState);
+                SetState<EnemySearchStateComponent>();
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HotlineHyrule.Entities.EnemyStates;
 using HotlineHyrule.Extensions;
 using HotlineHyrule.Items;
@@ -182,15 +183,9 @@ namespace HotlineHyrule.Entities
         Collider2D Collider { get; set; }
         Animator Animator { get; set; }
         HealthComponent HealthComponent { get; set; }
+        public WeaponComponent WeaponComponent { get; set; }
 
-        public EnemyBaseStateComponent PatrolState { get; private set; }
-        public EnemyBaseStateComponent GuardState { get; private set; }
-        public EnemyBaseStateComponent SearchState { get; private set; }
-        public EnemyBaseStateComponent TurnAroundState { get; private set; }
-        public EnemyBaseStateComponent AttackState { get; private set; }
-        public EnemyBaseStateComponent FollowState { get; private set; }
-        public EnemyBaseStateComponent DyingState { get; private set; }
-        public WeaponComponent WeaponComponent;
+        List<EnemyBaseStateComponent> States { get; set; }
 
         void Awake()
         {
@@ -198,13 +193,7 @@ namespace HotlineHyrule.Entities
             Collider = GetComponent<Collider2D>();
             Animator = GetComponent<Animator>();
             HealthComponent = GetComponent<HealthComponent>();
-            PatrolState = GetComponent<EnemyPatrolStateComponent>();
-            GuardState = GetComponent<EnemyGuardStateComponent>();
-            SearchState = GetComponent<EnemySearchStateComponent>();
-            TurnAroundState = GetComponent<EnemyTurnAroundStateComponent>();
-            AttackState = GetComponent<EnemyAttackStateComponent>();
-            FollowState = GetComponent<EnemyFollowStateComponent>();
-            DyingState = GetComponent<EnemyDyingStateComponent>();
+            States = GetComponents<EnemyBaseStateComponent>().ToList();
 
             WeaponComponent = GetComponent<WeaponComponent>();
 
@@ -213,8 +202,9 @@ namespace HotlineHyrule.Entities
 
         void Start()
         {
-            var passiveState = PatrolState ? PatrolState : GuardState;
-            ChangeState(passiveState);
+            var hasPatrol = (bool)GetComponent<EnemyPatrolStateComponent>();
+            if (hasPatrol) SetState<EnemyPatrolStateComponent>();
+            else SetState<EnemyGuardStateComponent>();
         }
 
         void FixedUpdate()
@@ -233,24 +223,27 @@ namespace HotlineHyrule.Entities
 #endif
         }
 
-        /// <summary>
-        /// Changes the enemy's state. Also exits the current one and sets up the new one
-        /// </summary>
-        /// <param name="newState">The new state the enemy shall get</param>
-        public void ChangeState(EnemyBaseStateComponent newState)
-        {
-            if (!newState) return;
-            if (state && newState.priority < state.priority) return;
-            if (state) state.ExitState();
+        public void SetState<TStateType>() where TStateType : EnemyBaseStateComponent => SetState(typeof(TStateType));
 
-            state = newState;
+        public void SetState(Type stateType)
+        {
+            if (!stateType.IsSubclassOf(typeof(EnemyBaseStateComponent))) return;
+
+            var nextState = States.Find(e => e.GetType() == stateType || e.GetType().IsSubclassOf(stateType));
+            if (!nextState) return;
+
+            if (state)
+            {
+                state.ExitState();
+                state.ChangeRequested -= OnChangeRequested;
+            }
+
+            state = nextState;
+            state.ChangeRequested += OnChangeRequested;
             state.EnterState();
         }
 
-        public void ChangeStateToFollow()
-        {
-            ChangeState(FollowState);
-        }
+        void OnChangeRequested(Type stateType) => SetState(stateType);
 
         public void SetVelocity(Vector2 velocity)
         {
@@ -273,7 +266,7 @@ namespace HotlineHyrule.Entities
 
             if (e.IsKilled)
             {
-                ChangeState(DyingState);
+                SetState<EnemyDyingStateComponent>();
 
                 foreach (var item in itemDrops)
                 {

@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using HotlineHyrule.Entities.EnemyStates;
 using HotlineHyrule.Items;
 using HotlineHyrule.Weapons;
 using UnityEngine;
@@ -6,6 +10,13 @@ namespace HotlineHyrule.Entities.PlayerStates
 {
     public class PlayerBaseStateComponent : MonoBehaviour
     {
+        public event Action<Type> ChangeRequested;
+        protected void SetState<TStateType>() where TStateType : PlayerBaseStateComponent =>
+            ChangeRequested?.Invoke(typeof(TStateType));
+        protected void SetState(Type stateType) =>
+            ChangeRequested?.Invoke(stateType);
+
+        protected List<EnemyBaseStateComponent> States { get; private set; }
         protected Rigidbody2D Rigidbody { get; private set; }
         protected PlayerComponent PlayerComponent { get; private set; }
         protected WeaponComponent WeaponComponent { get; private set; }
@@ -15,6 +26,7 @@ namespace HotlineHyrule.Entities.PlayerStates
 
         protected virtual void Awake()
         {
+            States = GetComponents<EnemyBaseStateComponent>().ToList();
             Rigidbody = GetComponent<Rigidbody2D>();
             PlayerComponent = GetComponent<PlayerComponent>();
             WeaponComponent = GetComponent<WeaponComponent>();

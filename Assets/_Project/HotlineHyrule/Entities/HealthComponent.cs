@@ -19,8 +19,9 @@ namespace HotlineHyrule.Entities
         /// The amount of health the entity spawns with.
         /// </summary>
         [SerializeField] public int startHealth;
-        
+
         int _health;
+
         /// <summary>
         /// The amount of health the entity currently has; clamped to [0, maxHealth].
         /// </summary>
@@ -53,7 +54,7 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// Resets health to the start value, clamped to [0, maxHealth].
         /// </summary>
-        void ResetHealth() => Health = startHealth;
+        public void ResetHealth() => Health = startHealth;
 
         public void Consume(HealthItemData healthItem)
         {
