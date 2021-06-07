@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HotlineHyrule.Entities.EnemyStates;
 using HotlineHyrule.Extensions;
 using HotlineHyrule.Items;
+using HotlineHyrule.Weapons;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -49,6 +50,11 @@ namespace HotlineHyrule.Entities
         /// Range in which the enemy will attack.
         /// </summary>
         [SerializeField] float attackRange;
+        /// <summary>
+        /// Whether a second attack shall be used.
+        /// If enabled, Animation for 'attacking2' will be played instead of 'attacking'
+        /// </summary>
+        public bool UsingAttack2;
 
         /// <summary>
         /// Particle system prefab to spawn when taking damage.
@@ -129,6 +135,11 @@ namespace HotlineHyrule.Entities
         }
 
         /// <summary>
+        /// Get 2D distance towards Player
+        /// </summary>
+        public float PlayerDistance => Vector2.Distance(transform.position, Locator.PlayerComponent.transform.position);
+
+        /// <summary>
         /// Whether the enemy has a wall to its left.
         /// </summary>
         public bool IsWallLeft =>
@@ -179,6 +190,7 @@ namespace HotlineHyrule.Entities
         public EnemyBaseStateComponent AttackState { get; private set; }
         public EnemyBaseStateComponent FollowState { get; private set; }
         public EnemyBaseStateComponent DyingState { get; private set; }
+        public WeaponComponent WeaponComponent;
 
         void Awake()
         {
@@ -193,6 +205,8 @@ namespace HotlineHyrule.Entities
             AttackState = GetComponent<EnemyAttackStateComponent>();
             FollowState = GetComponent<EnemyFollowStateComponent>();
             DyingState = GetComponent<EnemyDyingStateComponent>();
+
+            WeaponComponent = GetComponent<WeaponComponent>();
 
             HealthComponent.HealthChanged += OnHealthChanged;
         }
@@ -231,6 +245,11 @@ namespace HotlineHyrule.Entities
 
             state = newState;
             state.EnterState();
+        }
+
+        public void ChangeStateToFollow()
+        {
+            ChangeState(FollowState);
         }
 
         public void SetVelocity(Vector2 velocity)
