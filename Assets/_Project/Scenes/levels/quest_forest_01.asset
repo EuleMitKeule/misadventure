@@ -27,7 +27,28 @@ MonoBehaviour:
         HotlineHyrule]], mscorlib
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|HotlineHyrule.Quests.KillQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
+    - Name: shortTargetText
+      Entry: 1
+      Data: Kill {x} gnomes
+    - Name: targetReachedText
+      Entry: 1
+      Data: We killed the gnomes.
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We didn't do something.
+    - Name: killTarget
+      Entry: 3
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -35,7 +56,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   finishLevelOnCompletion: 0
-  questText: 
-  questTargetText: 
+  questText: There are gnomes.
+  questTargetText: Kill the gnomes!
   questRewards: []
   questRewardCount: 0
