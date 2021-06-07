@@ -1,0 +1,76 @@
+using System;
+using HotlineHyrule.Items;
+using HotlineHyrule.Weapons;
+using HotlineHyruleEditor.Extensions;
+using UnityEditor;
+using UnityEngine;
+
+namespace HotlineHyruleEditor
+{
+    public static class ItemBuilder
+    {
+        public static string Path => "Assets/_Project/Prefabs/Items";
+
+        public static ItemData CreateItem(string itemName, string path, Type itemType, bool createPrefab)
+        {
+            if (!IsValidItemType(itemType)) return null;
+
+            var fullItemName = $"item_{itemName}";
+            var itemTypeName = itemType.Name.Replace("ItemData", "");
+            var itemPath = $"{Path}/{itemTypeName}";
+            var itemDataPath = $"{Path}/{itemTypeName}/{fullItemName}.asset";
+            var itemPrefabPath = $"{Path}/{itemTypeName}/{fullItemName}.prefab";
+
+            var itemData = (ItemData)ScriptableObject.CreateInstance(itemType);
+            AssetDatabase.CreateAsset(itemData, itemDataPath);
+
+            if (createPrefab)
+            {
+                var itemPrefab = new GameObject(fullItemName);
+                itemPrefab.layer = LayerMask.NameToLayer("item");
+
+                var spriteRenderer = itemPrefab.AddComponent<SpriteRenderer>();
+                spriteRenderer.sortingLayerName = "item";
+
+                var circleCollider = itemPrefab.AddComponent<CircleCollider2D>();
+                circleCollider.isTrigger = true;
+
+                var itemComponent = itemPrefab.AddComponent<ItemComponent>();
+                itemComponent.itemDatas.Add(itemData);
+
+                PrefabUtility.SaveAsPrefabAsset(itemPrefab, itemPath);
+
+                itemPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(itemPrefabPath);
+
+                itemData.ItemPrefab = itemPrefab;
+            }
+
+            AssetDatabase.SaveAssets();
+
+            return itemData;
+        }
+
+        public static void RenameItem(ItemData itemData, string newName)
+        {
+            var itemPath = AssetDatabase.GetAssetPath(itemData);
+            var itemPrefabPath = itemData.GetPrefabPath();
+            AssetDatabase.RenameAsset(itemPrefabPath, $"item_{newName}");
+            AssetDatabase.RenameAsset(itemPath, $"item_{newName}");
+            AssetDatabase.SaveAssets();
+        }
+
+        public static void DeleteItem(ItemData itemData)
+        {
+            var itemPath = AssetDatabase.GetAssetPath(itemData);
+            var itemPrefabPath = itemData.GetPrefabPath();
+            AssetDatabase.DeleteAsset(itemPath);
+            AssetDatabase.DeleteAsset(itemPrefabPath);
+            AssetDatabase.SaveAssets();
+        }
+
+        static bool IsValidItemType(Type itemType) =>
+            !itemType.IsAbstract &&
+            itemType.IsSubclassOf(typeof(ItemData)) &&
+            !itemType.IsSubclassOf(typeof(WeaponData));
+    }
+}

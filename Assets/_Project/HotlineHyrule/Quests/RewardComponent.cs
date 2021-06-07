@@ -32,7 +32,7 @@ namespace HotlineHyrule.Quests
                 if (!rewardTilemap.HasTile(cellPosition)) continue;
 
                 if (chestTile) rewardTilemap.SetTile(cellPosition, chestTile);
-                Instantiate(Rewards[i].itemPrefab, cellPosition.ToWorld(), Quaternion.identity);
+                Instantiate(Rewards[i].ItemPrefab, cellPosition.ToWorld(), Quaternion.identity);
 
                 i += 1;
                 if (i == 2) break;

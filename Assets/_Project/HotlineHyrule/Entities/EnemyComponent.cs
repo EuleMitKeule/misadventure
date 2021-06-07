@@ -272,7 +272,7 @@ namespace HotlineHyrule.Entities
                 {
                     if (Random.value <= item.dropRate)
                     {
-                        Instantiate(item.data.itemPrefab, transform.position, Quaternion.identity);
+                        Instantiate(item.data.ItemPrefab, transform.position, Quaternion.identity);
                     }
                 }
 

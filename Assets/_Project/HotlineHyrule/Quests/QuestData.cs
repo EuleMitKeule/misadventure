@@ -11,32 +11,31 @@ namespace HotlineHyrule.Quests
     [HideMonoScript]
     public class QuestData : SerializedScriptableObject
     {
-        [TitleGroup("Settings")]
-        [BoxGroup("Settings/General")]
+        [BoxGroup("General")]
         [ShowInInspector]
         [LabelText("Auto Complete")]
         public bool finishLevelOnCompletion;
-        [BoxGroup("Settings/General")]
+        [BoxGroup("General")]
         [TextArea]
         [ShowInInspector]
         [LabelText("Intro Text")]
         public string questText;
-        [BoxGroup("Settings/General")]
+        [BoxGroup("General")]
         [TextArea]
         [ShowInInspector]
         [LabelText("Additional Intro Text")]
         public string questTargetText;
-        [BoxGroup("Settings/General")]
+        [BoxGroup("General")]
         [ShowInInspector]
         [OdinSerialize]
         [NonSerialized]
         [ListDrawerSettings(ListElementLabelName = "shortTargetText", Expanded = true)]
         public List<QuestTarget> questTargets = new List<QuestTarget>();
-        [BoxGroup("Settings/Rewards")]
+        [BoxGroup("Rewards")]
         [ShowInInspector]
         public List<ItemData> questRewards;
         [LabelText("How Many")]
-        [BoxGroup("Settings/Rewards")]
+        [BoxGroup("Rewards")]
         [Range(0, 2)]
         [ShowInInspector]
         public int questRewardCount;
