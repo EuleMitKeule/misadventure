@@ -12,13 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
   m_Name: weapon_spear
   m_EditorClassIdentifier: 
-  itemName: 
-  itemPrefab: {fileID: 0}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 87149508903852376, guid: fc9e959bdcc8aea47a2ee8bd41d78e0f, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: spear
+    - Name: ItemPrefab
+      Entry: 10
+      Data: 0
   movementFactor: 1
   slowTimeWindow: 0
   attackRate: 1
   weaponPrefab: {fileID: 5105910019921273631, guid: 7c40c8da16d6edb4fb09483fde587857, type: 3}
-  droppedWeaponPrefab: {fileID: 87149508903852376, guid: fc9e959bdcc8aea47a2ee8bd41d78e0f, type: 3}
   hasInfiniteCharges: 0
   weaponCharges: 10
   chargeRandomness: 0
@@ -30,3 +43,4 @@ MonoBehaviour:
   projectileAngle: 0
   projectileAngleOffset: 0
   projectileDelay: 0
+  flip: 0

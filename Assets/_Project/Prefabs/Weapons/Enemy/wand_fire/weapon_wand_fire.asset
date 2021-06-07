@@ -12,13 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
   m_Name: weapon_wand_fire
   m_EditorClassIdentifier: 
-  itemName: 
-  itemPrefab: {fileID: 3193329723167763181, guid: 30d0b6835fd42164f8a4210bf196a0e7, type: 3}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 87149508903852376, guid: d06348ec007e6064db5cc6810d2ec1e5, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: wand_fire
+    - Name: ItemPrefab
+      Entry: 10
+      Data: 0
   movementFactor: 1
   slowTimeWindow: 0
   attackRate: 0.8
   weaponPrefab: {fileID: 3193329723167763181, guid: 30d0b6835fd42164f8a4210bf196a0e7, type: 3}
-  droppedWeaponPrefab: {fileID: 87149508903852376, guid: d06348ec007e6064db5cc6810d2ec1e5, type: 3}
   hasInfiniteCharges: 0
   weaponCharges: 0
   chargeRandomness: 0
@@ -30,3 +43,4 @@ MonoBehaviour:
   projectileAngle: 0
   projectileAngleOffset: 0
   projectileDelay: 0
+  flip: 0
