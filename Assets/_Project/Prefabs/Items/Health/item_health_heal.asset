@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 911c969171484f789dcdca5ca6dc5fb1, type: 3}
-  m_Name: item_health_poison
+  m_Name: item_health_heal
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 6310304692703711339, guid: 14108b6a809a8314cb12e4c65de48942, type: 3}
+    - {fileID: 9085038711784390681, guid: b730e36813bcc4c4aa151dc56d20ec51, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -24,11 +24,11 @@ MonoBehaviour:
     SerializationNodes:
     - Name: ItemName
       Entry: 1
-      Data: health_poison
+      Data: health_heal
     - Name: ItemPrefab
       Entry: 10
       Data: 0
   consumeParticleSystemPrefab: {fileID: 0}
-  healTotal: -75
-  healAmount: -10
-  healRate: 1
+  healTotal: 50
+  healAmount: 0
+  healRate: 0

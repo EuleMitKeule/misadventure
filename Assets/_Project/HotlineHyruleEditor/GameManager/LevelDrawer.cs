@@ -41,17 +41,12 @@ namespace HotlineHyruleEditor.GameManager
         public override void CreateNew()
         {
             var levelData = LevelBuilder.CreateLevel(NameForNew, CurrentPath);
-
             SetSelected(levelData);
         }
 
         public override void CreateNew(string overrideName, string overridePath)
         {
-            if (overrideName == "") return;
-            if (overridePath == "") return;
-
             var levelData = LevelBuilder.CreateLevel(overrideName, overridePath);
-
             SetSelected(levelData);
         }
 

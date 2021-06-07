@@ -25,13 +25,11 @@ namespace HotlineHyruleEditor.GameManager
         TabState CurrentTabState { get; set; }
         int CurrentEnumIndex { get; set; }
 
-        public ScriptableObjectDrawer<ItemData> ItemDrawer { get; private set; }
+        public ItemDrawer ItemDrawer { get; private set; }
         public WeaponDrawer WeaponDrawer { get; private set; }
         public LevelDrawer LevelDrawer { get; private set; }
         public ScriptableObjectDrawer<QuestData> QuestDrawer { get; private set; }
         public LevelOrQuestDrawer LevelOrQuestDrawer { get; private set; }
-
-        string itemPath = "Assets/_Project/Prefabs/Items";
 
         object Selected => MenuTree?.Selection?.SelectedValue;
 
@@ -45,13 +43,12 @@ namespace HotlineHyruleEditor.GameManager
 
         protected override void Initialize()
         {
-            ItemDrawer = new ScriptableObjectDrawer<ItemData>();
+            ItemDrawer = new ItemDrawer();
             WeaponDrawer = new WeaponDrawer();
             LevelDrawer = new LevelDrawer();
             QuestDrawer = new ScriptableObjectDrawer<QuestData>();
             LevelOrQuestDrawer = new LevelOrQuestDrawer(this);
 
-            ItemDrawer.SetPath(itemPath);
             QuestDrawer.SetPath(LevelBuilder.ParentPath);
 
             OnSelectionChanged(SelectionChangedType.SelectionCleared);
@@ -194,7 +191,7 @@ namespace HotlineHyruleEditor.GameManager
                     tree.AddAllAssetsAtPath("Weapons/Player", $"{WeaponBuilder.ParentPath}/Player", typeof(WeaponData), true, true);
                     break;
                 case TabState.Items:
-                    tree.AddAllAssetsAtPath("Items", itemPath, typeof(ItemData));
+                    tree.AddAllAssetsAtPath("Items", ItemBuilder.Path, typeof(ItemData), true);
                     break;
             }
 

@@ -9,7 +9,7 @@ namespace HotlineHyrule.Weapons
     /// <summary>
     /// Determines the properties of a weapon.
     /// </summary>
-    public class WeaponData : ItemData
+    public abstract class WeaponData : ItemData
     {
         /// <summary>
         /// Multiplies the player's movement speed.
