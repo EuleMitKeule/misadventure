@@ -13,10 +13,11 @@ namespace HotlineHyruleEditor.Extensions
         public static GameObject GetPrefab(this WeaponData weaponData) =>
             AssetDatabase.LoadAssetAtPath<GameObject>(weaponData.GetPrefabPath());
 
-        public static AnimationClip GetIdleAnimation(this WeaponData weaponData)
-        {
-            return AssetDatabase.LoadAssetAtPath<AnimationClip>(weaponData.GetIdleAnimationPath());
-        }
+        public static GameObject GetDroppedPrefab(this WeaponData weaponData) =>
+            AssetDatabase.LoadAssetAtPath<GameObject>(weaponData.GetDroppedPrefabPath());
+
+        public static AnimationClip GetIdleAnimation(this WeaponData weaponData) =>
+            AssetDatabase.LoadAssetAtPath<AnimationClip>(weaponData.GetIdleAnimationPath());
 
         public static AnimationClip GetAttackAnimation(this WeaponData weaponData) =>
             AssetDatabase.LoadAssetAtPath<AnimationClip>(weaponData.GetAttackAnimationPath());
@@ -26,6 +27,9 @@ namespace HotlineHyruleEditor.Extensions
 
         public static string GetPrefabPath(this WeaponData weaponData) =>
             weaponData.GetPath().Replace(".asset", ".prefab");
+
+        public static string GetDroppedPrefabPath(this WeaponData weaponData) =>
+            weaponData.GetPath().Replace(".asset", "_dropped.prefab");
 
         public static string GetAnimationPath(this WeaponData weaponData) =>
             $"{WeaponBuilder.AnimationParentPath}/{weaponData.GetWeaponOwnerTypeName()}/{weaponData.ItemName}";

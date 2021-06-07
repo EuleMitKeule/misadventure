@@ -1,10 +1,7 @@
-using HotlineHyrule.Extensions;
-using HotlineHyrule.Level;
 using HotlineHyrule.Weapons;
 using HotlineHyrule.Weapons.Projectiles;
 using HotlineHyruleEditor.Extensions;
 using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,7 +12,7 @@ namespace HotlineHyruleEditor.GameManager
         public override string Path => WeaponBuilder.ParentPath;
         protected override bool ShowSelected =>
             CurrentTabState == TabState.Weapon && CurrentWeaponTabState == SubTabState.Settings;
-        
+
         [HideLabel]
         [EnumToggleButtons]
         [ShowInInspector]
@@ -54,6 +51,12 @@ namespace HotlineHyruleEditor.GameManager
         [ShowIf("@Selected is RangedWeaponData && CurrentTabState == TabState.Projectile && CurrentProjectileTabState == SubTabState.Prefab")]
         [TitleGroup("Tools/Main/Vertical/Settings")]
         GameObject ProjectilePrefab { get; set; }
+
+        [ShowInInspector]
+        [InlineEditor(InlineEditorObjectFieldModes.CompletelyHidden)]
+        [ShowIf("@CurrentTabState == TabState.Dropped")]
+        [TitleGroup("Tools/Main/Vertical/Settings")]
+        GameObject DroppedPrefab { get; set; }
 
         [PropertySpace(5)]
         [HideLabel]
@@ -185,6 +188,7 @@ namespace HotlineHyruleEditor.GameManager
             {
                 Selected = weaponData;
                 WeaponPrefab = weaponData.GetPrefab();
+                DroppedPrefab = weaponData.GetDroppedPrefab();
             }
 
             if (item is RangedWeaponData rangedWeaponData)
@@ -210,6 +214,7 @@ namespace HotlineHyruleEditor.GameManager
         {
             Weapon,
             Projectile,
+            Dropped,
         }
 
         enum SubTabState
