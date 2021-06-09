@@ -58,26 +58,26 @@ namespace HotlineHyrule.Entities
 
         public void Consume(HealthItemData healthItem)
         {
-            if (healthItem.healRate == 0)
+            if (healthItem.HealRate == 0)
             {
-                Health += healthItem.healTotal;
+                Health += healthItem.HealTotal;
                 return;
             }
 
-            if (healthItem.healAmount == 0) return;
-            if (Mathf.Sign(healthItem.healTotal) - Mathf.Sign(healthItem.healAmount) > float.Epsilon) return;
+            if (healthItem.HealAmount == 0) return;
+            if (Mathf.Sign(healthItem.HealTotal) - Mathf.Sign(healthItem.HealAmount) > float.Epsilon) return;
             StartCoroutine(HealRoutine(healthItem));
         }
 
         IEnumerator HealRoutine(HealthItemData healthItem)
         {
-            var healTotal = healthItem.healTotal;
+            var healTotal = healthItem.HealTotal;
 
-            while (Mathf.Abs(healTotal) >= Mathf.Abs(healthItem.healAmount))
+            while (Mathf.Abs(healTotal) >= Mathf.Abs(healthItem.HealAmount))
             {
-                healTotal -= healthItem.healAmount;
-                Health += healthItem.healAmount;
-                yield return new WaitForSeconds(1 / healthItem.healRate);
+                healTotal -= healthItem.HealAmount;
+                Health += healthItem.HealAmount;
+                yield return new WaitForSeconds(1 / healthItem.HealRate);
             }
         }
     }

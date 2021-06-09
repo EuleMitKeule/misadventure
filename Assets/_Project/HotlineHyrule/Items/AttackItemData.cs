@@ -8,7 +8,7 @@ namespace HotlineHyrule.Items
         /// <summary>
         /// Multiplies the absolute damage the weapon deals.
         /// </summary>
-        [SerializeField] public float damageFactor;
+        [SerializeField] public float damageFactor { get; set; }
         /// <summary>
         /// Adds to the absolute damage the weapon deals.
         /// </summary>

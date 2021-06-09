@@ -149,8 +149,8 @@ namespace HotlineHyrule.Items
         /// <param name="consumableItemData"></param>
         void SpawnParticleSystem(ConsumableItemData consumableItemData)
         {
-            if (!consumableItemData.consumeParticleSystemPrefab) return;
-            Instantiate(consumableItemData.consumeParticleSystemPrefab, transform);
+            if (!consumableItemData.ConsumeParticleSystemPrefab) return;
+            Instantiate(consumableItemData.ConsumeParticleSystemPrefab, transform);
         }
     }
 }

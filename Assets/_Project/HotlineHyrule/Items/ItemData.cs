@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace HotlineHyrule.Items
 {
+    [HideMonoScript]
     public class ItemData : SerializedScriptableObject
     {
         /// <summary>
@@ -13,13 +14,15 @@ namespace HotlineHyrule.Items
         [OdinSerialize]
         [DisableIf("IsItemNameReadOnly")]
         [PropertyOrder(-1)]
+        [BoxGroup("General")]
         public virtual string ItemName { get; set; }
-        protected virtual bool IsItemNameReadOnly => false;
         /// <summary>
         /// The prefab to spawn when dropping the item.
         /// </summary>
         [OdinSerialize]
         [PropertyOrder(-1)]
+        [BoxGroup("General")]
         public GameObject ItemPrefab { get; set; }
+        protected virtual bool IsItemNameReadOnly => false;
     }
 }
