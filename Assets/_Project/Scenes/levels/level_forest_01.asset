@@ -17,3 +17,4 @@ MonoBehaviour:
   areaFinishedText: We exited the clearing.
   questData: {fileID: 11400000, guid: b7405a6f603df0347ac408e783ecc6fd, type: 2}
   playerSpawnPosition: {x: -5, y: -15, z: 0}
+  bgmData: {fileID: 11400000, guid: 950e16e6ce8971344b5110535d6d2a9a, type: 2}

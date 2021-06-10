@@ -60,5 +60,9 @@ namespace HotlineHyrule.Level
             Snow = 1 << 2,
             All = Rain | Snow,
         }
+
+        [BoxGroup("Background Music")]
+        [ShowInInspector]
+        public BGMData bgmData;
     }
 }
