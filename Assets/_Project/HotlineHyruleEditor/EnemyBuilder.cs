@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,6 +12,12 @@ namespace HotlineHyruleEditor
 
         public static GameObject Create(string enemyName)
         {
+            if (enemyName == null || !Regex.IsMatch(enemyName, @"^([a-z])+(_([a-z])+)*$"))
+            { 
+                Debug.LogError("Enemy name is invalid. Use only lower-case letters and underscores.");
+                return null;
+            }
+
             var enemyBase = AssetDatabase.LoadAssetAtPath<GameObject>($"{Path}/enemy_base.prefab");
             if (!enemyBase) return null;
 
@@ -63,6 +70,12 @@ namespace HotlineHyruleEditor
 
         public static GameObject Rename(GameObject enemy, string newName)
         {
+            if (newName == null || !Regex.IsMatch(newName, @"^([a-z])+(_([a-z])+)*$"))
+            { 
+                Debug.LogError("Enemy name is invalid. Use only lower-case letters and underscores.");
+                return null;
+            }
+            
             var path = AssetDatabase.GetAssetPath(enemy);
             var oldName = enemy.name;
             
