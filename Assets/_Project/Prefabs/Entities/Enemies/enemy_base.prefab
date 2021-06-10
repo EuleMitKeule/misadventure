@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: -3355742661877872154}
   - component: {fileID: 3844134658638800442}
   m_Layer: 7
-  m_Name: enemy_humanoid_base
+  m_Name: enemy_base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7492512237567023215}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3210816406309924212}
@@ -223,6 +223,7 @@ MonoBehaviour:
   followAngle: 60
   followRange: 15
   attackRange: 10
+  UsingAttack2: 0
   damageParticleSystemPrefab: {fileID: 2442639310212140477, guid: bbd2f2170baf96d41814258f53875278, type: 3}
 --- !u!114 &1769910642343352168
 MonoBehaviour:
@@ -298,7 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9707e266f6264292819d956467c27736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 0
   moveSpeed: 2
 --- !u!114 &5802242549573311712
 MonoBehaviour:
@@ -312,7 +312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e65cf9dbb2042308c29f3011d8b6329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 0
 --- !u!114 &794638678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,7 +324,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a57a558fec24d06a03243a0a1ed5f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 0
   moveSpeed: 3
 --- !u!114 &3469506423157028055
 MonoBehaviour:
@@ -339,7 +337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd9d1fec35b7acb46b3150a040910f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 0
   moveSpeed: 3
 --- !u!114 &-3355742661877872154
 MonoBehaviour:
@@ -353,7 +350,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 006b1793f05aab24da0080795e5111d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 0
 --- !u!114 &3844134658638800442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,5 +362,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b04d054b1a4293b45bdeb499daf89d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 0
   turnDelay: 1
