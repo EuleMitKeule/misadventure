@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HotlineHyrule;
 using HotlineHyrule.Items;
 using HotlineHyrule.Level;
 using HotlineHyrule.Quests;
@@ -30,6 +31,7 @@ namespace HotlineHyruleEditor.GameManager
         public LevelDrawer LevelDrawer { get; private set; }
         public ScriptableObjectDrawer<QuestData> QuestDrawer { get; private set; }
         public LevelOrQuestDrawer LevelOrQuestDrawer { get; private set; }
+        public EnemyDrawer EnemyDrawer { get; private set; }
 
         object Selected => MenuTree?.Selection?.SelectedValue;
 
@@ -48,6 +50,7 @@ namespace HotlineHyruleEditor.GameManager
             LevelDrawer = new LevelDrawer();
             QuestDrawer = new ScriptableObjectDrawer<QuestData>();
             LevelOrQuestDrawer = new LevelOrQuestDrawer(this);
+            EnemyDrawer = new EnemyDrawer();
 
             QuestDrawer.SetPath(LevelBuilder.ParentPath);
 
@@ -109,6 +112,9 @@ namespace HotlineHyruleEditor.GameManager
                 case TabState.Items:
                     ItemDrawer.SetSelected(Selected);
                     break;
+                case TabState.Enemies:
+                    EnemyDrawer.SetSelected(Selected);
+                    break;
             }
         }
 
@@ -116,9 +122,6 @@ namespace HotlineHyruleEditor.GameManager
         {
             switch (CurrentTabState)
             {
-                case TabState.Enemies:
-                    DrawEditor(CurrentEnumIndex);
-                    break;
                 case TabState.Sound:
                     DrawEditor(CurrentEnumIndex);
                     break;
@@ -135,7 +138,7 @@ namespace HotlineHyruleEditor.GameManager
             else if (Selected is QuestData) targets.Add(QuestDrawer);
             else targets.Add(LevelOrQuestDrawer);
 
-            targets.Add(null);
+            targets.Add(EnemyDrawer);
             targets.Add(WeaponDrawer);
             targets.Add(ItemDrawer);
             targets.Add(null);
@@ -185,6 +188,7 @@ namespace HotlineHyruleEditor.GameManager
 
                     break;
                 case TabState.Enemies:
+                    tree.AddAllAssetsAtPath("Enemies", EnemyBuilder.Path, typeof(GameObject), true);
                     break;
                 case TabState.Weapons:
                     tree.AddAllAssetsAtPath("Weapons/Enemy", $"{WeaponBuilder.ParentPath}/Enemy", typeof(WeaponData), true, true);

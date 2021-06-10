@@ -50,6 +50,12 @@ namespace HotlineHyruleEditor.GameManager
             SetSelected(levelData);
         }
 
+        public override void RenameSelected()
+        {
+            var level = LevelBuilder.Rename(Selected, RenameName);
+            SetSelected(level);
+        }
+
         public override void DeleteSelected()
         {
             if (!Selected) return;

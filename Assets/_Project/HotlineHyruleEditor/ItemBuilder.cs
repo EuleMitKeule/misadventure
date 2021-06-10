@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using HotlineHyrule.Items;
 using HotlineHyrule.Weapons;
 using HotlineHyruleEditor.Extensions;
@@ -13,6 +14,12 @@ namespace HotlineHyruleEditor
 
         public static ItemData CreateItem(string itemName, string path, Type itemType, bool createPrefab)
         {
+            if (itemName == null || !Regex.IsMatch(itemName, @"^([a-z])+(_([a-z])+)*$"))
+            { 
+                Debug.LogError("Item name is invalid. Use only lower-case letters and underscores.");
+                return null;
+            }
+
             if (!IsValidItemType(itemType)) return null;
 
             var fullItemName = $"item_{itemName}";
@@ -52,6 +59,12 @@ namespace HotlineHyruleEditor
 
         public static void RenameItem(ItemData itemData, string newName)
         {
+            if (newName == null || !Regex.IsMatch(newName, @"^([a-z])+(_([a-z])+)*$"))
+            { 
+                Debug.LogError("Item name is invalid. Use only lower-case letters and underscores.");
+                return;
+            }
+
             var itemPath = AssetDatabase.GetAssetPath(itemData);
             var itemPrefabPath = itemData.GetPrefabPath();
             AssetDatabase.RenameAsset(itemPrefabPath, $"item_{newName}");
