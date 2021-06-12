@@ -12,56 +12,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72112766fd8a400786090afb9f205301, type: 3}
   m_Name: quest_forest_01
   m_EditorClassIdentifier: 
-  questText: This area of the forest had a bunch of gnomes gathered around a big
-    treasure.
-  questTargetText: We decided to kill them all and steal their prized posessions.
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: questTargets
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[HotlineHyrule.Quests.QuestTarget,
+        HotlineHyrule]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|HotlineHyrule.Quests.KillQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
+    - Name: shortTargetText
+      Entry: 1
+      Data: Kill {x} gnomes
+    - Name: targetReachedText
+      Entry: 1
+      Data: We killed the gnomes.
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We didn't do something.
+    - Name: killTarget
+      Entry: 3
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   finishLevelOnCompletion: 0
-  questTargets:
-  - id: 0
-  - id: 1
-  - id: 2
-  - id: 3
-  questRewards:
-  - {fileID: 11400000, guid: f58cd77d387f2b34090679534b827f5d, type: 2}
-  - {fileID: 11400000, guid: c8b0562d0fc150a429d13edc73d10d01, type: 2}
-  - {fileID: 11400000, guid: 8e6235a6a9707b24abf126b02b98aba5, type: 2}
-  questRewardCount: 2
-  references:
-    version: 1
-    00000000:
-      type: {class: KillQuestTarget, ns: HotlineHyrule.Quests, asm: HotlineHyrule}
-      data:
-        isRequired: 0
-        targetReachedText: We killed each and every enemy.
-        targetNotReachedText: We couldn't kill all of them.
-        shortTargetText: Kill {x} enemies
-        killTarget: 7
-    00000001:
-      type: {class: TreasureQuestTarget, ns: HotlineHyrule.Quests, asm: HotlineHyrule}
-      data:
-        isRequired: 1
-        targetReachedText: 'We found the legendary diamond.
-
-          But it was
-          too heavy to carry.'
-        targetNotReachedText: 
-        shortTargetText: Find and collect the treasure
-        treasureItem: {fileID: 11400000, guid: 3892f96f76b10fd42920f24c8d3dafcf, type: 2}
-        treasureTilemapName: tilemap_treasure
-    00000002:
-      type: {class: UseWeaponQuestTarget, ns: HotlineHyrule.Quests, asm: HotlineHyrule}
-      data:
-        isRequired: 0
-        targetReachedText: We used a pine cone.
-        targetNotReachedText: We couldn't use a pine cone.
-        shortTargetText: Throw back a pine cone
-        weapon: {fileID: 11400000, guid: 0dc7175a284f8ac4e9c83ba8cc220be6, type: 2}
-    00000003:
-      type: {class: KillSpecificQuestTarget, ns: HotlineHyrule.Quests, asm: HotlineHyrule}
-      data:
-        isRequired: 0
-        targetReachedText: We killed 5 gnomes.
-        targetNotReachedText: We spared the gnomes.
-        shortTargetText: Kill {x} gnomes
-        killTarget: 5
-        enemyName: forest_gnome
+  questText: There are gnomes.
+  questTargetText: Kill the gnomes!
+  questRewards: []
+  questRewardCount: 0

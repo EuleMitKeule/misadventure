@@ -12,11 +12,6 @@ namespace HotlineHyrule.Level
     [RequireComponent(typeof(Grid))]
     public class LevelComponent : MonoBehaviour
     {
-        /// <summary>
-        /// The cell position the player respawns at.
-        /// </summary>
-        [Header("General")]
-        [SerializeField] public Vector2Int playerRespawnPosition;
         [SerializeField] public LevelData levelData;
         /// <summary>
         /// The prefab of the rain effect.
@@ -43,8 +38,8 @@ namespace HotlineHyrule.Level
 
             if (mainCamera)
             {
-                if (levelData.isRaining) Instantiate(rainEffectPrefab, mainCamera.transform);
-                if (levelData.isSnowing) Instantiate(snowEffectPrefab, mainCamera.transform);
+                if (levelData.IsRaining) Instantiate(rainEffectPrefab, mainCamera.transform);
+                if (levelData.IsSnowing) Instantiate(snowEffectPrefab, mainCamera.transform);
             }
 
             DefaultControls.map_default.action_finish.performed += OnButtonFinish;
@@ -57,6 +52,7 @@ namespace HotlineHyrule.Level
             if (e.IsMenu) return;
 
             Locator.PlayerComponent.transform.position = e.LevelData.playerSpawnPosition.ToWorld();
+            Locator.SoundComponent.PlayBGM(e.LevelData.bgmData);
         }
 
         public void FinishLevel()

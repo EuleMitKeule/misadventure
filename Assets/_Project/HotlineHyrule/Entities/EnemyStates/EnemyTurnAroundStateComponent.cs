@@ -28,17 +28,14 @@ namespace HotlineHyrule.Entities.EnemyStates
             base.FixedUpdateState();
             
             EnemyComponent.SetVelocity(Vector2.zero);
-            
-            if (EnemyComponent.IsPlayerAttackable) EnemyComponent.ChangeState(EnemyComponent.AttackState);
-            if (EnemyComponent.IsPlayerFollowable) EnemyComponent.ChangeState(EnemyComponent.FollowState);
+
+            if (EnemyComponent.IsPlayerAttackable) SetState<EnemyAttackStateComponent>();
+            if (EnemyComponent.IsPlayerFollowable) SetState<EnemyFollowStateComponent>();
         }
 
         void StartTurnAroundRoutine()
         {
-            var passiveState = EnemyComponent.PatrolState
-                ? EnemyComponent.PatrolState
-                : EnemyComponent.GuardState;
-            if (TurnAroundCoroutine != null) EnemyComponent.ChangeState(passiveState);
+            if (TurnAroundCoroutine != null) SetState(PassiveState);
 
             TurnAroundCoroutine ??= StartCoroutine(TurnAroundRoutine());
         }
@@ -58,10 +55,7 @@ namespace HotlineHyrule.Entities.EnemyStates
             transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z + 90f);
 
             TurnAroundCoroutine = null;
-            var passiveState = EnemyComponent.PatrolState
-                ? EnemyComponent.PatrolState
-                : EnemyComponent.GuardState;
-            EnemyComponent.ChangeState(passiveState);
+            SetState(PassiveState);
         }
 
         void StopTurnAroundCoroutine()

@@ -34,14 +34,11 @@ namespace HotlineHyrule.Entities.EnemyStates
 
                 if (EnemyComponent.IsPlayerFollowable)
                 {
-                    EnemyComponent.ChangeState(EnemyComponent.FollowState);
+                    SetState<EnemyFollowStateComponent>();
                 }
                 else
                 {
-                    var passiveState = EnemyComponent.PatrolState
-                        ? EnemyComponent.PatrolState
-                        : EnemyComponent.GuardState;
-                    EnemyComponent.ChangeState(EnemyComponent.SearchState ? EnemyComponent.SearchState : passiveState);
+                    SetState(AfterAttackState);
                 }
             }
         }
@@ -56,13 +53,13 @@ namespace HotlineHyrule.Entities.EnemyStates
             AttackCoroutine = null;
         }
 
-        IEnumerator AttackRoutine()
+         protected virtual IEnumerator AttackRoutine()
         {
             while (true)
             {
                 if (WeaponComponent.CanAttack)
                 {
-                    if (Animator) Animator.SetTrigger("attack");
+                    if (Animator) Animator.SetTrigger(EnemyComponent.UsingAttack2 ? "attack2" : "attack");
                     if (WeaponComponent) WeaponComponent.PerformAttack();   
                 }
 

@@ -28,9 +28,11 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         [SerializeField] public AudioClip weaponFiredSound;
 
-        [SerializeField] public int projectileCount;
+        [Header("Number of projectiles")]
+        [SerializeField] public int projectileCount = 1;
         [SerializeField] public float projectileAngle;
         [SerializeField] public float projectileAngleOffset;
         [SerializeField] public float projectileDelay;
+        [SerializeField] public bool flip;
     }
 }

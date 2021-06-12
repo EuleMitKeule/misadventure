@@ -17,7 +17,7 @@ TagManager:
   - wall
   - item
   - enemyProjectile
-  - 
+  - boss
   - 
   - enemyHitbox
   - mapBorders

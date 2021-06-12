@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa9c66f5507aae42903e8a7d0dbadac, type: 3}
+  m_Name: schlager_bgm_data
+  m_EditorClassIdentifier: 
+  introAudioClip: {fileID: 8300000, guid: 05c86aeb2fba3f2418809977af1af5a3, type: 3}
+  loopAudioClip: {fileID: 8300000, guid: 1251ab6f08d349b4fbfb3c2b36c92d92, type: 3}

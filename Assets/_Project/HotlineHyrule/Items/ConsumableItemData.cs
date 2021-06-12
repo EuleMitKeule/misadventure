@@ -1,12 +1,20 @@
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 
 namespace HotlineHyrule.Items
 {
-    public class ConsumableItemData : ItemData
+    public abstract class ConsumableItemData : ItemData
     {
         /// <summary>
         /// The particle system to spawn when the item is consumed.
         /// </summary>
-        [SerializeField] public GameObject consumeParticleSystemPrefab;
+        [BoxGroup("General")]
+        [LabelText("Consume Particle Effect")]
+        [OdinSerialize]
+        public GameObject ConsumeParticleSystemPrefab { get; private set; }
+
+        public override string ItemName => name.Replace("item_", "");
+        protected override bool IsItemNameReadOnly => true;
     }
 }

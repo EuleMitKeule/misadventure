@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace HotlineHyruleEditor
 {
-    [CustomEditor(typeof(QuestData))]
+    // [CustomEditor(typeof(QuestData))]
     public class QuestDataEditor : Editor
     {
         Type[] QuestTargetTypes { get; set; }

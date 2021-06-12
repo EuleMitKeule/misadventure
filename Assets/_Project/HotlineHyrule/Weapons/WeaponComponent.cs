@@ -101,15 +101,15 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// The currently equipped ranged weapon.
         /// </summary>
-        public RangedWeaponData RangedWeaponData => (RangedWeaponData)weaponData;
+        public RangedWeaponData RangedWeaponData => weaponData as RangedWeaponData;
         /// <summary>
         /// The currently equipped melee weapon.
         /// </summary>
-        MeleeWeaponData MeleeWeaponData => (MeleeWeaponData)weaponData;
+        MeleeWeaponData MeleeWeaponData => weaponData as MeleeWeaponData;
         /// <summary>
         /// The currently equipped conjuring weapon.
         /// </summary>
-        ConjuringWeaponData ConjuringWeaponData => (ConjuringWeaponData) weaponData;
+        ConjuringWeaponData ConjuringWeaponData => weaponData as ConjuringWeaponData;
 
         /// <summary>
         /// The weapon object's current world position
@@ -258,6 +258,7 @@ namespace HotlineHyrule.Weapons
             for (var i = 0; i < projectileCount; i++)
             {
                 var angle = startAngle + i * angleDifference;
+                if (RangedWeaponData.flip) angle *= -1f;
                 var absoluteAngle = WeaponTransform.eulerAngles.z + angle;
                 var direction = Vector3.up.RotateAroundZ(absoluteAngle);
             

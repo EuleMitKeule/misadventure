@@ -1,17 +1,28 @@
 using System;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 
 namespace HotlineHyrule.Items
 {
-    public class ItemData : ScriptableObject
+    [HideMonoScript]
+    public class ItemData : SerializedScriptableObject
     {
         /// <summary>
         /// The name of the item.
         /// </summary>
-        [SerializeField] public string itemName;
+        [OdinSerialize]
+        [DisableIf("IsItemNameReadOnly")]
+        [PropertyOrder(-1)]
+        [BoxGroup("General")]
+        public virtual string ItemName { get; set; }
         /// <summary>
         /// The prefab to spawn when dropping the item.
         /// </summary>
-        [SerializeField] public GameObject itemPrefab;
+        [OdinSerialize]
+        [PropertyOrder(-1)]
+        [BoxGroup("General")]
+        public GameObject ItemPrefab { get; set; }
+        protected virtual bool IsItemNameReadOnly => false;
     }
 }

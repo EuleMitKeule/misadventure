@@ -16,14 +16,19 @@ namespace HotlineHyrule.Entities.EnemyStates
             EnemyComponent.SetVelocity(EnemyComponent.PlayerDirection * moveSpeed);
             transform.rotation = EnemyComponent.FollowRotation;
 
+            HandleStateRouting();
+        }
+
+        protected virtual void HandleStateRouting()
+        {
             if (EnemyComponent.IsPlayerAttackable)
             {
-                EnemyComponent.ChangeState(EnemyComponent.AttackState);
+                SetState<EnemyAttackStateComponent>();
             }
 
             if (!EnemyComponent.IsPlayerFollowable)
             {
-                EnemyComponent.ChangeState(EnemyComponent.SearchState);
+                SetState<EnemySearchStateComponent>();
             }
         }
     }

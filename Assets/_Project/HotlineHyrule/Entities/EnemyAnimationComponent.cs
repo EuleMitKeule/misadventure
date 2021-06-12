@@ -1,4 +1,5 @@
 using System;
+using HotlineHyrule.Entities.EnemyStates;
 using UnityEngine;
 
 namespace HotlineHyrule.Entities
@@ -10,10 +11,22 @@ namespace HotlineHyrule.Entities
         /// </summary>
         [SerializeField] GameObject deathParticleSystemPrefab;
 
+        EnemyComponent EnemyComponent { get; set; }
+
+        void Awake()
+        {
+            EnemyComponent = GetComponent<EnemyComponent>();
+        }
+
         public void SpawnDeathParticleSystem()
         {
             if (!deathParticleSystemPrefab) return;
             Instantiate(deathParticleSystemPrefab, transform.position, Quaternion.identity);
+        }
+
+        public void SetStateToFollow()
+        {
+            EnemyComponent.SetState<EnemyFollowStateComponent>();
         }
 
         public void Destroy() => Destroy(gameObject);
