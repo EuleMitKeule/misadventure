@@ -1,43 +1,61 @@
 fileFormatVersion: 2
-guid: c5fa8adc8bf3e69418cb35b9db348720
+guid: c48ef7455419c2e4c9806fb30677e823
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2278032616566424324
-    second: sprite_tileset_forest_details_0
+      213: 5778434490907924032
+    second: sprite_tileset_branches_0
   - first:
-      213: -8022535364625018086
-    second: sprite_tileset_forest_details_1
+      213: -6544119745891905436
+    second: sprite_tileset_branches_1
   - first:
-      213: 2088494887572087151
-    second: sprite_tileset_forest_details_2
+      213: -7119096601722796336
+    second: sprite_tileset_branches_2
   - first:
-      213: -3334739161026809706
-    second: sprite_tileset_forest_details_3
+      213: -4837099012401841844
+    second: sprite_tileset_branches_3
   - first:
-      213: 5685272098397783129
-    second: sprite_tileset_forest_details_4
+      213: -4555247942301517925
+    second: sprite_tileset_branches_4
   - first:
-      213: 9198639016749682942
-    second: sprite_tileset_forest_details_5
+      213: 8049596813730096443
+    second: sprite_tileset_branches_5
   - first:
-      213: -1194131575479234661
-    second: sprite_tileset_forest_details_6
+      213: 6699517204988629775
+    second: sprite_tileset_branches_6
   - first:
-      213: -7694892459522351488
-    second: sprite_tileset_forest_details_7
+      213: 8718302816253992122
+    second: sprite_tileset_branches_7
   - first:
-      213: 3239675392637630234
-    second: sprite_tileset_forest_details_8
+      213: 1662577242283116340
+    second: sprite_tileset_branches_8
   - first:
-      213: 5170480368500242025
-    second: sprite_tileset_forest_details_9
+      213: -6377001287797668102
+    second: sprite_tileset_branches_9
   - first:
-      213: -8889587140267187284
-    second: sprite_tileset_forest_details_10
+      213: 9185799912886133315
+    second: sprite_tileset_branches_10
   - first:
-      213: -2736244993883376956
-    second: sprite_tileset_forest_details_11
+      213: -6950573759206425539
+    second: sprite_tileset_branches_11
+  - first:
+      213: 1159827784003762880
+    second: sprite_tileset_branches_12
+  - first:
+      213: 5823832659062375816
+    second: sprite_tileset_branches_13
+  - first:
+      213: 6835187462432782945
+    second: sprite_tileset_branches_14
+  - first:
+      213: -5813799522189572995
+    second: sprite_tileset_branches_15
+  - first:
+      213: 7425125926178365822
+    second: sprite_tileset_branches_16
+  - first:
+      213: 1613863072043938095
+    second: sprite_tileset_branches_17
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -127,7 +145,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_tileset_forest_details_0
+      name: sprite_tileset_branches_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfcfdce976dc260e0800000000000000
-      internalID: -2278032616566424324
+      spriteID: 0469e64dd8f113050800000000000000
+      internalID: 5778434490907924032
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_forest_details_1
+      name: sprite_tileset_branches_1
       rect:
         serializedVersion: 2
         x: 16
@@ -162,14 +180,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a135481579a3aa090800000000000000
-      internalID: -8022535364625018086
+      spriteID: 4605e7a63cd9e25a0800000000000000
+      internalID: -6544119745891905436
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_forest_details_2
+      name: sprite_tileset_branches_2
       rect:
         serializedVersion: 2
         x: 32
@@ -183,14 +201,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6124f0f803dbfc10800000000000000
-      internalID: 2088494887572087151
+      spriteID: 0d64f9cfb53e33d90800000000000000
+      internalID: -7119096601722796336
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_forest_details_3
+      name: sprite_tileset_branches_3
       rect:
         serializedVersion: 2
         x: 48
@@ -204,14 +222,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 690b968b660a8b1d0800000000000000
-      internalID: -3334739161026809706
+      spriteID: c493566831c2fdcb0800000000000000
+      internalID: -4837099012401841844
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_forest_details_4
+      name: sprite_tileset_branches_4
       rect:
         serializedVersion: 2
         x: 64
@@ -225,14 +243,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95480740ad426ee40800000000000000
-      internalID: 5685272098397783129
+      spriteID: b97f947912288c0c0800000000000000
+      internalID: -4555247942301517925
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_forest_details_5
+      name: sprite_tileset_branches_5
       rect:
         serializedVersion: 2
         x: 80
@@ -246,14 +264,77 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef0d962037128af70800000000000000
-      internalID: 9198639016749682942
+      spriteID: b35af7b47a9e5bf60800000000000000
+      internalID: 8049596813730096443
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_forest_details_6
+      name: sprite_tileset_branches_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0317f1076779fc50800000000000000
+      internalID: 6699517204988629775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_branches_7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abc5b174832adf870800000000000000
+      internalID: 8718302816253992122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_branches_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4370fe17139a21710800000000000000
+      internalID: 1662577242283116340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_branches_9
       rect:
         serializedVersion: 2
         x: 0
@@ -267,14 +348,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9f8b7ca8a79d6fe0800000000000000
-      internalID: -1194131575479234661
+      spriteID: af68c949d175087a0800000000000000
+      internalID: -6377001287797668102
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_forest_details_7
+      name: sprite_tileset_branches_10
       rect:
         serializedVersion: 2
         x: 16
@@ -288,14 +369,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08e965dc310463590800000000000000
-      internalID: -7694892459522351488
+      spriteID: 34264613a548a7f70800000000000000
+      internalID: 9185799912886133315
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_forest_details_8
+      name: sprite_tileset_branches_11
       rect:
         serializedVersion: 2
         x: 32
@@ -309,14 +390,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a177db5ea93a5fc20800000000000000
-      internalID: 3239675392637630234
+      spriteID: d3c7951edf99a8f90800000000000000
+      internalID: -6950573759206425539
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_forest_details_9
+      name: sprite_tileset_branches_12
       rect:
         serializedVersion: 2
         x: 48
@@ -330,14 +411,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9667692308c31c740800000000000000
-      internalID: 5170480368500242025
+      spriteID: 0ca3c2a7939881010800000000000000
+      internalID: 1159827784003762880
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_forest_details_10
+      name: sprite_tileset_branches_13
       rect:
         serializedVersion: 2
         x: 64
@@ -351,14 +432,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca36e705897d1a480800000000000000
-      internalID: -8889587140267187284
+      spriteID: 8854bba82f862d050800000000000000
+      internalID: 5823832659062375816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_forest_details_11
+      name: sprite_tileset_branches_14
       rect:
         serializedVersion: 2
         x: 80
@@ -372,8 +453,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c2f321eca7e60ad0800000000000000
-      internalID: -2736244993883376956
+      spriteID: 16a728f58c67bde50800000000000000
+      internalID: 6835187462432782945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_branches_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d740e8c232c315fa0800000000000000
+      internalID: -5813799522189572995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_branches_16
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e71a76a90b85b0760800000000000000
+      internalID: 7425125926178365822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_branches_17
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f21bc45d9e7956610800000000000000
+      internalID: 1613863072043938095
       vertices: []
       indices: 
       edges: []
