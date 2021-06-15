@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 582235959}
   - component: {fileID: 582235958}
   - component: {fileID: 582235957}
+  - component: {fileID: 582235960}
   m_Layer: 12
   m_Name: sprite_boss_caterpillar_head
   m_TagString: Untagged
@@ -226,6 +227,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &582235960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582235956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605c0e77ae88bb9428603f7a4e190712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathParticleSystemPrefab: {fileID: 32106695664497314, guid: 55aef061e5074ee4089868d4090f134f, type: 3}
 --- !u!1001 &652317640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -303,6 +317,7 @@ GameObject:
   - component: {fileID: 924146236}
   - component: {fileID: 924146235}
   - component: {fileID: 924146234}
+  - component: {fileID: 924146237}
   m_Layer: 12
   m_Name: sprite_boss_caterpillar_tail
   m_TagString: Untagged
@@ -395,6 +410,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &924146237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924146233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605c0e77ae88bb9428603f7a4e190712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathParticleSystemPrefab: {fileID: 32106695664497314, guid: 55aef061e5074ee4089868d4090f134f, type: 3}
 --- !u!1 &1260782156
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,6 +434,7 @@ GameObject:
   - component: {fileID: 1260782159}
   - component: {fileID: 1260782158}
   - component: {fileID: 1260782157}
+  - component: {fileID: 1260782160}
   m_Layer: 12
   m_Name: sprite_boss_caterpillar_bodyPart
   m_TagString: Untagged
@@ -498,6 +527,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1260782160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260782156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605c0e77ae88bb9428603f7a4e190712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathParticleSystemPrefab: {fileID: 32106695664497314, guid: 55aef061e5074ee4089868d4090f134f, type: 3}
 --- !u!1 &1536798300
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,7 +822,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3333334, y: 1}
+    m_SensorSize: {x: 1.8289902, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
