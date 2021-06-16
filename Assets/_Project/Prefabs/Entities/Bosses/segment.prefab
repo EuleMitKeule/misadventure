@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 870712003
   m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7cbe649ca2c8a364c85ef4c004f7bff8, type: 3}
+  m_Sprite: {fileID: 8429535207700591306, guid: b908ae2692d0429acaee7504b472942e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,17 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c2e79984638d742afee183baf02759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeDistance: 0.5
-  segmentDistance: 1
-  headRotationDamping: 0.5
-  headMovementThreshold: 0.05
-  wallCheckDistance: 3
-  wallMask:
-    serializedVersion: 2
-    m_Bits: 512
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!70 &4389308800319511192
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

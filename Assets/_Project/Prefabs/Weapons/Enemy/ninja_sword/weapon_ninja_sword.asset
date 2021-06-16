@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72112766fd8a400786090afb9f205301, type: 3}
-  m_Name: quest_forest_penis
+  m_Script: {fileID: 11500000, guid: a99539d74b6f4c01b5d13551d1511721, type: 3}
+  m_Name: weapon_ninja_sword
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -21,21 +21,17 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: questTargets
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[HotlineHyrule.Quests.QuestTarget,
-        HotlineHyrule]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
+    - Name: ItemName
+      Entry: 1
+      Data: ninja_sword
+    - Name: ItemPrefab
+      Entry: 6
       Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-  finishLevelOnCompletion: 0
-  questText: 
-  questTargetText: 
-  questRewards: []
-  questRewardCount: 0
+  movementFactor: 1
+  slowTimeWindow: 0
+  attackRate: 1
+  weaponPrefab: {fileID: 3193329723167763181, guid: ae41976a544ea200e85020a80c900487, type: 3}
+  hasInfiniteCharges: 1
+  weaponCharges: 0
+  chargeRandomness: 0
+  damage: 20
