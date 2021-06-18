@@ -268,16 +268,33 @@ namespace HotlineHyrule.Entities
             {
                 SetState<EnemyDyingStateComponent>();
 
-                foreach (var item in itemDrops)
-                {
-                    if (Random.value <= item.dropRate)
-                    {
-                        Instantiate(item.data.ItemPrefab, transform.position, Quaternion.identity);
-                    }
-                }
+                DropItems();
 
                 var entityEventArgs = new EntityEventArgs(gameObject);
                 EnemyKilled?.Invoke(this, entityEventArgs);
+            }
+        }
+
+        void DropItems()
+        {
+            foreach (var item in itemDrops)
+            {
+                if (Random.value <= item.dropRate)
+                {
+                    var itemObject = Instantiate(item.data.ItemPrefab, transform.position, Quaternion.identity);
+                    var droppedWeaponComponent = itemObject.GetComponent<DroppedWeaponComponent>();
+                    var itemComponent = itemObject.GetComponent<ItemComponent>();
+
+                    var weaponData = itemComponent.itemDatas.OfType<WeaponData>().First();
+
+                    if (droppedWeaponComponent)
+                    {
+                        var chargeOffsetFactor =
+                            Random.Range(-weaponData.chargeRandomness, weaponData.chargeRandomness);
+                        droppedWeaponComponent.weaponCharges = weaponData.weaponCharges +
+                                                               (int)(weaponData.weaponCharges * chargeOffsetFactor);
+                    }
+                }
             }
         }
 
