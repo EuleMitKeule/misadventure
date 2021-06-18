@@ -285,15 +285,15 @@ namespace HotlineHyrule.Entities
                     var droppedWeaponComponent = itemObject.GetComponent<DroppedWeaponComponent>();
                     var itemComponent = itemObject.GetComponent<ItemComponent>();
 
-                    var weaponData = itemComponent.itemDatas.OfType<WeaponData>().First();
+                    var weaponData = item.data as WeaponData;
 
-                    if (droppedWeaponComponent)
-                    {
-                        var chargeOffsetFactor =
-                            Random.Range(-weaponData.chargeRandomness, weaponData.chargeRandomness);
-                        droppedWeaponComponent.weaponCharges = weaponData.weaponCharges +
-                                                               (int)(weaponData.weaponCharges * chargeOffsetFactor);
-                    }
+                    if (!weaponData) continue;
+                    if (!droppedWeaponComponent) continue;
+
+                    var chargeOffsetFactor =
+                        Random.Range(-weaponData.chargeRandomness, weaponData.chargeRandomness);
+                    droppedWeaponComponent.weaponCharges = weaponData.weaponCharges +
+                                                           (int)(weaponData.weaponCharges * chargeOffsetFactor);
                 }
             }
         }
