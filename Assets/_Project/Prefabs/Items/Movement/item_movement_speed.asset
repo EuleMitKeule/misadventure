@@ -12,6 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ad5137f3f4b46c498aa7eb3e9cce369, type: 3}
   m_Name: item_movement_speed
   m_EditorClassIdentifier: 
-  itemName: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 7874610359674098274, guid: fc9ef7abdc252dd4bbde1b0999f71009, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: movement_speed
+    - Name: ItemPrefab
+      Entry: 10
+      Data: 0
+    - Name: ConsumeParticleSystemPrefab
+      Entry: 6
+      Data: 
   movementFactor: 3
   duration: 10

@@ -19,8 +19,9 @@ namespace HotlineHyrule.Entities
         /// The amount of health the entity spawns with.
         /// </summary>
         [SerializeField] public int startHealth;
-        
+
         int _health;
+
         /// <summary>
         /// The amount of health the entity currently has; clamped to [0, maxHealth].
         /// </summary>
@@ -53,30 +54,30 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// Resets health to the start value, clamped to [0, maxHealth].
         /// </summary>
-        void ResetHealth() => Health = startHealth;
+        public void ResetHealth() => Health = startHealth;
 
         public void Consume(HealthItemData healthItem)
         {
-            if (healthItem.healRate == 0)
+            if (healthItem.HealRate == 0)
             {
-                Health += healthItem.healTotal;
+                Health += healthItem.HealTotal;
                 return;
             }
 
-            if (healthItem.healAmount == 0) return;
-            if (Mathf.Sign(healthItem.healTotal) - Mathf.Sign(healthItem.healAmount) > float.Epsilon) return;
+            if (healthItem.HealAmount == 0) return;
+            if (Mathf.Sign(healthItem.HealTotal) - Mathf.Sign(healthItem.HealAmount) > float.Epsilon) return;
             StartCoroutine(HealRoutine(healthItem));
         }
 
         IEnumerator HealRoutine(HealthItemData healthItem)
         {
-            var healTotal = healthItem.healTotal;
+            var healTotal = healthItem.HealTotal;
 
-            while (Mathf.Abs(healTotal) >= Mathf.Abs(healthItem.healAmount))
+            while (Mathf.Abs(healTotal) >= Mathf.Abs(healthItem.HealAmount))
             {
-                healTotal -= healthItem.healAmount;
-                Health += healthItem.healAmount;
-                yield return new WaitForSeconds(1 / healthItem.healRate);
+                healTotal -= healthItem.HealAmount;
+                Health += healthItem.HealAmount;
+                yield return new WaitForSeconds(1 / healthItem.HealRate);
             }
         }
     }

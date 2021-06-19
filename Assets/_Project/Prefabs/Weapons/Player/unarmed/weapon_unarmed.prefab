@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6325796044115875505}
   - component: {fileID: 6325796044115875504}
   - component: {fileID: 9005154244242490432}
+  - component: {fileID: -2359381898267220737}
   m_Layer: 6
   m_Name: weapon_unarmed
   m_TagString: Untagged
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 631342383
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: -1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -130,3 +131,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.75}
   m_EdgeRadius: 0
+--- !u!114 &-2359381898267220737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6325796044115875506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 167a99ff0d764d3abe13ff37a84a789c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

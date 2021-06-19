@@ -81,7 +81,7 @@ namespace HotlineHyrule.Items
         /// Applies the item's effects and destroys the item object.
         /// </summary>
         /// <param name="itemComponent"></param>
-        void ConsumeItem(ItemComponent itemComponent)
+        public void ConsumeItem(ItemComponent itemComponent)
         {
             var items = itemComponent.itemDatas;
 
@@ -117,13 +117,40 @@ namespace HotlineHyrule.Items
         }
 
         /// <summary>
+        /// Applies the item effect.
+        /// </summary>
+        /// <param name="itemData"></param>
+        public void ConsumeItem(ConsumableItemData itemData)
+        {
+            SpawnParticleSystem(itemData);
+
+            switch (itemData)
+            {
+                case HealthItemData healthItemData:
+                    if (!HealthComponent) return;
+                    HealthComponent.Consume(healthItemData);
+                    break;
+                case AttackItemData attackItemData:
+                    if (!WeaponComponent) return;
+                    WeaponComponent.Consume(attackItemData);
+                    break;
+                case MovementItemData movementItemData:
+                    if (MovementComponent == null) return;
+                    MovementComponent.Consume(movementItemData);
+                    break;
+            }
+
+            ItemConsumed?.Invoke(this, new ItemEventArgs(itemData));
+        }
+
+        /// <summary>
         /// Spawns the item's particle systems.
         /// </summary>
         /// <param name="consumableItemData"></param>
         void SpawnParticleSystem(ConsumableItemData consumableItemData)
         {
-            if (!consumableItemData.consumeParticleSystemPrefab) return;
-            Instantiate(consumableItemData.consumeParticleSystemPrefab, transform);
+            if (!consumableItemData.ConsumeParticleSystemPrefab) return;
+            Instantiate(consumableItemData.ConsumeParticleSystemPrefab, transform);
         }
     }
 }

@@ -33,7 +33,7 @@ namespace HotlineHyrule.UserInterface
 
             QuestData = e.LevelData.questData;
             Locator.QuestComponent.QuestTargetReached += OnQuestTargetReached;
-            Locator.QuestComponent.QuestTargetChanged += OnQuestTargetChanged;
+            Locator.QuestComponent.KillQuestTargetChanged += OnKillQuestTargetChanged;
 
             TargetToTargetObject = new Dictionary<QuestTarget, GameObject>();
 
@@ -47,19 +47,19 @@ namespace HotlineHyrule.UserInterface
                     parsedTargetText.Contains("{x}"))
                 {
                     var remainingKillTarget =
-                        Mathf.Max(killQuestTarget.killTarget - Locator.QuestComponent.KilledEnemies, 0);
+                        Mathf.Max(killQuestTarget.killTarget - Locator.QuestComponent.TotalKilledEnemies, 0);
                     parsedTargetText = parsedTargetText.Replace("{x}", remainingKillTarget.ToString());
                 }
 
                 var questTargetText =
-                    $"{(questTarget.isRequired ? "" : "(")}{parsedTargetText}{(questTarget.isRequired ? "" : ")")}";
+                    $"{(questTarget.IsRequired ? "" : "(")}{parsedTargetText}{(questTarget.IsRequired ? "" : ")")}";
                 label.text = $"{questTargetText} ~";
                 
                 TargetToTargetObject.Add(questTarget, questTargetObject);
             }
         }
 
-        void OnQuestTargetChanged(object sender, QuestTargetEventArgs e)
+        void OnKillQuestTargetChanged(object sender, KillQuestTargetEventArgs e)
         {
             var targetObject = TargetToTargetObject[e.QuestTarget];
             var label = targetObject.GetComponentInChildren<TextMeshProUGUI>();
@@ -69,12 +69,12 @@ namespace HotlineHyrule.UserInterface
                 parsedTargetText.Contains("{x}"))
             {
                 var remainingKillTarget =
-                    Mathf.Max(killQuestTarget.killTarget - Locator.QuestComponent.KilledEnemies, 0);
+                    Mathf.Max(killQuestTarget.killTarget - e.KillCount, 0);
                 parsedTargetText = parsedTargetText.Replace("{x}", remainingKillTarget.ToString());
             }
 
             var questTargetText =
-                $"{(e.QuestTarget.isRequired ? "" : "(")}{parsedTargetText}{(e.QuestTarget.isRequired ? "" : ")")}";
+                $"{(e.QuestTarget.IsRequired ? "" : "(")}{parsedTargetText}{(e.QuestTarget.IsRequired ? "" : ")")}";
             label.text = $"{questTargetText} ~";
         }
 

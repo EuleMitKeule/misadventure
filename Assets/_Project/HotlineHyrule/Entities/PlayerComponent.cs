@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using HotlineHyrule.Entities.EnemyStates;
 using HotlineHyrule.Entities.PlayerStates;
 using HotlineHyrule.Items;
 using HotlineHyrule.Level;
@@ -109,12 +112,6 @@ namespace HotlineHyrule.Entities
         /// </summary>
         public float MovementItemFactor { get; set; }
 
-        PlayerBaseStateComponent State { get; set; }
-
-        public PlayerBaseStateComponent IdleState { get; private set; }
-        public PlayerBaseStateComponent DodgeState { get; private set; }
-        public PlayerBaseStateComponent FrozenState { get; private set; }
-
         public event EventHandler MovementStarted;
 
         Rigidbody2D Rigidbody { get; set; }
@@ -123,16 +120,16 @@ namespace HotlineHyrule.Entities
         LoadoutComponent LoadoutComponent { get; set; }
         Camera MainCamera { get; set; }
 
+        PlayerBaseStateComponent State { get; set; }
+        List<PlayerBaseStateComponent> States { get; set; }
+
         void Awake()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
             HealthComponent = GetComponent<HealthComponent>();
             WeaponComponent = GetComponent<WeaponComponent>();
             LoadoutComponent = GetComponent<LoadoutComponent>();
-
-            IdleState = GetComponent<PlayerIdleStateComponent>();
-            DodgeState = GetComponent<PlayerDodgeStateComponent>();
-            FrozenState = GetComponent<PlayerFrozenStateComponent>();
+            States = GetComponents<PlayerBaseStateComponent>().ToList();
 
             if (!legsAnimator) legsAnimator = transform.Find("legs").GetComponent<Animator>();
 
@@ -160,7 +157,7 @@ namespace HotlineHyrule.Entities
                 HealthComponent.Health = e.PlayerStateData.currentHealth;
             }
 
-            SetState(FrozenState);
+            SetState<PlayerFrozenStateComponent>();
         }
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)
@@ -174,7 +171,7 @@ namespace HotlineHyrule.Entities
 
         void OnLevelFinished(object sender, EventArgs e)
         {
-            SetState(FrozenState);
+            SetState<PlayerFrozenStateComponent>();
         }
 
         void Update()
@@ -189,20 +186,34 @@ namespace HotlineHyrule.Entities
             if (State) State.FixedUpdateState();
         }
 
-        public void SetState(PlayerBaseStateComponent state)
+        void SetState<TStateType>() where TStateType : PlayerBaseStateComponent => SetState(typeof(TStateType));
+
+        void SetState(Type stateType)
         {
-            if (!state) return;
-            if (State) State.ExitState();
-            State = state;
+            if (!stateType.IsSubclassOf(typeof(PlayerBaseStateComponent))) return;
+
+            var nextState = States.First(e => e.GetType() == stateType);
+            if (!nextState) return;
+
+            if (State)
+            {
+                State.ExitState();
+                State.ChangeRequested -= OnChangeRequested;
+            }
+
+            State = nextState;
+            State.ChangeRequested += OnChangeRequested;
             State.EnterState();
         }
+
+        void OnChangeRequested(Type stateType) => SetState(stateType);
 
         void OnButtonDodge(InputAction.CallbackContext context)
         {
             if (Time.time < NextDodgeTime) return;
             NextDodgeTime = Time.time + dodgeDelay;
 
-            SetState(DodgeState);
+            SetState<PlayerDodgeStateComponent>();
         }
 
         /// <summary>
@@ -231,7 +242,7 @@ namespace HotlineHyrule.Entities
 
         void HandleRotation()
         {
-            if (State == FrozenState) return;
+            if (State is PlayerFrozenStateComponent) return;
 
             Rigidbody.rotation = LookAngle;
             if (WeaponComponent.HasRangedWeapon) WeaponComponent.SetWeaponRotation(WeaponAngle);
@@ -261,7 +272,7 @@ namespace HotlineHyrule.Entities
 
             if (e.IsKilled)
             {
-                SetState(FrozenState);
+                SetState<PlayerFrozenStateComponent>();
             }
         }
 
@@ -274,5 +285,7 @@ namespace HotlineHyrule.Entities
 
             return stateData;
         }
+
+        public void EnableMovement() => SetState<PlayerIdleStateComponent>();
     }
 }

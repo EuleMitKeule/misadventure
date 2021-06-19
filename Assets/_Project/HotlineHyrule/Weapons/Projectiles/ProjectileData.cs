@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace HotlineHyrule.Weapons.Projectiles
 {
@@ -21,6 +23,10 @@ namespace HotlineHyrule.Weapons.Projectiles
         /// </summary>
         [SerializeField] public bool isSticky;
         /// <summary>
+        /// Whether projectile should not stick on player even when impact mask for player and sticky are enabled
+        /// </summary>
+        [SerializeField] public bool notStickyOnPlayer;
+        /// <summary>
         /// How often the projectile can penetrate entities.
         /// </summary>
         [SerializeField] public int penetrations;
@@ -28,5 +34,13 @@ namespace HotlineHyrule.Weapons.Projectiles
         /// The particle system to spawn on impact.
         /// </summary>
         [SerializeField] public GameObject impactParticleSystem;
+        /// <summary>
+        /// Tiles to spawn when exploding.
+        /// </summary>
+        [SerializeField] public List<TileBase> weaponEffectTiles;
+        /// <summary>
+        /// The name of the tilemap to spawn the tiles on.
+        /// </summary>
+        [SerializeField] public string weaponEffectTilemapName = "tilemap_weapon_effect";
     }
 }

@@ -110,7 +110,7 @@ namespace HotlineHyrule
             {
                 if (!Locator.LevelComponent.levelData)
                 {
-                    Debug.LogWarning($"The loaded level {Locator.LevelComponent.name} has no level data assigned.");
+                    Logging.LogWarning($"The loaded level {Locator.LevelComponent.name} has no level data assigned.");
                     yield break;
                 }
             }

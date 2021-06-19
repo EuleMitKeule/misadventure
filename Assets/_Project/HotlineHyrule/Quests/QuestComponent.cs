@@ -6,6 +6,8 @@ using HotlineHyrule.Entities;
 using HotlineHyrule.Extensions;
 using HotlineHyrule.Items;
 using HotlineHyrule.Level;
+using HotlineHyrule.Weapons;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = System.Random;
@@ -16,19 +18,23 @@ namespace HotlineHyrule.Quests
     {
         QuestData QuestData => LevelComponent ? LevelComponent.levelData.questData : QuestData.Empty;
 
-        List<KillQuestTarget> KillQuestTargets => QuestData.questTargets.OfType<KillQuestTarget>().ToList();
+        List<KillQuestTarget> KillQuestTargets => QuestData.questTargets.OfType<KillQuestTarget>().Where(target => !(target is KillSpecificQuestTarget)).ToList();
+        List<KillSpecificQuestTarget> KillSpecificQuestTargets => QuestData.questTargets.OfType<KillSpecificQuestTarget>().ToList();
         List<SearchQuestTarget> SearchQuestTargets => QuestData.questTargets.OfType<SearchQuestTarget>().ToList();
         List<TreasureQuestTarget> TreasureQuestTargets => QuestData.questTargets.OfType<TreasureQuestTarget>().ToList();
+        List<UseWeaponQuestTarget> UseWeaponQuestTargets => QuestData.questTargets.OfType<UseWeaponQuestTarget>().ToList();
 
-        public bool IsQuestFinished => QuestData.questTargets.Where(e => e.isRequired).All(IsReached);
+        public bool IsQuestFinished => QuestData.questTargets.Where(e => e.IsRequired).All(IsReached);
         public bool IsCompleted => QuestData.questTargets.All(e => ReachedTargets.Contains(e));
 
-        public int KilledEnemies { get; set; }
+        public int TotalKilledEnemies { get; set; }
+        public Dictionary<string, int> KilledEnemies { get; } = new Dictionary<string, int>();
         List<ItemData> FoundItems { get; } = new List<ItemData>();
+        List<WeaponData> UsedWeapons { get; } = new List<WeaponData>();
         List<QuestTarget> ReachedTargets { get; } = new List<QuestTarget>();
 
         public event EventHandler<QuestTargetEventArgs> QuestTargetReached;
-        public event EventHandler<QuestTargetEventArgs> QuestTargetChanged;
+        public event EventHandler<KillQuestTargetEventArgs> KillQuestTargetChanged;
 
         LevelComponent LevelComponent { get; set; }
 
@@ -47,6 +53,9 @@ namespace HotlineHyrule.Quests
         {
             var itemPickupComponent = Locator.PlayerComponent.GetComponent<ItemPickupComponent>();
             itemPickupComponent.ItemConsumed += OnItemConsumed;
+
+            var weaponComponent = Locator.PlayerComponent.GetComponent<WeaponComponent>();
+            weaponComponent.AttackStarted += OnAttackStarted;
 
             Locator.LevelComponent.LevelFinished += OnLevelFinished;
         }
@@ -70,12 +79,12 @@ namespace HotlineHyrule.Quests
             foreach (var treasureQuestTarget in TreasureQuestTargets)
             {
                 if (!treasureQuestTarget.treasureItem) continue;
-                if (!treasureQuestTarget.treasureItem.itemPrefab) continue;
+                if (!treasureQuestTarget.treasureItem.ItemPrefab) continue;
 
-                var treasureTilemapObject = transform.Find(treasureQuestTarget.treasureTilemapName);
+                var treasureTilemapObject = transform.Find(treasureQuestTarget.TreasureTilemapName);
                 if (!treasureTilemapObject)
                 {
-                    Debug.LogWarning($"{treasureQuestTarget.treasureTilemapName} could not be found.");
+                    Logging.LogWarning($"{treasureQuestTarget.TreasureTilemapName} could not be found.");
                     continue;
                 }
 
@@ -90,7 +99,7 @@ namespace HotlineHyrule.Quests
 
                 var randomIndex = new Random().Next(treasureSpots.Count);
                 var treasureSpot = treasureSpots.ElementAt(randomIndex);
-                Instantiate(treasureQuestTarget.treasureItem.itemPrefab, treasureSpot.ToWorld(), Quaternion.identity);
+                Instantiate(treasureQuestTarget.treasureItem.ItemPrefab, treasureSpot.ToWorld(), Quaternion.identity);
             }
         }
 
@@ -105,8 +114,7 @@ namespace HotlineHyrule.Quests
         {
             if (IsCompleted)
             {
-                var rnd = new Random();
-                var items = QuestData.questRewards.OrderBy(x => rnd.Next()).ToList();
+                var items = QuestData.questRewards.OrderBy(x => Guid.NewGuid()).ToList();
                 var rewards = items.Take(QuestData.questRewardCount).ToList();
 
                 RewardComponent.Rewards = rewards;
@@ -117,20 +125,40 @@ namespace HotlineHyrule.Quests
             }
         }
 
-        void OnEnemyKilled(object sender, EventArgs e)
+        void OnEnemyKilled(object sender, EntityEventArgs e)
         {
-            KilledEnemies += 1;
+            TotalKilledEnemies += 1;
 
-            foreach (var killQuestTarget in KillQuestTargets)
+            var killSpecificQuestTarget =
+                KillSpecificQuestTargets.Find(target => e.EntityObject.name.Contains(target.enemyName));
+
+            if (killSpecificQuestTarget != null)
             {
-                QuestTargetChanged?.Invoke(this, new QuestTargetEventArgs(killQuestTarget));
+                if (!KilledEnemies.ContainsKey(killSpecificQuestTarget.enemyName))
+                {
+                    KilledEnemies.Add(killSpecificQuestTarget.enemyName, 0);
+                }
+
+                KilledEnemies[killSpecificQuestTarget.enemyName] += 1;
+                var killCount = KilledEnemies[killSpecificQuestTarget.enemyName];
+                KillQuestTargetChanged?.Invoke(this, new KillQuestTargetEventArgs(killSpecificQuestTarget, killCount));
+
+                if (!IsReached(killSpecificQuestTarget) &&
+                    KilledEnemies[killSpecificQuestTarget.enemyName] >= killSpecificQuestTarget.killTarget)
+                {
+                    ReachedTargets.Add(killSpecificQuestTarget);
+                    QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(killSpecificQuestTarget));
+                }
             }
 
-            var questTarget = KillQuestTargets.Find(target => KilledEnemies >= target.killTarget);
+            foreach (var target in KillQuestTargets)
+            {
+                KillQuestTargetChanged?.Invoke(this, new KillQuestTargetEventArgs(target, TotalKilledEnemies));
+            }
 
-            if (ReachedTargets.Contains(questTarget)) return;
+            var questTarget = KillQuestTargets.Find(target => TotalKilledEnemies >= target.killTarget);
 
-            if (questTarget != null)
+            if (!ReachedTargets.Contains(questTarget) && questTarget != null)
             {
                 ReachedTargets.Add(questTarget);
                 QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(questTarget));
@@ -162,6 +190,21 @@ namespace HotlineHyrule.Quests
                 ReachedTargets.Add(treasureQuestTarget);
                 QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(treasureQuestTarget));       
             }
+        }
+
+        void OnAttackStarted(object sender, WeaponEventArgs e)
+        {
+            if (UsedWeapons.Contains(e.Weapon)) return;
+
+            UsedWeapons.Add(e.Weapon);
+
+            var useWeaponQuestTarget = UseWeaponQuestTargets.Find(target => target.weapon == e.Weapon);
+
+            if (useWeaponQuestTarget == null) return;
+            if (IsReached(useWeaponQuestTarget)) return;
+
+            ReachedTargets.Add(useWeaponQuestTarget);
+            QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(useWeaponQuestTarget));
         }
 
         public bool IsReached(QuestTarget questTarget) => ReachedTargets.Contains(questTarget);

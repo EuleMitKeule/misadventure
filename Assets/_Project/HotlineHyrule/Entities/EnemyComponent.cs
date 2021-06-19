@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HotlineHyrule.Entities.EnemyStates;
 using HotlineHyrule.Extensions;
 using HotlineHyrule.Items;
+using HotlineHyrule.Weapons;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -28,7 +30,7 @@ namespace HotlineHyrule.Entities
         /// The enemy's current state.
         /// </summary>
         [Header("AI")]
-        [SerializeField] public EnemyStateBaseComponent state;
+        [SerializeField] public EnemyBaseStateComponent state;
         /// <summary>
         /// Layers that count as wall.
         /// </summary>
@@ -49,6 +51,11 @@ namespace HotlineHyrule.Entities
         /// Range in which the enemy will attack.
         /// </summary>
         [SerializeField] float attackRange;
+        /// <summary>
+        /// Whether a second attack shall be used.
+        /// If enabled, Animation for 'attacking2' will be played instead of 'attacking'
+        /// </summary>
+        public bool UsingAttack2;
 
         /// <summary>
         /// Particle system prefab to spawn when taking damage.
@@ -129,6 +136,11 @@ namespace HotlineHyrule.Entities
         }
 
         /// <summary>
+        /// Get 2D distance towards Player
+        /// </summary>
+        public float PlayerDistance => Vector2.Distance(transform.position, Locator.PlayerComponent.transform.position);
+
+        /// <summary>
         /// Whether the enemy has a wall to its left.
         /// </summary>
         public bool IsWallLeft =>
@@ -165,19 +177,15 @@ namespace HotlineHyrule.Entities
                 wallMask
             );
 
-        public static event EventHandler<EventArgs> EnemyKilled;
+        public static event EventHandler<EntityEventArgs> EnemyKilled;
 
         Rigidbody2D Rigidbody { get; set; }
         Collider2D Collider { get; set; }
         Animator Animator { get; set; }
         HealthComponent HealthComponent { get; set; }
+        public WeaponComponent WeaponComponent { get; set; }
 
-        public EnemyStateBaseComponent PatrolState { get; private set; }
-        public EnemyStateBaseComponent SearchState { get; private set; }
-        public EnemyStateBaseComponent TurnAroundState { get; private set; }
-        public EnemyStateBaseComponent AttackState { get; private set; }
-        public EnemyStateBaseComponent FollowState { get; private set; }
-        public EnemyStateBaseComponent DyingState { get; private set; }
+        List<EnemyBaseStateComponent> States { get; set; }
 
         void Awake()
         {
@@ -185,19 +193,18 @@ namespace HotlineHyrule.Entities
             Collider = GetComponent<Collider2D>();
             Animator = GetComponent<Animator>();
             HealthComponent = GetComponent<HealthComponent>();
-            PatrolState = GetComponent<EnemyStatePatrolComponent>();
-            SearchState = GetComponent<EnemyStateSearchComponent>();
-            TurnAroundState = GetComponent<EnemyStateTurnAroundComponent>();
-            AttackState = GetComponent<EnemyStateAttackComponent>();
-            FollowState = GetComponent<EnemyStateFollowComponent>();
-            DyingState = GetComponent<EnemyStateDyingComponent>();
+            States = GetComponents<EnemyBaseStateComponent>().ToList();
+
+            WeaponComponent = GetComponent<WeaponComponent>();
 
             HealthComponent.HealthChanged += OnHealthChanged;
         }
 
         void Start()
         {
-            ChangeState(PatrolState);
+            var hasPatrol = (bool)GetComponent<EnemyPatrolStateComponent>();
+            if (hasPatrol) SetState<EnemyPatrolStateComponent>();
+            else SetState<EnemyGuardStateComponent>();
         }
 
         void FixedUpdate()
@@ -216,19 +223,27 @@ namespace HotlineHyrule.Entities
 #endif
         }
 
-        /// <summary>
-        /// Changes the enemy's state. Also exits the current one and sets up the new one
-        /// </summary>
-        /// <param name="newState">The new state the enemy shall get</param>
-        public void ChangeState(EnemyStateBaseComponent newState)
-        {
-            if (!newState) return;
-            if (state && newState.priority < state.priority) return;
-            if (state) state.ExitState();
+        public void SetState<TStateType>() where TStateType : EnemyBaseStateComponent => SetState(typeof(TStateType));
 
-            state = newState;
+        public void SetState(Type stateType)
+        {
+            if (!stateType.IsSubclassOf(typeof(EnemyBaseStateComponent))) return;
+
+            var nextState = States.Find(e => e.GetType() == stateType || e.GetType().IsSubclassOf(stateType));
+            if (!nextState) return;
+
+            if (state)
+            {
+                state.ExitState();
+                state.ChangeRequested -= OnChangeRequested;
+            }
+
+            state = nextState;
+            state.ChangeRequested += OnChangeRequested;
             state.EnterState();
         }
+
+        void OnChangeRequested(Type stateType) => SetState(stateType);
 
         public void SetVelocity(Vector2 velocity)
         {
@@ -251,17 +266,35 @@ namespace HotlineHyrule.Entities
 
             if (e.IsKilled)
             {
-                ChangeState(DyingState);
+                SetState<EnemyDyingStateComponent>();
 
-                foreach (var item in itemDrops)
+                DropItems();
+
+                var entityEventArgs = new EntityEventArgs(gameObject);
+                EnemyKilled?.Invoke(this, entityEventArgs);
+            }
+        }
+
+        void DropItems()
+        {
+            foreach (var item in itemDrops)
+            {
+                if (Random.value <= item.dropRate)
                 {
-                    if (Random.value <= item.dropRate)
-                    {
-                        Instantiate(item.data.itemPrefab, transform.position, Quaternion.identity);
-                    }
-                }
+                    var itemObject = Instantiate(item.data.ItemPrefab, transform.position, Quaternion.identity);
+                    var droppedWeaponComponent = itemObject.GetComponent<DroppedWeaponComponent>();
+                    var itemComponent = itemObject.GetComponent<ItemComponent>();
 
-                EnemyKilled?.Invoke(this, EventArgs.Empty);
+                    var weaponData = item.data as WeaponData;
+
+                    if (!weaponData) continue;
+                    if (!droppedWeaponComponent) continue;
+
+                    var chargeOffsetFactor =
+                        Random.Range(-weaponData.chargeRandomness, weaponData.chargeRandomness);
+                    droppedWeaponComponent.weaponCharges = weaponData.weaponCharges +
+                                                           (int)(weaponData.weaponCharges * chargeOffsetFactor);
+                }
             }
         }
 

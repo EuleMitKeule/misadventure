@@ -54,8 +54,6 @@ namespace HotlineHyrulePlayTests.Entities
             if (withRespawnComponent)
             {
                 testEntity.AddComponent<Rigidbody2D>();
-                var respawnComponent = testEntity.AddComponent<RespawnComponent>();
-                respawnComponent.respawnAction = new InputAction("respawnAction", binding: "<Keyboard>/r");
             }
             
             testEntity.SetActive(true);
