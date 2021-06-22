@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3210816406309924212}
   - component: {fileID: 6108195585538764472}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: collider_hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

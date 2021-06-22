@@ -74,7 +74,14 @@ namespace HotlineHyrule.UserInterface
                         var castedItemData =  itemDataImage.data as MovementItemData;
                         StartCoroutine(RemoveImageObject(instance, castedItemData.duration));
                     }
-                    
+                    else if (itemDataImage.data.GetType() == typeof(HealthItemData))
+                    {
+                        var castedItemData = itemDataImage.data as HealthItemData;
+                        if (castedItemData.HealRate == 0) return;
+                        var cycles = (int)(castedItemData.HealTotal / castedItemData.HealAmount);
+                        var duration = cycles * castedItemData.HealRate;
+                        StartCoroutine(RemoveImageObject(instance, duration));
+                    }
                 }
             }
         }

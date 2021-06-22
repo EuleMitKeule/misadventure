@@ -208,6 +208,8 @@ namespace HotlineHyrule.Weapons
             Rigidbody.simulated = false;
 
             if (Animator) Animator.SetTrigger("stop");
+            var impactParticleSystem = projectileData.impactParticleSystem;
+            if (impactParticleSystem) Instantiate(impactParticleSystem, transform.position, Quaternion.identity);
         }
 
         public void Destroy()
