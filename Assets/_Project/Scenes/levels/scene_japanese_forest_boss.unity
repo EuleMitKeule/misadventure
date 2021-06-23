@@ -134,6 +134,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: light_global
       objectReference: {fileID: 0}
+    - target: {fileID: 5198847071050481589, guid: 594500e212b563a418c4a270e21544c4, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8867924
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198847071050481589, guid: 594500e212b563a418c4a270e21544c4, type: 3}
+      propertyPath: m_Color.g
+      value: 0.38551986
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198847071050481589, guid: 594500e212b563a418c4a270e21544c4, type: 3}
+      propertyPath: m_Color.r
+      value: 0.2216981
+      objectReference: {fileID: 0}
+    - target: {fileID: 5198847071050481589, guid: 594500e212b563a418c4a270e21544c4, type: 3}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5198847071050481590, guid: 594500e212b563a418c4a270e21544c4, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -343,6 +359,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 9219763331161076985, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: 319bad2f12d1a900996b18ec96bc4e54, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
 --- !u!4 &1326564997 stripped
