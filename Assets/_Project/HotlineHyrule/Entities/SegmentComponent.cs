@@ -37,7 +37,7 @@ namespace HotlineHyrule.Entities
         [FoldoutGroup("Debug")]
         [ShowInInspector]
         [ReadOnly]
-        bool IsTail => !ChildSegment;
+        public bool IsTail => !ChildSegment;
         public RaycastHit2D WallAbove => Physics2D.Raycast(
             transform.position, LookDirection, CaterpillarComponent.WallCheckDistance, CaterpillarComponent.WallMask);
         public RaycastHit2D WallLeft => Physics2D.Raycast(
