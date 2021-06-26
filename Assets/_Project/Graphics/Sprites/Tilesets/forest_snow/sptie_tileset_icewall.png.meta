@@ -53,6 +53,39 @@ TextureImporter:
   - first:
       213: 1940460655596743385
     second: sptie_tileset_icewall_16
+  - first:
+      213: -1146392278303193708
+    second: sptie_tileset_icewall_17
+  - first:
+      213: 7557717804797273592
+    second: sptie_tileset_icewall_18
+  - first:
+      213: -3862764353026197428
+    second: sptie_tileset_icewall_19
+  - first:
+      213: 6764900131956708980
+    second: sptie_tileset_icewall_20
+  - first:
+      213: 8181590051668109552
+    second: sptie_tileset_icewall_21
+  - first:
+      213: 1992135528486636619
+    second: sptie_tileset_icewall_22
+  - first:
+      213: 8483064121221349295
+    second: sptie_tileset_icewall_23
+  - first:
+      213: 6682148113218576708
+    second: sptie_tileset_icewall_24
+  - first:
+      213: 1868876760327812944
+    second: sptie_tileset_icewall_25
+  - first:
+      213: -2509216083766744033
+    second: sptie_tileset_icewall_26
+  - first:
+      213: 3089551696892709826
+    second: sptie_tileset_icewall_27
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -170,7 +203,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -191,7 +224,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -212,7 +245,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 80
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -232,7 +265,7 @@ TextureImporter:
       name: sptie_tileset_icewall_3
       rect:
         serializedVersion: 2
-        x: 0
+        x: 48
         y: 64
         width: 16
         height: 16
@@ -253,7 +286,7 @@ TextureImporter:
       name: sptie_tileset_icewall_4
       rect:
         serializedVersion: 2
-        x: 16
+        x: 64
         y: 64
         width: 16
         height: 16
@@ -274,7 +307,7 @@ TextureImporter:
       name: sptie_tileset_icewall_5
       rect:
         serializedVersion: 2
-        x: 32
+        x: 80
         y: 64
         width: 16
         height: 16
@@ -358,8 +391,8 @@ TextureImporter:
       name: sptie_tileset_icewall_9
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
+        x: 48
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -379,8 +412,8 @@ TextureImporter:
       name: sptie_tileset_icewall_10
       rect:
         serializedVersion: 2
-        x: 16
-        y: 32
+        x: 64
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -400,8 +433,8 @@ TextureImporter:
       name: sptie_tileset_icewall_11
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
+        x: 80
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -422,7 +455,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -443,7 +476,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 16
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -464,7 +497,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 16
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -484,8 +517,8 @@ TextureImporter:
       name: sptie_tileset_icewall_15
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 48
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -505,8 +538,8 @@ TextureImporter:
       name: sptie_tileset_icewall_16
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -518,6 +551,237 @@ TextureImporter:
       bones: []
       spriteID: 9da277d6fa6edea10800000000000000
       internalID: 1940460655596743385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sptie_tileset_icewall_17
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 495cc76fb423710f0800000000000000
+      internalID: -1146392278303193708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sptie_tileset_icewall_18
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f5269b0d4862e860800000000000000
+      internalID: 7557717804797273592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sptie_tileset_icewall_19
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c48f4d66944b46ac0800000000000000
+      internalID: -3862764353026197428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sptie_tileset_icewall_20
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 476d54af3d0c1ed50800000000000000
+      internalID: 6764900131956708980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sptie_tileset_icewall_21
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f82c87ddc8da8170800000000000000
+      internalID: 8181590051668109552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sptie_tileset_icewall_22
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4c81e755bc75ab10800000000000000
+      internalID: 1992135528486636619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sptie_tileset_icewall_23
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: faf72408fd5e9b570800000000000000
+      internalID: 8483064121221349295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sptie_tileset_icewall_24
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 441a0f03e42cbbc50800000000000000
+      internalID: 6682148113218576708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sptie_tileset_icewall_25
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 057725403859fe910800000000000000
+      internalID: 1868876760327812944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sptie_tileset_icewall_26
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1ce26624497d2dd0800000000000000
+      internalID: -2509216083766744033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sptie_tileset_icewall_27
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cbce7036ea40ea20800000000000000
+      internalID: 3089551696892709826
       vertices: []
       indices: 
       edges: []
