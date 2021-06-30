@@ -112,7 +112,7 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// Whether the enemy is currently able to follow the player.
         /// </summary>
-        public bool IsPlayerFollowable => IsPlayerInFollowRange && IsPlayerInAngle && IsPlayerVisible;
+        public bool IsPlayerFollowable => Locator.PlayerComponent && IsPlayerInFollowRange && IsPlayerInAngle && IsPlayerVisible;
         /// <summary>
         /// Whether the enemy is currently able to attack the player.
         /// </summary>
