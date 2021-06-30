@@ -11,6 +11,22 @@ SortingGroup:
   m_SortingLayerID: 870712003
   m_SortingLayer: 7
   m_SortingOrder: 0
+--- !u!58 &443204081830554234
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424216350709354677}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.8
 --- !u!1001 &8212600203459770733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18,6 +34,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2944899940319275480, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108195585538764472, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6656983
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108195585538764472, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: m_Size.y
+      value: 1.6088008
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108195585538764472, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.022126796
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108195585538764472, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.00793213
+      objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: attackRange
       value: 1
@@ -86,6 +122,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023214, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023215, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_Name
       value: ghostly_presence
@@ -94,10 +134,16 @@ PrefabInstance:
       propertyPath: weaponData
       value: 
       objectReference: {fileID: 11400000, guid: 0e949f66f76d3cb43a56d5a96a0a3f68, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6108195585538764472, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
 --- !u!1 &1586327486243152130 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7492512237567023215, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+  m_PrefabInstance: {fileID: 8212600203459770733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6424216350709354677 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2944899940319275480, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
   m_PrefabInstance: {fileID: 8212600203459770733}
   m_PrefabAsset: {fileID: 0}
