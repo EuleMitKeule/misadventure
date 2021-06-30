@@ -1,58 +1,43 @@
 fileFormatVersion: 2
-guid: f265f6b562ff02f4089bf59e7e097d65
+guid: bad0402a336ac7946a36aafedb8420f1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6458727023964349073
-    second: sprite_tileset_snowpath_0
+      213: -3471436196611794923
+    second: sprite_tileset_mountain_0
   - first:
-      213: 1901166635880900484
-    second: sprite_tileset_snowpath_1
+      213: -4043820958847532728
+    second: sprite_tileset_mountain_1
   - first:
-      213: -724434558478239636
-    second: sprite_tileset_snowpath_2
+      213: 5682221151046959433
+    second: sprite_tileset_mountain_2
   - first:
-      213: 7288196308855513342
-    second: sprite_tileset_snowpath_3
+      213: -2461923800149412231
+    second: sprite_tileset_mountain_3
   - first:
-      213: 6729220720807827364
-    second: sprite_tileset_snowpath_4
+      213: -7578496426145206013
+    second: sprite_tileset_mountain_4
   - first:
-      213: -640049979250812504
-    second: sprite_tileset_snowpath_5
+      213: -2706378516216110843
+    second: sprite_tileset_mountain_5
   - first:
-      213: -7234464047299155761
-    second: sprite_tileset_snowpath_6
+      213: 6312429965486515699
+    second: sprite_tileset_mountain_6
   - first:
-      213: -1964862883277765951
-    second: sprite_tileset_snowpath_7
+      213: 3176752211725501201
+    second: sprite_tileset_mountain_7
   - first:
-      213: 7177039264217787100
-    second: sprite_tileset_snowpath_8
+      213: 4729575311716100691
+    second: sprite_tileset_mountain_8
   - first:
-      213: -7282799082892486479
-    second: sprite_tileset_snowpath_9
+      213: -6627980837784117636
+    second: sprite_tileset_mountain_9
   - first:
-      213: 7800776080181828800
-    second: sprite_tileset_snowpath_10
+      213: 6001541720521011439
+    second: sprite_tileset_mountain_10
   - first:
-      213: -2651424939465355080
-    second: sprite_tileset_snowpath_11
-  - first:
-      213: -720499074539682271
-    second: sprite_tileset_snowpath_12
-  - first:
-      213: 3394776019409855841
-    second: sprite_tileset_snowpath_13
-  - first:
-      213: 230520712105578243
-    second: sprite_tileset_snowpath_14
-  - first:
-      213: -7150875367706623361
-    second: sprite_tileset_snowpath_15
-  - first:
-      213: -1932555270008092360
-    second: sprite_tileset_snowpath_16
+      213: 708389072969718124
+    second: sprite_tileset_mountain_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -166,133 +151,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_tileset_snowpath_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1926c9c220202a950800000000000000
-      internalID: 6458727023964349073
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_tileset_snowpath_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 48761868bfc426a10800000000000000
-      internalID: 1901166635880900484
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_tileset_snowpath_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c6833e67b9a42f5f0800000000000000
-      internalID: -724434558478239636
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_tileset_snowpath_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef065aaadefd42560800000000000000
-      internalID: 7288196308855513342
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_tileset_snowpath_4
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4a7d2f6b79ef26d50800000000000000
-      internalID: 6729220720807827364
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_tileset_snowpath_5
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 64
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8a9524c5fe51e17f0800000000000000
-      internalID: -640049979250812504
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_tileset_snowpath_6
+      name: sprite_tileset_mountain_0
       rect:
         serializedVersion: 2
         x: 0
@@ -300,20 +159,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc8266067450a9b90800000000000000
-      internalID: -7234464047299155761
+      spriteID: 5185580fb2bf2dfc0800000000000000
+      internalID: -3471436196611794923
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_snowpath_7
+      name: sprite_tileset_mountain_1
       rect:
         serializedVersion: 2
         x: 16
@@ -321,20 +180,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c201e13e976bb4e0800000000000000
-      internalID: -1964862883277765951
+      spriteID: 8410d94534671e7c0800000000000000
+      internalID: -4043820958847532728
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_snowpath_8
+      name: sprite_tileset_mountain_2
       rect:
         serializedVersion: 2
         x: 32
@@ -342,20 +201,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cda6bba6f27f99360800000000000000
-      internalID: 7177039264217787100
+      spriteID: 9418d5bf70e4bde40800000000000000
+      internalID: 5682221151046959433
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_snowpath_9
+      name: sprite_tileset_mountain_3
       rect:
         serializedVersion: 2
         x: 0
@@ -363,20 +222,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b817ade1dc4eea90800000000000000
-      internalID: -7282799082892486479
+      spriteID: 976b30cf85d75ddd0800000000000000
+      internalID: -2461923800149412231
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_snowpath_10
+      name: sprite_tileset_mountain_4
       rect:
         serializedVersion: 2
         x: 16
@@ -384,20 +243,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cc1a9fb38ce14c60800000000000000
-      internalID: 7800776080181828800
+      spriteID: 3013c0c27a5c3d690800000000000000
+      internalID: -7578496426145206013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_snowpath_11
+      name: sprite_tileset_mountain_5
       rect:
         serializedVersion: 2
         x: 32
@@ -405,20 +264,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b05e8eb01f343bd0800000000000000
-      internalID: -2651424939465355080
+      spriteID: 501a0391413017ad0800000000000000
+      internalID: -2706378516216110843
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_snowpath_12
+      name: sprite_tileset_mountain_6
       rect:
         serializedVersion: 2
         x: 0
@@ -426,20 +285,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1268019b8e54006f0800000000000000
-      internalID: -720499074539682271
+      spriteID: 3f5ea52eb914a9750800000000000000
+      internalID: 6312429965486515699
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_snowpath_13
+      name: sprite_tileset_mountain_7
       rect:
         serializedVersion: 2
         x: 16
@@ -447,20 +306,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16560f8adcaac1f20800000000000000
-      internalID: 3394776019409855841
+      spriteID: 113c55f2e47161c20800000000000000
+      internalID: 3176752211725501201
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_snowpath_14
+      name: sprite_tileset_mountain_8
       rect:
         serializedVersion: 2
         x: 32
@@ -468,20 +327,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30f4c66cd59f23300800000000000000
-      internalID: 230520712105578243
+      spriteID: 35aab4900b3d2a140800000000000000
+      internalID: 4729575311716100691
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_snowpath_15
+      name: sprite_tileset_mountain_9
       rect:
         serializedVersion: 2
         x: 0
@@ -489,20 +348,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7281c27dbcf2cc90800000000000000
-      internalID: -7150875367706623361
+      spriteID: c7e18c96b8ea404a0800000000000000
+      internalID: -6627980837784117636
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_snowpath_16
+      name: sprite_tileset_mountain_10
       rect:
         serializedVersion: 2
         x: 16
@@ -510,14 +369,35 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 839cb56983f2e25e0800000000000000
-      internalID: -1932555270008092360
+      spriteID: fe07754b562c94350800000000000000
+      internalID: 6001541720521011439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_mountain_11
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c69d021db14b4d900800000000000000
+      internalID: 708389072969718124
       vertices: []
       indices: 
       edges: []
