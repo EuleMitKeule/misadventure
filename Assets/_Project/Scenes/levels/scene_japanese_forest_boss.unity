@@ -362,14 +362,38 @@ PrefabInstance:
     - target: {fileID: 9219763331161076985, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
       propertyPath: weaponData
       value: 
-      objectReference: {fileID: 11400000, guid: 319bad2f12d1a900996b18ec96bc4e54, type: 2}
-    m_RemovedComponents: []
+      objectReference: {fileID: 11400000, guid: e15a73d2a06119e928eeffe6bf6c05e0, type: 2}
+    m_RemovedComponents:
+    - {fileID: 975139409624137883, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
 --- !u!4 &1326564997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7670373497835594150, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
   m_PrefabInstance: {fileID: 1326564996}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1326564998 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7670373497835594146, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
+  m_PrefabInstance: {fileID: 1326564996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1326564999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326564998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b6b2d9a7c24537a3bf030abad376c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+  weapons:
+  - data: {fileID: 11400000, guid: 319bad2f12d1a900996b18ec96bc4e54, type: 2}
+    animationTrigger: attack
+  - data: {fileID: 11400000, guid: e15a73d2a06119e928eeffe6bf6c05e0, type: 2}
+    animationTrigger: attack3
 --- !u!1 &1420212855
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +651,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7785016, y: 1}
+    m_SensorSize: {x: 1.7772108, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

@@ -20,13 +20,13 @@ namespace HotlineHyrule.Entities.EnemyStates
             {
                 if (EnemyComponent.PlayerDistance > maxDistanceForUsingAttack2)
                 {
-                    EnemyComponent.UsingAttack2 = false;
+                    EnemyComponent.attackAnimationTrigger = "attack";
                     EnemyComponent.WeaponComponent.SetWeapon(attack1Weapon);
                     SetState<EnemyAttackStateComponent>();
                 }
                 else if (EnemyComponent.PlayerDistance <= maxDistanceForPerformingAttack2)
                 {
-                    EnemyComponent.UsingAttack2 = true;
+                    EnemyComponent.attackAnimationTrigger = "attack2";
                     EnemyComponent.WeaponComponent.SetWeapon(attack2Weapon);
                     SetState<EnemyAttackStateComponent>();
                 }

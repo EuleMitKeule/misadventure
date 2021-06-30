@@ -55,7 +55,9 @@ namespace HotlineHyrule.Entities
         /// Whether a second attack shall be used.
         /// If enabled, Animation for 'attacking2' will be played instead of 'attacking'
         /// </summary>
-        public bool UsingAttack2;
+        //public bool UsingAttack2;
+
+        public string attackAnimationTrigger = "attack";
 
         /// <summary>
         /// Particle system prefab to spawn when taking damage.

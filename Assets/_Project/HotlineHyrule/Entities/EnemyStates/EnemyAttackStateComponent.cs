@@ -59,7 +59,7 @@ namespace HotlineHyrule.Entities.EnemyStates
             {
                 if (WeaponComponent.CanAttack)
                 {
-                    if (Animator) Animator.SetTrigger(EnemyComponent.UsingAttack2 ? "attack2" : "attack");
+                    if (Animator) Animator.SetTrigger(EnemyComponent.attackAnimationTrigger);
                     if (WeaponComponent) WeaponComponent.PerformAttack();   
                 }
 

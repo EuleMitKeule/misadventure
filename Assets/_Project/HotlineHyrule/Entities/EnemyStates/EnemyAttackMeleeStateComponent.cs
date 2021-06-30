@@ -6,7 +6,7 @@ namespace HotlineHyrule.Entities.EnemyStates
     {
         protected override IEnumerator AttackRoutine()
         {
-            if (Animator) Animator.SetTrigger(EnemyComponent.UsingAttack2 ? "attack2" : "attack");
+            if (Animator) Animator.SetTrigger(EnemyComponent.attackAnimationTrigger);
             if (WeaponComponent) WeaponComponent.PerformAttack();
             SetState<EnemyFollowStateComponent>();
             yield return null;
