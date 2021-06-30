@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b3124b8a41bc1743ac1d5b548103b40, type: 3}
   m_Name: projectile_spear
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 15
   impactMask:
     serializedVersion: 2
     m_Bits: 16896
   impactRaycastOffset: 0
   isSticky: 0
+  notStickyOnPlayer: 0
   penetrations: 3
+  impactParticleSystem: {fileID: 0}
+  weaponEffectTiles: []
+  weaponEffectTilemapName: tilemap_weapon_effect
   range: 7.5
   flightTime: 0.75
   movementThreshold: 0.5
