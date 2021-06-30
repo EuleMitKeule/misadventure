@@ -80,6 +80,8 @@ namespace HotlineHyrule.Sound
             //var start = audioSource.volume;
             var start = 0f;
 
+            if (data == null) yield break;
+            
             audioSource.clip = data.loopAudioClip;
             audioSource.PlayOneShot(data.introAudioClip);
             audioSource.PlayScheduled(AudioSettings.dspTime + data.introAudioClip.length);
@@ -88,7 +90,7 @@ namespace HotlineHyrule.Sound
             {
                 currentTime += Time.deltaTime;
                 audioSource.volume = Mathf.Lerp(start, 1, currentTime / duration);
-                yield return null;
+                yield break;
             }
         }
 
@@ -101,7 +103,7 @@ namespace HotlineHyrule.Sound
             {
                 currentTime += Time.deltaTime;
                 audioSource.volume = Mathf.Lerp(start, 0, currentTime / duration);
-                yield return null;
+                yield break;
             }
 
             audioSource.Stop();
