@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3210816406309924212}
   - component: {fileID: 6108195585538764472}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: collider_hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 3469506423157028055}
   - component: {fileID: -3355742661877872154}
   - component: {fileID: 3844134658638800442}
+  - component: {fileID: -7907710592481096711}
   m_Layer: 7
   m_Name: enemy_base
   m_TagString: Untagged
@@ -363,3 +364,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnDelay: 1
+--- !u!210 &-7907710592481096711
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7492512237567023215}
+  m_Enabled: 1
+  m_SortingLayerID: 870712003
+  m_SortingLayer: 7
+  m_SortingOrder: 0

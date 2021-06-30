@@ -32,6 +32,6 @@ MonoBehaviour:
   attackRate: 1
   weaponPrefab: {fileID: 3193329723167763181, guid: ae41976a544ea200e85020a80c900487, type: 3}
   hasInfiniteCharges: 1
-  weaponCharges: 0
-  chargeRandomness: 0
-  damage: 20
+  weaponCharges: 30
+  chargeRandomness: 0.16666667
+  damage: 15

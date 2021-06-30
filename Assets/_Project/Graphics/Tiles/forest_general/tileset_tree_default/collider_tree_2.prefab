@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5421537942926273799}
   - component: {fileID: 5421537942926273798}
+  - component: {fileID: 846394582819823092}
   m_Layer: 9
   m_Name: collider_tree_2
   m_TagString: Untagged
@@ -47,3 +48,29 @@ CircleCollider2D:
   m_Offset: {x: 0.09, y: -0.06}
   serializedVersion: 2
   m_Radius: 0.32
+--- !u!114 &846394582819823092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421537942926273793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 0
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 0000000077c227024f026ac16b6b97596903ccd6a1a70ae62f85a125c302e633d31b0b8ca7e99040b1b2ac0327542f1c
+  m_ShapePath:
+  - {x: -0.1322147, y: -0.28465185, z: 0}
+  - {x: -0.13546129, y: 0.16882221, z: 0}
+  - {x: 0.31151593, y: 0.16841228, z: 0}
+  - {x: 0.3, y: -0.3, z: 0}
+  m_ShapePathHash: 1160924664
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -173076

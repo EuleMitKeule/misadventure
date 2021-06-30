@@ -301,9 +301,6 @@ namespace HotlineHyrule.Entities
         void OnCollisionEnter2D(Collision2D other)
         {
             if (state) state.OnCollisionEnterState(other);
-            
-            if (other.gameObject.layer != LayerMask.NameToLayer("enemy")) return;
-            transform.Rotate(Vector3.forward, 90f);
         }
         
 #if UNITY_EDITOR
