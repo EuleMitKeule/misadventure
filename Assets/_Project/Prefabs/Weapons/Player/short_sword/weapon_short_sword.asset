@@ -30,7 +30,7 @@ MonoBehaviour:
       Data: 0
   movementFactor: 1
   slowTimeWindow: 0
-  attackRate: 1
+  attackRate: 1.5
   weaponPrefab: {fileID: 2118646409396199792, guid: 72bc245f1f5223c4e909c83453458753, type: 3}
   hasInfiniteCharges: 0
   weaponCharges: 30

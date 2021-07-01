@@ -14,6 +14,9 @@ TextureImporter:
   - first:
       213: -4578007210555365929
     second: sprite_weapon_short_sword_3
+  - first:
+      213: -7459290020753525368
+    second: sprite_weapon_short_sword_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -182,6 +185,27 @@ TextureImporter:
       bones: []
       spriteID: 7d5aba382b6a770c0800000000000000
       internalID: -4578007210555365929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_weapon_short_sword_4
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 10
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 885be544f374b7890800000000000000
+      internalID: -7459290020753525368
       vertices: []
       indices: 
       edges: []
