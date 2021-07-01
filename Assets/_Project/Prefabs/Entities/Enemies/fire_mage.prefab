@@ -49,9 +49,17 @@ PrefabInstance:
     - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: itemDrops.Array.data[0].data
       value: 
-      objectReference: {fileID: 11400000, guid: 3d73b0030c67d364e8b5b56b97ed0986, type: 2}
+      objectReference: {fileID: 11400000, guid: f534ac49de3ef6f48bef6c1d81ed879c, type: 2}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: itemDrops.Array.data[1].data
+      value: 
+      objectReference: {fileID: 11400000, guid: f534ac49de3ef6f48bef6c1d81ed879c, type: 2}
     - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: itemDrops.Array.data[0].dropRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: itemDrops.Array.data[1].dropRate
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023206, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
