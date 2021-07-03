@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72112766fd8a400786090afb9f205301, type: 3}
-  m_Name: quest_forest_01
+  m_Name: quest_forest_general_03
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -36,16 +36,16 @@ MonoBehaviour:
       Data: 2
     - Name: shortTargetText
       Entry: 1
-      Data: Kill {x} gnomes
+      Data: Kill the mages
     - Name: targetReachedText
       Entry: 1
-      Data: We killed the gnomes.
+      Data: You managed to slay all of the mages.
     - Name: targetNotReachedText
       Entry: 1
       Data: We didn't do something.
     - Name: killTarget
       Entry: 3
-      Data: 5
+      Data: 10
     - Name: 
       Entry: 8
       Data: 
@@ -55,8 +55,13 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  finishLevelOnCompletion: 0
-  questText: There are gnomes.
-  questTargetText: Kill the gnomes!
-  questRewards: []
-  questRewardCount: 0
+  finishLevelOnCompletion: 1
+  questText: 'A sect of mages appeared to be holding a sabbath here.
+
+    We''d have
+    to kill them all if we intended to pass through.'
+  questTargetText: 
+  questRewards:
+  - {fileID: 11400000, guid: 95fdee72c21b25f4bb3a30c5620e6a13, type: 2}
+  - {fileID: 11400000, guid: d99a9217006240b45a2c69825432e731, type: 2}
+  questRewardCount: 1

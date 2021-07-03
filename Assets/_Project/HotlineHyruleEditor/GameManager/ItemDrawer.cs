@@ -46,13 +46,13 @@ namespace HotlineHyruleEditor.GameManager
 
         public override void CreateNew()
         {
-            var itemData = ItemBuilder.CreateItem(NameForNew, CurrentPath, SelectedItemType, HasPrefab);
+            var itemData = ItemBuilder.CreateItem(NameForNew, SelectedItemType, HasPrefab);
             SetSelected(itemData);
         }
 
         public override void CreateNew(string overrideName, string overridePath)
         {
-            var itemData = ItemBuilder.CreateItem(overrideName, overridePath, SelectedItemType, HasPrefab);
+            var itemData = ItemBuilder.CreateItem(overrideName, SelectedItemType, HasPrefab);
             SetSelected(itemData);
         }
 
