@@ -8,9 +8,23 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1586327486243152130}
   m_Enabled: 1
-  m_SortingLayerID: 870712003
-  m_SortingLayer: 7
+  m_SortingLayerID: 61649585
+  m_SortingLayer: 10
   m_SortingOrder: 0
+--- !u!114 &1472067439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586327486243152130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2266c0790728406b8682b6eb60e49ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  radius: 3
 --- !u!58 &443204081830554234
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -34,6 +48,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 794638678, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2944899940319275480, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_Layer
       value: 14
@@ -58,6 +76,22 @@ PrefabInstance:
       propertyPath: attackRange
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: followAngle
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: followRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: lockRotation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: wallMask.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023206, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_Controller
       value: 
@@ -75,6 +109,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -6765592623891416377, guid: 42a285258dcd94d4fa94cc335cd45b1c, type: 3}
     - target: {fileID: 7492512237567023208, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: m_SortingLayer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023208, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 61649585
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023208, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -84,11 +126,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023211, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -13.71
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023211, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -9.37
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023211, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -136,6 +178,9 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 0e949f66f76d3cb43a56d5a96a0a3f68, type: 2}
     m_RemovedComponents:
     - {fileID: 6108195585538764472, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+    - {fileID: 3844134658638800442, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+    - {fileID: 3469506423157028055, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+    - {fileID: 7492512237567023205, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
 --- !u!1 &1586327486243152130 stripped
 GameObject:
