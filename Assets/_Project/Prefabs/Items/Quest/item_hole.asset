@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6320f379fe7b48e8a1f0f793b8f7fab5, type: 3}
-  m_Name: item_grave
+  m_Name: item_hole
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 635629173079569165, guid: 9b4cbcf7f77ada54da89c677d6e685dd, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -23,7 +24,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: ItemName
       Entry: 1
-      Data: grave
+      Data: hole
     - Name: ItemPrefab
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0

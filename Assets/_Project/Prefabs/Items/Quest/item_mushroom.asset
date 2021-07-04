@@ -15,7 +15,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 9138563703494191510, guid: ac26819403d9d114d8d5c6a5e4c3bdad, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -25,5 +26,5 @@ MonoBehaviour:
       Entry: 1
       Data: mushroom
     - Name: ItemPrefab
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0

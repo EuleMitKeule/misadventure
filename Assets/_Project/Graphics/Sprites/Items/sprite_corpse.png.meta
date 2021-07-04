@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: 7758248360080680430
     second: sprite_corpse_1
+  - first:
+      213: -7138768880475900451
+    second: sprite_corpse_2
+  - first:
+      213: -5838207171848259008
+    second: sprite_corpse_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -134,6 +140,48 @@ TextureImporter:
       bones: []
       spriteID: ee5addd47c5daab60800000000000000
       internalID: 7758248360080680430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_corpse_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd5fe99a68ffdec90800000000000000
+      internalID: -7138768880475900451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_corpse_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04ab8d462858afea0800000000000000
+      internalID: -5838207171848259008
       vertices: []
       indices: 
       edges: []
