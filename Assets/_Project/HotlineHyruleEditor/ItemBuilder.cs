@@ -12,7 +12,7 @@ namespace HotlineHyruleEditor
     {
         public static string Path => "Assets/_Project/Prefabs/Items";
 
-        public static ItemData CreateItem(string itemName, string path, Type itemType, bool createPrefab)
+        public static ItemData CreateItem(string itemName, Type itemType, bool createPrefab)
         {
             if (itemName == null || !Regex.IsMatch(itemName, @"^([a-z])+(_([a-z])+)*$"))
             { 
@@ -45,7 +45,7 @@ namespace HotlineHyruleEditor
                 var itemComponent = itemPrefab.AddComponent<ItemComponent>();
                 itemComponent.itemDatas.Add(itemData);
 
-                PrefabUtility.SaveAsPrefabAsset(itemPrefab, itemPath);
+                PrefabUtility.SaveAsPrefabAsset(itemPrefab, itemPrefabPath);
 
                 itemPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(itemPrefabPath);
 

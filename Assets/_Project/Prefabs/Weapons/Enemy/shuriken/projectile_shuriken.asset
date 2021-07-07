@@ -20,7 +20,7 @@ MonoBehaviour:
   isSticky: 1
   notStickyOnPlayer: 1
   penetrations: 0
-  impactParticleSystem: {fileID: 0}
+  impactParticleSystem: {fileID: 6858063568646399262, guid: 3f8750f6bcae84e40b0939a98a9307fa, type: 3}
   weaponEffectTiles: []
   weaponEffectTilemapName: tilemap_weapon_effect
   movementSpeed: 25

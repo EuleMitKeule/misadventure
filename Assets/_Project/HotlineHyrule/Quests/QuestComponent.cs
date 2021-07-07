@@ -169,20 +169,23 @@ namespace HotlineHyrule.Quests
 
         void OnItemConsumed(object sender, ItemEventArgs e)
         {
-            if (SearchQuestTargets.All(target => target.item != e.ItemData) &&
-                TreasureQuestTargets.All(target => target.treasureItem != e.ItemData)) return;
+            // if (SearchQuestTargets.All(target => target.item != e.ItemData) &&
+            //     TreasureQuestTargets.All(target => target.treasureItem != e.ItemData)) return;
             
             FoundItems.Add(e.ItemData);
 
-            var searchQuestTarget = SearchQuestTargets.Find(target => target.item == e.ItemData);
             var treasureQuestTarget = TreasureQuestTargets.Find(target => target.treasureItem == e.ItemData);
 
-            if (searchQuestTarget != null)
+            foreach (var searchQuestTarget in SearchQuestTargets)
             {
+                var isCompleted =
+                    searchQuestTarget.Items.Keys.All(item => searchQuestTarget.Items[item] <= FoundItems.Count(foundItem => foundItem == item));
+                if (!isCompleted) continue;
+                
                 if (ReachedTargets.Contains(searchQuestTarget)) return;
             
                 ReachedTargets.Add(searchQuestTarget);
-                QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(searchQuestTarget));       
+                QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(searchQuestTarget));
             }
 
             if (treasureQuestTarget != null)

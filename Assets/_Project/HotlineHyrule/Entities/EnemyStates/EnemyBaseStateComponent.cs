@@ -15,14 +15,8 @@ namespace HotlineHyrule.Entities.EnemyStates
         protected void SetState(Type stateType) =>
             ChangeRequested?.Invoke(stateType);
 
-        protected Type PassiveState =>
-            States.First(e =>
-                e is EnemyPatrolStateComponent ||
-                e is EnemyGuardStateComponent)
-                .GetType();
-
         protected Type AfterAttackState =>
-            States.Find(e => e is EnemySearchStateComponent)?.GetType() ?? PassiveState;
+            States.Find(e => e is EnemySearchStateComponent)?.GetType() ?? EnemyComponent.PassiveState;
 
         protected List<EnemyBaseStateComponent> States { get; private set; }
         protected Rigidbody2D Rigidbody { get; private set; }

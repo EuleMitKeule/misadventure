@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1634ab00f9b94a66bf6a7eaacdc248f4, type: 3}
-  m_Name: level_forest_01
+  m_Name: level_forest_general_03
   m_EditorClassIdentifier: 
-  areaName: Forest Clearing
-  areaText: We entered a clearing in the forest.
-  areaFinishedText: We exited the clearing.
-  questData: {fileID: 11400000, guid: b7405a6f603df0347ac408e783ecc6fd, type: 2}
-  playerSpawnPosition: {x: -5, y: -15, z: 0}
+  areaName: Forest Lake
+  areaText: This lake seemed to be infused with magic energy.
+  areaFinishedText: We felt envigorated by the lake's energy as we proceeded through
+    the forest.
+  questData: {fileID: 11400000, guid: d588924489b790348b3785763cf8e340, type: 2}
+  playerSpawnPosition: {x: -36, y: -3, z: 0}
   bgmData: {fileID: 11400000, guid: 950e16e6ce8971344b5110535d6d2a9a, type: 2}

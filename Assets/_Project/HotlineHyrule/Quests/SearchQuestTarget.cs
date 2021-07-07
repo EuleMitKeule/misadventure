@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using HotlineHyrule.Items;
+using Sirenix.Serialization;
 using UnityEngine;
 
 namespace HotlineHyrule.Quests
@@ -7,6 +9,7 @@ namespace HotlineHyrule.Quests
     [Serializable]
     public class SearchQuestTarget : QuestTarget
     {
-        [SerializeField] public ItemData item;
+        [OdinSerialize]
+        public Dictionary<ItemData, int> Items { get; private set; } = new Dictionary<ItemData, int>();
     }
 }

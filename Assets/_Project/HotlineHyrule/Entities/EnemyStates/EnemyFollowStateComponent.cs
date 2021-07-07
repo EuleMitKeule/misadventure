@@ -28,7 +28,11 @@ namespace HotlineHyrule.Entities.EnemyStates
 
             if (!EnemyComponent.IsPlayerFollowable)
             {
-                SetState<EnemySearchStateComponent>();
+                var nextState =
+                    States.Find(e => e is EnemySearchStateComponent)?.GetType() ?? 
+                    EnemyComponent.PassiveState;
+                
+                SetState(nextState);
             }
         }
     }
