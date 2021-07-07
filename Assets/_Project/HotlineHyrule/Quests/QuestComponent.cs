@@ -178,6 +178,8 @@ namespace HotlineHyrule.Quests
 
             foreach (var searchQuestTarget in SearchQuestTargets)
             {
+                if (searchQuestTarget.Items == null) continue;
+                
                 var isCompleted =
                     searchQuestTarget.Items.Keys.All(item => searchQuestTarget.Items[item] <= FoundItems.Count(foundItem => foundItem == item));
                 if (!isCompleted) continue;
