@@ -29,6 +29,39 @@ TextureImporter:
   - first:
       213: 1278530632675379641
     second: sprite_tileset_ground_japanese_8
+  - first:
+      213: -7617457978147487295
+    second: sprite_tileset_ground_japanese_9
+  - first:
+      213: -5485785274312810394
+    second: sprite_tileset_ground_japanese_10
+  - first:
+      213: 923581293962776594
+    second: sprite_tileset_ground_japanese_11
+  - first:
+      213: -2893432647620313793
+    second: sprite_tileset_ground_japanese_12
+  - first:
+      213: 1731368622777845942
+    second: sprite_tileset_ground_japanese_13
+  - first:
+      213: 3502368982965853721
+    second: sprite_tileset_ground_japanese_14
+  - first:
+      213: 7476566643043011452
+    second: sprite_tileset_ground_japanese_15
+  - first:
+      213: -5993047522635745968
+    second: sprite_tileset_ground_japanese_16
+  - first:
+      213: 7450002807382939752
+    second: sprite_tileset_ground_japanese_17
+  - first:
+      213: -1079789417678788130
+    second: sprite_tileset_ground_japanese_18
+  - first:
+      213: -5380588498427879110
+    second: sprite_tileset_ground_japanese_19
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -122,7 +155,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -143,7 +176,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 32
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -164,7 +197,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 32
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -184,8 +217,8 @@ TextureImporter:
       name: sprite_tileset_ground_japanese_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
+        x: 48
+        y: 64
         width: 16
         height: 16
       alignment: 0
@@ -205,8 +238,8 @@ TextureImporter:
       name: sprite_tileset_ground_japanese_4
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
+        x: 0
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -226,8 +259,8 @@ TextureImporter:
       name: sprite_tileset_ground_japanese_5
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
+        x: 16
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -247,8 +280,8 @@ TextureImporter:
       name: sprite_tileset_ground_japanese_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 32
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -268,8 +301,8 @@ TextureImporter:
       name: sprite_tileset_ground_japanese_7
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 48
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -289,8 +322,8 @@ TextureImporter:
       name: sprite_tileset_ground_japanese_8
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
+        x: 0
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -302,6 +335,237 @@ TextureImporter:
       bones: []
       spriteID: 9b9421326d04eb110800000000000000
       internalID: 1278530632675379641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_ground_japanese_9
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c1cd01f35a594690800000000000000
+      internalID: -7617457978147487295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_ground_japanese_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6602482ab539ed3b0800000000000000
+      internalID: -5485785274312810394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_ground_japanese_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 210d8d32b4831dc00800000000000000
+      internalID: 923581293962776594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_ground_japanese_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3db219465678d7d0800000000000000
+      internalID: -2893432647620313793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_ground_japanese_13
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b84ee7d69e070810800000000000000
+      internalID: 1731368622777845942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_ground_japanese_14
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91e960e980aea9030800000000000000
+      internalID: 3502368982965853721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_ground_japanese_15
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7b0d12dfb912c760800000000000000
+      internalID: 7476566643043011452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_ground_japanese_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 055f24bd70b64dca0800000000000000
+      internalID: -5993047522635745968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_ground_japanese_17
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86819bdd41ab36760800000000000000
+      internalID: 7450002807382939752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_ground_japanese_18
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed9a70fde31d301f0800000000000000
+      internalID: -1079789417678788130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_ground_japanese_19
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3167aca44f4455b0800000000000000
+      internalID: -5380588498427879110
       vertices: []
       indices: 
       edges: []
