@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16756a7c42f247138c2fdd1e06d1d9bc, type: 3}
   m_Name: tile_explosive_present
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 1549955567050341098, guid: 008efd6ca3b24534f9de0a5f639d3c6e, type: 3}
+  m_DefaultSprite: {fileID: 21300000, guid: 4dfa98c84426d2d489b3c415cc6b12e4, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 2
   m_TilingRules: []
   itemEffects:
   - {fileID: 11400000, guid: 74642ffdf905c3142a79b4793e0f44e8, type: 2}
+  - {fileID: 11400000, guid: d99a9217006240b45a2c69825432e731, type: 2}
