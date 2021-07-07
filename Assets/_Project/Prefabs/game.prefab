@@ -2777,6 +2777,8 @@ MonoBehaviour:
     image: {fileID: 2159692202350189988, guid: ee02e07cdebca8b20ac1cd7a3b833102, type: 3}
   - data: {fileID: 11400000, guid: d99a9217006240b45a2c69825432e731, type: 2}
     image: {fileID: 8493866793881364569, guid: 57e1bd62b13ad81bbbbb718a29de6043, type: 3}
+  - data: {fileID: 11400000, guid: 917df7b7079e4bd45a5ade2a3fc8e1c8, type: 2}
+    image: {fileID: 778659788618280871, guid: 2d89a73aa2fe37d4b97453f5b8931e44, type: 3}
 --- !u!1 &8366423192119765287
 GameObject:
   m_ObjectHideFlags: 0

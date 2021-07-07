@@ -58,8 +58,10 @@ namespace HotlineHyrule.UserInterface
         {
             foreach (var itemDataImage in itemDataImages)
             {
+                
                 if (itemDataImage.data == e.ItemData)
                 {
+                    
                     var imageObj = itemDataImage.image.gameObject;
                     var instance = Instantiate(imageObj, imageObj.transform.position, imageObj.transform.rotation);
                     instance.transform.SetParent(gameObject.transform, false);
