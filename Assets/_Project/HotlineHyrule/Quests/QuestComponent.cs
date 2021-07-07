@@ -51,11 +51,13 @@ namespace HotlineHyrule.Quests
 
         void Start()
         {
-            var itemPickupComponent = Locator.PlayerComponent.GetComponent<ItemPickupComponent>();
-            itemPickupComponent.ItemConsumed += OnItemConsumed;
-
-            var weaponComponent = Locator.PlayerComponent.GetComponent<WeaponComponent>();
-            weaponComponent.AttackStarted += OnAttackStarted;
+            if (Locator.PlayerComponent)
+            {
+                var itemPickupComponent = Locator.PlayerComponent.GetComponent<ItemPickupComponent>();
+                itemPickupComponent.ItemConsumed += OnItemConsumed;
+                var weaponComponent = Locator.PlayerComponent.GetComponent<WeaponComponent>();
+                weaponComponent.AttackStarted += OnAttackStarted;
+            }
 
             Locator.LevelComponent.LevelFinished += OnLevelFinished;
         }

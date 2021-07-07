@@ -17,3 +17,4 @@ MonoBehaviour:
   areaFinishedText: 
   questData: {fileID: 0}
   playerSpawnPosition: {x: -22, y: -11, z: 0}
+  bgmData: {fileID: 11400000, guid: 950e16e6ce8971344b5110535d6d2a9a, type: 2}

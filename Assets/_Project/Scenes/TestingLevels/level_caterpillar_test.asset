@@ -17,5 +17,3 @@ MonoBehaviour:
   areaFinishedText: ' '
   questData: {fileID: 0}
   playerSpawnPosition: {x: -5, y: -15, z: 0}
-  isRaining: 0
-  isSnowing: 0

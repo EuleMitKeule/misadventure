@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using HotlineHyrule;
 using HotlineHyrule.Entities;
 using HotlineHyrule.Items;
@@ -18,6 +19,12 @@ namespace HotlineHyruleEditor.GameManager
 
         public static WeaponData Create(string weaponName, WeaponType weaponType, WeaponOwnerType weaponOwnerType, ProjectileType projectileType)
         {
+            if (weaponName == null || !Regex.IsMatch(weaponName, @"^([a-z])+(_([a-z])+)*$"))
+            { 
+                Debug.LogError("Weapon name is invalid. Use only lower-case letters and underscores.");
+                return null;
+            }
+
             var weaponPrefab = CreateWeaponPrefab(weaponName, weaponOwnerType);
 
             var weaponData = weaponType switch
@@ -317,6 +324,12 @@ namespace HotlineHyruleEditor.GameManager
 
         public static void Rename(WeaponData weaponData, string newName)
         {
+            if (newName == null || !Regex.IsMatch(newName, @"^([a-z])+(_([a-z])+)*$"))
+            { 
+                Debug.LogError("Weapon name is invalid. Use only lower-case letters and underscores.");
+                return;
+            }
+
             var assetPath = AssetDatabase.GetAssetPath(weaponData);
             var weaponDirectory = System.IO.Path.GetDirectoryName(assetPath);
             var weaponName = System.IO.Path.GetFileNameWithoutExtension(weaponDirectory);

@@ -112,7 +112,7 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// Whether the enemy is currently able to follow the player.
         /// </summary>
-        public bool IsPlayerFollowable => IsPlayerInFollowRange && IsPlayerInAngle && IsPlayerVisible;
+        public bool IsPlayerFollowable => Locator.PlayerComponent && IsPlayerInFollowRange && IsPlayerInAngle && IsPlayerVisible;
         /// <summary>
         /// Whether the enemy is currently able to attack the player.
         /// </summary>
@@ -268,25 +268,39 @@ namespace HotlineHyrule.Entities
             {
                 SetState<EnemyDyingStateComponent>();
 
-                foreach (var item in itemDrops)
-                {
-                    if (Random.value <= item.dropRate)
-                    {
-                        Instantiate(item.data.ItemPrefab, transform.position, Quaternion.identity);
-                    }
-                }
+                DropItems();
 
                 var entityEventArgs = new EntityEventArgs(gameObject);
                 EnemyKilled?.Invoke(this, entityEventArgs);
             }
         }
 
+        void DropItems()
+        {
+            foreach (var item in itemDrops)
+            {
+                if (Random.value <= item.dropRate)
+                {
+                    var itemObject = Instantiate(item.data.ItemPrefab, transform.position, Quaternion.identity);
+                    var droppedWeaponComponent = itemObject.GetComponent<DroppedWeaponComponent>();
+                    var itemComponent = itemObject.GetComponent<ItemComponent>();
+
+                    var weaponData = item.data as WeaponData;
+
+                    if (!weaponData) continue;
+                    if (!droppedWeaponComponent) continue;
+
+                    var chargeOffsetFactor =
+                        Random.Range(-weaponData.chargeRandomness, weaponData.chargeRandomness);
+                    droppedWeaponComponent.weaponCharges = weaponData.weaponCharges +
+                                                           (int)(weaponData.weaponCharges * chargeOffsetFactor);
+                }
+            }
+        }
+
         void OnCollisionEnter2D(Collision2D other)
         {
             if (state) state.OnCollisionEnterState(other);
-            
-            if (other.gameObject.layer != LayerMask.NameToLayer("enemy")) return;
-            transform.Rotate(Vector3.forward, 90f);
         }
         
 #if UNITY_EDITOR

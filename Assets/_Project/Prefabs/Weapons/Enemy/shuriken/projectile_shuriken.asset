@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4aeb7eff8ae43649ba4bc3fd03f4190, type: 3}
   m_Name: projectile_shuriken
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 8
   impactMask:
     serializedVersion: 2
     m_Bits: 576

@@ -2671,8 +2671,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95183ea443337834dbea75b5e54737ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugBGM1: {fileID: 8300000, guid: e2ae22b19e0fe134f86a3ca98fa412cc, type: 3}
-  debugBGM2: {fileID: 8300000, guid: 0112207d51fdfc4439e9cc9c61ffae65, type: 3}
+  bgmAudioMixerGroup: {fileID: 4137990136780820279, guid: d811e6afab6167b47815067b88827273, type: 2}
+  sfxAudioMixerGroup: {fileID: 491457270032787840, guid: d811e6afab6167b47815067b88827273, type: 2}
+  debugData1: {fileID: 11400000, guid: 0b34f64cdacaf534e93e18a905414ec4, type: 2}
+  debugData2: {fileID: 11400000, guid: f0e242accf8efad46aba5b7cb4bd8266, type: 2}
   debugFadeBGMAction:
     m_Name: Debug Fade BGM
     m_Type: 0

@@ -52,6 +52,7 @@ namespace HotlineHyrule.Level
             if (e.IsMenu) return;
 
             Locator.PlayerComponent.transform.position = e.LevelData.playerSpawnPosition.ToWorld();
+            Locator.SoundComponent.PlayBGM(e.LevelData.bgmData);
         }
 
         public void FinishLevel()

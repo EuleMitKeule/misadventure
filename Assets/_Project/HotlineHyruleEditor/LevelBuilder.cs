@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text.RegularExpressions;
 using Cinemachine;
 using HotlineHyrule.Level;
 using HotlineHyrule.Quests;
@@ -6,7 +7,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace HotlineHyruleEditor.GameManager
+namespace HotlineHyruleEditor
 {
     public static class LevelBuilder
     {
@@ -14,6 +15,12 @@ namespace HotlineHyruleEditor.GameManager
 
         public static LevelData CreateLevel(string name, string path)
         {
+            if (name == null || !Regex.IsMatch(name, @"^([a-z0-9])+(_([a-z0-9])+)*$"))
+            { 
+                Debug.LogError("Level name is invalid. Use only lower-case letters, numbers and underscores.");
+                return null;
+            }
+
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene);
 
             var cameraPrefab =
@@ -60,6 +67,27 @@ namespace HotlineHyruleEditor.GameManager
             AssetDatabase.SaveAssets();
 
             return levelData;
+        }
+        
+        public static LevelData Rename(LevelData level, string newName)
+        {
+            if (newName == null || !Regex.IsMatch(newName, @"^([a-z0-9])+(_([a-z0-9])+)*$"))
+            { 
+                Debug.LogError("Level name is invalid. Use only lower-case letters, numbers and underscores.");
+                return null;
+            }
+
+            var path = AssetDatabase.GetAssetPath(level);
+            AssetDatabase.RenameAsset(path, $"level_{newName}");
+
+            var scenePath = path.Replace("level_", "scene_").Replace(".asset", ".unity");
+            AssetDatabase.RenameAsset(scenePath, $"scene_{newName}");
+
+            var questPath = path.Replace("level_", "quest_");
+            AssetDatabase.RenameAsset(questPath, $"quest_{newName}");
+            
+            AssetDatabase.SaveAssets();
+            return level;
         }
 
         public static QuestData CreateQuest(string name, string path)

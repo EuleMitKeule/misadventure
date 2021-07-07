@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4aeb7eff8ae43649ba4bc3fd03f4190, type: 3}
   m_Name: projectile_wand_fire
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 15
   impactMask:
     serializedVersion: 2
     m_Bits: 16896

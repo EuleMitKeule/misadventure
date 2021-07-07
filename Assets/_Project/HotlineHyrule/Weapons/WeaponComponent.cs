@@ -62,6 +62,7 @@ namespace HotlineHyrule.Weapons
         /// The last point in time the weapon was used at.
         /// </summary>
         float LastAttackTime { get; set; }
+        public bool CanMeleeAttack { get; set; }
         /// <summary>
         /// The currently equipped weapon object.
         /// </summary>
@@ -296,6 +297,8 @@ namespace HotlineHyrule.Weapons
         public void PerformMeleeAttack()
         {
             if (!HasMeleeWeapon) return;
+
+            CanMeleeAttack = true;
         }
 
         public void PerformConjuringAttack()
@@ -319,14 +322,26 @@ namespace HotlineHyrule.Weapons
             }
         }
 
-        void OnTriggerEnter2D(Collider2D other)
+        // void OnTriggerEnter2D(Collider2D other)
+        // {
+        //     if (!HasMeleeWeapon) return;
+        //
+        //     var healthComponent = other.GetComponent<HealthComponent>();
+        //     if (!healthComponent) return;
+        //
+        //     healthComponent.Health -= (int)(MeleeWeaponData.damage * DamageFactor) + DamageBonus;
+        // }
+
+        void OnTriggerStay2D(Collider2D other)
         {
+            if (!CanMeleeAttack) return;
             if (!HasMeleeWeapon) return;
-            
+
             var healthComponent = other.GetComponent<HealthComponent>();
             if (!healthComponent) return;
 
-            healthComponent.Health -= (int)(MeleeWeaponData.damage * DamageFactor) + DamageBonus;
+            healthComponent.Health -= (int) (MeleeWeaponData.damage * DamageFactor) + DamageBonus;
+            CanMeleeAttack = false;
         }
 
         void InvokeAttackFinished() => AttackFinished?.Invoke(this, EventArgs.Empty);
