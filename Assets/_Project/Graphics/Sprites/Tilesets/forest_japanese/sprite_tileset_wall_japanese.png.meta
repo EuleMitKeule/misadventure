@@ -1,67 +1,64 @@
 fileFormatVersion: 2
-guid: be1148532bceaa9b683446c8b5840b94
+guid: 994711882c14b2f91bc380df0a58cabc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -228694677622349781
-    second: sprite_tileset_bridge_0
+      213: 7448986386368043701
+    second: sprite_tileset_wall_japanese_0
   - first:
-      213: 4799907908184103628
-    second: sprite_tileset_bridge_1
+      213: 7218570035129888067
+    second: sprite_tileset_wall_japanese_1
   - first:
-      213: -2230403636062395268
-    second: sprite_tileset_bridge_2
+      213: -7734583038469754992
+    second: sprite_tileset_wall_japanese_2
   - first:
-      213: -2283509516445615756
-    second: sprite_tileset_bridge_3
+      213: 6983725389469321388
+    second: sprite_tileset_wall_japanese_3
   - first:
-      213: 7536788370483876987
-    second: sprite_tileset_bridge_4
+      213: 6400181407618413457
+    second: sprite_tileset_wall_japanese_4
   - first:
-      213: 8665778613092723922
-    second: sprite_tileset_bridge_5
+      213: 4717042069593856521
+    second: sprite_tileset_wall_japanese_5
   - first:
-      213: -46360078476083840
-    second: sprite_tileset_bridge_6
+      213: 8113741496468759267
+    second: sprite_tileset_wall_japanese_6
   - first:
-      213: -101332994531789155
-    second: sprite_tileset_bridge_7
+      213: -3560066444571003944
+    second: sprite_tileset_wall_japanese_7
   - first:
-      213: -8599621886103702890
-    second: sprite_tileset_bridge_8
+      213: -7789561597044284694
+    second: sprite_tileset_wall_japanese_8
   - first:
-      213: -4063857919733065587
-    second: sprite_tileset_bridge_9
+      213: 5248857022580796288
+    second: sprite_tileset_wall_japanese_9
   - first:
-      213: -1877099723053479596
-    second: sprite_tileset_bridge_10
+      213: 8166482745562041554
+    second: sprite_tileset_wall_japanese_10
   - first:
-      213: -8558789470163426221
-    second: sprite_tileset_bridge_11
+      213: 7798475798002646636
+    second: sprite_tileset_wall_japanese_11
   - first:
-      213: 667139998140293097
-    second: sprite_tileset_bridge_12
+      213: -6696416017029457940
+    second: sprite_tileset_wall_japanese_12
   - first:
-      213: -5175143990262306092
-    second: sprite_tileset_bridge_13
+      213: 2775409375766260258
+    second: sprite_tileset_wall_japanese_13
   - first:
-      213: -1879226991401326389
-    second: sprite_tileset_bridge_14
+      213: 376449994057134847
+    second: sprite_tileset_wall_japanese_14
   - first:
-      213: -7911021424590609039
-    second: sprite_tileset_bridge_15
+      213: -484759320027585749
+    second: sprite_tileset_wall_japanese_15
   - first:
-      213: 5977189630226129443
-    second: sprite_tileset_bridge_16
+      213: 295305059742850118
+    second: sprite_tileset_wall_japanese_16
   - first:
-      213: 3892873195503558573
-    second: sprite_tileset_bridge_17
+      213: -2843384600588808719
+    second: sprite_tileset_wall_japanese_17
   - first:
-      213: -4315269935434587182
-    second: sprite_tileset_bridge_18
-  - first:
-      213: -4871351079421602181
-    second: sprite_tileset_bridge_19
+      213: 5374091516748787960
+    second: sprite_tileset_wall_japanese_18
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -151,91 +148,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_tileset_bridge_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b202c42076383dcf0800000000000000
-      internalID: -228694677622349781
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_tileset_bridge_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ccad6edbfc2bc9240800000000000000
-      internalID: 4799907908184103628
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_tileset_bridge_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c74e2cec5b30c01e0800000000000000
-      internalID: -2230403636062395268
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_tileset_bridge_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 80
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 479f80f71385f40e0800000000000000
-      internalID: -2283509516445615756
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_tileset_bridge_4
+      name: sprite_tileset_wall_japanese_0
       rect:
         serializedVersion: 2
         x: 0
@@ -249,14 +162,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b749cf1671d089860800000000000000
-      internalID: 7536788370483876987
+      spriteID: 5ba1038e6ad106760800000000000000
+      internalID: 7448986386368043701
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_5
+      name: sprite_tileset_wall_japanese_1
       rect:
         serializedVersion: 2
         x: 16
@@ -270,14 +183,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2dca19f3cb7034870800000000000000
-      internalID: 8665778613092723922
+      spriteID: 34d223a83338d2460800000000000000
+      internalID: 7218570035129888067
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_6
+      name: sprite_tileset_wall_japanese_2
       rect:
         serializedVersion: 2
         x: 32
@@ -291,14 +204,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08d7ca611cb4b5ff0800000000000000
-      internalID: -46360078476083840
+      spriteID: 09faf32c4bd39a490800000000000000
+      internalID: -7734583038469754992
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_7
+      name: sprite_tileset_wall_japanese_3
       rect:
         serializedVersion: 2
         x: 48
@@ -312,14 +225,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d96f7e8ad2ef79ef0800000000000000
-      internalID: -101332994531789155
+      spriteID: ca802388d3d2be060800000000000000
+      internalID: 6983725389469321388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_8
+      name: sprite_tileset_wall_japanese_4
       rect:
         serializedVersion: 2
         x: 0
@@ -333,14 +246,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6923d14157108a880800000000000000
-      internalID: -8599621886103702890
+      spriteID: 193b723a41302d850800000000000000
+      internalID: 6400181407618413457
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_9
+      name: sprite_tileset_wall_japanese_5
       rect:
         serializedVersion: 2
         x: 16
@@ -354,14 +267,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8817a4d0c64a97c0800000000000000
-      internalID: -4063857919733065587
+      spriteID: 90a17b435cc467140800000000000000
+      internalID: 4717042069593856521
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_10
+      name: sprite_tileset_wall_japanese_6
       rect:
         serializedVersion: 2
         x: 32
@@ -375,14 +288,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 459c9674fb333f5e0800000000000000
-      internalID: -1877099723053479596
+      spriteID: 3e2ed5017ecc99070800000000000000
+      internalID: 8113741496468759267
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_11
+      name: sprite_tileset_wall_japanese_7
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d3be824e6a189ec0800000000000000
+      internalID: -3560066444571003944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_wall_japanese_8
       rect:
         serializedVersion: 2
         x: 0
@@ -396,14 +330,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3542e83c252193980800000000000000
-      internalID: -8558789470163426221
+      spriteID: ae2a6249ffae5e390800000000000000
+      internalID: -7789561597044284694
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_12
+      name: sprite_tileset_wall_japanese_9
       rect:
         serializedVersion: 2
         x: 16
@@ -417,14 +351,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ef5b9c2b48224900800000000000000
-      internalID: 667139998140293097
+      spriteID: 08b2eb307afa7d840800000000000000
+      internalID: 5248857022580796288
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_13
+      name: sprite_tileset_wall_japanese_10
       rect:
         serializedVersion: 2
         x: 32
@@ -438,14 +372,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4daeaeeb5f13e28b0800000000000000
-      internalID: -5175143990262306092
+      spriteID: 2dc05990acc255170800000000000000
+      internalID: 8166482745562041554
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_14
+      name: sprite_tileset_wall_japanese_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6ebd619b60c93c60800000000000000
+      internalID: 7798475798002646636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_wall_japanese_12
       rect:
         serializedVersion: 2
         x: 0
@@ -459,14 +414,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc8a2350205abe5e0800000000000000
-      internalID: -1879226991401326389
+      spriteID: ce719b49c1d8113a0800000000000000
+      internalID: -6696416017029457940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_15
+      name: sprite_tileset_wall_japanese_13
       rect:
         serializedVersion: 2
         x: 16
@@ -480,14 +435,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 175a5c0cde7663290800000000000000
-      internalID: -7911021424590609039
+      spriteID: 22a26dc5f1c348620800000000000000
+      internalID: 2775409375766260258
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_16
+      name: sprite_tileset_wall_japanese_14
       rect:
         serializedVersion: 2
         x: 32
@@ -501,14 +456,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 322e6c8dc4e33f250800000000000000
-      internalID: 5977189630226129443
+      spriteID: ff2397b664b693500800000000000000
+      internalID: 376449994057134847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_17
+      name: sprite_tileset_wall_japanese_15
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b23223087f9c549f0800000000000000
+      internalID: -484759320027585749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_tileset_wall_japanese_16
       rect:
         serializedVersion: 2
         x: 0
@@ -522,14 +498,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: daf11a5cb83460630800000000000000
-      internalID: 3892873195503558573
+      spriteID: 64c19522362291400800000000000000
+      internalID: 295305059742850118
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_18
+      name: sprite_tileset_wall_japanese_17
       rect:
         serializedVersion: 2
         x: 16
@@ -543,14 +519,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d3af746bd41d14c0800000000000000
-      internalID: -4315269935434587182
+      spriteID: 1fd861a45c44a88d0800000000000000
+      internalID: -2843384600588808719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_tileset_bridge_19
+      name: sprite_tileset_wall_japanese_18
       rect:
         serializedVersion: 2
         x: 32
@@ -564,8 +540,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b761cd6b00c756cb0800000000000000
-      internalID: -4871351079421602181
+      spriteID: 8f07046e2cb949a40800000000000000
+      internalID: 5374091516748787960
       vertices: []
       indices: 
       edges: []
