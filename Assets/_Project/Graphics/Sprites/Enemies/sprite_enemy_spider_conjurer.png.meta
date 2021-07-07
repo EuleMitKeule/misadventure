@@ -1,22 +1,31 @@
 fileFormatVersion: 2
-guid: 63e6d2aeeaa9df35a897c518f9369353
+guid: b46f161f9a79f074cbcaa503090cda52
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7921582662038224507
-    second: sprite_weapon_shuriken_0
+      213: 6628743663869123772
+    second: sprite_enemy_spider_conjurer_0
   - first:
-      213: 4173683825231782097
-    second: sprite_weapon_shuriken_1
+      213: 2304749741865152527
+    second: sprite_enemy_spider_conjurer_1
   - first:
-      213: -3426038622689228570
-    second: sprite_weapon_shuriken_2
+      213: -2183267793094480270
+    second: sprite_enemy_spider_conjurer_2
   - first:
-      213: 5748735288563050335
-    second: sprite_weapon_shuriken_3
+      213: 8427237898447794829
+    second: sprite_enemy_spider_conjurer_3
   - first:
-      213: -1725248098522426967
-    second: sprite_weapon_shuriken_4
+      213: -6164810431632296642
+    second: sprite_enemy_spider_conjurer_4
+  - first:
+      213: 7895368217881382442
+    second: sprite_enemy_spider_conjurer_5
+  - first:
+      213: -3414215342488749430
+    second: sprite_enemy_spider_conjurer_6
+  - first:
+      213: 1261962300660289603
+    second: sprite_enemy_spider_conjurer_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -106,106 +115,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_weapon_shuriken_0
+      name: sprite_enemy_spider_conjurer_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 12
-        height: 10
-      alignment: 9
-      pivot: {x: 0.7916667, y: 0.16666667}
+        y: 1
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7e7ea5f57d1fed60800000000000000
-      internalID: 7921582662038224507
+      spriteID: cbc5a00ed370efb50800000000000000
+      internalID: 6628743663869123772
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_weapon_shuriken_1
-      rect:
-        serializedVersion: 2
-        x: 12
-        y: 0
-        width: 4
-        height: 12
-      alignment: 9
-      pivot: {x: 0.125, y: 0.16666667}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d0ebbf6357ebe930800000000000000
-      internalID: 4173683825231782097
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_weapon_shuriken_2
+      name: sprite_enemy_spider_conjurer_1
       rect:
         serializedVersion: 2
         x: 16
-        y: 0
-        width: 5
-        height: 9
+        y: 1
+        width: 16
+        height: 15
       alignment: 9
-      pivot: {x: 0.3, y: 0.22222222}
+      pivot: {x: 0.5, y: 0.53333336}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e807db46044470d0800000000000000
-      internalID: -3426038622689228570
+      spriteID: f00bb0cddad1cff10800000000000000
+      internalID: 2304749741865152527
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_weapon_shuriken_3
+      name: sprite_enemy_spider_conjurer_2
       rect:
         serializedVersion: 2
-        x: 21
-        y: 0
-        width: 5
-        height: 7
+        x: 32
+        y: 1
+        width: 15
+        height: 13
       alignment: 9
-      pivot: {x: 0.3, y: 0.2857143}
+      pivot: {x: 0.53333336, y: 0.61538464}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f57ad8e694c97cf40800000000000000
-      internalID: 5748735288563050335
+      spriteID: 27e6d07728973b1e0800000000000000
+      internalID: -2183267793094480270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_weapon_shuriken_4
+      name: sprite_enemy_spider_conjurer_3
       rect:
         serializedVersion: 2
-        x: 26
-        y: 0
-        width: 10
-        height: 9
+        x: 47
+        y: 1
+        width: 16
+        height: 20
       alignment: 9
-      pivot: {x: 0.65, y: 0.22222222}
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a11722ceffae08e0800000000000000
-      internalID: -1725248098522426967
+      spriteID: d82b0be183093f470800000000000000
+      internalID: 8427237898447794829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_enemy_spider_conjurer_4
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 1
+        width: 16
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3809524}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e353fe23391327aa0800000000000000
+      internalID: -6164810431632296642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_enemy_spider_conjurer_5
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 2
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4375}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2e8abd009bf19d60800000000000000
+      internalID: 7895368217881382442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_enemy_spider_conjurer_6
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 1
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8af44c3c354e90d0800000000000000
+      internalID: -3414215342488749430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite_enemy_spider_conjurer_7
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 0
+        width: 20
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3409acab604638110800000000000000
+      internalID: 1261962300660289603
       vertices: []
       indices: 
       edges: []
