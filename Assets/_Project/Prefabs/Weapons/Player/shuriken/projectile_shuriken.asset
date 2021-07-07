@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4aeb7eff8ae43649ba4bc3fd03f4190, type: 3}
+  m_Name: projectile_shuriken
+  m_EditorClassIdentifier: 
+  damage: 8
+  impactMask:
+    serializedVersion: 2
+    m_Bits: 16896
+  impactRaycastOffset: 0
+  isSticky: 0
+  notStickyOnPlayer: 0
+  penetrations: 0
+  impactParticleSystem: {fileID: 6858063568646399262, guid: bd625b684e8112145a3c834e931dc617, type: 3}
+  weaponEffectTiles: []
+  weaponEffectTilemapName: tilemap_weapon_effect
+  movementSpeed: 25

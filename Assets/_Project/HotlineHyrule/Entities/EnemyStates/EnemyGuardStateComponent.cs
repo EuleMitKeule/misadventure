@@ -43,6 +43,8 @@ namespace HotlineHyrule.Entities.EnemyStates
 
         public override void ExitState()
         {
+            base.ExitState();
+            
             if (PathfindingComponent) PathfindingComponent.DestinationReached -= OnDestinationReached;
             PathfindingComponent.ClearDestination();
         }

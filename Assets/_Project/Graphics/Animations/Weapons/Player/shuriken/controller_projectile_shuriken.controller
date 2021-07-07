@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: controller_projectile_shuriken
+  m_Controller: {fileID: 9100000, guid: 722517cdec31a3141ad795cefa8f186f, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 1dc1426920239cd4cbb14fe692d06919, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d15004d2e8ec66249b8dfbfbc0dcbe7e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a2e842a115f92244a88b50723f22f781, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f8d26e00ee7a74f418646f55207910f0, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: fa559ded3cd4d8e4fa9ecbd99073872a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4dce7d6de270b9947af1d3ef6cc92a7e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 649dad6a92c3df3408bcc24822370ca6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 592d13a6704818743af226a6b239d9af, type: 2}

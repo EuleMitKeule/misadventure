@@ -36,6 +36,15 @@ namespace HotlineHyrule.Entities
         [MinValue(0f)]
         [SuffixLabel("1/s")]
         float DamageFrequency { get; set; }
+        [BoxGroup("General")]
+        [OdinSerialize]
+        RuntimeAnimatorController HeadController { get; set; }
+        [BoxGroup("General")]
+        [OdinSerialize]
+        RuntimeAnimatorController BodyController { get; set; }
+        [BoxGroup("General")]
+        [OdinSerialize]
+        RuntimeAnimatorController TailController { get; set; }
         [BoxGroup("AI")]
         [OdinSerialize]
         [MinValue(0f)]
@@ -127,6 +136,11 @@ namespace HotlineHyrule.Entities
         [ReadOnly]
         Dictionary<SegmentComponent, HealthComponent> SegmentToHealthComponent { get; } =
             new Dictionary<SegmentComponent, HealthComponent>();
+        [FoldoutGroup("Debug")]
+        [ShowInInspector]
+        [ReadOnly]
+        Dictionary<SegmentComponent, Animator> SegmentToAnimator { get; } =
+            new Dictionary<SegmentComponent, Animator>();
 
         void Awake()
         {
@@ -139,6 +153,12 @@ namespace HotlineHyrule.Entities
                 var segment = segmentObject.GetComponent<SegmentComponent>();
                 
                 Segments.Add(segment);
+
+                var animator = segment.GetComponent<Animator>();
+                SegmentToAnimator.Add(segment, animator);
+
+                animator.runtimeAnimatorController = i == 0 ? HeadController : i == SegmentCount - 1 ? TailController : BodyController;
+                animator.SetBool("isMoving", true);
             }
 
             for (var i = 0; i < SegmentCount; i++)
@@ -267,17 +287,28 @@ namespace HotlineHyrule.Entities
                 healthComponent.HealthChanged -= OnHealthChanged;
                 healthComponent.ResetHealth();
                 healthComponent.HealthChanged += OnHealthChanged;
+
+                if (segment.IsTail)
+                {
+                    var tailAnimator = SegmentToAnimator[segment].runtimeAnimatorController = TailController;
+                }
             }
             
             var newHeadIndex = segments.Count / 2;
             var newHeadSegment = segments[newHeadIndex];
             newHeadSegment.SplitHere();
+
+            var animator = SegmentToAnimator[newHeadSegment];
+            if (animator) animator.runtimeAnimatorController = HeadController;
             
             SetState<CaterpillarMovingStateComponent>(newHeadSegment);
         }
 
         void Kill(SegmentComponent segment)
         {
+            var animator = SegmentToAnimator[segment];
+            if (animator) animator.SetTrigger("dying");
+
             CurrentHealth -= HealthPerHead;
             
             SegmentToState.Remove(segment);

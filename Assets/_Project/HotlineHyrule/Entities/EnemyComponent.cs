@@ -56,6 +56,7 @@ namespace HotlineHyrule.Entities
         /// If enabled, Animation for 'attacking2' will be played instead of 'attacking'
         /// </summary>
         public bool UsingAttack2;
+        [SerializeField] bool lockRotation;
 
         /// <summary>
         /// Particle system prefab to spawn when taking damage.
@@ -112,7 +113,7 @@ namespace HotlineHyrule.Entities
         /// <summary>
         /// Whether the enemy is currently able to follow the player.
         /// </summary>
-        public bool IsPlayerFollowable => IsPlayerInFollowRange && IsPlayerInAngle && IsPlayerVisible;
+        public bool IsPlayerFollowable => Locator.PlayerComponent && IsPlayerInFollowRange && IsPlayerInAngle && IsPlayerVisible;
         /// <summary>
         /// Whether the enemy is currently able to attack the player.
         /// </summary>
@@ -187,6 +188,13 @@ namespace HotlineHyrule.Entities
 
         List<EnemyBaseStateComponent> States { get; set; }
 
+        public Type PassiveState =>
+            States.First(e =>
+                    e is EnemyPatrolStateComponent ||
+                    e is EnemyGuardStateComponent ||
+                    e is GhostGuardStateComponent) 
+                .GetType();
+
         void Awake()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
@@ -202,9 +210,7 @@ namespace HotlineHyrule.Entities
 
         void Start()
         {
-            var hasPatrol = (bool)GetComponent<EnemyPatrolStateComponent>();
-            if (hasPatrol) SetState<EnemyPatrolStateComponent>();
-            else SetState<EnemyGuardStateComponent>();
+            SetState(PassiveState);
         }
 
         void FixedUpdate()
@@ -212,6 +218,7 @@ namespace HotlineHyrule.Entities
             if (state) state.FixedUpdateState();
 
             Rigidbody.velocity = Velocity;
+            if (lockRotation) transform.rotation = Quaternion.identity;
         }
 
         void Update()
@@ -301,9 +308,6 @@ namespace HotlineHyrule.Entities
         void OnCollisionEnter2D(Collision2D other)
         {
             if (state) state.OnCollisionEnterState(other);
-            
-            if (other.gameObject.layer != LayerMask.NameToLayer("enemy")) return;
-            transform.Rotate(Vector3.forward, 90f);
         }
         
 #if UNITY_EDITOR

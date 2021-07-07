@@ -26,6 +26,7 @@ namespace HotlineHyrule.Entities
         [SerializeField] int entitiesPerWave;
         [SerializeField] [Range(0, 1)] float entitiesPerWaveOffset;
         
+        List<Vector3Int> SpawnTiles { get; set; }
         public int CurrentEntities { get; set; }
         int CurrentWave { get; set; }
 
@@ -45,19 +46,36 @@ namespace HotlineHyrule.Entities
                 return;
             }
 
+            SpawnTiles = GetSpawnTiles();
             
             if (!useWaves && spawnOnAwake)
             {
-                for (var i = 0; i <= maxEntities; i++)
-                {
-                    SpawnEntityAtRandom();
-                }
+                SpawnEntitiesAtRandom(maxEntities);
             }
             else if(useWaves)
             {
                 StartCoroutine(WaveRoutine());
             }                  
             
+        }
+
+        List<Vector3Int> GetSpawnTiles()
+        {
+            var tiles = new List<Vector3Int>();
+            var bounds = spawnTilemap.cellBounds;
+
+            for (var x = bounds.xMin; x < bounds.xMax; x++)
+            {
+                for (var y = bounds.yMin; y < bounds.yMax; y++)
+                {
+                    var position = new Vector3Int(x, y, 0);
+                    if (!spawnTilemap.HasTile(position)) continue;
+                    
+                    tiles.Add(position);
+                }
+            }
+
+            return tiles;
         }
 
         IEnumerator WaveRoutine()
@@ -72,7 +90,7 @@ namespace HotlineHyrule.Entities
                     for (var i = 0; i < entitiesPerWave + offset; i++)
                     {
                         if (!CanSpawn) break;
-                        SpawnEntityAtRandom();
+                        SpawnEntitiesAtRandom();
                     }
 
                     CurrentWave += 1;
@@ -85,27 +103,23 @@ namespace HotlineHyrule.Entities
             }
         }
         
-        void SpawnEntityAtRandom()
+        void SpawnEntitiesAtRandom(int count = 1)
         {
-            var errors = 0;
-            var bounds = spawnTilemap.cellBounds;
-            
-            var spawnPositionX = Random.Range(bounds.min.x, bounds.max.x);
-            var spawnPositionY = Random.Range(bounds.min.y, bounds.max.y);
-            var spawnPosition = new Vector3Int(spawnPositionX, spawnPositionY, 0);
+            var spawnPositions = new List<Vector3Int>();
 
-            while (!spawnTilemap.HasTile(spawnPosition))
-            {                
-                errors += 1;
-                
-                spawnPositionX = Random.Range(bounds.min.x, bounds.max.x);
-                spawnPositionY = Random.Range(bounds.min.y, bounds.max.y);
-                spawnPosition = new Vector3Int(spawnPositionX, spawnPositionY, 0);
-
-                if (errors > 50) return;
+            for (var i = 0; i < SpawnTiles.Count; i++)
+            {
+                var index = Random.Range(0, SpawnTiles.Count);
+                var position = SpawnTiles[index];
+                spawnPositions.Add(position);
             }
 
-            SpawnEntityAt(spawnPosition);
+            for (var i = 0; i < count; i++)
+            {
+                var index = i % spawnPositions.Count;
+                
+                SpawnEntityAt(spawnPositions[index]);
+            }
         }
         
         void SpawnEntityAt(Vector3Int position)
