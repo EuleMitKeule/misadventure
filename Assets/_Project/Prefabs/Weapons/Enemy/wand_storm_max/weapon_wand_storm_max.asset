@@ -27,16 +27,16 @@ MonoBehaviour:
     - Name: ItemPrefab
       Entry: 6
       Data: 
-  movementFactor: 1
+  movementFactor: 0
   slowTimeWindow: 0
-  attackRate: 1
+  attackRate: 0.5
   weaponPrefab: {fileID: 4456085385587587559, guid: db43bf257ee3e3962a1b246e3b6ae64e, type: 3}
   hasInfiniteCharges: 1
   weaponCharges: 0
   chargeRandomness: 0
   deadzoneRadius: 0
   projectilePrefab: {fileID: 3168395468748182143, guid: 3b6256a3b9663c44f93bfba3240c0bb7, type: 3}
-  spawnPosition: {x: 0, y: 0}
+  spawnPosition: {x: 0, y: 1}
   weaponFiredSound: {fileID: 0}
   projectileCount: 5
   projectileAngle: 90
