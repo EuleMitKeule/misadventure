@@ -35,7 +35,7 @@ namespace HotlineHyrule.Entities.EnemyStates
 
         void StartTurnAroundRoutine()
         {
-            if (TurnAroundCoroutine != null) SetState(PassiveState);
+            if (TurnAroundCoroutine != null) SetState(EnemyComponent.PassiveState);
 
             TurnAroundCoroutine ??= StartCoroutine(TurnAroundRoutine());
         }
@@ -55,7 +55,7 @@ namespace HotlineHyrule.Entities.EnemyStates
             transform.rotation = Quaternion.Euler(0f, 0f, transform.rotation.eulerAngles.z + 90f);
 
             TurnAroundCoroutine = null;
-            SetState(PassiveState);
+            SetState(EnemyComponent.PassiveState);
         }
 
         void StopTurnAroundCoroutine()

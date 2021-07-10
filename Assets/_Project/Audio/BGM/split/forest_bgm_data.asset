@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa9c66f5507aae42903e8a7d0dbadac, type: 3}
   m_Name: forest_bgm_data
   m_EditorClassIdentifier: 
-  introAudioClip: {fileID: 8300000, guid: c9ddcd2c2f124e546885de63ca7d2cce, type: 3}
-  loopAudioClip: {fileID: 8300000, guid: d8fb0c991efc60643b2335d676a54b59, type: 3}
+  introAudioClip: {fileID: 8300000, guid: dc799da6fb784294bb0059e97c764802, type: 3}
+  loopAudioClip: {fileID: 8300000, guid: e644c63456ffa9649a14f4c34f193990, type: 3}

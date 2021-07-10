@@ -33,8 +33,8 @@ MonoBehaviour:
   attackRate: 2
   weaponPrefab: {fileID: 5105910019921273631, guid: 490df2099ce251e4b84573fe0369646f, type: 3}
   hasInfiniteCharges: 0
-  weaponCharges: 100
-  chargeRandomness: 0.25
+  weaponCharges: 30
+  chargeRandomness: 0.16666667
   deadzoneRadius: 1
   projectilePrefab: {fileID: 8636156419958803353, guid: 07c24f9187b030848977eb21dc349ec5, type: 3}
   spawnPosition: {x: 0.0313, y: 0.56}

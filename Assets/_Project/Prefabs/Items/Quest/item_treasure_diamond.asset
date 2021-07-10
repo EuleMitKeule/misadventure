@@ -15,7 +15,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 6326030864420231853, guid: 72ddfc50968ebfa4ca08e6128eee23f3, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -25,5 +26,5 @@ MonoBehaviour:
       Entry: 1
       Data: treasure_diamond
     - Name: ItemPrefab
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0

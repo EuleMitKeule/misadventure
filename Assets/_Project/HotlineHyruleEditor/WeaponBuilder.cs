@@ -170,8 +170,8 @@ namespace HotlineHyruleEditor.GameManager
             projectileComponent.projectileData = projectileData;
             projectileComponent.rangedWeaponData = rangedWeaponData;
 
-            var enemyLayer = (weaponOwnerType == WeaponOwnerType.Player ? PhysicsLayer.ENEMY : PhysicsLayer.PLAYER);
-            var impactMask = 1 << PhysicsLayer.WALL | 1 << enemyLayer;
+            var enemyHitboxLayer = (weaponOwnerType == WeaponOwnerType.Player ? LayerMask.NameToLayer("enemyHitbox") : PhysicsLayer.PLAYER);
+            var impactMask = 1 << PhysicsLayer.WALL | 1 << enemyHitboxLayer;
 
             projectileComponent.projectileData.impactMask = impactMask;
 

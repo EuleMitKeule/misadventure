@@ -31,7 +31,7 @@ namespace HotlineHyrule.Items
         /// List of items that are currently in range.
         /// </summary>
         Collider2D[] OverlappingItems =>
-            Physics2D.OverlapCircleAll(transform.position, pickupRadius, itemMask);
+            Physics2D.OverlapCircleAll(transform.position, pickupRadius, itemMask).Where(e => e.isTrigger).ToArray();
         /// <summary>
         /// The item that is currently closest.
         /// </summary>

@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/TestingLevels/scene_test_ai.unity
     guid: 0dd05de521fc06a46b5d23cbde889ced
   - enabled: 1
-    path: Assets/_Project/Scenes/levels/scene_forest_01.unity
+    path: Assets/_Project/Scenes/levels/scene_forest_general_01.unity
     guid: 628f177c436d87b9eb682a0324c14964
   - enabled: 1
-    path: Assets/_Project/Scenes/levels/scene_forest_02.unity
+    path: Assets/_Project/Scenes/levels/scene_forest_general_02.unity
     guid: 58c3097d9131003c1a9cb0bae837681f
   - enabled: 1
     path: Assets/_Project/Scenes/TestingLevels/scene_level_info.unity
