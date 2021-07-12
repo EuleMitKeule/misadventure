@@ -17,4 +17,4 @@ MonoBehaviour:
   areaFinishedText: gg ez
   questData: {fileID: 11400000, guid: 9ee83c9cc403c5d4d92b2d728b84f498, type: 2}
   playerSpawnPosition: {x: 0, y: 0, z: 0}
-  bgmData: {fileID: 11400000, guid: 950e16e6ce8971344b5110535d6d2a9a, type: 2}
+  bgmData: {fileID: 11400000, guid: f0e242accf8efad46aba5b7cb4bd8266, type: 2}

@@ -53,13 +53,13 @@ namespace HotlineHyrule.Entities.EnemyStates
             AttackCoroutine = null;
         }
 
-         protected virtual IEnumerator AttackRoutine()
+        protected virtual IEnumerator AttackRoutine()
         {
             while (true)
             {
                 if (WeaponComponent.CanAttack)
                 {
-                    if (Animator) Animator.SetTrigger(EnemyComponent.UsingAttack2 ? "attack2" : "attack");
+                    if (Animator) Animator.SetTrigger(EnemyComponent.AttackAnimationTrigger);
                     if (WeaponComponent) WeaponComponent.PerformAttack();   
                 }
 
