@@ -15,7 +15,7 @@ MonoBehaviour:
   damage: 10
   impactMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   impactRaycastOffset: 0
   isSticky: 0
   notStickyOnPlayer: 0

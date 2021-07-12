@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using HotlineHyrule.Weapons;
 using UnityEngine;
@@ -11,26 +12,28 @@ namespace HotlineHyrule.Entities.EnemyStates
         public string animationTrigger;
     }
     
-    public class EnemyFollowMultipleWeaponsStateComponent : EnemyFollowStateComponent
+    public class EnemyMultipleAttackStateComponent : EnemyAttackStateComponent
     {
         /// <summary>
         /// Weapon data + animation triggers that shall be used for the corresponding attack
         /// </summary>
         [SerializeField] List<WeaponAnimation> weapons;
-
-        protected override void HandleStateRouting()
+        
+        protected override IEnumerator AttackRoutine()
         {
-            if (EnemyComponent.IsPlayerAttackable)
+            while (true)
             {
                 var attackIndex = Random.Range(0, weapons.Count);
-                EnemyComponent.attackAnimationTrigger = weapons[attackIndex].animationTrigger;
+                EnemyComponent.AttackAnimationTrigger = weapons[attackIndex].animationTrigger;
                 EnemyComponent.WeaponComponent.SetWeapon(weapons[attackIndex].data);
-                SetState<EnemyAttackStateComponent>();
-            }
+                
+                if (WeaponComponent.CanAttack)
+                {
+                    if (Animator) Animator.SetTrigger(EnemyComponent.AttackAnimationTrigger);
+                    if (WeaponComponent) WeaponComponent.PerformAttack();   
+                }
 
-            if (!EnemyComponent.IsPlayerFollowable)
-            {
-                SetState<EnemySearchStateComponent>();
+                yield return new WaitForSeconds(WeaponComponent.AttackDelay);
             }
         }
     }

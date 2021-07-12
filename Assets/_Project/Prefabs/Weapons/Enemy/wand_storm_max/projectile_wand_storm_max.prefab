@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -691272855
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -1833017953783846759, guid: 74bee52a5120152c0bf37dbd549b1cc5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangedWeaponData: {fileID: 11400000, guid: e15a73d2a06119e928eeffe6bf6c05e0, type: 2}
   projectileData: {fileID: 11400000, guid: 045ba469009c71772adcf944470d9a79, type: 2}
+  useImpactAnimation: 0
 --- !u!61 &5863720801640001428
 BoxCollider2D:
   m_ObjectHideFlags: 0

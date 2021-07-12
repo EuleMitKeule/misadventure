@@ -299,6 +299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: boss_arch_mage
       objectReference: {fileID: 0}
+    - target: {fileID: 7670373497835594147, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7670373497835594149, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
       propertyPath: m_Size.x
       value: 3
@@ -364,7 +368,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e15a73d2a06119e928eeffe6bf6c05e0, type: 2}
     m_RemovedComponents:
-    - {fileID: 975139409624137883, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
+    - {fileID: 6705245197644981549, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
 --- !u!4 &1326564997 stripped
 Transform:
@@ -385,10 +389,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1326564998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1b6b2d9a7c24537a3bf030abad376c8, type: 3}
+  m_Script: {fileID: 11500000, guid: 06ad3700272542258a9413fdc5357ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
   weapons:
   - data: {fileID: 11400000, guid: 319bad2f12d1a900996b18ec96bc4e54, type: 2}
     animationTrigger: attack
@@ -651,7 +654,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3333334, y: 1}
+    m_SensorSize: {x: 1.7772108, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

@@ -21,6 +21,11 @@ namespace HotlineHyrule.Weapons
         /// The projectile associated with this projectile object.
         /// </summary>
         [SerializeField] public ProjectileData projectileData;
+        
+        /// <summary>
+        /// If impact animation trigger shall be triggered when impact happens
+        /// </summary>
+        [SerializeField] bool useImpactAnimation = true;
 
         /// <summary>
         /// The distance between center and top of projectile.
@@ -195,7 +200,7 @@ namespace HotlineHyrule.Weapons
 
             var impactParticleSystem = projectileData.impactParticleSystem;
             if (impactParticleSystem) Instantiate(impactParticleSystem, transform.position, Quaternion.identity);
-            if (Animator) Animator.SetTrigger("impact");
+            if (Animator && useImpactAnimation) Animator.SetTrigger("impact");
             if (projectileData.isSticky) if (other) 
                 if (other.gameObject.layer == LayerMask.NameToLayer("player") && projectileData.notStickyOnPlayer)
                     Destroy(gameObject);
