@@ -1,22 +1,19 @@
 fileFormatVersion: 2
-guid: 63e6d2aeeaa9df35a897c518f9369353
+guid: 4ae0a4a9767640e48b72adcc6369bdd1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7921582662038224507
-    second: sprite_weapon_shuriken_0
+      213: -4175592968957571514
+    second: sprite_enemy_spider_small_0
   - first:
-      213: 4173683825231782097
-    second: sprite_weapon_shuriken_1
+      213: -3006930288830924388
+    second: sprite_enemy_spider_small_1
   - first:
-      213: -3426038622689228570
-    second: sprite_weapon_shuriken_2
+      213: 715813743593635288
+    second: sprite_enemy_spider_small_2
   - first:
-      213: 5748735288563050335
-    second: sprite_weapon_shuriken_3
-  - first:
-      213: -1725248098522426967
-    second: sprite_weapon_shuriken_4
+      213: 1723520719498363153
+    second: sprite_enemy_spider_small_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -106,106 +103,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite_weapon_shuriken_0
+      name: sprite_enemy_spider_small_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 12
-        height: 10
-      alignment: 9
-      pivot: {x: 0.7916667, y: 0.16666667}
+        x: 5
+        y: 103
+        width: 22
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7e7ea5f57d1fed60800000000000000
-      internalID: 7921582662038224507
+      spriteID: 64e4aa661505d06c0800000000000000
+      internalID: -4175592968957571514
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_weapon_shuriken_1
+      name: sprite_enemy_spider_small_1
       rect:
         serializedVersion: 2
-        x: 12
-        y: 0
-        width: 4
-        height: 12
+        x: 5
+        y: 71
+        width: 22
+        height: 15
       alignment: 9
-      pivot: {x: 0.125, y: 0.16666667}
+      pivot: {x: 0.5, y: 0.53333336}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d0ebbf6357ebe930800000000000000
-      internalID: 4173683825231782097
+      spriteID: c99bedd65dc3546d0800000000000000
+      internalID: -3006930288830924388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_weapon_shuriken_2
+      name: sprite_enemy_spider_small_2
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
-        width: 5
-        height: 9
+        x: 4
+        y: 38
+        width: 26
+        height: 22
       alignment: 9
-      pivot: {x: 0.3, y: 0.22222222}
+      pivot: {x: 0.4615385, y: 0.40909094}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e807db46044470d0800000000000000
-      internalID: -3426038622689228570
+      spriteID: 8ddbd38aec41fe900800000000000000
+      internalID: 715813743593635288
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite_weapon_shuriken_3
+      name: sprite_enemy_spider_small_3
       rect:
         serializedVersion: 2
-        x: 21
-        y: 0
-        width: 5
-        height: 7
+        x: 2
+        y: 6
+        width: 26
+        height: 22
       alignment: 9
-      pivot: {x: 0.3, y: 0.2857143}
+      pivot: {x: 0.53846157, y: 0.40909094}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f57ad8e694c97cf40800000000000000
-      internalID: 5748735288563050335
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite_weapon_shuriken_4
-      rect:
-        serializedVersion: 2
-        x: 26
-        y: 0
-        width: 10
-        height: 9
-      alignment: 9
-      pivot: {x: 0.65, y: 0.22222222}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9a11722ceffae08e0800000000000000
-      internalID: -1725248098522426967
+      spriteID: 111c9b876fc2be710800000000000000
+      internalID: 1723520719498363153
       vertices: []
       indices: 
       edges: []
