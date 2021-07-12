@@ -129,13 +129,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 048bf1b0ddaf5354e96a966e68de264f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entities: []
+  entities:
+  - {fileID: 9081683654673227834, guid: eda932fc43ab31e468139f7eb0c7f3a1, type: 3}
   spawnTilemap: {fileID: 0}
-  maxEntities: 0
+  maxEntities: 5
   spawnOnAwake: 0
   useWaves: 0
   waveLimit: 0
   waveTime: 0
   waveTimeOffset: 0
-  entitiesPerWave: 0
+  entitiesPerWave: 5
   entitiesPerWaveOffset: 0
