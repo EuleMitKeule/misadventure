@@ -18,4 +18,4 @@ MonoBehaviour:
     other.
   questData: {fileID: 11400000, guid: db4f3d82af51ebb4b8d61499fee38e30, type: 2}
   playerSpawnPosition: {x: -3, y: 1, z: 0}
-  bgmData: {fileID: 11400000, guid: f0e242accf8efad46aba5b7cb4bd8266, type: 2}
+  bgmData: {fileID: 11400000, guid: 8eacb01e05504cf4b9bbbcf856adb95a, type: 2}
