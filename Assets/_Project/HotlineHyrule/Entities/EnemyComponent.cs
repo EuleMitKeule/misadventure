@@ -56,7 +56,18 @@ namespace HotlineHyrule.Entities
         /// If enabled, Animation for 'attacking2' will be played instead of 'attacking'
         /// </summary>
         public bool UsingAttack2;
-        [SerializeField] bool lockRotation;
+        /// <summary>
+        /// Name of Animation trigger that shall be triggered on attack
+        /// </summary>
+        public string AttackAnimationTrigger = "attack";
+        /// <summary>
+        /// If Rigidbody velocity shall stay on zero or can be changed
+        /// </summary>
+        public bool LockVelocity;
+        /// <summary>
+        /// If last rotation shall remain or rotation can be changed
+        /// </summary>
+        public bool LockRotation;
 
         /// <summary>
         /// Particle system prefab to spawn when taking damage.
@@ -188,6 +199,8 @@ namespace HotlineHyrule.Entities
 
         List<EnemyBaseStateComponent> States { get; set; }
 
+        Quaternion lastRotation;
+
         public Type PassiveState =>
             States.First(e =>
                     e is EnemyPatrolStateComponent ||
@@ -217,8 +230,11 @@ namespace HotlineHyrule.Entities
         {
             if (state) state.FixedUpdateState();
 
-            Rigidbody.velocity = Velocity;
-            if (lockRotation) transform.rotation = Quaternion.identity;
+            Rigidbody.velocity = LockVelocity ?  Vector2.zero : Velocity;
+            if (!LockRotation)
+                lastRotation = transform.rotation;
+            else
+                transform.rotation = lastRotation;
         }
 
         void Update()

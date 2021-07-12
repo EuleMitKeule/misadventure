@@ -30,5 +30,25 @@ namespace HotlineHyrule.Entities
         }
 
         public void Destroy() => Destroy(gameObject);
+
+        public void LockRotation()
+        {
+            EnemyComponent.LockRotation = true;
+        }
+
+        public void UnlockRotation()
+        {
+            EnemyComponent.LockRotation = false;
+        }
+
+        public void LockVelocity()
+        {
+            EnemyComponent.LockVelocity = true;
+        }
+        
+        public void UnlockVelocity()
+        {
+            EnemyComponent.LockVelocity = false;
+        }
     }
 }
