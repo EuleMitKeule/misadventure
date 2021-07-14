@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1634ab00f9b94a66bf6a7eaacdc248f4, type: 3}
-  m_Name: level_japanese_forest_boss
+  m_Name: level_pathfinding_test
   m_EditorClassIdentifier: 
   areaName: 
   areaText: 
   areaFinishedText: 
-  questData: {fileID: 11400000, guid: 7ad2c78d79d03dadc9278a90f1addcd9, type: 2}
+  questData: {fileID: 11400000, guid: 49896529ad29c5b489fba219baaba474, type: 2}
   playerSpawnPosition: {x: 0, y: 0, z: 0}
-  bgmData: {fileID: 11400000, guid: c17dc97569785de4b9e302252b8ec952, type: 2}
+  bgmData: {fileID: 0}
