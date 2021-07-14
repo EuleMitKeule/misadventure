@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: level_forest_ruins_02
   m_EditorClassIdentifier: 
   areaName: 
-  areaText: 
+  areaText: Looks like we had stumbled right in to a spiders nest.
   areaFinishedText: 
   questData: {fileID: 11400000, guid: 52342d1551073fd438471453f30ec4a6, type: 2}
   playerSpawnPosition: {x: 0, y: -7, z: 0}

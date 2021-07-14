@@ -27,6 +27,11 @@ namespace HotlineHyrule.Weapons.Projectiles
         /// </summary>
         [SerializeField] public bool notStickyOnPlayer;
         /// <summary>
+        /// Whether the projectile gets destroyed when it's not rendered.
+        /// </summary>
+        [SerializeField]
+        public bool destroyOnInvisible;
+        /// <summary>
         /// How often the projectile can penetrate entities.
         /// </summary>
         [SerializeField] public int penetrations;

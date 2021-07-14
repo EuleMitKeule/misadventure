@@ -154,7 +154,7 @@ namespace HotlineHyrule.Weapons
 
         void OnBecameInvisible()
         {
-            Destroy(gameObject);
+            if (projectileData.destroyOnInvisible) Destroy(gameObject);
         }
 
         public void Fire(Vector3 direction, Vector2 entityVelocity, int weaponCharges, int damageBonus, float damageFactor, float attackSpeed)
