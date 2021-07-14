@@ -6,7 +6,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: controller_spider
+  m_Name: controller_spider_boss
   m_Controller: {fileID: 9100000, guid: 607ea13e5d7b32f4db4349fa7b7dca10, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: c76ece5e502b1cf4c93099c0b5bd9035, type: 2}

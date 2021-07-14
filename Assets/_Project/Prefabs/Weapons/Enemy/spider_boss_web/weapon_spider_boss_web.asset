@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a99539d74b6f4c01b5d13551d1511721, type: 3}
-  m_Name: weapon_spider_fangs
+  m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
+  m_Name: weapon_spider_boss_web
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -23,15 +23,23 @@ MonoBehaviour:
     SerializationNodes:
     - Name: ItemName
       Entry: 1
-      Data: spider_fangs
+      Data: spider_boss_web
     - Name: ItemPrefab
       Entry: 6
       Data: 
   movementFactor: 1
   slowTimeWindow: 0
-  attackRate: 0.5
-  weaponPrefab: {fileID: 2911998802375661030, guid: 27e9b4668e2fc684aaa1e449645f2131, type: 3}
+  attackRate: 1
+  weaponPrefab: {fileID: 5418443260776190965, guid: dfea6c247d839084ba4f23867e5c28a5, type: 3}
   hasInfiniteCharges: 1
   weaponCharges: 0
   chargeRandomness: 0
-  damage: 20
+  deadzoneRadius: 0
+  projectilePrefab: {fileID: 7564152535705857847, guid: a0bc7aefc6f78f14c8e8691ecd3a6e01, type: 3}
+  spawnPosition: {x: 0, y: 0}
+  weaponFiredSound: {fileID: 0}
+  projectileCount: 1
+  projectileAngle: 0
+  projectileAngleOffset: 0
+  projectileDelay: 0
+  flip: 0
