@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: level_forest_japanese_02
   m_EditorClassIdentifier: 
   areaName: Ninja hideout
-  areaText: There is a gate that blocks the way...
+  areaText: There is a tall building that blocks the way...
   areaFinishedText: Finally, we can continue on our way. ...We thought the residents
     inside of the building would have been a little more friendly.
   questData: {fileID: 11400000, guid: 83c34d11b44af8b30b34e9e0406221b1, type: 2}
-  playerSpawnPosition: {x: 0, y: 0, z: 0}
+  playerSpawnPosition: {x: -2, y: -5, z: 0}
   bgmData: {fileID: 0}
