@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/TestingLevels/scene_level_info2.unity
     guid: a85b8c2c8b6fa7949ab3fb2e387ec0f4
   - enabled: 1
-    path: Assets/_Project/Scenes/scene_menu.unity
-    guid: 21e8f0f1cd731df489a3831af953aa8a
+    path: Assets/_Project/Scenes/Menu/scene_menu.unity
+    guid: d149a2a0032964b469abe6e2a89e3006
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6dfa4f0392a59a241a436d1f6c1f39ad, type: 2}
