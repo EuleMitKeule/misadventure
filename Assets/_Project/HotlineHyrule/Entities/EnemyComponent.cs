@@ -205,7 +205,8 @@ namespace HotlineHyrule.Entities
             States.First(e =>
                     e is EnemyPatrolStateComponent ||
                     e is EnemyGuardStateComponent ||
-                    e is GhostGuardStateComponent) 
+                    e is GhostGuardStateComponent ||
+                    e is EnemyIdleStateComponent) 
                 .GetType();
 
         void Awake()

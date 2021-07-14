@@ -40,6 +40,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eef8b3525ba94b36a9a8062850fa3207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2459465758032333890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3760773847053125151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab07ff2078b48359da63bb10e1ca8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6037695208846351984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109,11 +121,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023211, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023211, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.775
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023211, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -149,7 +161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023215, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_Name
-      value: ninja
+      value: ninja (3)
       objectReference: {fileID: 0}
     - target: {fileID: 8249268261262953780, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: weaponData
@@ -157,6 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 0bb96f2cd11adb896850095a1882c510, type: 2}
     m_RemovedComponents:
     - {fileID: 794638678, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+    - {fileID: 7492512237567023205, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
 --- !u!1 &3760773847053125151 stripped
 GameObject:
