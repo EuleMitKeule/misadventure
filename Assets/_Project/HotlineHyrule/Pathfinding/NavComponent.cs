@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using HotlineHyrule.Extensions;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -55,6 +57,13 @@ namespace HotlineHyrule.Pathfinding
                 {
                     if (!tilemap.HasTile(cell)) continue;
                     if (!cells.Contains(cell)) continue;
+
+                    var hasTileCollider = tilemap.GetColliderType(cell) != Tile.ColliderType.None;
+                    var boxcastResults = new RaycastHit2D[10];
+                    var resultCount = Physics2D.BoxCastNonAlloc(cell.ToWorld(), Vector2.one * 0.9f, 0f, Vector2.zero, boxcastResults);
+                    var hasCollider = boxcastResults.Where(e => e.collider != null).Any(e => e.collider.gameObject == tilemap.gameObject);
+
+                    if (!hasTileCollider && !hasCollider) continue;
 
                     cells.Remove(cell);
                 }

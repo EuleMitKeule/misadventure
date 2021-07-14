@@ -28,6 +28,7 @@ namespace HotlineHyrule.UserInterface
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
             if (e.IsMenu) return;
+            if (!Locator.PlayerComponent) return;
 
             var healthComponent = Locator.PlayerComponent.GetComponent<HealthComponent>();
             MaxHealth = healthComponent.maxHealth;

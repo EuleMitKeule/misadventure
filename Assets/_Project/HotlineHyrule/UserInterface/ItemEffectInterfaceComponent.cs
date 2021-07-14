@@ -41,6 +41,7 @@ namespace HotlineHyrule.UserInterface
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
             if (e.IsMenu) return;
+            if (!Locator.PlayerComponent) return;
 
             var itemPickupComponent = Locator.PlayerComponent.GetComponent<ItemPickupComponent>();
             itemPickupComponent.ItemConsumed += OnItemConsumed;
@@ -49,7 +50,8 @@ namespace HotlineHyrule.UserInterface
         void OnLevelUnloaded(object sender, LevelEventArgs e)
         {
             if (e.IsMenu) return;
-
+            if (!Locator.PlayerComponent) return;
+            
             var itemPickupComponent = Locator.PlayerComponent.GetComponent<ItemPickupComponent>();
             itemPickupComponent.ItemConsumed -= OnItemConsumed;
         }

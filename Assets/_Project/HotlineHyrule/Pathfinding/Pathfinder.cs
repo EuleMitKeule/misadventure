@@ -7,7 +7,7 @@ namespace HotlineHyrule.Pathfinding
 {
     public static class Pathfinder
     {
-        static Dictionary<Vector3Int, NavNode> NavMap { get; set; }
+        public static Dictionary<Vector3Int, NavNode> NavMap { get; set; }
 
         /// <summary>
         /// Initializes the pathfinder with a nav map.

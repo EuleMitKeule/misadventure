@@ -202,11 +202,11 @@ namespace HotlineHyrule.Entities
         Quaternion lastRotation;
 
         public Type PassiveState =>
-            States.First(e =>
+            States.Find(e =>
                     e is EnemyPatrolStateComponent ||
                     e is EnemyGuardStateComponent ||
                     e is GhostGuardStateComponent) 
-                .GetType();
+                ?.GetType();
 
         void Awake()
         {
@@ -250,6 +250,7 @@ namespace HotlineHyrule.Entities
 
         public void SetState(Type stateType)
         {
+            if (stateType == null) return;
             if (!stateType.IsSubclassOf(typeof(EnemyBaseStateComponent))) return;
 
             var nextState = States.Find(e => e.GetType() == stateType || e.GetType().IsSubclassOf(stateType));
