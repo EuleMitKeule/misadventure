@@ -1,4 +1,5 @@
 using HotlineHyrule.Extensions;
+using HotlineHyrule.Level;
 using HotlineHyrule.Pathfinding;
 using UnityEngine;
 
@@ -10,19 +11,31 @@ namespace HotlineHyrule.Entities.EnemyStates
 
         Vector3Int GuardPosition { get; set; }
         float GuardRotation { get; set; }
-        bool IsAtGuardPosition { get; set; }
+        bool IsAtGuardPosition { get; set; } = true;
 
         protected override void Awake()
         {
             base.Awake();
 
+            GameComponent.LevelLoaded += OnLevelLoaded;
+            GameComponent.LevelUnloaded += OnLevelUnloaded;
+        }
+
+        void OnLevelLoaded(object sender, LevelEventArgs e)
+        {
             if (!Locator.LevelComponent) return;
-            var grid = Locator.LevelComponent.GetComponent<Grid>();
-            if (!grid) return;
+            var grid = Locator.LevelComponent.Grid;
+
             GuardPosition = grid.WorldToCell(transform.position);
+            Debug.Log($"{name} {GuardPosition}");
             GuardRotation = transform.eulerAngles.z;
         }
 
+        void OnLevelUnloaded(object sender, LevelEventArgs e)
+        {
+            GameComponent.LevelLoaded -= OnLevelLoaded;
+            GameComponent.LevelUnloaded -= OnLevelUnloaded;
+        }
         void OnDestinationReached(object sender, CellEventArgs e)
         {
             IsAtGuardPosition = true;
@@ -35,7 +48,7 @@ namespace HotlineHyrule.Entities.EnemyStates
 
             if (PathfindingComponent) PathfindingComponent.DestinationReached += OnDestinationReached;
 
-            IsAtGuardPosition = false;
+            IsAtGuardPosition = GuardPosition.ToWorld().DistanceTo(transform.position) <= 1f;
 
             if (!PathfindingComponent) return;
             PathfindingComponent.SetDestination(GuardPosition);
