@@ -27,8 +27,10 @@ namespace HotlineHyrule.Entities.EnemyStates
             var grid = Locator.LevelComponent.Grid;
 
             GuardPosition = grid.WorldToCell(transform.position);
-            Debug.Log($"{name} {GuardPosition}");
             GuardRotation = transform.eulerAngles.z;
+            
+            if (!PathfindingComponent) return;
+            PathfindingComponent.SetDestination(GuardPosition);
         }
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)
