@@ -173,7 +173,7 @@ namespace HotlineHyrule.Weapons
         /// <param name="newWeaponData"></param>
         public void SetWeapon(WeaponData newWeaponData)
         {
-            if (HasConjuringWeapon)
+            if (WeaponObject && HasConjuringWeapon)
             {
                 var spawnerComponent = WeaponObject.GetComponent<SpawnerComponent>();
                 if (!spawnerComponent) return;

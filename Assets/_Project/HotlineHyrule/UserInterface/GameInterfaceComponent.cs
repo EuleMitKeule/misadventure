@@ -42,12 +42,9 @@ namespace HotlineHyrule.UserInterface
             }
 
             if (!Locator.LevelComponent) return;
-
             Locator.LevelComponent.LevelFinished += OnLevelFinished;
-            if (Locator.PlayerComponent)
-            {
 
-            }
+            if (!Locator.PlayerComponent) return;
             Locator.PlayerComponent.MovementStarted += OnMovementStarted;
 
             var healthComponent = Locator.PlayerComponent.GetComponent<HealthComponent>();
