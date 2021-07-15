@@ -19,5 +19,5 @@ MonoBehaviour:
     forest.'
   areaFinishedText: 
   questData: {fileID: 11400000, guid: 555cc7ce79352c545a2dccb34b73f8be, type: 2}
-  playerSpawnPosition: {x: 0, y: 0, z: 0}
-  bgmData: {fileID: 0}
+  playerSpawnPosition: {x: 0, y: -7, z: 0}
+  bgmData: {fileID: 11400000, guid: c17dc97569785de4b9e302252b8ec952, type: 2}

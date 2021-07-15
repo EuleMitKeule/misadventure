@@ -58,7 +58,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  finishLevelOnCompletion: 0
+  finishLevelOnCompletion: 1
   questText: We'll have to kill the spider queen to continue.
   questTargetText: 
   questRewards: []

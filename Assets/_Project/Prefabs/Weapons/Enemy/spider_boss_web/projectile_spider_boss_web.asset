@@ -25,6 +25,6 @@ MonoBehaviour:
   weaponEffectTiles:
   - {fileID: 11400000, guid: fc50302c8bb5a254cbfbde20311c037b, type: 2}
   weaponEffectTilemapName: tilemap_weapon_effect
-  range: 10
+  range: 14
   flightTime: 1
   movementThreshold: 0.5
