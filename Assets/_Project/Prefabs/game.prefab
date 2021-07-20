@@ -2901,14 +2901,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e223f239498249d18df0ab94740f4021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenes:
-  - scene_forest_ruins_02
+  levels:
   - scene_forest_general_01
-  - scene_forest_general_02
   - scene_forest_general_03
-  - scene_forest_ruins_01
   - scene_forest_japanese_01
   - scene_forest_japanese_02
+  - scene_forest_ruins_01
+  - scene_forest_ruins_02
+  bossLevels:
+  - scene_forest_general_boss
+  - scene_forest_ruins_boss
+  - scene_japanese_forest_boss
+  levelsToPlay: 3
   playerStateData: {fileID: 0}
 --- !u!114 &5336618903236965245
 MonoBehaviour:
