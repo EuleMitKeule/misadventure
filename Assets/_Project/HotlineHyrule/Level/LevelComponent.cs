@@ -29,9 +29,10 @@ namespace HotlineHyrule.Level
         [SerializeField]
         List<GameObject> objectsToDestroyOnFinish = new List<GameObject>();
 
-    DefaultControls DefaultControls { get; set; }
+        DefaultControls DefaultControls { get; set; }
 
         public event EventHandler<EventArgs> LevelFinished;
+        public event EventHandler<EventArgs> GameFinished;
 
         public Grid Grid { get; private set; }
 
@@ -63,7 +64,7 @@ namespace HotlineHyrule.Level
             Locator.SoundComponent.PlayBGM(e.LevelData.bgmData);
         }
 
-        public void FinishLevel()
+        public void FinishLevel(bool finishGame = false)
         {
             LevelFinished?.Invoke(this, EventArgs.Empty);
             DefaultControls.map_default.action_finish.Enable();
@@ -72,6 +73,9 @@ namespace HotlineHyrule.Level
             {
                 Destroy(obj);
             }
+
+            if (!finishGame) return;
+            GameFinished?.Invoke(this, EventArgs.Empty);
         }
 
         void OnButtonFinish(InputAction.CallbackContext context)

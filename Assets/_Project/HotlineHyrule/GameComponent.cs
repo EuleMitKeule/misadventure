@@ -24,6 +24,9 @@ namespace HotlineHyrule
         Queue<string> LevelPool { get; set; }
         string BossLevel { get; set; }
 
+        float StartTime { get; set; }
+        public float ElapsedTime => Time.time - StartTime;
+
         [SerializeField] PlayerStateData playerStateData;
 
         int CurrentSceneIndex => levels.IndexOf(SceneManager.GetActiveScene().name);
@@ -101,6 +104,7 @@ namespace HotlineHyrule
             LevelPool = new Queue<string>(levels.OrderBy(e => Guid.NewGuid()).Take(levelsToPlay));
             BossLevel = bossLevels.OrderBy(e => Guid.NewGuid()).First();
             playerStateData = null;
+            StartTime = Time.time;
 
             var currentLevelComponent = Locator.LevelComponent;
 

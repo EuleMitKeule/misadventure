@@ -67,8 +67,8 @@ namespace HotlineHyrule.Quests
         {
             if (!IsQuestFinished) return;
             if (!QuestData.finishLevelOnCompletion) return;
-
-            LevelComponent.FinishLevel();
+            
+            LevelComponent.FinishLevel(QuestData.finishGameOnCompletion);
         }
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
