@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using HotlineHyrule.Attributes;
 using HotlineHyrule.Entities;
 using HotlineHyrule.Level;
@@ -11,12 +12,22 @@ namespace HotlineHyrule
 {
     public class GameComponent : MonoBehaviour
     {
-        [Scene] [SerializeField] public List<string> scenes;
+        [Scene]
+        [SerializeField]
+        public List<string> levels;
+        [Scene]
+        [SerializeField]
+        public List<string> bossLevels;
+        [SerializeField]
+        int levelsToPlay;
+
+        Queue<string> LevelPool { get; set; }
+        string BossLevel { get; set; }
 
         [SerializeField] PlayerStateData playerStateData;
 
-        int CurrentSceneIndex => scenes.IndexOf(SceneManager.GetActiveScene().name);
-        bool IsLevel => scenes.Contains(SceneManager.GetActiveScene().name);
+        int CurrentSceneIndex => levels.IndexOf(SceneManager.GetActiveScene().name);
+        bool IsLevel => levels.Contains(SceneManager.GetActiveScene().name);
 
         public static event EventHandler<LevelEventArgs> LevelLoaded;
         public static event EventHandler<LevelEventArgs> LevelUnloaded;
@@ -27,6 +38,9 @@ namespace HotlineHyrule
 
             DontDestroyOnLoad(gameObject);
             Locator.GameComponent = this;
+
+            LevelPool = new Queue<string>(levels.OrderBy(e => Guid.NewGuid()).Take(levelsToPlay));
+            BossLevel = bossLevels.OrderBy(e => Guid.NewGuid()).First();
 
             LevelUnloaded += OnLevelUnloaded;
         }
@@ -53,8 +67,8 @@ namespace HotlineHyrule
                 LevelUnloaded?.Invoke(this, new LevelEventArgs(null, null, true));
             }
 
-            var nextSceneIndex = CurrentSceneIndex == -1 ? 0 : (CurrentSceneIndex + 1) % scenes.Count;
-            StartCoroutine(LoadSceneRoutine(scenes[nextSceneIndex]));
+            var nextLevelName = LevelPool.Count > 0 ? LevelPool.Dequeue() : BossLevel;
+            StartCoroutine(LoadSceneRoutine(nextLevelName));
         }
 
         public void LoadMenuScene()
@@ -84,6 +98,8 @@ namespace HotlineHyrule
 
         public void LoadFirstScene()
         {
+            LevelPool = new Queue<string>(levels.OrderBy(e => Guid.NewGuid()).Take(levelsToPlay));
+            BossLevel = bossLevels.OrderBy(e => Guid.NewGuid()).First();
             playerStateData = null;
 
             var currentLevelComponent = Locator.LevelComponent;
@@ -94,7 +110,7 @@ namespace HotlineHyrule
                 LevelUnloaded?.Invoke(this, levelEventArgs);
             }
 
-            StartCoroutine(LoadSceneRoutine(scenes[0]));
+            StartCoroutine(LoadSceneRoutine(LevelPool.Dequeue()));
         }
 
         IEnumerator LoadSceneRoutine(string sceneName)

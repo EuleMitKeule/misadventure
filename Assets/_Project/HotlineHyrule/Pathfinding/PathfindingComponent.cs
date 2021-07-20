@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HotlineHyrule.Entities;
 using HotlineHyrule.Extensions;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace HotlineHyrule.Pathfinding
 {

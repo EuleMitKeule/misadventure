@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using HotlineHyrule.Extensions;
 using HotlineHyrule.Input;
 using UnityEngine;
@@ -12,17 +13,23 @@ namespace HotlineHyrule.Level
     [RequireComponent(typeof(Grid))]
     public class LevelComponent : MonoBehaviour
     {
-        [SerializeField] public LevelData levelData;
+        [SerializeField]
+        public LevelData levelData;
         /// <summary>
         /// The prefab of the rain effect.
         /// </summary>
-        [SerializeField] GameObject rainEffectPrefab;
+        [SerializeField]
+        GameObject rainEffectPrefab;
         /// <summary>
         /// The prefab of the snow effect.
         /// </summary>
-        [SerializeField] GameObject snowEffectPrefab;
+        [SerializeField]
+        GameObject snowEffectPrefab;
 
-        DefaultControls DefaultControls { get; set; }
+        [SerializeField]
+        List<GameObject> objectsToDestroyOnFinish = new List<GameObject>();
+
+    DefaultControls DefaultControls { get; set; }
 
         public event EventHandler<EventArgs> LevelFinished;
 
@@ -50,6 +57,7 @@ namespace HotlineHyrule.Level
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
             if (e.IsMenu) return;
+            if (!Locator.PlayerComponent) return;
 
             Locator.PlayerComponent.transform.position = e.LevelData.playerSpawnPosition.ToWorld();
             Locator.SoundComponent.PlayBGM(e.LevelData.bgmData);
@@ -59,6 +67,11 @@ namespace HotlineHyrule.Level
         {
             LevelFinished?.Invoke(this, EventArgs.Empty);
             DefaultControls.map_default.action_finish.Enable();
+
+            foreach (var obj in objectsToDestroyOnFinish)
+            {
+                Destroy(obj);
+            }
         }
 
         void OnButtonFinish(InputAction.CallbackContext context)

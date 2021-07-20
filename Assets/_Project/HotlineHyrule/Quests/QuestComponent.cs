@@ -23,6 +23,7 @@ namespace HotlineHyrule.Quests
         List<SearchQuestTarget> SearchQuestTargets => QuestData.questTargets.OfType<SearchQuestTarget>().ToList();
         List<TreasureQuestTarget> TreasureQuestTargets => QuestData.questTargets.OfType<TreasureQuestTarget>().ToList();
         List<UseWeaponQuestTarget> UseWeaponQuestTargets => QuestData.questTargets.OfType<UseWeaponQuestTarget>().ToList();
+        List<AreaQuestTarget> AreaQuestTargets => QuestData.questTargets.OfType<AreaQuestTarget>().ToList();
 
         public bool IsQuestFinished => QuestData.questTargets.Where(e => e.IsRequired).All(IsReached);
         public bool IsCompleted => QuestData.questTargets.All(e => ReachedTargets.Contains(e));
@@ -103,6 +104,17 @@ namespace HotlineHyrule.Quests
                 var treasureSpot = treasureSpots.ElementAt(randomIndex);
                 Instantiate(treasureQuestTarget.treasureItem.ItemPrefab, treasureSpot.ToWorld(), Quaternion.identity);
             }
+
+            foreach (var areaQuestTarget in AreaQuestTargets)
+            {
+                var colliderObject = GameObject.Find(areaQuestTarget.colliderName);
+                if (!colliderObject) continue;
+
+                var questAreaComponent = colliderObject.GetComponent<QuestAreaComponent>();
+                if (!questAreaComponent) continue;
+
+                questAreaComponent.PlayerEntered += OnPlayerEntered;
+            }
         }
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)
@@ -116,14 +128,11 @@ namespace HotlineHyrule.Quests
         {
             if (IsCompleted)
             {
-                var items = QuestData.questRewards.OrderBy(x => Guid.NewGuid()).ToList();
-                var rewards = items.Take(QuestData.questRewardCount).ToList();
-
-                RewardComponent.Rewards = rewards;
+                RewardComponent.Rewards = QuestData.questRewards;
             }
             else
             {
-                RewardComponent.Rewards = new List<ItemData>();
+                RewardComponent.Rewards = new List<ConsumableItemData>();
             }
         }
 
@@ -212,6 +221,18 @@ namespace HotlineHyrule.Quests
 
             ReachedTargets.Add(useWeaponQuestTarget);
             QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(useWeaponQuestTarget));
+        }
+
+        void OnPlayerEntered(object sender, EventArgs e)
+        {
+            var questAreaComponent = (QuestAreaComponent)sender;
+            var areaQuestTarget = AreaQuestTargets.Find(t => t.colliderName == questAreaComponent.name);
+            if (areaQuestTarget == null) return;
+
+            if (ReachedTargets.Contains(areaQuestTarget)) return;
+            
+            ReachedTargets.Add(areaQuestTarget);
+            QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(areaQuestTarget));     
         }
 
         public bool IsReached(QuestTarget questTarget) => ReachedTargets.Contains(questTarget);

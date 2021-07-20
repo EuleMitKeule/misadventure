@@ -16,6 +16,10 @@ namespace HotlineHyrule.Quests
         [LabelText("Auto Complete")]
         public bool finishLevelOnCompletion;
         [BoxGroup("General")]
+        [ShowInInspector]
+        [LabelText("Finishes Game")]
+        public bool finishGameOnCompletion;
+        [BoxGroup("General")]
         [TextArea]
         [ShowInInspector]
         [LabelText("Intro Text")]
@@ -33,7 +37,7 @@ namespace HotlineHyrule.Quests
         public List<QuestTarget> questTargets = new List<QuestTarget>();
         [BoxGroup("Rewards")]
         [ShowInInspector]
-        public List<ItemData> questRewards;
+        public List<ConsumableItemData> questRewards;
         [LabelText("How Many")]
         [BoxGroup("Rewards")]
         [Range(0, 2)]

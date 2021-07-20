@@ -9,10 +9,7 @@ namespace HotlineHyrule.Quests
 {
     public class RewardComponent : MonoBehaviour
     {
-        [SerializeField] public Tilemap rewardTilemap;
-        [SerializeField] public TileBase chestTile;
-
-        public static List<ItemData> Rewards { get; set; }
+        public static List<ConsumableItemData> Rewards { get; set; }
 
         void Awake()
         {
@@ -25,17 +22,14 @@ namespace HotlineHyrule.Quests
             if (e.IsMenu) return;
             if (Rewards == null) return;
             if (Rewards.Count == 0) return;
+            if (!Locator.PlayerComponent) return;
 
-            var i = 0;
-            foreach (var cellPosition in rewardTilemap.cellBounds.allPositionsWithin)
+            var itemPickupComponent = Locator.PlayerComponent.GetComponent<ItemPickupComponent>();
+            if (!itemPickupComponent) return;
+
+            foreach (var reward in Rewards)
             {
-                if (!rewardTilemap.HasTile(cellPosition)) continue;
-
-                if (chestTile) rewardTilemap.SetTile(cellPosition, chestTile);
-                Instantiate(Rewards[i].ItemPrefab, cellPosition.ToWorld(), Quaternion.identity);
-
-                i += 1;
-                if (i == 2) break;
+                itemPickupComponent.ConsumeItem(reward);
             }
         }
 
