@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: level_snow02
   m_EditorClassIdentifier: 
   areaName: 
-  areaText: 
+  areaText: We can now make our tripp trugh the snow
   areaFinishedText: 
   questData: {fileID: 11400000, guid: e03f12673a5e2834c99db70ec490836e, type: 2}
-  playerSpawnPosition: {x: 0, y: 0, z: 0}
+  playerSpawnPosition: {x: -17, y: 7, z: -125}
   bgmData: {fileID: 0}

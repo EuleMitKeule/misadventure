@@ -27,7 +27,57 @@ MonoBehaviour:
         HotlineHyrule]], mscorlib
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 1|HotlineHyrule.Quests.KillSpecificQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
+    - Name: shortTargetText
+      Entry: 1
+      Data: angry elf {x} to kill
+    - Name: targetReachedText
+      Entry: 1
+      Data: 'Yeah, now the angry elfs will be reborn as happy christmas elves and
+        soon the Christmas spirit will coom back. '
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We didn't do something.
+    - Name: killTarget
+      Entry: 3
+      Data: 15
+    - Name: enemyName
+      Entry: 1
+      Data: ice_midget
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|HotlineHyrule.Quests.KillSpecificQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
+    - Name: shortTargetText
+      Entry: 1
+      Data: fat snowman {x} to kill
+    - Name: targetReachedText
+      Entry: 1
+      Data: Yeah, now the angry elfs and the fat snowmans will be reborn as happy
+        christmas elves and snowmans. Soon the Christmas spirit will coom back.
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We didn't do something.
+    - Name: killTarget
+      Entry: 3
+      Data: 5
+    - Name: enemyName
+      Entry: 1
+      Data: snowman
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -35,7 +85,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
   finishLevelOnCompletion: 0
-  questText: 
+  questText: Shit happens! Fake Santa Claus has stolen the Christmas magic and now
+    all the elves are freaking out.
   questTargetText: 
   questRewards: []
   questRewardCount: 0

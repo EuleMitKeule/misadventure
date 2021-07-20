@@ -110,7 +110,7 @@ namespace HotlineHyrule.Items
                         break;
                 }
 
-                ItemConsumed?.Invoke(this, new ItemEventArgs(itemData));
+                ItemConsumed?.Invoke(this, new ItemEventArgs(itemData, itemComponent));
             }
 
             Destroy(itemComponent.gameObject);
