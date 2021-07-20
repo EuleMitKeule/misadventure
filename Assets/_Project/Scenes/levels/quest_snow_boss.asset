@@ -60,6 +60,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   finishLevelOnCompletion: 1
+  finishGameOnCompletion: 1
   questText: Try to get the stolen Christmas magic back while he's still eating cookies
     and drinking milk.
   questTargetText: If you don't succeed, just kill him ! ^_^
