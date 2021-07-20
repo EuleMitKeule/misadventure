@@ -55,8 +55,6 @@ namespace HotlineHyrule.UserInterface
                 label.text = targetText;
             }
 
-            Debug.Log($"{Locator.QuestComponent.IsCompleted}");
-
             if (Locator.QuestComponent.IsCompleted)
             {
                 foreach (var reward in Locator.LevelComponent.levelData.questData.questRewards)
