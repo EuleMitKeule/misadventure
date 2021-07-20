@@ -19,11 +19,14 @@ MonoBehaviour:
   impactRaycastOffset: 0
   isSticky: 0
   notStickyOnPlayer: 0
+  destroyOnInvisible: 0
   penetrations: 0
   impactParticleSystem: {fileID: 942572096511836404, guid: 40638da377280d4469e604953fb6bf56, type: 3}
   weaponEffectTiles:
   - {fileID: 11400000, guid: 60d284e0aa314f947ab5b3add0227a5b, type: 2}
   weaponEffectTilemapName: tilemap_explosive_present
-  range: 8
+  weaponEffectRadius: 5
+  weaponEffectRandomnes: 0.655
+  range: 5
   flightTime: 0.7
   movementThreshold: 0.5

@@ -6,13 +6,16 @@ using HotlineHyrule.Level;
 using HotlineHyrule.Tiles;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Sirenix.OdinInspector;
 
 namespace HotlineHyrule.Items
 {
     public class TileEffectComponent : MonoBehaviour
     {
         [SerializeField] float tileDuration;
+        [SerializeField] [MinMaxSlider(0, "tileDuration")] Vector2 tileDurationOffset;
         [SerializeField] public List<ConsumableItemData> itemEffects;
+                
         Tilemap Tilemap { get; set; }
 
         void Awake()
@@ -47,7 +50,9 @@ namespace HotlineHyrule.Items
 
         IEnumerator DestroyTile(Vector3Int pos)
         {
-            yield return new WaitForSeconds(tileDuration);
+            var durationOffset = UnityEngine.Random.Range(tileDurationOffset.x, tileDurationOffset.y);
+            var duration = tileDuration + (UnityEngine.Random.Range(0, 1) < 0.5f ? 1 : -1) * durationOffset;
+            yield return new WaitForSeconds(duration);
             Tilemap.SetTile(pos, null);
         }
 

@@ -5,13 +5,15 @@ using System.Linq;
 using HotlineHyrule.Extensions;
 using HotlineHyrule.Level;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
+
 namespace HotlineHyrule.Items
 {
     public class FestoonComponent : MonoBehaviour
     {
 
         ItemComponent activateItem;
-        Animator animator;
+        Light2D light2d;
         [SerializeField] QuestItemData activateItemData;
 
         // Start is called before the first frame update
@@ -19,12 +21,7 @@ namespace HotlineHyrule.Items
         {
             GameComponent.LevelLoaded += OnLevelLoaded;
             GameComponent.LevelUnloaded += OnLevelUnloaded;
-            animator = GetComponent<Animator>();
-            Debug.Log("sdaasdasd");
-        }
-        private void Update()
-        {
-            Debug.Log("asdasdas");
+            light2d = GetComponent<Light2D>();
         }
 
         private void OnLevelUnloaded(object sender, LevelEventArgs e)
@@ -35,7 +32,6 @@ namespace HotlineHyrule.Items
 
         private void OnLevelLoaded(object sender, LevelEventArgs e)
         {
-            Debug.Log("pooasd");
             if (e.IsMenu) return;
 
             var itemComponents = GameObject.FindObjectsOfType<ItemComponent>();
@@ -51,13 +47,10 @@ namespace HotlineHyrule.Items
         }
 
         private void OnItemConsumed(object sender, ItemEventArgs e)
-        {
-            Debug.Log(e.ItemData);
-            if (!e.ItemComponent) return;
-            Debug.Log(e.ItemComponent.name);
-            
+        {            
+            if (!e.ItemComponent) return;                     
             if (e.ItemComponent != activateItem) return;
-            animator.SetTrigger("light");
+            light2d.enabled = true;            
         }
 
 
