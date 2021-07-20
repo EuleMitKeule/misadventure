@@ -128,14 +128,11 @@ namespace HotlineHyrule.Quests
         {
             if (IsCompleted)
             {
-                var items = QuestData.questRewards.OrderBy(x => Guid.NewGuid()).ToList();
-                var rewards = items.Take(QuestData.questRewardCount).ToList();
-
-                RewardComponent.Rewards = rewards;
+                RewardComponent.Rewards = QuestData.questRewards;
             }
             else
             {
-                RewardComponent.Rewards = new List<ItemData>();
+                RewardComponent.Rewards = new List<ConsumableItemData>();
             }
         }
 

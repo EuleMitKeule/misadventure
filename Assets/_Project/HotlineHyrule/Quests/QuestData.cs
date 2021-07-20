@@ -33,7 +33,7 @@ namespace HotlineHyrule.Quests
         public List<QuestTarget> questTargets = new List<QuestTarget>();
         [BoxGroup("Rewards")]
         [ShowInInspector]
-        public List<ItemData> questRewards;
+        public List<ConsumableItemData> questRewards;
         [LabelText("How Many")]
         [BoxGroup("Rewards")]
         [Range(0, 2)]
