@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/levels/scene_forest_ruins_02.unity
     guid: a2e49e68e20ee9940a25014f00a2a5c6
   - enabled: 1
-    path: Assets/_Project/Scenes/levels/forest_japanese/scene_forest_japanese_01.unity
+    path: Assets/_Project/Scenes/levels/scene_forest_japanese_01.unity
     guid: fa340c71d4836ba6baa2eebb1a036e8a
   - enabled: 1
     path: Assets/_Project/Scenes/levels/scene_forest_japanese_02.unity
