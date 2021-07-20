@@ -16,6 +16,10 @@ namespace HotlineHyrule.Quests
         [LabelText("Auto Complete")]
         public bool finishLevelOnCompletion;
         [BoxGroup("General")]
+        [ShowInInspector]
+        [LabelText("Finishes Game")]
+        public bool finishGameOnCompletion;
+        [BoxGroup("General")]
         [TextArea]
         [ShowInInspector]
         [LabelText("Intro Text")]
