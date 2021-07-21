@@ -79,10 +79,10 @@ MonoBehaviour:
       Data: 2
     - Name: MoveSpeed
       Entry: 4
-      Data: 7.5
+      Data: 3.5
     - Name: FollowSpeed
       Entry: 4
-      Data: 10
+      Data: 5
     - Name: ViewAngle
       Entry: 4
       Data: 90
@@ -121,7 +121,7 @@ MonoBehaviour:
       Data: UnityEngine.LayerMask, UnityEngine.CoreModule
     - Name: 
       Entry: 3
-      Data: 512
+      Data: 528
     - Name: 
       Entry: 8
       Data: 
