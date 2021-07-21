@@ -31,8 +31,7 @@ namespace HotlineHyrule.Level
 
         DefaultControls DefaultControls { get; set; }
 
-        public event EventHandler<EventArgs> LevelFinished;
-        public event EventHandler<EventArgs> GameFinished;
+        public event EventHandler<LevelFinishedEventArgs> LevelFinished;
 
         public Grid Grid { get; private set; }
 
@@ -49,8 +48,6 @@ namespace HotlineHyrule.Level
                 if (levelData.IsRaining) Instantiate(rainEffectPrefab, mainCamera.transform);
                 if (levelData.IsSnowing) Instantiate(snowEffectPrefab, mainCamera.transform);
             }
-
-            DefaultControls.map_default.action_finish.performed += OnButtonFinish;
             
             GameComponent.LevelLoaded += OnLevelLoaded;
         }
@@ -66,22 +63,32 @@ namespace HotlineHyrule.Level
 
         public void FinishLevel(bool finishGame = false)
         {
-            LevelFinished?.Invoke(this, EventArgs.Empty);
+            if (finishGame) DefaultControls.map_default.action_finish.performed += OnButtonMenu;
+            else DefaultControls.map_default.action_finish.performed += OnButtonFinish;
+            
+            LevelFinished?.Invoke(this, new LevelFinishedEventArgs(finishGame));
             DefaultControls.map_default.action_finish.Enable();
 
             foreach (var obj in objectsToDestroyOnFinish)
             {
                 Destroy(obj);
             }
-
-            if (!finishGame) return;
-            GameFinished?.Invoke(this, EventArgs.Empty);
         }
 
         void OnButtonFinish(InputAction.CallbackContext context)
         {
+            DefaultControls.map_default.action_finish.performed -= OnButtonFinish;
             DefaultControls.map_default.action_finish.Disable();
+            
             Locator.GameComponent.LoadNextScene();
+        }
+
+        void OnButtonMenu(InputAction.CallbackContext context)
+        {
+            DefaultControls.map_default.action_finish.performed -= OnButtonMenu;
+            DefaultControls.map_default.action_finish.Disable();
+            
+            Locator.GameComponent.LoadMenuScene();
         }
     }
 }

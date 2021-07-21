@@ -34,9 +34,10 @@ namespace HotlineHyrule.UserInterface
             labels[2].text = e.LevelData.areaFinishedText;
         }
 
-        void OnLevelFinished(object sender, EventArgs e)
+        void OnLevelFinished(object sender, LevelFinishedEventArgs e)
         {
             if (!Locator.QuestComponent) return;
+            if (e.FinishGame) return;
 
             for (var i = 0; i < questTargetReachedParent.childCount; i++)
             {
