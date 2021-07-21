@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72112766fd8a400786090afb9f205301, type: 3}
-  m_Name: quest_forest_japanese_02
+  m_Name: quest_forest_japanese_03
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -28,47 +28,29 @@ MonoBehaviour:
         HotlineHyrule]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 7
-      Data: 1|HotlineHyrule.Quests.QuestTarget, HotlineHyrule
+      Data: 1|HotlineHyrule.Quests.SearchQuestTarget, HotlineHyrule
     - Name: requiredType
       Entry: 3
       Data: 2
     - Name: shortTargetText
       Entry: 1
-      Data: Find the exit
+      Data: Find all 7 artifacts
     - Name: targetReachedText
       Entry: 1
-      Data: We found the exit.
+      Data: We found all artifacts.
     - Name: targetNotReachedText
       Entry: 1
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|HotlineHyrule.Quests.SearchQuestTarget, HotlineHyrule
-    - Name: requiredType
-      Entry: 3
-      Data: 4
-    - Name: shortTargetText
-      Entry: 1
-      Data: Collect the 3 artifacts
-    - Name: targetReachedText
-      Entry: 1
-      Data: We also found all artifacts they had hidden.
-    - Name: targetNotReachedText
-      Entry: 1
-      Data: We have a feeling that we should have taken all their artifacts.
+      Data: We didn't do something.
     - Name: Items
       Entry: 7
-      Data: 3|System.Collections.Generic.Dictionary`2[[HotlineHyrule.Items.ItemData,
+      Data: 2|System.Collections.Generic.Dictionary`2[[HotlineHyrule.Items.ItemData,
         HotlineHyrule],[System.Int32, mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 4|System.Collections.Generic.ObjectEqualityComparer`1[[HotlineHyrule.Items.ItemData,
+      Data: 3|System.Collections.Generic.ObjectEqualityComparer`1[[HotlineHyrule.Items.ItemData,
         HotlineHyrule]], mscorlib
     - Name: 
       Entry: 8
@@ -84,7 +66,7 @@ MonoBehaviour:
       Data: 0
     - Name: $v
       Entry: 3
-      Data: 3
+      Data: 7
     - Name: 
       Entry: 8
       Data: 
@@ -103,8 +85,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  finishLevelOnCompletion: 0
-  questText: Looks like we have to make our way through it.
+  finishLevelOnCompletion: 1
+  questText: We better take away the artifacts.
   questTargetText: 
   questRewards: []
   questRewardCount: 0
