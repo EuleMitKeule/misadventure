@@ -1,44 +1,49 @@
 using System;
+using System.ComponentModel;
 using HotlineHyrule.Level;
-using HotlineHyrule.Quests;
 using TMPro;
 using UnityEngine;
 
 namespace HotlineHyrule.UserInterface
 {
-    public class LevelFinishedInterfaceComponent : MonoBehaviour
+    public class GameFinishedInterfaceComponent : MonoBehaviour
     {
         [SerializeField] Transform questTargetReachedParent;
-        [SerializeField] Transform rewardsParent;
         [SerializeField] GameObject questTargetReachedTextPrefab;
-
-        Animator Animator { get; set; }
+        
+        TextMeshProUGUI TimeLabel { get; set; }
 
         void Awake()
         {
             if (!questTargetReachedParent) questTargetReachedParent = transform.Find("parent_quest_target_reached");
-            if (!rewardsParent) rewardsParent = transform.Find("parent_rewards");
-
-            Animator = GetComponent<Animator>();
 
             GameComponent.LevelLoaded += OnLevelLoaded;
+            
+            var timeLabelObject = transform.Find("label_time");
+            if (!timeLabelObject) return;
+
+            TimeLabel = timeLabelObject.GetComponent<TextMeshProUGUI>();
         }
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
             if (e.IsMenu) return;
-
+            
             Locator.LevelComponent.LevelFinished += OnLevelFinished;
-
-            var labels = GetComponentsInChildren<TextMeshProUGUI>();
-            labels[2].text = e.LevelData.areaFinishedText;
         }
 
         void OnLevelFinished(object sender, LevelFinishedEventArgs e)
         {
-            if (!Locator.QuestComponent) return;
-            if (e.FinishGame) return;
+            if (!e.FinishGame) return;
+            
+            var elapsedTime = (int)Locator.GameComponent.ElapsedTime;
+            var elapsedSeconds = elapsedTime % 60;
+            var elapsedMinutes = elapsedTime / 60 % 60;
+            var elapsedHours = elapsedTime / 60 / 60;
 
+            TimeLabel.text =
+                $"{elapsedHours:D2}:{elapsedMinutes:D2}:{elapsedSeconds:D2}";
+            
             for (var i = 0; i < questTargetReachedParent.childCount; i++)
             {
                 var child = questTargetReachedParent.GetChild(i);
@@ -54,16 +59,6 @@ namespace HotlineHyrule.UserInterface
                 var labelObject = Instantiate(questTargetReachedTextPrefab, questTargetReachedParent);
                 var label = labelObject.GetComponent<TextMeshProUGUI>();
                 label.text = targetText;
-            }
-
-            if (Locator.QuestComponent.IsCompleted)
-            {
-                foreach (var reward in Locator.LevelComponent.levelData.questData.questRewards)
-                {
-                    var rewardsTextObject = Instantiate(questTargetReachedTextPrefab, rewardsParent);
-                    var label = rewardsTextObject.GetComponent<TextMeshProUGUI>();
-                    label.text = reward.InfoText;
-                }
             }
         }
     }

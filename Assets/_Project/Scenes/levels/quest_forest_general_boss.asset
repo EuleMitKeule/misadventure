@@ -56,6 +56,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   finishLevelOnCompletion: 1
+  finishGameOnCompletion: 1
   questText: Oh shit, we better kill that before it turns into a giant murder butterfly.
   questTargetText: 
   questRewards: []
