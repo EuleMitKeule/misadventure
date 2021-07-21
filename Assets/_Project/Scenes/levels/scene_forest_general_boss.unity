@@ -134,6 +134,14 @@ PrefabInstance:
       propertyPath: loadoutSlots.Array.data[0].weaponData
       value: 
       objectReference: {fileID: 11400000, guid: dda91c349427f7946824aa6c4c95778e, type: 2}
+    - target: {fileID: 1512549236598669735, guid: f82d0237f23d1f84ea6fb494d6261b83, type: 3}
+      propertyPath: maxHealth
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1512549236598669735, guid: f82d0237f23d1f84ea6fb494d6261b83, type: 3}
+      propertyPath: startHealth
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 1512549236598669737, guid: f82d0237f23d1f84ea6fb494d6261b83, type: 3}
       propertyPath: m_Name
       value: player
@@ -284,11 +292,11 @@ PrefabInstance:
       objectReference: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
     - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[0]
-      value: '"path":"FollowSpeed","value":{"$id":0,"$type":"System.Single, mscorlib",5}'
+      value: '"path":"FollowSpeed","value":{"$id":0,"$type":"System.Single, mscorlib",7.5}'
       objectReference: {fileID: 0}
     - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[1]
@@ -296,24 +304,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[2]
-      value: '"path":"MoveSpeed","value":{"$id":0,"$type":"System.Single, mscorlib",3.5}'
+      value: '"path":"MaxSpeedOffset","value":{"$id":0,"$type":"System.Single, mscorlib",1.5}'
       objectReference: {fileID: 0}
     - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
       propertyPath: serializationData.PrefabModifications.Array.data[3]
+      value: '"path":"MoveSpeed","value":{"$id":0,"$type":"System.Single, mscorlib",3.5}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[4]
+      value: '"path":"WallCheckDistance","value":{"$id":0,"$type":"System.Single,
+        mscorlib",1.5}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
+      propertyPath: serializationData.PrefabModifications.Array.data[5]
       value: '"path":"WallMask","value":{"$id":0,"$type":"UnityEngine.LayerMask,
         UnityEngine.CoreModule",528}'
       objectReference: {fileID: 0}
     - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[6].Data
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[7].Data
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3392037398564683134, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
-      propertyPath: serializationData.SerializationNodes.Array.data[20].Data
-      value: 528
+      propertyPath: serializationData.PrefabModificationsReferencedUnityObjects.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6967384053706649436, guid: 22ee3bd0dbfdfdf4eb2f5281c21d882b, type: 3}
       propertyPath: serializationData.Prefab

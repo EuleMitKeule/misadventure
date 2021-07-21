@@ -113,6 +113,12 @@ MonoBehaviour:
     - Name: MaxTurnAngle
       Entry: 4
       Data: 7.5
+    - Name: MaxRotationJitter
+      Entry: 4
+      Data: 10
+    - Name: MaxSpeedOffset
+      Entry: 4
+      Data: 10
     - Name: WallCheckDistance
       Entry: 4
       Data: 3

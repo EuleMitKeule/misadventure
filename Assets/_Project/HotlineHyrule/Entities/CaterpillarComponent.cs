@@ -101,6 +101,11 @@ namespace HotlineHyrule.Entities
         public float MaxTurnAngle { get; set; }
         [BoxGroup("Physics")]
         [OdinSerialize]
+        [PropertyRange(0f, "FollowSpeed")]
+        [SuffixLabel("u/s")]
+        public float MaxSpeedOffset { get; private set; }
+        [BoxGroup("Physics")]
+        [OdinSerialize]
         [MinValue(float.Epsilon)]
         [SuffixLabel("u")]
         public float WallCheckDistance { get; set; }
