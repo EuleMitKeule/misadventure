@@ -19,11 +19,11 @@ TagManager:
   - item
   - enemyProjectile
   - boss
-  - 
+  - playerWeapon
   - enemyHitbox
   - mapBorders
   - levelFinish
-  - 
+  - bomb
   - 
   - 
   - 

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1634ab00f9b94a66bf6a7eaacdc248f4, type: 3}
   m_Name: level_forest_ruins_03
   m_EditorClassIdentifier: 
-  areaName: 
+  areaName: Ghost House
   areaText: 
   areaFinishedText: 
   questData: {fileID: 11400000, guid: e8a2793dde8b5074fa7be35f1f67e463, type: 2}
-  playerSpawnPosition: {x: 2, y: 15, z: 0}
+  playerSpawnPosition: {x: 3, y: 5, z: 0}
   bgmData: {fileID: 0}
