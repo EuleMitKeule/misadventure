@@ -15,7 +15,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 8112157577105420745, guid: 1f133f1c11f653146a22455c9cb15e25, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -25,5 +26,5 @@ MonoBehaviour:
       Entry: 1
       Data: fuse
     - Name: ItemPrefab
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
