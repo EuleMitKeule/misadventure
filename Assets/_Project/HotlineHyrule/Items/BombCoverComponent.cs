@@ -44,7 +44,6 @@ namespace HotlineHyrule.Items
 
             if (ItemsToFind.Count == 0)
             {
-                Debug.Log("Cover now pickupable");
                 ItemCollider.enabled = true;
             }
         }

@@ -44,8 +44,6 @@ namespace HotlineHyrule.Items
         {
             if (e.ItemData != BombCoverItem) return;
 
-            Debug.Log("can explode now");
-
             CanExplode = true;
             HitboxCollider.enabled = true;
         }
