@@ -27,14 +27,35 @@ MonoBehaviour:
         HotlineHyrule]], mscorlib
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|HotlineHyrule.Quests.AreaQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
+    - Name: shortTargetText
+      Entry: 1
+      Data: Find an exit
+    - Name: targetReachedText
+      Entry: 1
+      Data: We did something.
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We didn't do something.
+    - Name: colliderName
+      Entry: 1
+      Data: collider_exit
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-  finishLevelOnCompletion: 0
+  finishLevelOnCompletion: 1
   finishGameOnCompletion: 0
   questText: 
   questTargetText: 
