@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using HotlineHyrule.Items;
 using UnityEditor;
 using UnityEngine;
@@ -30,7 +31,7 @@ namespace HotlineHyrule.Entities
             get { return _health; }
             set
             {
-                if (IsInvincible) return;
+                if (IsInvincible && value < _health) return;
                 var lastHealth = _health;
                 _health = Mathf.Clamp(value, 0, maxHealth);
 

@@ -135,8 +135,6 @@ namespace HotlineHyrule.Entities
 
             Locator.PlayerComponent = this;
             MainCamera = Camera.main;
-
-            HealthComponent.HealthChanged += OnHealthChanged; 
             
             ResetBuffs();
 
@@ -156,6 +154,8 @@ namespace HotlineHyrule.Entities
             {
                 HealthComponent.Health = e.PlayerStateData.currentHealth;
             }
+            
+            HealthComponent.HealthChanged += OnHealthChanged;
 
             SetState<PlayerFrozenStateComponent>();
         }
