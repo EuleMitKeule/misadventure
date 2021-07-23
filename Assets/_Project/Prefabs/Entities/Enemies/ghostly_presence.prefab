@@ -85,8 +85,12 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
-      propertyPath: LockVelocity
+      propertyPath: LockRotation
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: LockVelocity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: lockRotation

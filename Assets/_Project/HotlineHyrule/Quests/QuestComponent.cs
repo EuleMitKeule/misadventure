@@ -193,7 +193,7 @@ namespace HotlineHyrule.Quests
                     searchQuestTarget.Items.Keys.All(item => searchQuestTarget.Items[item] <= FoundItems.Count(foundItem => foundItem == item));
                 if (!isCompleted) continue;
                 
-                if (ReachedTargets.Contains(searchQuestTarget)) return;
+                if (ReachedTargets.Contains(searchQuestTarget)) continue;
             
                 ReachedTargets.Add(searchQuestTarget);
                 QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(searchQuestTarget));

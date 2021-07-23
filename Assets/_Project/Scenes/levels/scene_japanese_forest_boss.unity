@@ -654,7 +654,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7772108, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -704,6 +704,7 @@ GameObject:
   - component: {fileID: 4987893362635527694}
   - component: {fileID: 4987893362635527692}
   - component: {fileID: 4987893362635527693}
+  - component: {fileID: 4987893362635527696}
   m_Layer: 0
   m_Name: camera_cinemachine
   m_TagString: Untagged
@@ -711,6 +712,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4987893362635527696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4987893362635527695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusTracking: 0
+  m_FocusTarget: {fileID: 0}
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: 4aed71ed71f62e24c8fe4ea0d7a014a2, type: 2}
 --- !u!114 &4987893363853255701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,7 +808,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -7199,6 +7217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c57e4f6975b48aa976e103da282d2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherFinishedQuestsRequired: 1
 --- !u!4 &6915148782830025223
 Transform:
   m_ObjectHideFlags: 0
@@ -22755,6 +22774,7 @@ MonoBehaviour:
   levelData: {fileID: 11400000, guid: 0911c0a96905bbe1fbf706e408e4ce22, type: 2}
   rainEffectPrefab: {fileID: 5431334764939620233, guid: 3771099df981fe0439074926beb458cb, type: 3}
   snowEffectPrefab: {fileID: 4384620333352811691, guid: 93fa4cce27c0f3a44b77aa2301eff17e, type: 3}
+  objectsToDestroyOnFinish: []
 --- !u!114 &6915148784641150194
 MonoBehaviour:
   m_ObjectHideFlags: 0

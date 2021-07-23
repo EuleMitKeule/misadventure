@@ -12,5 +12,11 @@ namespace HotlineHyrule.Quests
             if (other.gameObject.layer != LayerMask.NameToLayer("player")) return;
             PlayerEntered?.Invoke(this, EventArgs.Empty);
         }
+
+        void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.layer != LayerMask.NameToLayer("player")) return;
+            PlayerEntered?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
