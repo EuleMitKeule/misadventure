@@ -219,12 +219,15 @@ MonoBehaviour:
   state: {fileID: 0}
   wallMask:
     serializedVersion: 2
-    m_Bits: 528
+    m_Bits: 33296
   wallCheckDistance: 0.3
   followAngle: 60
   followRange: 15
   attackRange: 10
   UsingAttack2: 0
+  AttackAnimationTrigger: attack
+  LockVelocity: 0
+  LockRotation: 0
   damageParticleSystemPrefab: {fileID: 2442639310212140477, guid: bbd2f2170baf96d41814258f53875278, type: 3}
 --- !u!114 &1769910642343352168
 MonoBehaviour:
