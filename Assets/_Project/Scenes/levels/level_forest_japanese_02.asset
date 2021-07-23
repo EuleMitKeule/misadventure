@@ -18,4 +18,4 @@ MonoBehaviour:
     inside of the building would have been a little more friendly.
   questData: {fileID: 11400000, guid: 83c34d11b44af8b30b34e9e0406221b1, type: 2}
   playerSpawnPosition: {x: -2, y: -5, z: 0}
-  bgmData: {fileID: 0}
+  bgmData: {fileID: 11400000, guid: 43296168350be6343bc2df1003915cc1, type: 2}
