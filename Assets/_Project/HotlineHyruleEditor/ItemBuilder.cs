@@ -14,7 +14,7 @@ namespace HotlineHyruleEditor
 
         public static ItemData CreateItem(string itemName, Type itemType, bool createPrefab)
         {
-            if (itemName == null || !Regex.IsMatch(itemName, @"^([a-z])+(_([a-z])+)*$"))
+            if (itemName == null || !Regex.IsMatch(itemName, @"^([a-z\d\+\-])+(_([a-z\d\+\-])+)*$"))
             { 
                 Debug.LogError("Item name is invalid. Use only lower-case letters and underscores.");
                 return null;
@@ -59,7 +59,7 @@ namespace HotlineHyruleEditor
 
         public static void RenameItem(ItemData itemData, string newName)
         {
-            if (newName == null || !Regex.IsMatch(newName, @"^([a-z])+(_([a-z])+)*$"))
+            if (newName == null || !Regex.IsMatch(newName, @"^([a-z\d\+\-])+(_([a-z\d\+\-])+)*$"))
             { 
                 Debug.LogError("Item name is invalid. Use only lower-case letters and underscores.");
                 return;
