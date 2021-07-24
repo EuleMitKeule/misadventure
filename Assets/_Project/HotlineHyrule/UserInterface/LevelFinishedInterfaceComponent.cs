@@ -51,6 +51,8 @@ namespace HotlineHyrule.UserInterface
                     ? questTarget.targetReachedText
                     : questTarget.targetNotReachedText;
 
+                if (targetText == "") continue;
+
                 var labelObject = Instantiate(questTargetReachedTextPrefab, questTargetReachedParent);
                 var label = labelObject.GetComponent<TextMeshProUGUI>();
                 label.text = targetText;

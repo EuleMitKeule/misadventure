@@ -56,7 +56,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: f534ac49de3ef6f48bef6c1d81ed879c, type: 2}
     - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: itemDrops.Array.data[0].dropRate
-      value: 0.3
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: itemDrops.Array.data[1].dropRate
