@@ -25,8 +25,8 @@ TagManager:
   - levelFinish
   - bomb
   - hole
-  - 
-  - 
+  - ghost
+  - projectile_fire
   - 
   - 
   - 
