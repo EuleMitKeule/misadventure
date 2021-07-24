@@ -5,6 +5,7 @@ using HotlineHyrule.Weapons;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 namespace HotlineHyrule.Items
 {
@@ -19,14 +20,16 @@ namespace HotlineHyrule.Items
         [OdinSerialize]
         GameObject WallObject { get; set; }
         Animator Animator { get; set; }
+        Light2D Light { get; set; }
         bool IsExploded { get; set; }
         bool CanExplode { get; set; }
 
         void Awake()
         {
-            Animator = GetComponent<Animator>();
             if (!ExplosionCollider) ExplosionCollider = GetComponents<Collider2D>()[0];
             if (!HitboxCollider) HitboxCollider = GetComponents<Collider2D>()[1];
+            Animator = GetComponent<Animator>();
+            Light = GetComponent<Light2D>();
 
             GameComponent.LevelLoaded += OnLevelLoaded;
             GameComponent.LevelUnloaded += OnLevelUnloaded;
@@ -46,6 +49,7 @@ namespace HotlineHyrule.Items
 
             CanExplode = true;
             HitboxCollider.enabled = true;
+            Light.enabled = true;
         }
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)
