@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72112766fd8a400786090afb9f205301, type: 3}
-  m_Name: questl_forest_ruins_03
+  m_Name: quest_forest_ruins_03
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
