@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 7320460730021520215}
   - component: {fileID: 7320460730021520232}
   - component: {fileID: 7320460730021520233}
-  - component: {fileID: 7320460730021520234}
   - component: {fileID: 7320460730021520235}
   - component: {fileID: 7320460730021520214}
   - component: {fileID: 3184425719602560471}
-  m_Layer: 8
-  m_Name: projectile_flames
+  - component: {fileID: 5508134044544701502}
+  m_Layer: 20
+  m_Name: projectile_wand_fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -691272855
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -3876,11 +3876,11 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 640
+      m_Bits: 524928
     maxCollisionShapes: 10000
     quality: 0
     voxelSize: 0.05
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -4831,32 +4831,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!61 &7320460730021520234
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7320460730021520237}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.25, y: 0.125}
-    oldSize: {x: 0.25, y: 0.75}
-    newSize: {x: 0.25, y: 0.75}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &7320460730021520235
 Rigidbody2D:
   serializedVersion: 4
@@ -4904,3 +4878,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangedWeaponData: {fileID: 11400000, guid: 3d73b0030c67d364e8b5b56b97ed0986, type: 2}
   projectileData: {fileID: 11400000, guid: 687a5c806367e194b92b8eaa299fc992, type: 2}
+  useImpactAnimation: 1
+--- !u!61 &5508134044544701502
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7320460730021520237}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.0001, y: 0.0001}
+  m_EdgeRadius: 0

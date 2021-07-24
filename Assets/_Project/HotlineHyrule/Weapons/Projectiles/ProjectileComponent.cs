@@ -61,6 +61,7 @@ namespace HotlineHyrule.Weapons
         /// The number of entity penetrations remaining until impact.
         /// </summary>
         int Penetrations { get; set; }
+        List<GameObject> HitEnemies { get; set; } = new List<GameObject>();
 
         /// <summary>
         /// Whether the projectile associated with this projectile object is linear.
@@ -147,6 +148,19 @@ namespace HotlineHyrule.Weapons
 
             if (Penetrations <= 0 || other.gameObject.layer.IsWall()) HandleImpact(other.transform);
             Penetrations -= 1;
+
+            var healthComponent = other.GetComponentInParent<HealthComponent>();
+            if (healthComponent) healthComponent.Health -= (int)(projectileData.damage * DamageFactor) + DamageBonus;
+        }
+
+        void OnParticleCollision(GameObject other)
+        {
+            if (projectileData.impactMask.value != (projectileData.impactMask.value | 1 << other.layer)) return;
+            Debug.Log(other.name);
+            
+            if (HitEnemies.Contains(other)) return;
+            HitEnemies.Add((other));
+            Debug.Log(other.name);
 
             var healthComponent = other.GetComponentInParent<HealthComponent>();
             if (healthComponent) healthComponent.Health -= (int)(projectileData.damage * DamageFactor) + DamageBonus;
