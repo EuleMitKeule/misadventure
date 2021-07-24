@@ -156,11 +156,9 @@ namespace HotlineHyrule.Weapons
         void OnParticleCollision(GameObject other)
         {
             if (projectileData.impactMask.value != (projectileData.impactMask.value | 1 << other.layer)) return;
-            Debug.Log(other.name);
             
             if (HitEnemies.Contains(other)) return;
             HitEnemies.Add((other));
-            Debug.Log(other.name);
 
             var healthComponent = other.GetComponentInParent<HealthComponent>();
             if (healthComponent) healthComponent.Health -= (int)(projectileData.damage * DamageFactor) + DamageBonus;
