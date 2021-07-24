@@ -3263,6 +3263,8 @@ MonoBehaviour:
     image: {fileID: 8493866793881364569, guid: 57e1bd62b13ad81bbbbb718a29de6043, type: 3}
   - data: {fileID: 11400000, guid: 917df7b7079e4bd45a5ade2a3fc8e1c8, type: 2}
     image: {fileID: 778659788618280871, guid: 2d89a73aa2fe37d4b97453f5b8931e44, type: 3}
+  - data: {fileID: 11400000, guid: 710dd84582968884899c94ecaf44fdda, type: 2}
+    image: {fileID: 778659788618280871, guid: 62a2d9628cad8132e9c40feddd2f0c9a, type: 3}
 --- !u!1 &6355505124187562455
 GameObject:
   m_ObjectHideFlags: 0

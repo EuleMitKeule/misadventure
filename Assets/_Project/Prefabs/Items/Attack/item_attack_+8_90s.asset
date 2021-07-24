@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 610c3210925c4af7b5f91020c0bbdff5, type: 3}
-  m_Name: item_attack_+20
+  m_Name: item_attack_+8_90s
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 7750176915603624539, guid: f9fef390ac99e5047a7c4c7c2a084672, type: 3}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -24,19 +23,19 @@ MonoBehaviour:
     SerializationNodes:
     - Name: ItemName
       Entry: 1
-      Data: attack_+20
+      Data: attack_+8_90s
     - Name: ItemPrefab
-      Entry: 10
-      Data: 0
+      Entry: 6
+      Data: 
     - Name: ConsumeParticleSystemPrefab
       Entry: 6
       Data: 
     - Name: InfoText
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: + Attack
     - Name: damageFactor
       Entry: 4
-      Data: 0
-  damageBonus: 20
+      Data: 1
+  damageBonus: 8
   attackSpeed: 1
-  duration: 10
+  duration: 90

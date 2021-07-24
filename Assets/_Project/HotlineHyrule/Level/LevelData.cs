@@ -1,13 +1,14 @@
 using System;
 using HotlineHyrule.Quests;
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 
 namespace HotlineHyrule.Level
 {
     [CreateAssetMenu(menuName = "Level/New Level")]
     [HideMonoScript]
-    public class LevelData : ScriptableObject
+    public class LevelData : SerializedScriptableObject
     {
         [BoxGroup("Story")]
         [ShowInInspector]
@@ -41,6 +42,7 @@ namespace HotlineHyrule.Level
         [EnumToggleButtons]
         [HideLabel]
         [ShowInInspector]
+        [OdinSerialize]
         EffectType effectType;
 
         /// <summary>

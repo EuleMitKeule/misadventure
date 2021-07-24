@@ -38659,6 +38659,7 @@ GameObject:
   - component: {fileID: 4138621123787531919}
   - component: {fileID: 4138621123787531918}
   - component: {fileID: 4138621123787531954}
+  - component: {fileID: 4138621123787531955}
   m_Layer: 0
   m_Name: grid_forest_general_boss
   m_TagString: Untagged
@@ -38676,6 +38677,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfe2019b4a8b4ff9bf464f5919ae8a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4138621123787531955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4138621123787531953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857a8626b4174ee78c053837f8e95509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4138621123921683473

@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: 8508713101416219138}
   - component: {fileID: 8508713101416219139}
   - component: {fileID: 8414895725787937887}
+  - component: {fileID: 7884457308851807800}
   m_Layer: 0
   m_Name: grid_base
   m_TagString: Untagged
@@ -555,6 +556,7 @@ MonoBehaviour:
   levelData: {fileID: 0}
   rainEffectPrefab: {fileID: 5431334764939620233, guid: 3771099df981fe0439074926beb458cb, type: 3}
   snowEffectPrefab: {fileID: 4384620333352811691, guid: 93fa4cce27c0f3a44b77aa2301eff17e, type: 3}
+  objectsToDestroyOnFinish: []
 --- !u!114 &8508713101416219138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,6 +604,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfe2019b4a8b4ff9bf464f5919ae8a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7884457308851807800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508713101416219196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857a8626b4174ee78c053837f8e95509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8508713101551419548
@@ -1976,6 +1990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c57e4f6975b48aa976e103da282d2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherFinishedQuestsRequired: 1
 --- !u!1 &9114062881754906483
 GameObject:
   m_ObjectHideFlags: 0
