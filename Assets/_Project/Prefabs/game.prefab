@@ -2534,6 +2534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 0}
+  menuCanvas: {fileID: 0}
 --- !u!1 &798222154784294095
 GameObject:
   m_ObjectHideFlags: 0
@@ -4457,10 +4458,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - scene_forest_general_01
+  - scene_forest_general_02
   - scene_forest_general_03
-  - scene_forest_japanese_02
   - scene_forest_ruins_01
   - scene_forest_ruins_02
+  - scene_forest_ruins_03
+  - scene_forest_ruins_04
+  - scene_forest_ruins_05
+  - scene_forest_japanese_02
+  - scene_snow01
   bossLevels:
   - scene_forest_general_boss
   - scene_forest_ruins_boss
