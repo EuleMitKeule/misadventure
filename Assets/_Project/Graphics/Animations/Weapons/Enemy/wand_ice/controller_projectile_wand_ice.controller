@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: controller_projectile_wand_ice
+  m_Controller: {fileID: 9100000, guid: 722517cdec31a3141ad795cefa8f186f, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 1dc1426920239cd4cbb14fe692d06919, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 37834e9abe6deba498f5bfaf840640d7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a2e842a115f92244a88b50723f22f781, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5d04538ffd10a1849a4033112791f0ed, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: fa559ded3cd4d8e4fa9ecbd99073872a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3b9f2f089df5523488a80e3ddae431ab, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 649dad6a92c3df3408bcc24822370ca6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5b26215c411915442bb21964a2be9d89, type: 2}

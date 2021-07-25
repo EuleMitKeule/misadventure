@@ -236,6 +236,7 @@ namespace HotlineHyrule.Weapons
 
         public void DropWeapon()
         {
+            if (!rangedWeaponData) return;
             if (!rangedWeaponData.hasInfiniteCharges && WeaponCharges <= 0) return;
             if (!rangedWeaponData.ItemPrefab) return;
 

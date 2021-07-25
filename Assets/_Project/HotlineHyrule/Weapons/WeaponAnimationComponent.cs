@@ -45,6 +45,13 @@ namespace HotlineHyrule.Weapons
 
             WeaponComponent.PerformConjuringAttack();
         }
+        
+        public void PerformTargetingAttack()
+        {
+            if (!WeaponComponent) return;
+
+            WeaponComponent.PerformTargetingAttack();
+        }
 
         /// <summary>
         /// Unequips the current weapon without dropping it.

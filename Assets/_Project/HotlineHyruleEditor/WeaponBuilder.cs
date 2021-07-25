@@ -391,6 +391,7 @@ namespace HotlineHyruleEditor.GameManager
             Melee,
             Ranged,
             Conjuring,
+            Targeting
         }
 
         public enum WeaponOwnerType
