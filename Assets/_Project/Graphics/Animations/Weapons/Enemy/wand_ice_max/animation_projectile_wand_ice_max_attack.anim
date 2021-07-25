@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: animation_projectile_wand_ice_attack
+  m_Name: animation_projectile_wand_ice_max_attack
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
