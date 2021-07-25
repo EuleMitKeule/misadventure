@@ -31,5 +31,8 @@ MonoBehaviour:
     - Name: ConsumeParticleSystemPrefab
       Entry: 6
       Data: 
-  movementFactor: 3
-  duration: 10
+    - Name: InfoText
+      Entry: 1
+      Data: + Movement Speed
+  movementFactor: 1.5
+  duration: 15

@@ -242,6 +242,16 @@ namespace HotlineHyrule.Entities
         {
             if (state) state.UpdateState();
 
+            if (Locator.PlayerComponent)
+            {
+                var weaponDirection = WeaponComponent.WeaponPosition.To(PlayerPosition);
+                var weaponAngle = Vector3.SignedAngle(Vector3.up, weaponDirection, Vector3.forward);
+                if (WeaponComponent.HasRangedWeapon)
+                {
+                    WeaponComponent.SetWeaponRotation(weaponAngle);
+                }
+            }
+
 #if UNITY_EDITOR
             if (IsPlayerFollowable) Debug.DrawLine(transform.position, PlayerPosition, IsPlayerAttackable ? Color.green : Color.red);
 #endif

@@ -81,7 +81,7 @@ namespace HotlineHyrule.Weapons
         /// Whether enough time has passed since the last usage for the weapon to be used again.
         /// </summary>
         public bool CanAttack =>
-            weaponData.attackRate == 0 || Time.time >= LastAttackTime + AttackDelay;
+            weaponData && (weaponData.attackRate == 0 || Time.time >= LastAttackTime + AttackDelay);
 
         /// <summary>
         /// The currently equipped weapon object's transform.

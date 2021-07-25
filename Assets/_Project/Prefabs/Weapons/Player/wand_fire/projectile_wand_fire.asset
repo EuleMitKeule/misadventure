@@ -15,12 +15,15 @@ MonoBehaviour:
   damage: 15
   impactMask:
     serializedVersion: 2
-    m_Bits: 16896
+    m_Bits: 524928
   impactRaycastOffset: 0
   isSticky: 0
   notStickyOnPlayer: 0
+  destroyOnInvisible: 0
   penetrations: 0
   impactParticleSystem: {fileID: 0}
   weaponEffectTiles: []
   weaponEffectTilemapName: tilemap_weapon_effect
+  weaponEffectRadius: 0
+  weaponEffectRandomnes: 0
   movementSpeed: 0

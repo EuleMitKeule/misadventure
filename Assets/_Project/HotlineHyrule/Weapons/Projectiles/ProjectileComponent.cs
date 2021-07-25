@@ -61,6 +61,7 @@ namespace HotlineHyrule.Weapons
         /// The number of entity penetrations remaining until impact.
         /// </summary>
         int Penetrations { get; set; }
+        List<GameObject> HitEnemies { get; set; } = new List<GameObject>();
 
         /// <summary>
         /// Whether the projectile associated with this projectile object is linear.
@@ -152,9 +153,20 @@ namespace HotlineHyrule.Weapons
             if (healthComponent) healthComponent.Health -= (int)(projectileData.damage * DamageFactor) + DamageBonus;
         }
 
+        void OnParticleCollision(GameObject other)
+        {
+            if (projectileData.impactMask.value != (projectileData.impactMask.value | 1 << other.layer)) return;
+            
+            if (HitEnemies.Contains(other)) return;
+            HitEnemies.Add((other));
+
+            var healthComponent = other.GetComponentInParent<HealthComponent>();
+            if (healthComponent) healthComponent.Health -= (int)(projectileData.damage * DamageFactor) + DamageBonus;
+        }
+
         void OnBecameInvisible()
         {
-            Destroy(gameObject);
+            if (projectileData.destroyOnInvisible) Destroy(gameObject);
         }
 
         public void Fire(Vector3 direction, Vector2 entityVelocity, int weaponCharges, int damageBonus, float damageFactor, float attackSpeed)
@@ -213,6 +225,8 @@ namespace HotlineHyrule.Weapons
             Rigidbody.simulated = false;
 
             if (Animator) Animator.SetTrigger("stop");
+            var impactParticleSystem = projectileData.impactParticleSystem;
+            if (impactParticleSystem) Instantiate(impactParticleSystem, transform.position, Quaternion.identity);
         }
 
         public void Destroy()
@@ -240,7 +254,27 @@ namespace HotlineHyrule.Weapons
             var weaponEffectTilemap = weaponEffectTilemapObject.GetComponent<Tilemap>();
             if (!weaponEffectTilemap) return;
 
-            count = Mathf.Clamp(count, 0, 4);
+            var maxoffset = count * projectileData.weaponEffectRandomnes;
+            var offset = Random.Range(-maxoffset, maxoffset);
+
+            count += (int)offset;
+            var spawnPositions = new List<Vector3Int>();
+
+            for(int x = -projectileData.weaponEffectRadius; x <= projectileData.weaponEffectRadius; x++)
+            {
+                for(int y = -projectileData.weaponEffectRadius; y <= projectileData.weaponEffectRadius; y++)
+                {
+                    var distance = Mathf.Sqrt(x * x + y * y);
+                    if (distance > projectileData.weaponEffectRadius) continue;
+                    var cellPosition = weaponEffectTilemap.WorldToCell(transform.position);
+                    var offsetPosition = new Vector3Int(x, y,0);
+
+                    spawnPositions.Add(offsetPosition + cellPosition);
+                }
+            }
+
+            count = Mathf.Clamp(count, 0, spawnPositions.Count);
+
 
             var effectTiles = new List<TileBase>();
 
@@ -251,23 +285,11 @@ namespace HotlineHyrule.Weapons
                 effectTiles.Add(effectTile);
             }
 
-            var directions =
-                new List<Vector3Int>
-                {
-                    Vector3Int.left,
-                    Vector3Int.right,
-                    Vector3Int.up,
-                    Vector3Int.down,
-                }
-                .OrderBy(e => Guid.NewGuid())
-                .Take(count);
+            spawnPositions = spawnPositions.OrderBy(e => Guid.NewGuid()).ToList();
 
-            var cellPosition = weaponEffectTilemap.WorldToCell(transform.position);
-            var positions = directions.Select(e => cellPosition + e).ToList();
-
-            for (var i = 0; i < positions.Count; i++)
+            for (var i = 0; i < count; i++)
             {
-                var position = positions[i];
+                var position = spawnPositions[i];
                 weaponEffectTilemap.SetTile(position, effectTiles[i]);
             }
         }

@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - NavWall
   layers:
   - Default
   - TransparentFX
@@ -18,14 +19,14 @@ TagManager:
   - item
   - enemyProjectile
   - boss
-  - 
+  - playerWeapon
   - enemyHitbox
   - mapBorders
   - levelFinish
-  - 
-  - 
-  - 
-  - 
+  - bomb
+  - hole
+  - ghost
+  - projectile_fire
   - 
   - 
   - 

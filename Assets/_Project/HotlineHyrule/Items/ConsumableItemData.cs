@@ -13,6 +13,9 @@ namespace HotlineHyrule.Items
         [LabelText("Consume Particle Effect")]
         [OdinSerialize]
         public GameObject ConsumeParticleSystemPrefab { get; private set; }
+        [BoxGroup("General")]
+        [OdinSerialize]
+        public string InfoText { get; private set; }
 
         public override string ItemName => name.Replace("item_", "");
         protected override bool IsItemNameReadOnly => true;

@@ -21,5 +21,6 @@ namespace HotlineHyrule
         /// Whether the layer is the player layer;
         /// </summary>
         public static bool IsPlayer(this int layer) => layer == PLAYER;
+        public static bool IsPlayerProjectile(this int layer) => layer == PROJECTILE;
     }
 }

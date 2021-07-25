@@ -21,6 +21,7 @@ namespace HotlineHyrule.Pathfinding
         /// Cell positions that entities can walk on.
         /// </summary>
         public List<Vector3Int> NavMap { get; set; }
+        bool IsGenerated { get; set; } = false;
 
         void Awake()
         {
@@ -28,6 +29,18 @@ namespace HotlineHyrule.Pathfinding
             GenerateNavMap();
             
             Pathfinder.InitializeNavMap(NavMap);
+        }
+
+        void Update()
+        {
+            if (!IsGenerated)
+            {
+                GenerateNavMap();
+            
+                Pathfinder.InitializeNavMap(NavMap);
+
+                IsGenerated = true;
+            }
         }
 
         /// <summary>
@@ -59,11 +72,17 @@ namespace HotlineHyrule.Pathfinding
                     if (!cells.Contains(cell)) continue;
 
                     var hasTileCollider = tilemap.GetColliderType(cell) != Tile.ColliderType.None;
+                    
                     var boxcastResults = new RaycastHit2D[10];
-                    var resultCount = Physics2D.BoxCastNonAlloc(cell.ToWorld(), Vector2.one * 0.9f, 0f, Vector2.zero, boxcastResults);
+                    Physics2D.BoxCastNonAlloc(cell.ToWorld(), Vector2.one * 0.9f, 0f, Vector2.zero, boxcastResults);
+                    
+                    var tilePrefab = tilemap.GetInstantiatedObject(cell);
+                    var prefabCollider = tilePrefab ? tilePrefab.GetComponent<Collider2D>() : null;
+                    var hasPrefabCollider = prefabCollider && !prefabCollider.isTrigger;
+                    
                     var hasCollider = boxcastResults.Where(e => e.collider != null).Any(e => e.collider.gameObject == tilemap.gameObject);
-
-                    if (!hasTileCollider && !hasCollider) continue;
+                    
+                    if (!hasTileCollider && !hasCollider && !hasPrefabCollider) continue;
 
                     cells.Remove(cell);
                 }

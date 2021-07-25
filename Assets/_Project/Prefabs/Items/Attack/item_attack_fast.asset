@@ -28,8 +28,15 @@ MonoBehaviour:
     - Name: ItemPrefab
       Entry: 10
       Data: 0
-  consumeParticleSystemPrefab: {fileID: 0}
-  damageFactor: 1
+    - Name: ConsumeParticleSystemPrefab
+      Entry: 6
+      Data: 
+    - Name: InfoText
+      Entry: 1
+      Data: ++ Attack Speed
+    - Name: damageFactor
+      Entry: 4
+      Data: 0
   damageBonus: 0
   attackSpeed: 2
-  duration: 10
+  duration: 25

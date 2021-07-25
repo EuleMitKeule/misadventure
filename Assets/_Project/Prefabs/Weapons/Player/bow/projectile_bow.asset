@@ -19,6 +19,7 @@ MonoBehaviour:
   impactRaycastOffset: -0.35
   isSticky: 1
   notStickyOnPlayer: 0
+  destroyOnInvisible: 1
   penetrations: 0
   impactParticleSystem: {fileID: 0}
   weaponEffectTiles: []

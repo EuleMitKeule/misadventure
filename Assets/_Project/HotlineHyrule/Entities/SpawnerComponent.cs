@@ -18,6 +18,7 @@ namespace HotlineHyrule.Entities
         [SerializeField] public Tilemap spawnTilemap;       
         [SerializeField] public int maxEntities;
         [SerializeField] public bool spawnOnAwake;
+        [SerializeField] GameObject parentObject;
 
         [SerializeField] bool useWaves;
         [SerializeField] int waveLimit;
@@ -132,6 +133,7 @@ namespace HotlineHyrule.Entities
                 position.ToWorld(),
                 Quaternion.Euler(0, 0, rotation)
             );
+            if (parentObject) entity.transform.SetParent(parentObject.transform);
             
             var healthComponent = entity.GetComponent<HealthComponent>();
             if (healthComponent) healthComponent.HealthChanged += OnHealthChanged;
@@ -181,6 +183,7 @@ namespace HotlineHyrule.Entities
                     spawnPosition.ToWorld(),
                     Quaternion.Euler(0, 0, rotation)
                 );
+                if (parentObject) entity.transform.SetParent(parentObject.transform);
 
                 var weaponComponent = GetComponentInParent<WeaponComponent>();
                 if (weaponComponent)

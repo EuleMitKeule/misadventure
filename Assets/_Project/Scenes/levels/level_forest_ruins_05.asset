@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1634ab00f9b94a66bf6a7eaacdc248f4, type: 3}
+  m_Name: level_forest_ruins_05
+  m_EditorClassIdentifier: 
+  areaName: The Cellar
+  areaText: On our way through the forest we met a friendly old lady. She told us
+    about a great pest that had infested her cellar.
+  areaFinishedText: After leaving the cellar we reported back to the owner that the
+    pest had been dealen with.
+  questData: {fileID: 11400000, guid: d935550d5cbd3b64681f5d25d3eb925f, type: 2}
+  playerSpawnPosition: {x: 0, y: -1, z: 0}
+  bgmData: {fileID: 11400000, guid: 8eacb01e05504cf4b9bbbcf856adb95a, type: 2}

@@ -9,6 +9,7 @@ namespace HotlineHyrule.UserInterface
     public class LevelFinishedInterfaceComponent : MonoBehaviour
     {
         [SerializeField] Transform questTargetReachedParent;
+        [SerializeField] Transform rewardsParent;
         [SerializeField] GameObject questTargetReachedTextPrefab;
 
         Animator Animator { get; set; }
@@ -16,6 +17,7 @@ namespace HotlineHyrule.UserInterface
         void Awake()
         {
             if (!questTargetReachedParent) questTargetReachedParent = transform.Find("parent_quest_target_reached");
+            if (!rewardsParent) rewardsParent = transform.Find("parent_rewards");
 
             Animator = GetComponent<Animator>();
 
@@ -32,9 +34,10 @@ namespace HotlineHyrule.UserInterface
             labels[2].text = e.LevelData.areaFinishedText;
         }
 
-        void OnLevelFinished(object sender, EventArgs e)
+        void OnLevelFinished(object sender, LevelFinishedEventArgs e)
         {
             if (!Locator.QuestComponent) return;
+            if (e.FinishGame) return;
 
             for (var i = 0; i < questTargetReachedParent.childCount; i++)
             {
@@ -44,13 +47,25 @@ namespace HotlineHyrule.UserInterface
 
             foreach (var questTarget in Locator.LevelComponent.levelData.questData.questTargets)
             {
-                var reachedText = Locator.QuestComponent.IsReached(questTarget)
+                var targetText = Locator.QuestComponent.IsReached(questTarget)
                     ? questTarget.targetReachedText
                     : questTarget.targetNotReachedText;
 
+                if (targetText == "") continue;
+
                 var labelObject = Instantiate(questTargetReachedTextPrefab, questTargetReachedParent);
                 var label = labelObject.GetComponent<TextMeshProUGUI>();
-                label.text = reachedText;
+                label.text = targetText;
+            }
+
+            if (Locator.QuestComponent.IsCompleted)
+            {
+                foreach (var reward in Locator.LevelComponent.levelData.questData.questRewards)
+                {
+                    var rewardsTextObject = Instantiate(questTargetReachedTextPrefab, rewardsParent);
+                    var label = rewardsTextObject.GetComponent<TextMeshProUGUI>();
+                    label.text = reward.InfoText;
+                }
             }
         }
     }
