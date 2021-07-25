@@ -18,6 +18,8 @@ namespace HotlineHyrule.Items
         [OdinSerialize]
         Collider2D HitboxCollider { get; set; }
         [OdinSerialize]
+        Collider2D SecondHitboxCollider { get; set; }
+        [OdinSerialize]
         GameObject WallObject { get; set; }
         Animator Animator { get; set; }
         Light2D Light { get; set; }
@@ -49,6 +51,7 @@ namespace HotlineHyrule.Items
 
             CanExplode = true;
             HitboxCollider.enabled = true;
+            if (SecondHitboxCollider) SecondHitboxCollider.enabled = true;
             Light.enabled = true;
         }
 
@@ -67,6 +70,20 @@ namespace HotlineHyrule.Items
                 var isMeleeWeapon = other.gameObject.GetComponent<WeaponAnimationComponent>();
 
                 if (!other.gameObject.layer.IsPlayerProjectile() & !isMeleeWeapon) return;
+                HandleExplosion();
+            }
+        }
+
+        void OnParticleCollision(GameObject other)
+        {
+            if (!CanExplode) return;
+
+            if (!IsExploded)
+            {
+                var isMeleeWeapon = other.GetComponent<WeaponAnimationComponent>();
+
+                if (!other.layer.IsPlayerProjectile() &&
+                    other.layer != 20 & !other.layer.IsPlayer() & !isMeleeWeapon) return;
                 HandleExplosion();
             }
         }
