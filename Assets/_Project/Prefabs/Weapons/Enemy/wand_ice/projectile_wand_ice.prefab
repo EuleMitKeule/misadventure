@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8262640201923771783}
   - component: {fileID: 5032010828927415407}
   - component: {fileID: 2358138121193525780}
-  - component: {fileID: 5079345110554012773}
+  - component: {fileID: 5897677089083672632}
   m_Layer: 11
   m_Name: projectile_wand_ice
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8874698304576867284}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -126,7 +126,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!114 &2358138121193525780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,10 +139,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261465b5c13226c4bbff10a34fcde221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangedWeaponData: {fileID: 0}
+  rangedWeaponData: {fileID: 11400000, guid: d8f0d984eecd985dd91fe61afc4468f7, type: 2}
   projectileData: {fileID: 11400000, guid: 4014045e553a2504c96fe898f244fc06, type: 2}
   useImpactAnimation: 0
---- !u!58 &5079345110554012773
+  stopPhysicsOnImpact: 0
+--- !u!58 &5897677089083672632
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

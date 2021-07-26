@@ -325,11 +325,12 @@ namespace HotlineHyrule.Weapons
             var rotation = Quaternion.Euler(0f, 0f, angle);
             var projectileObject = Instantiate(TargetingWeaponData.projectilePrefab, targetPos, rotation);
             projectileObject.transform.position += projectileObject.transform.right * distance;
-            
+            projectileObject.GetComponent<Rigidbody2D>().simulated = true;
+
             var projectileComponent = projectileObject.GetComponent<ProjectileComponent>();
             if (projectileComponent) projectileComponent.Fire(
                 new Vector3(0f ,0f, angle),
-                Vector2.zero, 
+                Rigidbody.velocity, 
                 IsPlayer ? LoadoutComponent.CurrentLoadoutSlot.weaponCharges : 0, 
                 DamageBonus, 
                 DamageFactor, 

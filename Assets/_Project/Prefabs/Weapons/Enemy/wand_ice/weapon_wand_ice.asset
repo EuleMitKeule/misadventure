@@ -15,8 +15,7 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 9084397236909348207, guid: 7f912b86248148d4a856f84bae4af413, type: 3}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -26,11 +25,11 @@ MonoBehaviour:
       Entry: 1
       Data: wand_ice
     - Name: ItemPrefab
-      Entry: 10
-      Data: 0
-  movementFactor: 1
+      Entry: 6
+      Data: 
+  movementFactor: 0
   slowTimeWindow: 0
-  attackRate: 1
+  attackRate: 0.5
   weaponPrefab: {fileID: 9084397236909348207, guid: 7f912b86248148d4a856f84bae4af413, type: 3}
   hasInfiniteCharges: 1
   weaponCharges: 0
