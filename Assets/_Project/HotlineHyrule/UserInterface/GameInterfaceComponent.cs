@@ -87,6 +87,7 @@ namespace HotlineHyrule.UserInterface
         void OnMovementStarted(object sender, EventArgs e)
         {
             Animator.SetBool("showInfo", false);
+            Locator.GameComponent.gameplayEnabled = true;
         }
 
         public void ShowLevelInfo()

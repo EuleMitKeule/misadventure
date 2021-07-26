@@ -229,7 +229,7 @@ namespace HotlineHyrule.Entities
 
         void FixedUpdate()
         {
-            if (state) state.FixedUpdateState();
+            if (state && Locator.GameComponent.gameplayEnabled) state.FixedUpdateState();
 
             Rigidbody.velocity = LockVelocity ?  Vector2.zero : Velocity;
             if (!LockRotation)
@@ -240,7 +240,7 @@ namespace HotlineHyrule.Entities
 
         void Update()
         {
-            if (state) state.UpdateState();
+            if (state && Locator.GameComponent.gameplayEnabled) state.UpdateState();
 
             if (Locator.PlayerComponent)
             {
