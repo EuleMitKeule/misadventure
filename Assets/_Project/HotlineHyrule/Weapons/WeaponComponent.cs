@@ -91,6 +91,7 @@ namespace HotlineHyrule.Weapons
         /// Whether the current weapon is a ranged one.
         /// </summary>
         public bool HasRangedWeapon => weaponData is RangedWeaponData;
+        public bool HasTargetingWeapon => weaponData is TargetingWeaponData;
         /// <summary>
         /// Whether the current weapon is a melee one.
         /// </summary>
@@ -111,6 +112,7 @@ namespace HotlineHyrule.Weapons
         /// The currently equipped conjuring weapon.
         /// </summary>
         ConjuringWeaponData ConjuringWeaponData => weaponData as ConjuringWeaponData;
+        public TargetingWeaponData TargetingWeaponData => weaponData as TargetingWeaponData;
 
         /// <summary>
         /// The weapon object's current world position
@@ -125,7 +127,7 @@ namespace HotlineHyrule.Weapons
         /// <summary>
         /// The spawn position of the projectile.
         /// </summary>
-        Vector3 ProjectileSpawnPosition => ProjectileSpawnOffset + WeaponTransform.position;
+        Vector3 RangedProjectileSpawnPosition => ProjectileSpawnOffset + WeaponTransform.position;
         
         int ConjuredEntities { get; set; }
         SpawnerComponent SpawnerComponent { get; set; }
@@ -275,8 +277,7 @@ namespace HotlineHyrule.Weapons
         void FireProjectile(Vector3 direction)
         {
             var fireAngle = Vector3.SignedAngle(Vector3.up, direction, Vector3.forward);
-            
-            var projectileObject = Instantiate(RangedWeaponData.projectilePrefab, ProjectileSpawnPosition,
+            var projectileObject = Instantiate(RangedWeaponData.projectilePrefab, RangedProjectileSpawnPosition,
                 Quaternion.Euler(0f, 0f, fireAngle));
 
             var projectileComponent = projectileObject.GetComponent<ProjectileComponent>();
@@ -289,6 +290,50 @@ namespace HotlineHyrule.Weapons
                 AttackSpeedFactor);
             
             Locator.SoundComponent.PlaySound(RangedWeaponData.weaponFiredSound);
+        }
+        
+        public void PerformTargetingAttack()
+        {
+            if (!HasTargetingWeapon) return;
+
+            StartCoroutine(PerformTargetingAttackRoutine());
+        }
+        
+        IEnumerator PerformTargetingAttackRoutine()
+        {
+            if (!HasTargetingWeapon) yield break;
+
+            var playerPos = Locator.PlayerComponent.transform.position;
+            
+            for (var i = 0; i < TargetingWeaponData.spawnRings.Count; i++)
+            {
+                var spawnRing = TargetingWeaponData.spawnRings[i];
+                var nProjectiles = spawnRing.numberOfProjectiles;
+                for (var j = 0; j < nProjectiles; j++)
+                {
+                    var angle = (float) j / nProjectiles * 360f;
+                    SpawnTargetingProjectile(playerPos, angle, spawnRing.radius);
+                }
+
+                Locator.SoundComponent.PlaySound(TargetingWeaponData.weaponFiredSound);
+                yield return new WaitForSeconds(TargetingWeaponData.delayBetweenSpawnRings);
+            }
+        }
+
+        void SpawnTargetingProjectile(Vector3 targetPos, float angle, float distance)
+        {
+            var rotation = Quaternion.Euler(0f, 0f, angle);
+            var projectileObject = Instantiate(TargetingWeaponData.projectilePrefab, targetPos, rotation);
+            projectileObject.transform.position += projectileObject.transform.right * distance;
+            
+            var projectileComponent = projectileObject.GetComponent<ProjectileComponent>();
+            if (projectileComponent) projectileComponent.Fire(
+                new Vector3(0f ,0f, angle),
+                Vector2.zero, 
+                IsPlayer ? LoadoutComponent.CurrentLoadoutSlot.weaponCharges : 0, 
+                DamageBonus, 
+                DamageFactor, 
+                AttackSpeedFactor);
         }
 
         /// <summary>

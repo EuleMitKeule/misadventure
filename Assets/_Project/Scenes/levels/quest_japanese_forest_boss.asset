@@ -27,7 +27,31 @@ MonoBehaviour:
         HotlineHyrule]], mscorlib
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|HotlineHyrule.Quests.KillSpecificQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
+    - Name: shortTargetText
+      Entry: 1
+      Data: Kill the Arch mage
+    - Name: targetReachedText
+      Entry: 1
+      Data: The Arch mage could be defeated.
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We didn't do something.
+    - Name: killTarget
+      Entry: 3
+      Data: 1
+    - Name: enemyName
+      Entry: 1
+      Data: boss_arch_mage
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
