@@ -43,7 +43,7 @@ MonoBehaviour:
       Data: We found the exit.
     - Name: targetNotReachedText
       Entry: 1
-      Data: We didn't do something.
+      Data: 
     - Name: 
       Entry: 8
       Data: 

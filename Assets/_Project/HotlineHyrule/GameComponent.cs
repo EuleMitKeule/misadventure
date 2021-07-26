@@ -24,6 +24,9 @@ namespace HotlineHyrule
         Queue<string> LevelPool { get; set; }
         string BossLevel { get; set; }
 
+        float StartTime { get; set; }
+        public float ElapsedTime => Time.time - StartTime;
+
         [SerializeField] PlayerStateData playerStateData;
 
         int CurrentSceneIndex => levels.IndexOf(SceneManager.GetActiveScene().name);
@@ -39,8 +42,7 @@ namespace HotlineHyrule
             DontDestroyOnLoad(gameObject);
             Locator.GameComponent = this;
 
-            LevelPool = new Queue<string>(levels.OrderBy(e => Guid.NewGuid()).Take(levelsToPlay));
-            BossLevel = bossLevels.OrderBy(e => Guid.NewGuid()).First();
+            ResetGame();
 
             LevelUnloaded += OnLevelUnloaded;
         }
@@ -71,9 +73,18 @@ namespace HotlineHyrule
             StartCoroutine(LoadSceneRoutine(nextLevelName));
         }
 
+        void ResetGame()
+        {
+            LevelPool = new Queue<string>(levels.OrderBy(e => Guid.NewGuid()).Take(levelsToPlay));
+            BossLevel = bossLevels.OrderBy(e => Guid.NewGuid()).First();
+            playerStateData = null;
+            StartTime = Time.time;
+        }
+
         public void LoadMenuScene()
         {
-            playerStateData = null;
+            ResetGame();
+            
             StartCoroutine(LoadSceneRoutine("scene_menu"));
         }
 
@@ -98,10 +109,8 @@ namespace HotlineHyrule
 
         public void LoadFirstScene()
         {
-            LevelPool = new Queue<string>(levels.OrderBy(e => Guid.NewGuid()).Take(levelsToPlay));
-            BossLevel = bossLevels.OrderBy(e => Guid.NewGuid()).First();
-            playerStateData = null;
-
+            ResetGame();
+            
             var currentLevelComponent = Locator.LevelComponent;
 
             if (currentLevelComponent)

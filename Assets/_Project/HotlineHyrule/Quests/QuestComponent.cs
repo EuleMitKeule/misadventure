@@ -24,10 +24,13 @@ namespace HotlineHyrule.Quests
         List<TreasureQuestTarget> TreasureQuestTargets => QuestData.questTargets.OfType<TreasureQuestTarget>().ToList();
         List<UseWeaponQuestTarget> UseWeaponQuestTargets => QuestData.questTargets.OfType<UseWeaponQuestTarget>().ToList();
         List<AreaQuestTarget> AreaQuestTargets => QuestData.questTargets.OfType<AreaQuestTarget>().ToList();
+        List<DestroyQuestTarget> DestroyQuestTargets => QuestData.questTargets.OfType<DestroyQuestTarget>().ToList();
 
         public bool IsQuestFinished => QuestData.questTargets.Where(e => e.IsRequired).All(IsReached);
         public bool IsCompleted => QuestData.questTargets.All(e => ReachedTargets.Contains(e));
 
+        public Dictionary<DestroyQuestTarget, int> QuestToDestroyedObjects { get; } =
+            new Dictionary<DestroyQuestTarget, int>();
         public int TotalKilledEnemies { get; set; }
         public Dictionary<string, int> KilledEnemies { get; } = new Dictionary<string, int>();
         List<ItemData> FoundItems { get; } = new List<ItemData>();
@@ -67,8 +70,8 @@ namespace HotlineHyrule.Quests
         {
             if (!IsQuestFinished) return;
             if (!QuestData.finishLevelOnCompletion) return;
-
-            LevelComponent.FinishLevel();
+            
+            LevelComponent.FinishLevel(QuestData.finishGameOnCompletion);
         }
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
@@ -115,6 +118,36 @@ namespace HotlineHyrule.Quests
 
                 questAreaComponent.PlayerEntered += OnPlayerEntered;
             }
+
+            foreach (var destroyQuestTarget in DestroyQuestTargets) QuestToDestroyedObjects.Add(destroyQuestTarget, 0);
+
+            var objectsToDestroy = FindObjectsOfType<QuestDestroyComponent>().ToList();
+
+            foreach (var objectToDestroy in objectsToDestroy)
+            {
+                objectToDestroy.Destroyed += OnObjectDestroyed;
+            }
+        }
+
+        void OnObjectDestroyed(object sender, EventArgs e)
+        {
+            if (sender is QuestDestroyComponent questDestroyComponent)
+            {
+                var questTarget = DestroyQuestTargets.Find(element =>
+                    questDestroyComponent.name.StartsWith(element.objectName));
+
+                if (questTarget == null) return;
+
+                QuestToDestroyedObjects[questTarget] += 1;
+
+                if (QuestToDestroyedObjects[questTarget] < questTarget.count) return;
+
+                if (!ReachedTargets.Contains(questTarget))
+                {
+                    ReachedTargets.Add(questTarget);
+                    QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(questTarget));
+                }
+            }
         }
 
         void OnLevelUnloaded(object sender, LevelEventArgs e)
@@ -124,9 +157,9 @@ namespace HotlineHyrule.Quests
             GameComponent.LevelUnloaded -= OnLevelUnloaded;
         }
 
-        void OnLevelFinished(object sender, EventArgs e)
+        void OnLevelFinished(object sender, LevelFinishedEventArgs e)
         {
-            if (IsCompleted)
+            if (IsCompleted &! e.FinishGame)
             {
                 RewardComponent.Rewards = QuestData.questRewards;
             }
@@ -193,7 +226,7 @@ namespace HotlineHyrule.Quests
                     searchQuestTarget.Items.Keys.All(item => searchQuestTarget.Items[item] <= FoundItems.Count(foundItem => foundItem == item));
                 if (!isCompleted) continue;
                 
-                if (ReachedTargets.Contains(searchQuestTarget)) return;
+                if (ReachedTargets.Contains(searchQuestTarget)) continue;
             
                 ReachedTargets.Add(searchQuestTarget);
                 QuestTargetReached?.Invoke(this, new QuestTargetEventArgs(searchQuestTarget));

@@ -295,29 +295,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1420212856}
     m_Modifications:
+    - target: {fileID: 1326564999, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
+      propertyPath: weapons.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326564999, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
+      propertyPath: weapons.Array.data[1].data
+      value: 
+      objectReference: {fileID: 11400000, guid: 2d6fedb8adc769640bc2dce1c47ff772, type: 2}
+    - target: {fileID: 1326564999, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
+      propertyPath: weapons.Array.data[2].data
+      value: 
+      objectReference: {fileID: 11400000, guid: e15a73d2a06119e928eeffe6bf6c05e0, type: 2}
+    - target: {fileID: 1326564999, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
+      propertyPath: weapons.Array.data[1].animationTrigger
+      value: attack2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1326564999, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
+      propertyPath: weapons.Array.data[2].animationTrigger
+      value: attack3
+      objectReference: {fileID: 0}
     - target: {fileID: 7670373497835594146, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
       propertyPath: m_Name
       value: boss_arch_mage
-      objectReference: {fileID: 0}
-    - target: {fileID: 7670373497835594147, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7670373497835594149, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
-      propertyPath: m_Size.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7670373497835594149, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
-      propertyPath: m_Size.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7670373497835594149, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 2083541363200733641, guid: b8f70dc7c5c95a291a43f5da61eb8484, type: 3}
-    - target: {fileID: 7670373497835594149, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7670373497835594150, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
       propertyPath: m_RootOrder
@@ -329,7 +329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7670373497835594150, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7670373497835594150, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
       propertyPath: m_LocalPosition.z
@@ -363,40 +363,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
-    - target: {fileID: 9219763331161076985, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
-      propertyPath: weaponData
-      value: 
-      objectReference: {fileID: 11400000, guid: e15a73d2a06119e928eeffe6bf6c05e0, type: 2}
-    m_RemovedComponents:
-    - {fileID: 6705245197644981549, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
 --- !u!4 &1326564997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7670373497835594150, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
   m_PrefabInstance: {fileID: 1326564996}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1326564998 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7670373497835594146, guid: 1bb4cd6a1522dd68b808dcc66e1a7955, type: 3}
-  m_PrefabInstance: {fileID: 1326564996}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1326564999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1326564998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06ad3700272542258a9413fdc5357ede, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapons:
-  - data: {fileID: 11400000, guid: 319bad2f12d1a900996b18ec96bc4e54, type: 2}
-    animationTrigger: attack
-  - data: {fileID: 11400000, guid: e15a73d2a06119e928eeffe6bf6c05e0, type: 2}
-    animationTrigger: attack3
 --- !u!1 &1420212855
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,14 +620,14 @@ MonoBehaviour:
   m_Follow: {fileID: 658731718}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 10.333333
+    OrthographicSize: 6
     NearClipPlane: 0.001
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7772108, y: 1}
+    m_SensorSize: {x: 1.7781351, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -704,6 +677,7 @@ GameObject:
   - component: {fileID: 4987893362635527694}
   - component: {fileID: 4987893362635527692}
   - component: {fileID: 4987893362635527693}
+  - component: {fileID: 4987893362635527696}
   m_Layer: 0
   m_Name: camera_cinemachine
   m_TagString: Untagged
@@ -711,6 +685,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4987893362635527696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4987893362635527695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusTracking: 0
+  m_FocusTarget: {fileID: 0}
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: 4aed71ed71f62e24c8fe4ea0d7a014a2, type: 2}
 --- !u!114 &4987893363853255701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,7 +781,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -860,7 +851,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10.333333
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -7199,6 +7190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c57e4f6975b48aa976e103da282d2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherFinishedQuestsRequired: 1
 --- !u!4 &6915148782830025223
 Transform:
   m_ObjectHideFlags: 0
@@ -22721,6 +22713,7 @@ GameObject:
   - component: {fileID: 6915148784641150194}
   - component: {fileID: 6915148784641150195}
   - component: {fileID: 6711833794382934703}
+  - component: {fileID: 6915148784641150157}
   m_Layer: 0
   m_Name: grid_japanese_forest_boss
   m_TagString: Untagged
@@ -22728,6 +22721,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6915148784641150157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6915148784641150156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857a8626b4174ee78c053837f8e95509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!156049354 &6915148784641150192
 Grid:
   m_ObjectHideFlags: 0
@@ -22755,6 +22760,7 @@ MonoBehaviour:
   levelData: {fileID: 11400000, guid: 0911c0a96905bbe1fbf706e408e4ce22, type: 2}
   rainEffectPrefab: {fileID: 5431334764939620233, guid: 3771099df981fe0439074926beb458cb, type: 3}
   snowEffectPrefab: {fileID: 4384620333352811691, guid: 93fa4cce27c0f3a44b77aa2301eff17e, type: 3}
+  objectsToDestroyOnFinish: []
 --- !u!114 &6915148784641150194
 MonoBehaviour:
   m_ObjectHideFlags: 0

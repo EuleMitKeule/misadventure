@@ -26,16 +26,6 @@ namespace HotlineHyrule.Entities.EnemyStates
 
             GuardPosition = transform.position;
         }
-        
-        public override void EnterState()
-        {
-            base.EnterState();
-        }
-
-        public override void ExitState()
-        {
-            base.ExitState();
-        }
 
         public override void FixedUpdateState()
         {
