@@ -58,7 +58,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  finishLevelOnCompletion: 0
+  finishLevelOnCompletion: 1
+  finishGameOnCompletion: 1
   questText: 
   questTargetText: 
   questRewards: []
