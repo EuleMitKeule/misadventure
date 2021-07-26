@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4aeb7eff8ae43649ba4bc3fd03f4190, type: 3}
   m_Name: projectile_wand_ice_max
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 10
   impactMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   impactRaycastOffset: 0
   isSticky: 0
   notStickyOnPlayer: 0

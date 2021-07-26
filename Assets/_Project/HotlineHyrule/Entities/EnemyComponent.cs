@@ -246,7 +246,7 @@ namespace HotlineHyrule.Entities
             {
                 var weaponDirection = WeaponComponent.WeaponPosition.To(PlayerPosition);
                 var weaponAngle = Vector3.SignedAngle(Vector3.up, weaponDirection, Vector3.forward);
-                if (WeaponComponent.HasRangedWeapon)
+                if (WeaponComponent.HasRangedWeapon || WeaponComponent.HasTargetingWeapon)
                 {
                     WeaponComponent.SetWeaponRotation(weaponAngle);
                 }

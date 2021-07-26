@@ -24,9 +24,10 @@ MonoBehaviour:
     - Name: effectType
       Entry: 3
       Data: 0
-  areaName: 
-  areaText: 
-  areaFinishedText: 
+  areaName: The Arch Mage
+  areaText: We confront the leader of all mages and ninjas of the forest. He is using
+    a lot of artifacts as a source of his power. Time to end him!
+  areaFinishedText: 'We defeated the Arch Mage! '
   questData: {fileID: 11400000, guid: bc6dc9049f4e9ad4294fd41527828cad, type: 2}
   playerSpawnPosition: {x: 0, y: 0, z: 0}
-  bgmData: {fileID: 11400000, guid: 43296168350be6343bc2df1003915cc1, type: 2}
+  bgmData: {fileID: 11400000, guid: c17dc97569785de4b9e302252b8ec952, type: 2}

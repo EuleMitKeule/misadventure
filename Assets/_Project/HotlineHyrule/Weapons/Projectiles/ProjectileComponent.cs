@@ -27,6 +27,8 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         [SerializeField] bool useImpactAnimation = true;
 
+        [SerializeField] bool stopPhysicsOnImpact = true;
+
         /// <summary>
         /// The distance between center and top of projectile.
         /// </summary>
@@ -208,7 +210,7 @@ namespace HotlineHyrule.Weapons
         /// </summary>
         void HandleImpact(Transform other = null)
         {
-            Rigidbody.simulated = false;
+            if (stopPhysicsOnImpact) Rigidbody.simulated = false;
 
             var impactParticleSystem = projectileData.impactParticleSystem;
             if (impactParticleSystem) Instantiate(impactParticleSystem, transform.position, Quaternion.identity);
