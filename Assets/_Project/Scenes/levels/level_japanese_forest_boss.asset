@@ -12,8 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1634ab00f9b94a66bf6a7eaacdc248f4, type: 3}
   m_Name: level_japanese_forest_boss
   m_EditorClassIdentifier: 
-  areaName: 
-  areaText: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: effectType
+      Entry: 3
+      Data: 0
+  areaName: The Arch Mage
+  areaText: We are facing the most dangerous of all mages, the Arch Mage! Using a
+    ton of artifacts as energy source makes him even more dangerous!
   areaFinishedText: 
   questData: {fileID: 11400000, guid: 7ad2c78d79d03dadc9278a90f1addcd9, type: 2}
   playerSpawnPosition: {x: 0, y: 0, z: 0}

@@ -60,7 +60,7 @@ MonoBehaviour:
       Data: 
   finishLevelOnCompletion: 1
   finishGameOnCompletion: 1
-  questText: 
+  questText: Defeat the Arch Mage
   questTargetText: 
   questRewards: []
   questRewardCount: 0
