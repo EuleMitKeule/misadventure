@@ -60,7 +60,7 @@ MonoBehaviour:
       Data: 
   finishLevelOnCompletion: 1
   finishGameOnCompletion: 1
-  questText: 
+  questText: We have to defeat him!
   questTargetText: 
   questRewards: []
   questRewardCount: 0

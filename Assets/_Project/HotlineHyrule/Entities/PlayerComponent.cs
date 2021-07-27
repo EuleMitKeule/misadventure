@@ -120,7 +120,7 @@ namespace HotlineHyrule.Entities
         LoadoutComponent LoadoutComponent { get; set; }
         Camera MainCamera { get; set; }
 
-        PlayerBaseStateComponent State { get; set; }
+        public PlayerBaseStateComponent State { get; set; }
         List<PlayerBaseStateComponent> States { get; set; }
 
         void Awake()

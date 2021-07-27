@@ -7,6 +7,7 @@ using HotlineHyrule.Entities;
 using HotlineHyrule.Level;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace HotlineHyrule
 {
@@ -34,6 +35,8 @@ namespace HotlineHyrule
 
         public static event EventHandler<LevelEventArgs> LevelLoaded;
         public static event EventHandler<LevelEventArgs> LevelUnloaded;
+
+        public bool gameplayEnabled = false;
 
         void Awake()
         {
