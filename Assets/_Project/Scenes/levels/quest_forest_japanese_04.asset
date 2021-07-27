@@ -30,25 +30,22 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|HotlineHyrule.Quests.KillSpecificQuestTarget, HotlineHyrule
+      Data: 1|HotlineHyrule.Quests.AreaQuestTarget, HotlineHyrule
     - Name: requiredType
       Entry: 3
       Data: 2
     - Name: shortTargetText
       Entry: 1
-      Data: Defeat the Arch Mage
+      Data: Reach the end
     - Name: targetReachedText
       Entry: 1
       Data: 
     - Name: targetNotReachedText
       Entry: 1
-      Data: We didn't do something.
-    - Name: killTarget
-      Entry: 3
-      Data: 1
-    - Name: enemyName
+      Data: 
+    - Name: colliderName
       Entry: 1
-      Data: boss_arch_mage
+      Data: collider_exit
     - Name: 
       Entry: 8
       Data: 
@@ -59,8 +56,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
   finishLevelOnCompletion: 1
-  finishGameOnCompletion: 1
-  questText: 
+  finishGameOnCompletion: 0
+  questText: Reach the end.
   questTargetText: 
   questRewards: []
   questRewardCount: 0

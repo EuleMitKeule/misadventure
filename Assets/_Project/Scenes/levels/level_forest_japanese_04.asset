@@ -24,10 +24,9 @@ MonoBehaviour:
     - Name: effectType
       Entry: 3
       Data: 0
-  areaName: The Arch Mage
-  areaText: We confront the leader of all mages and ninjas of the forest. He is using
-    a lot of artifacts as a source of his power. Time to end him!
-  areaFinishedText: 'We defeated the Arch Mage! '
+  areaName: Warrior's Path
+  areaText: There's a long way infront of us. We have to fight our way throught
+  areaFinishedText: We passed the Warrior's Path and became true warriors
   questData: {fileID: 11400000, guid: bc6dc9049f4e9ad4294fd41527828cad, type: 2}
   playerSpawnPosition: {x: 0, y: 0, z: 0}
   bgmData: {fileID: 11400000, guid: c17dc97569785de4b9e302252b8ec952, type: 2}
