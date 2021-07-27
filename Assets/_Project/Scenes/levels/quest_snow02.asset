@@ -39,14 +39,13 @@ MonoBehaviour:
       Data: angry elf {x} to kill
     - Name: targetReachedText
       Entry: 1
-      Data: 'Yeah, now the angry elfs will be reborn as happy christmas elves and
-        soon the Christmas spirit will coom back. '
+      Data: 
     - Name: targetNotReachedText
       Entry: 1
       Data: We didn't do something.
     - Name: killTarget
       Entry: 3
-      Data: 15
+      Data: 13
     - Name: enemyName
       Entry: 1
       Data: ice_midget
@@ -64,7 +63,7 @@ MonoBehaviour:
       Data: fat snowman {x} to kill
     - Name: targetReachedText
       Entry: 1
-      Data: Yeah, now the angry elfs and the fat snowmans will be reborn as happy
+      Data: Yeah, now the angry elves and the fat snowmans will be reborn as happy
         christmas elves and snowmans. Soon the Christmas spirit will coom back.
     - Name: targetNotReachedText
       Entry: 1
@@ -85,8 +84,9 @@ MonoBehaviour:
       Entry: 8
       Data: 
   finishLevelOnCompletion: 0
+  finishGameOnCompletion: 0
   questText: Shit happens! Fake Santa Claus has stolen the Christmas magic and now
-    all the elves are freaking out.
-  questTargetText: 
+    all the elves are freaking out. Maybe they need anti-stress therapy!
+  questTargetText: ' Be careful and calm the shit out of the area!'
   questRewards: []
   questRewardCount: 0

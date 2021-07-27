@@ -12,9 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1634ab00f9b94a66bf6a7eaacdc248f4, type: 3}
   m_Name: level_snow02
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: effectType
+      Entry: 3
+      Data: 4
   areaName: 
-  areaText: We can now make our tripp trugh the snow
+  areaText: We start our experience in the snow area.
   areaFinishedText: 
   questData: {fileID: 11400000, guid: e03f12673a5e2834c99db70ec490836e, type: 2}
-  playerSpawnPosition: {x: -17, y: 7, z: -125}
+  playerSpawnPosition: {x: -17, y: 7, z: 0}
   bgmData: {fileID: 11400000, guid: 467966a2f49639348b3e61d0a5951d9f, type: 2}

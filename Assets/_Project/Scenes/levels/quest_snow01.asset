@@ -37,10 +37,10 @@ MonoBehaviour:
       Data: 2
     - Name: shortTargetText
       Entry: 1
-      Data: Activate the lights
+      Data: Activate the lights {x}
     - Name: targetReachedText
       Entry: 1
-      Data: Christmas is back!
+      Data: Yep this was very good, the Christmas spirit starts growing again!
     - Name: targetNotReachedText
       Entry: 1
       Data: We didn't do something.
@@ -87,7 +87,8 @@ MonoBehaviour:
       Data: 
   finishLevelOnCompletion: 0
   finishGameOnCompletion: 0
-  questText: 
-  questTargetText: 
+  questText: 'Be careful after the fake Santa Claus stole the Christmas spirit, all
+    the elves are a bit weird. '
+  questTargetText: Maybe the need some Christmas spirit again?
   questRewards: []
   questRewardCount: 0

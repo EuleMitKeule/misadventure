@@ -39,6 +39,7 @@ namespace HotlineHyrule.Quests
 
         public event EventHandler<QuestTargetEventArgs> QuestTargetReached;
         public event EventHandler<KillQuestTargetEventArgs> KillQuestTargetChanged;
+        public event EventHandler<KillQuestTargetEventArgs> SearchQuestTargetChanged;
 
         LevelComponent LevelComponent { get; set; }
 
@@ -217,6 +218,19 @@ namespace HotlineHyrule.Quests
             FoundItems.Add(e.ItemData);
 
             var treasureQuestTarget = TreasureQuestTargets.Find(target => target.treasureItem == e.ItemData);
+
+            var searchQuestsTargets = SearchQuestTargets.Where(element => element.Items.ContainsKey(e.ItemData)).ToList();
+
+            foreach (var searchQuestTarget in searchQuestsTargets)
+            {
+                var foundItems = 0;
+
+                foreach ( var pair in searchQuestTarget.Items)
+                {
+                    foundItems += FoundItems.Count(foundItem => foundItem == pair.Key);
+                }
+                SearchQuestTargetChanged?.Invoke(this, new KillQuestTargetEventArgs(searchQuestTarget, foundItems));
+            }
 
             foreach (var searchQuestTarget in SearchQuestTargets)
             {
