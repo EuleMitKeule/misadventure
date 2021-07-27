@@ -29,4 +29,4 @@ MonoBehaviour:
   areaFinishedText: We passed the Warrior's Path and became true warriors
   questData: {fileID: 11400000, guid: bc6dc9049f4e9ad4294fd41527828cad, type: 2}
   playerSpawnPosition: {x: 0, y: 0, z: 0}
-  bgmData: {fileID: 11400000, guid: c17dc97569785de4b9e302252b8ec952, type: 2}
+  bgmData: {fileID: 11400000, guid: 43296168350be6343bc2df1003915cc1, type: 2}
