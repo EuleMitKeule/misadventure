@@ -25,8 +25,9 @@ MonoBehaviour:
       Entry: 3
       Data: 4
   areaName: 
-  areaText: 
-  areaFinishedText: 
+  areaText: We start our experience in the snow area.
+  areaFinishedText: Yeah,you did it now find the exit and we will be giving out the
+    presenats.
   questData: {fileID: 11400000, guid: d6bc01fffaaaa14448a34a2cb82d893e, type: 2}
   playerSpawnPosition: {x: -7, y: 1, z: 0}
   bgmData: {fileID: 11400000, guid: 467966a2f49639348b3e61d0a5951d9f, type: 2}
