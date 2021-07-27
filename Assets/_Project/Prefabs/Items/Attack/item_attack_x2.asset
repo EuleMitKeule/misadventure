@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 610c3210925c4af7b5f91020c0bbdff5, type: 3}
-  m_Name: item_attack_x4
+  m_Name: item_attack_x2
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -24,12 +24,19 @@ MonoBehaviour:
     SerializationNodes:
     - Name: ItemName
       Entry: 1
-      Data: attack_x4
+      Data: attack_x2
     - Name: ItemPrefab
       Entry: 10
       Data: 0
-  consumeParticleSystemPrefab: {fileID: 0}
-  damageFactor: 4
+    - Name: ConsumeParticleSystemPrefab
+      Entry: 6
+      Data: 
+    - Name: InfoText
+      Entry: 6
+      Data: 
+    - Name: damageFactor
+      Entry: 4
+      Data: 2
   damageBonus: 0
   attackSpeed: 1
   duration: 10
