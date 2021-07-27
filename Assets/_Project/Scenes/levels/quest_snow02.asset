@@ -39,14 +39,13 @@ MonoBehaviour:
       Data: angry elf {x} to kill
     - Name: targetReachedText
       Entry: 1
-      Data: 'Yeah, now the angry elves will be reborn as happy christmas elves and
-        soon the Christmas spirit will coom back. '
+      Data: 
     - Name: targetNotReachedText
       Entry: 1
       Data: We didn't do something.
     - Name: killTarget
       Entry: 3
-      Data: 15
+      Data: 13
     - Name: enemyName
       Entry: 1
       Data: ice_midget
