@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using HotlineHyrule.Level;
 using HotlineHyrule.Quests;
@@ -34,6 +35,7 @@ namespace HotlineHyrule.UserInterface
             QuestData = e.LevelData.questData;
             Locator.QuestComponent.QuestTargetReached += OnQuestTargetReached;
             Locator.QuestComponent.KillQuestTargetChanged += OnKillQuestTargetChanged;
+            Locator.QuestComponent.SearchQuestTargetChanged += OnSearchQuestTargetChanged;
 
             TargetToTargetObject = new Dictionary<QuestTarget, GameObject>();
 
@@ -50,6 +52,18 @@ namespace HotlineHyrule.UserInterface
                         Mathf.Max(killQuestTarget.killTarget - Locator.QuestComponent.TotalKilledEnemies, 0);
                     parsedTargetText = parsedTargetText.Replace("{x}", remainingKillTarget.ToString());
                 }
+                else if (questTarget is SearchQuestTarget searchQuestTarget &&
+                    parsedTargetText.Contains("{x}"))
+                {
+                    var searchTarget = 0;
+                    foreach (var pair in searchQuestTarget.Items)
+                    {
+                        searchTarget += pair.Value;
+                    }
+                    var remainingSearchTarget =
+                        Mathf.Max(searchTarget,0);
+                    parsedTargetText = parsedTargetText.Replace("{x}", remainingSearchTarget.ToString());
+                }
 
                 var questTargetText =
                     $"{(questTarget.IsRequired ? "" : "(")}{parsedTargetText}{(questTarget.IsRequired ? "" : ")")}";
@@ -57,6 +71,30 @@ namespace HotlineHyrule.UserInterface
                 
                 TargetToTargetObject.Add(questTarget, questTargetObject);
             }
+        }
+
+        private void OnSearchQuestTargetChanged(object sender, KillQuestTargetEventArgs e)
+        {
+            var targetObject = TargetToTargetObject[e.QuestTarget];
+            var label = targetObject.GetComponentInChildren<TextMeshProUGUI>();
+            var parsedTargetText = e.QuestTarget.shortTargetText;
+
+            if (e.QuestTarget is SearchQuestTarget searchQuestTarget &&
+                parsedTargetText.Contains("{x}"))
+            {
+                var searchTarget = 0;
+                foreach( var pair in searchQuestTarget.Items)
+                {
+                    searchTarget += pair.Value;
+                }
+                var remainingSearchTarget =
+                    Mathf.Max(searchTarget - e.KillCount, 0);
+                parsedTargetText = parsedTargetText.Replace("{x}", remainingSearchTarget.ToString());
+            }
+
+            var questTargetText =
+                $"{(e.QuestTarget.IsRequired ? "" : "(")}{parsedTargetText}{(e.QuestTarget.IsRequired ? "" : ")")}";
+            label.text = $"{questTargetText} ~";
         }
 
         void OnKillQuestTargetChanged(object sender, KillQuestTargetEventArgs e)

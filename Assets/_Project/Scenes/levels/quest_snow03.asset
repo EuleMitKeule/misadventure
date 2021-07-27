@@ -15,7 +15,11 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 8c613c483e4c50848acfd9cd6a185a01, type: 2}
+    - {fileID: 11400000, guid: 85768828e42bf114c9e3abc022e2977a, type: 2}
+    - {fileID: 11400000, guid: d6a96784cb790ec44a4a1a351b882096, type: 2}
+    - {fileID: 11400000, guid: 199e883051c868b48a8962dcc7df5d9e, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -27,7 +31,199 @@ MonoBehaviour:
         HotlineHyrule]], mscorlib
     - Name: 
       Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 7
+      Data: 1|HotlineHyrule.Quests.SearchQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
+    - Name: shortTargetText
+      Entry: 1
+      Data: Blue presents {x}
+    - Name: targetReachedText
+      Entry: 1
+      Data: Nice man, you are one step closer to bring Christmas back.
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We didn't do something.
+    - Name: Items
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[HotlineHyrule.Items.ItemData,
+        HotlineHyrule],[System.Int32, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 3|System.Collections.Generic.ObjectEqualityComparer`1[[HotlineHyrule.Items.ItemData,
+        HotlineHyrule]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
       Data: 0
+    - Name: $v
+      Entry: 3
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|HotlineHyrule.Quests.SearchQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
+    - Name: shortTargetText
+      Entry: 1
+      Data: Yellow presents {x}
+    - Name: targetReachedText
+      Entry: 1
+      Data: 
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We didn't do something.
+    - Name: Items
+      Entry: 7
+      Data: 5|System.Collections.Generic.Dictionary`2[[HotlineHyrule.Items.ItemData,
+        HotlineHyrule],[System.Int32, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 6|System.Collections.Generic.ObjectEqualityComparer`1[[HotlineHyrule.Items.ItemData,
+        HotlineHyrule]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 1
+    - Name: $v
+      Entry: 3
+      Data: 7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|HotlineHyrule.Quests.SearchQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
+    - Name: shortTargetText
+      Entry: 1
+      Data: Red presents {x}
+    - Name: targetReachedText
+      Entry: 1
+      Data: 
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We didn't do something.
+    - Name: Items
+      Entry: 7
+      Data: 8|System.Collections.Generic.Dictionary`2[[HotlineHyrule.Items.ItemData,
+        HotlineHyrule],[System.Int32, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 2
+    - Name: $v
+      Entry: 3
+      Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|HotlineHyrule.Quests.SearchQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
+    - Name: shortTargetText
+      Entry: 1
+      Data: Green presents {x}
+    - Name: targetReachedText
+      Entry: 1
+      Data: 
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We didn't do something.
+    - Name: Items
+      Entry: 7
+      Data: 10|System.Collections.Generic.Dictionary`2[[HotlineHyrule.Items.ItemData,
+        HotlineHyrule],[System.Int32, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 9
+      Data: 6
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 3
+    - Name: $v
+      Entry: 3
+      Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -35,7 +231,12 @@ MonoBehaviour:
       Entry: 8
       Data: 
   finishLevelOnCompletion: 0
-  questText: 
-  questTargetText: 
-  questRewards: []
-  questRewardCount: 0
+  finishGameOnCompletion: 0
+  questText: Be careful after the fake Santa Claus stole the Christmas spirit, all
+    the elves are a bit weird.
+  questTargetText: Maybe the need some Christmas spirit again, look for the Christmas
+    presents to give them to the elves later.
+  questRewards:
+  - {fileID: 11400000, guid: 87381fb868c883e45b4092d6b72e9c87, type: 2}
+  - {fileID: 11400000, guid: c4eaa2e0c9ec2de40afddeae4665bc4b, type: 2}
+  questRewardCount: 1
