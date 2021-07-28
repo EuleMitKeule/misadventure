@@ -23,10 +23,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb967dc72d1466a947385fdea30abaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
+  moveSpeed: 8
   attack1Weapon: {fileID: 11400000, guid: 0bb96f2cd11adb896850095a1882c510, type: 2}
   attack2Weapon: {fileID: 11400000, guid: 0affa509aa439577fbbd4e0dc3856102, type: 2}
-  maxDistanceForUsingAttack2: 8
+  maxDistanceForUsingAttack2: 5
   maxDistanceForPerformingAttack2: 1
 --- !u!114 &35948591
 MonoBehaviour:
@@ -77,7 +77,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: attackRange
-      value: 12
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: followRange
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: itemDrops.Array.size
@@ -161,7 +165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023215, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_Name
-      value: ninja (3)
+      value: ninja
       objectReference: {fileID: 0}
     - target: {fileID: 8249268261262953780, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: weaponData
