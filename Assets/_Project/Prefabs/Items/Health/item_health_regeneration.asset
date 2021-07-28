@@ -31,12 +31,15 @@ MonoBehaviour:
     - Name: ConsumeParticleSystemPrefab
       Entry: 6
       Data: 
+    - Name: InfoText
+      Entry: 6
+      Data: 
     - Name: SelectedHealType
       Entry: 3
       Data: 1
     - Name: HealTotal
       Entry: 3
-      Data: 20
+      Data: 25
     - Name: HealAmount
       Entry: 3
       Data: 5

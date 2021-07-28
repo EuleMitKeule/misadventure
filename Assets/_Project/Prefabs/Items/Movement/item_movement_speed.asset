@@ -35,4 +35,4 @@ MonoBehaviour:
       Entry: 1
       Data: + Movement Speed
   movementFactor: 1.5
-  duration: 15
+  duration: 25

@@ -32,11 +32,11 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: InfoText
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: ++ Attacl
     - Name: damageFactor
       Entry: 4
       Data: 0
   damageBonus: 20
   attackSpeed: 1
-  duration: 10
+  duration: 40
