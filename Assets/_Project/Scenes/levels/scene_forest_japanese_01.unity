@@ -3948,7 +3948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3883507329294850683, guid: dabd569d587789e4188322a6586dc28a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.364305
+      value: -14.372267
       objectReference: {fileID: 0}
     - target: {fileID: 3883507329294850683, guid: dabd569d587789e4188322a6586dc28a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3960,7 +3960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3883507330521098339, guid: dabd569d587789e4188322a6586dc28a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.364305
+      value: 14.372267
       objectReference: {fileID: 0}
     - target: {fileID: 3883507330521098339, guid: dabd569d587789e4188322a6586dc28a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -26291,8 +26291,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkableTilemaps:
   - {fileID: 496504177562779729}
+  - {fileID: 496504178385044658}
+  - {fileID: 496504176692782413}
+  - {fileID: 496504178150060786}
+  - {fileID: 2113555598}
+  - {fileID: 911405021}
   unwalkableTilemaps:
   - {fileID: 496504177404137637}
+  - {fileID: 496504176831248591}
 --- !u!50 &496504176965663277
 Rigidbody2D:
   serializedVersion: 4
