@@ -95,6 +95,8 @@ namespace HotlineHyrule.Pathfinding
         {
             CurrentPath = Pathfinder.FindPath(CurrentCell, destinationCell);
 
+            if (CurrentPath == null) return;
+
             if (CurrentPath.Count == 0)
             {
                 DestinationReached?.Invoke(this, new CellEventArgs(destinationCell));
