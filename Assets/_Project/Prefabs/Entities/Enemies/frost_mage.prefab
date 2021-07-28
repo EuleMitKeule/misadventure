@@ -26,6 +26,14 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: attackRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: followRange
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023206, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_Controller
       value: 
@@ -97,7 +105,7 @@ PrefabInstance:
     - target: {fileID: 8249268261262953780, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: weaponData
       value: 
-      objectReference: {fileID: 11400000, guid: 94032551580cbb34eafdfd676d8321c8, type: 2}
+      objectReference: {fileID: 11400000, guid: d9770eec86582014490915e4bacb7507, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
 --- !u!1 &27959096091732440 stripped
