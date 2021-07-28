@@ -4715,6 +4715,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc032a169db4e85a3ac9cb8ac5124c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainGroup: {fileID: 2968691535970232700}
+  optionsGroup: {fileID: 8646674047672495386}
+  audioMixer: {fileID: 24100000, guid: d811e6afab6167b47815067b88827273, type: 2}
+  masterSlider: {fileID: 20166572350144626}
+  bgmSlider: {fileID: 307462115340618795}
+  sfxSlider: {fileID: 4242127858306360082}
+  FullscreenToggle: {fileID: 2045745617028660619}
 --- !u!1 &5052641319406968585
 GameObject:
   m_ObjectHideFlags: 0
