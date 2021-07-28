@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72112766fd8a400786090afb9f205301, type: 3}
-  m_Name: quest_forest_japanese_04
+  m_Name: quest_forest_japanese_01
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: a83e37aa063c876b2a31d8c14da25602, type: 2}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -52,51 +51,23 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 2|HotlineHyrule.Quests.SearchQuestTarget, HotlineHyrule
+      Data: 2|HotlineHyrule.Quests.KillQuestTarget, HotlineHyrule
     - Name: requiredType
       Entry: 3
       Data: 4
     - Name: shortTargetText
       Entry: 1
-      Data: Find 4 artifacts
+      Data: Kill 10 enemies
     - Name: targetReachedText
       Entry: 1
-      Data: We could take away some artifacts. That should lower the mages' magic.
+      Data: We could reduce the enemies' numbers.
     - Name: targetNotReachedText
       Entry: 1
-      Data: Maybe we should have taken some more artifacts.
-    - Name: Items
-      Entry: 7
-      Data: 3|System.Collections.Generic.Dictionary`2[[HotlineHyrule.Items.ItemData,
-        HotlineHyrule],[System.Int32, mscorlib]], mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 4|System.Collections.Generic.ObjectEqualityComparer`1[[HotlineHyrule.Items.ItemData,
-        HotlineHyrule]], mscorlib
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 10
-      Data: 0
-    - Name: $v
+      Data: There are still a lot of enemies left. Hopefully they don't kill someone
+        else.
+    - Name: killTarget
       Entry: 3
-      Data: 4
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 10
     - Name: 
       Entry: 8
       Data: 
@@ -108,9 +79,8 @@ MonoBehaviour:
       Data: 
   finishLevelOnCompletion: 1
   finishGameOnCompletion: 0
-  questText: Reach the end. Look around for items, they might be a big help.
+  questText: There are a lot of enemies. It might be useful to reduce their numbers.
   questTargetText: 
   questRewards:
-  - {fileID: 11400000, guid: 87381fb868c883e45b4092d6b72e9c87, type: 2}
-  - {fileID: 11400000, guid: 710dd84582968884899c94ecaf44fdda, type: 2}
+  - {fileID: 11400000, guid: c8b0562d0fc150a429d13edc73d10d01, type: 2}
   questRewardCount: 1
