@@ -232,10 +232,12 @@ MonoBehaviour:
       Data: 
   finishLevelOnCompletion: 0
   finishGameOnCompletion: 0
-  questText: Be careful after the fake Santa Claus stole the Christmas spirit, all
-    the elves are a bit weird.
-  questTargetText: Maybe the need some Christmas spirit again, look for the Christmas
-    presents to give them to the elves later.
+  questText: Be careful, since there's no more toys being made here, the elves have
+    become very irritable.
+  questTargetText: 'Maybe they need some christmas spirit again.
+
+    Look for the
+    christmas presents to give them to the elves later.'
   questRewards:
   - {fileID: 11400000, guid: 87381fb868c883e45b4092d6b72e9c87, type: 2}
   - {fileID: 11400000, guid: c4eaa2e0c9ec2de40afddeae4665bc4b, type: 2}

@@ -19,11 +19,13 @@ namespace HotlineHyrule
 
         static void SetupLevel()
         {
-            if (Locator.GameComponent) return;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            // if (Locator.GameComponent) return;
             if (!Locator.LevelComponent && SceneManager.GetActiveScene().name != "scene_menu") return;
-
+#if UNITY_EDITOR
             var gamePrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_Project/Prefabs/game.prefab");
             PrefabUtility.InstantiatePrefab(gamePrefab, SceneManager.GetActiveScene());
+#endif
 
             Locator.GameComponent.ReloadScene();
         }

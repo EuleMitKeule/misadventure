@@ -28,7 +28,7 @@ namespace HotlineHyrule.Items
 
         private void OnLevelUnloaded(object sender, LevelEventArgs e)
         {
-            Tilemap.tilemapTileChanged -= OnTileChanged;
+            // Tilemap.tilemapTileChanged -= OnTileChanged;
             GameComponent.LevelLoaded -= OnLevelLoaded;
             GameComponent.LevelUnloaded -= OnLevelUnloaded;
         }
@@ -36,16 +36,22 @@ namespace HotlineHyrule.Items
         private void OnLevelLoaded(object sender, LevelEventArgs e)
         {
             if (e.IsMenu) return;
-            Tilemap.tilemapTileChanged += OnTileChanged;
+            // Tilemap.tilemapTileChanged += OnTileChanged;
         }
 
-        private void OnTileChanged(Tilemap tilemap, Tilemap.SyncTile[] tiles)
+        // void OnTileChanged(Tilemap tilemap, Tilemap.SyncTile[] tiles)
+        // {
+        //     if (Tilemap != tilemap) return;
+        //     foreach (var tile in tiles)
+        //     {
+        //         StartCoroutine(DestroyTile(tile.position));
+        //     }
+        // }
+
+        public void SetTile(Vector3Int position, TileBase tile)
         {
-            if (Tilemap != tilemap) return;
-            foreach (var tile in tiles)
-            {
-                StartCoroutine(DestroyTile(tile.position));
-            }            
+            Tilemap.SetTile(position, tile);
+            StartCoroutine(DestroyTile(position));
         }
 
         IEnumerator DestroyTile(Vector3Int pos)

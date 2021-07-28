@@ -50,6 +50,7 @@ namespace HotlineHyrule.Quests
             QuestTargetReached += OnQuestTargetReached;
 
             EnemyComponent.EnemyKilled += OnEnemyKilled;
+            CaterpillarComponent.CaterpillarKilled += OnEnemyKilled;
             GameComponent.LevelLoaded += OnLevelLoaded;
             GameComponent.LevelUnloaded += OnLevelUnloaded;
         }
@@ -154,6 +155,7 @@ namespace HotlineHyrule.Quests
         void OnLevelUnloaded(object sender, LevelEventArgs e)
         {
             EnemyComponent.EnemyKilled -= OnEnemyKilled;
+            CaterpillarComponent.CaterpillarKilled -= OnEnemyKilled;
             GameComponent.LevelLoaded -= OnLevelLoaded;
             GameComponent.LevelUnloaded -= OnLevelUnloaded;
         }

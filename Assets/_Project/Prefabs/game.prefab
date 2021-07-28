@@ -4469,11 +4469,21 @@ MonoBehaviour:
   - scene_forest_ruins_05
   - scene_forest_japanese_02
   - scene_snow01
+  - scene_forest_general_04
+  - scene_forest_japanese_01
+  - scene_forest_japanese_03
+  - scene_forest_japanese_04
+  - scene_forest_japanese_05
+  - scene_snow02
+  - scene_snow04
   bossLevels:
   - scene_forest_general_boss
   - scene_forest_ruins_boss
-  levelsToPlay: 3
+  - scene_snow_boss
+  - scene_japanese_forest_boss
+  levelsToPlay: 5
   playerStateData: {fileID: 0}
+  gameplayEnabled: 0
 --- !u!114 &5336618903236965245
 MonoBehaviour:
   m_ObjectHideFlags: 0

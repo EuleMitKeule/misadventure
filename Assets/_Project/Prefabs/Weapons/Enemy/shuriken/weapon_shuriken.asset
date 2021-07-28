@@ -37,7 +37,7 @@ MonoBehaviour:
   deadzoneRadius: 0
   projectilePrefab: {fileID: 4088921383590290785, guid: 08472f35d90d51e8181e08a64fe55869, type: 3}
   spawnPosition: {x: 0.26, y: 0.26}
-  weaponFiredSound: {fileID: 0}
+  weaponFiredSound: {fileID: 8300000, guid: 83d99217e63305f47807bdd36cbbebe9, type: 3}
   projectileCount: 3
   projectileAngle: 45
   projectileAngleOffset: 0

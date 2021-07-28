@@ -12,11 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1634ab00f9b94a66bf6a7eaacdc248f4, type: 3}
   m_Name: level_forest_ruins_boss
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: effectType
+      Entry: 3
+      Data: 0
   areaName: The Spider Queens Den
-  areaText: 'This is it.
-
-    Here resides the arachnid ruler of this part of the
-    forest.'
+  areaText: Here resides the arachnid ruler of this part of the forest.
   areaFinishedText: 
   questData: {fileID: 11400000, guid: 555cc7ce79352c545a2dccb34b73f8be, type: 2}
   playerSpawnPosition: {x: -1, y: -15, z: 0}

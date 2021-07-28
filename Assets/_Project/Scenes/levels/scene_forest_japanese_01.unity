@@ -3948,7 +3948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3883507329294850683, guid: dabd569d587789e4188322a6586dc28a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.372267
+      value: -14.370361
       objectReference: {fileID: 0}
     - target: {fileID: 3883507329294850683, guid: dabd569d587789e4188322a6586dc28a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3960,7 +3960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3883507330521098339, guid: dabd569d587789e4188322a6586dc28a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.372267
+      value: 14.370361
       objectReference: {fileID: 0}
     - target: {fileID: 3883507330521098339, guid: dabd569d587789e4188322a6586dc28a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -26347,7 +26347,8 @@ MonoBehaviour:
   levelData: {fileID: 11400000, guid: 23abc28352c0777cc959a2e3466e6fc5, type: 2}
   rainEffectPrefab: {fileID: 5431334764939620233, guid: 3771099df981fe0439074926beb458cb, type: 3}
   snowEffectPrefab: {fileID: 4384620333352811691, guid: 93fa4cce27c0f3a44b77aa2301eff17e, type: 3}
-  objectsToDestroyOnFinish: []
+  objectsToDestroyOnFinish:
+  - {fileID: 1951148820}
 --- !u!483693784 &496504177404137632
 TilemapRenderer:
   m_ObjectHideFlags: 0

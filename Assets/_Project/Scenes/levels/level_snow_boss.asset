@@ -24,8 +24,8 @@ MonoBehaviour:
     - Name: effectType
       Entry: 3
       Data: 4
-  areaName: Free Christmas from evil Santa Claus
-  areaText: 'You''re entering the chilling zone from Bad Santa! '
+  areaName: Evil Santa's Lair
+  areaText: You've reached fake Santa Clause's hideout.
   areaFinishedText: 
   questData: {fileID: 11400000, guid: 6ceeadac41d2cdd40ab5e40e51c48f1c, type: 2}
   playerSpawnPosition: {x: -18, y: -12, z: 0}

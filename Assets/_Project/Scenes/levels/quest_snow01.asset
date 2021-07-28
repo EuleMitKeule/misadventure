@@ -87,8 +87,8 @@ MonoBehaviour:
       Data: 
   finishLevelOnCompletion: 0
   finishGameOnCompletion: 0
-  questText: 'Be careful after the fake Santa Claus stole the Christmas spirit, all
-    the elves are a bit weird. '
-  questTargetText: Maybe the need some Christmas spirit again?
+  questText: Be careful, ever since the fake Santa Claus had stolen the christmas
+    spirit, all the elves have been a bit on edge.
+  questTargetText: Maybe they need some Christmas spirit again?
   questRewards: []
   questRewardCount: 0

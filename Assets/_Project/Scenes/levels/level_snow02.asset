@@ -24,8 +24,11 @@ MonoBehaviour:
     - Name: effectType
       Entry: 3
       Data: 4
-  areaName: 
-  areaText: We start our experience in the snow area.
+  areaName: Christmas Tree
+  areaText: 'In the distance, we saw a shining gold star above the tree tops.
+
+    Intrigued,
+    we made our way towards it.'
   areaFinishedText: 
   questData: {fileID: 11400000, guid: e03f12673a5e2834c99db70ec490836e, type: 2}
   playerSpawnPosition: {x: -17, y: 7, z: 0}

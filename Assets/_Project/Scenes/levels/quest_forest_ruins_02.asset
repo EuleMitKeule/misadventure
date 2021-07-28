@@ -36,7 +36,7 @@ MonoBehaviour:
       Data: 2
     - Name: shortTargetText
       Entry: 1
-      Data: Run for your life!
+      Data: Run for your life
     - Name: targetReachedText
       Entry: 1
       Data: We escaped by the skin of our teeth.
@@ -56,6 +56,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   finishLevelOnCompletion: 1
+  finishGameOnCompletion: 0
   questText: There's a huge swarm of spiders trying to kill you, run!
   questTargetText: 
   questRewards: []

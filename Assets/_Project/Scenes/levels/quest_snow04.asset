@@ -37,10 +37,10 @@ MonoBehaviour:
       Data: 2
     - Name: shortTargetText
       Entry: 1
-      Data: angry elf {x} to kill
+      Data: Kill {x} angry elves
     - Name: targetReachedText
       Entry: 1
-      Data: Yep good job, now we should find the exit.
+      Data: Yep good job, now the elves are sleeping peacefully.
     - Name: targetNotReachedText
       Entry: 1
       Data: We didn't do something.
@@ -61,10 +61,13 @@ MonoBehaviour:
       Data: 2
     - Name: shortTargetText
       Entry: 1
-      Data: yellow presents {x}
+      Data: Collect {x} yellow presents
     - Name: targetReachedText
       Entry: 1
-      Data: 
+      Data: 'Also we''ve stolen their presents.
+
+        They''ve been very naughty
+        and don''t deserve them.'
     - Name: targetNotReachedText
       Entry: 1
       Data: We didn't do something.
@@ -111,8 +114,8 @@ MonoBehaviour:
       Data: 
   finishLevelOnCompletion: 0
   finishGameOnCompletion: 0
-  questText: Be careful after the fake Santa Claus stole the Christmas spirit, all
-    the elves are a bit weird.
+  questText: Be careful, the inhabitants of this maze have been stuck here for days
+    and in their hunger, have developed a taste for human flesh.
   questTargetText: 
   questRewards: []
   questRewardCount: 0

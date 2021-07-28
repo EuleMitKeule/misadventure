@@ -147,6 +147,8 @@ namespace HotlineHyrule.Entities
         Dictionary<SegmentComponent, Animator> SegmentToAnimator { get; } =
             new Dictionary<SegmentComponent, Animator>();
 
+        public static event EventHandler<EntityEventArgs> CaterpillarKilled;
+        
         void Awake()
         {
             Segments = new List<SegmentComponent>();
@@ -323,7 +325,14 @@ namespace HotlineHyrule.Entities
             
             Destroy(segment.gameObject);
 
-            if (Segments.Count == 0) Destroy(gameObject);
+            if (Segments.Count == 0)
+            {
+
+                var entityEventArgs = new EntityEventArgs(gameObject);
+                CaterpillarKilled?.Invoke(this, entityEventArgs);
+                
+                Destroy(gameObject);
+            }
         }
         
         public Vector3 GetPlayerDirection(SegmentComponent segment) =>

@@ -34,6 +34,18 @@ PrefabInstance:
       propertyPath: followRange
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: itemDrops.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: itemDrops.Array.data[0].data
+      value: 
+      objectReference: {fileID: 11400000, guid: d99a9217006240b45a2c69825432e731, type: 2}
+    - target: {fileID: 7492512237567023204, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
+      propertyPath: itemDrops.Array.data[0].dropRate
+      value: 0.33333334
+      objectReference: {fileID: 0}
     - target: {fileID: 7492512237567023206, guid: 00626a1425865b44586bd6ddcb87f3fc, type: 3}
       propertyPath: m_Controller
       value: 

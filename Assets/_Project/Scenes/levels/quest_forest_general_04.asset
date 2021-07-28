@@ -39,8 +39,7 @@ MonoBehaviour:
       Data: Destroy the dam
     - Name: targetReachedText
       Entry: 1
-      Data: We tore down the dam and barely escaped from the large masses of water
-        that flowed all over the forest.
+      Data: 
     - Name: targetNotReachedText
       Entry: 1
       Data: We didn't do something.

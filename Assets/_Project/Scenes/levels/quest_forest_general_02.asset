@@ -55,7 +55,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  finishLevelOnCompletion: 0
+  finishLevelOnCompletion: 1
   finishGameOnCompletion: 0
   questText: If we wanted to get through here, we'd have to fight.
   questTargetText: 

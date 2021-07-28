@@ -16,6 +16,8 @@ namespace HotlineHyrule.UserInterface
 
         void OnLevelLoaded(object sender, LevelEventArgs e)
         {
+            Debug.Log("Loaded");
+
             if (e.IsMenu)
             {
                 CanvasGroup.alpha = 1f;

@@ -36,11 +36,11 @@ MonoBehaviour:
       Data: 2
     - Name: shortTargetText
       Entry: 1
-      Data: Santaclaus
+      Data: Kill Santa
     - Name: targetReachedText
       Entry: 1
-      Data: Awesome man, you did it and were able to bring the Christmas feeling
-        back to the world!
+      Data: Awesome man, you did it and were able to bring the Christmas spirit back
+        to the world!
     - Name: targetNotReachedText
       Entry: 1
       Data: We didn't do something.
@@ -63,6 +63,6 @@ MonoBehaviour:
   finishGameOnCompletion: 1
   questText: Try to get the stolen Christmas magic back while he's still eating cookies
     and drinking milk.
-  questTargetText: If you don't succeed, just kill him ! ^_^
+  questTargetText: If you don't succeed, just kill him !
   questRewards: []
   questRewardCount: 0

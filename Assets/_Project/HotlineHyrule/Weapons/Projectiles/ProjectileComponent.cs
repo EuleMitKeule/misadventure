@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using HotlineHyrule.Entities;
+using HotlineHyrule.Items;
 using HotlineHyrule.Weapons.Projectiles;
 using UnityEditor;
 using UnityEngine;
@@ -158,7 +159,7 @@ namespace HotlineHyrule.Weapons
         void OnParticleCollision(GameObject other)
         {
             if (projectileData.impactMask.value != (projectileData.impactMask.value | 1 << other.layer)) return;
-            
+
             if (HitEnemies.Contains(other)) return;
             HitEnemies.Add((other));
 
@@ -290,10 +291,12 @@ namespace HotlineHyrule.Weapons
 
             spawnPositions = spawnPositions.OrderBy(e => Guid.NewGuid()).ToList();
 
+            var tileEffectComponent = weaponEffectTilemap.GetComponent<TileEffectComponent>();
+            if (!tileEffectComponent) return;
             for (var i = 0; i < count; i++)
             {
                 var position = spawnPositions[i];
-                weaponEffectTilemap.SetTile(position, effectTiles[i]);
+                tileEffectComponent.SetTile(position, effectTiles[i]);
             }
         }
     }

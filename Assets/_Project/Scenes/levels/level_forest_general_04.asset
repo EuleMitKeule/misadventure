@@ -27,7 +27,8 @@ MonoBehaviour:
   areaName: The Dam
   areaText: This part of the forest looked different. Most of the plants died and
     the ground felt very dry.
-  areaFinishedText: 
+  areaFinishedText: We tore down the dam and barely escaped from the large masses
+    of water that flowed all over the forest.
   questData: {fileID: 11400000, guid: a4b1c8143098a7f4293d217fab632797, type: 2}
   playerSpawnPosition: {x: -3, y: -2, z: 0}
   bgmData: {fileID: 11400000, guid: f0e242accf8efad46aba5b7cb4bd8266, type: 2}

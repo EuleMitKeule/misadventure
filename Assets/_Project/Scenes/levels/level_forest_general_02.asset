@@ -29,7 +29,7 @@ MonoBehaviour:
 
     They demanded we pay a toll
     in exchange for safe passage, but we had just run out of pine cones and pebbles.'
-  areaFinishedText: 
+  areaFinishedText: We fended off the Gnomes and proceeded on our path.
   questData: {fileID: 11400000, guid: 2edd0e873f297fa4199a30274641cd4e, type: 2}
   playerSpawnPosition: {x: -27, y: -18, z: 0}
-  bgmData: {fileID: 0}
+  bgmData: {fileID: 11400000, guid: f0e242accf8efad46aba5b7cb4bd8266, type: 2}

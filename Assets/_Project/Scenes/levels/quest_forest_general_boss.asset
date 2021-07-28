@@ -30,22 +30,25 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|HotlineHyrule.Quests.KillQuestTarget, HotlineHyrule
+      Data: 1|HotlineHyrule.Quests.KillSpecificQuestTarget, HotlineHyrule
     - Name: requiredType
       Entry: 3
       Data: 2
     - Name: shortTargetText
       Entry: 1
-      Data: Kill the Catterpillar
+      Data: Kill the caterpillar
     - Name: targetReachedText
       Entry: 1
-      Data: More like Scatterpillar.
+      Data: 
     - Name: targetNotReachedText
       Entry: 1
       Data: We didn't do something.
     - Name: killTarget
       Entry: 3
       Data: 1
+    - Name: enemyName
+      Entry: 1
+      Data: caterpillar
     - Name: 
       Entry: 8
       Data: 

@@ -24,8 +24,8 @@ MonoBehaviour:
     - Name: effectType
       Entry: 3
       Data: 4
-  areaName: 
-  areaText: We start our experience in the snow area.
+  areaName: Christmas Village
+  areaText: We came upon a festive-looking village.
   areaFinishedText: 
   questData: {fileID: 11400000, guid: d3088b8883dfb604b964b3144bd4bbf3, type: 2}
   playerSpawnPosition: {x: -19, y: 18, z: 0}

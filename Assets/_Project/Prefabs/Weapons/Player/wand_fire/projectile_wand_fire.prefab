@@ -3876,7 +3876,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 524928
+      m_Bits: 529024
     maxCollisionShapes: 10000
     quality: 0
     voxelSize: 0.05
@@ -4879,6 +4879,7 @@ MonoBehaviour:
   rangedWeaponData: {fileID: 11400000, guid: 3d73b0030c67d364e8b5b56b97ed0986, type: 2}
   projectileData: {fileID: 11400000, guid: 687a5c806367e194b92b8eaa299fc992, type: 2}
   useImpactAnimation: 1
+  stopPhysicsOnImpact: 1
 --- !u!61 &5508134044544701502
 BoxCollider2D:
   m_ObjectHideFlags: 0

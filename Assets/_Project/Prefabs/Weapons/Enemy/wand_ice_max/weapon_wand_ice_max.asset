@@ -38,7 +38,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 9191822526320412006, guid: 4f19e16d8301c0546a2fe31d126d3c63, type: 3}
   delayBetweenSpawnRings: 0.25
   offset: {x: 0, y: 0}
-  weaponFiredSound: {fileID: 0}
+  weaponFiredSound: {fileID: 8300000, guid: 6df371da54859804d8e0ea4a142087e6, type: 3}
   spawnRings:
   - numberOfProjectiles: 1
     radius: 0
