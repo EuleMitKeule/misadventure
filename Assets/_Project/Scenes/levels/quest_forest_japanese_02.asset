@@ -31,7 +31,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 1|HotlineHyrule.Quests.QuestTarget, HotlineHyrule
+      Data: 1|HotlineHyrule.Quests.AreaQuestTarget, HotlineHyrule
     - Name: requiredType
       Entry: 3
       Data: 2
@@ -43,7 +43,10 @@ MonoBehaviour:
       Data: We found the exit.
     - Name: targetNotReachedText
       Entry: 1
-      Data: 
+      Data: We didn't do something.
+    - Name: colliderName
+      Entry: 1
+      Data: collider_exit
     - Name: 
       Entry: 8
       Data: 
@@ -104,7 +107,9 @@ MonoBehaviour:
       Entry: 8
       Data: 
   finishLevelOnCompletion: 0
+  finishGameOnCompletion: 0
   questText: Looks like we have to make our way through it.
   questTargetText: 
-  questRewards: []
-  questRewardCount: 0
+  questRewards:
+  - {fileID: 11400000, guid: c4501b63a52bc294cbd5568de663d7d2, type: 2}
+  questRewardCount: 1

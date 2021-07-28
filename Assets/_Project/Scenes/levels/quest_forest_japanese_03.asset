@@ -37,7 +37,7 @@ MonoBehaviour:
       Data: 2
     - Name: shortTargetText
       Entry: 1
-      Data: Find all 7 artifacts
+      Data: Find all 8 artifacts
     - Name: targetReachedText
       Entry: 1
       Data: We found all artifacts.
@@ -66,7 +66,7 @@ MonoBehaviour:
       Data: 0
     - Name: $v
       Entry: 3
-      Data: 7
+      Data: 8
     - Name: 
       Entry: 8
       Data: 
@@ -86,6 +86,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   finishLevelOnCompletion: 1
+  finishGameOnCompletion: 0
   questText: We better take away the artifacts.
   questTargetText: 
   questRewards: []
