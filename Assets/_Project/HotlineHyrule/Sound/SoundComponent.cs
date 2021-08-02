@@ -10,10 +10,6 @@ namespace HotlineHyrule.Sound
         [SerializeField] AudioMixerGroup bgmAudioMixerGroup;
         [SerializeField] AudioMixerGroup sfxAudioMixerGroup;
 
-        [SerializeField] BGMData debugData1;
-        [SerializeField] BGMData debugData2;
-        [SerializeField] InputAction debugFadeBGMAction;
-
         AudioSource _bgm1AudioSource;
         AudioSource _bgm2AudioSource;
         AudioSource _sfxAudioSource;
@@ -23,6 +19,13 @@ namespace HotlineHyrule.Sound
         IEnumerator _fadeInCoroutine;
         IEnumerator _fadeOutCoroutine;
 
+        public void PlaySound(AudioClip clip)
+        {
+            if (!clip) return;
+            
+            _sfxAudioSource.PlayOneShot(clip);
+        }
+        
         void Awake()
         {
             Locator.SoundComponent = this;
@@ -38,8 +41,7 @@ namespace HotlineHyrule.Sound
             _bgm1AudioSource.loop = true;
             _bgm2AudioSource.loop = true;
 
-            debugFadeBGMAction.started += OnDebugAction;
-            debugFadeBGMAction.Enable();
+            _bgm1Active = false;
         }
 
         public void PlayBGM(BGMData data, float fadeDuration = 1)
@@ -52,8 +54,8 @@ namespace HotlineHyrule.Sound
                 _fadeOutCoroutine = FadeOutAudio(_bgm1AudioSource, fadeDuration);
                 _fadeInCoroutine = FadeInAudio(_bgm2AudioSource, data, fadeDuration);
 
-                StartCoroutine(_fadeInCoroutine);
                 StartCoroutine(_fadeOutCoroutine);
+                StartCoroutine(_fadeInCoroutine);
             }
             else
             {
@@ -67,20 +69,10 @@ namespace HotlineHyrule.Sound
             _bgm1Active = !_bgm1Active;
         }
 
-        public void PlaySound(AudioClip clip)
-        {
-            if (!clip) return;
-            
-            _sfxAudioSource.PlayOneShot(clip);
-        }
-
         IEnumerator FadeInAudio(AudioSource audioSource, BGMData data, float duration)
         {
             var currentTime = 0f;
-            //var start = audioSource.volume;
             var start = 0f;
-
-            if (data == null) yield break;
             
             audioSource.clip = data.loopAudioClip;
             audioSource.PlayOneShot(data.introAudioClip);
@@ -90,7 +82,7 @@ namespace HotlineHyrule.Sound
             {
                 currentTime += Time.deltaTime;
                 audioSource.volume = Mathf.Lerp(start, 1, currentTime / duration);
-                yield break;
+                yield return null;
             }
         }
 
@@ -103,15 +95,10 @@ namespace HotlineHyrule.Sound
             {
                 currentTime += Time.deltaTime;
                 audioSource.volume = Mathf.Lerp(start, 0, currentTime / duration);
-                yield break;
+                yield return null;
             }
 
             audioSource.Stop();
-        }
-
-        void OnDebugAction(InputAction.CallbackContext context)
-        {
-            PlayBGM(_bgm1Active ? debugData2 : debugData1);
         }
     }
 }
