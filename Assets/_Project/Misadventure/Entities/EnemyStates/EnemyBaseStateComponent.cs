@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HotlineHyrule.Pathfinding;
-using HotlineHyrule.Weapons;
+using Misadventure.Pathfinding;
+using Misadventure.Weapons;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities.EnemyStates
+namespace Misadventure.Entities.EnemyStates
 {
     public abstract class EnemyBaseStateComponent : MonoBehaviour
     {

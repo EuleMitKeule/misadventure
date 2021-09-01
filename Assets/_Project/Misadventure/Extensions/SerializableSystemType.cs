@@ -1,95 +1,95 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using UnityEditor;
 using UnityEngine;
 using Object = System.Object;
 
-[Serializable]
-public class SerializableSystemType
+namespace Misadventure.Extensions
 {
-    [SerializeField] private string m_Name;
-    public string Name { get { return m_Name; } }
-
-    [SerializeField] private string m_AssemblyQualifiedName;
-    public string AssemblyQualifiedName { get { return m_AssemblyQualifiedName; } }
-
-    private Type m_SystemType;
-    public Type SystemType
+    [Serializable]
+    public class SerializableSystemType
     {
-        get
+        [SerializeField] private string m_Name;
+        public string Name { get { return m_Name; } }
+
+        [SerializeField] private string m_AssemblyQualifiedName;
+        public string AssemblyQualifiedName { get { return m_AssemblyQualifiedName; } }
+
+        private Type m_SystemType;
+        public Type SystemType
         {
-            if (m_SystemType == null)
+            get
             {
-                GetSystemType();
+                if (m_SystemType == null)
+                {
+                    GetSystemType();
+                }
+                return m_SystemType;
             }
-            return m_SystemType;
         }
-    }
 
-    private void GetSystemType()
-    {
-        m_SystemType = string.IsNullOrEmpty(m_AssemblyQualifiedName) ? null : Type.GetType(m_AssemblyQualifiedName);
-    }
-
-    public SerializableSystemType(Type _SystemType)
-    {
-        if (_SystemType == null)
-            throw new ArgumentNullException("_SystemType");
-        m_SystemType = _SystemType;
-        m_Name = _SystemType.Name;
-        m_AssemblyQualifiedName = _SystemType.AssemblyQualifiedName;
-    }
-
-    public override bool Equals(Object obj)
-    {
-        SerializableSystemType temp = obj as SerializableSystemType;
-        if ((object)temp == null)
+        private void GetSystemType()
         {
-            return false;
+            m_SystemType = string.IsNullOrEmpty(m_AssemblyQualifiedName) ? null : Type.GetType(m_AssemblyQualifiedName);
         }
-        return Equals(temp);
-    }
 
-    public bool Equals(SerializableSystemType _Object)
-    {
-        if (_Object == null)
-            return false;
-        return SystemType.Equals(_Object.SystemType);
-    }
-
-    public static bool operator ==(SerializableSystemType a, SerializableSystemType b)
-    {
-        if (ReferenceEquals(a, b))
+        public SerializableSystemType(Type _SystemType)
         {
-            return true;
+            if (_SystemType == null)
+                throw new ArgumentNullException("_SystemType");
+            m_SystemType = _SystemType;
+            m_Name = _SystemType.Name;
+            m_AssemblyQualifiedName = _SystemType.AssemblyQualifiedName;
         }
 
-        if (((object)a == null) || ((object)b == null))
+        public override bool Equals(Object obj)
         {
-            return false;
+            SerializableSystemType temp = obj as SerializableSystemType;
+            if ((object)temp == null)
+            {
+                return false;
+            }
+            return Equals(temp);
         }
 
-        return a.Equals(b);
-    }
+        public bool Equals(SerializableSystemType _Object)
+        {
+            if (_Object == null)
+                return false;
+            return SystemType.Equals(_Object.SystemType);
+        }
 
-    public static bool operator !=(SerializableSystemType a, SerializableSystemType b)
-    {
-        return !(a == b);
-    }
+        public static bool operator ==(SerializableSystemType a, SerializableSystemType b)
+        {
+            if (ReferenceEquals(a, b))
+            {
+                return true;
+            }
 
-    public override int GetHashCode()
-    {
-        return SystemType.GetHashCode();
-    }
+            if (((object)a == null) || ((object)b == null))
+            {
+                return false;
+            }
 
-    public static implicit operator SerializableSystemType(Type type)
-    {
-        return new SerializableSystemType(type);
-    }
+            return a.Equals(b);
+        }
 
-    public static implicit operator Type(SerializableSystemType type)
-    {
-        return type.SystemType;
+        public static bool operator !=(SerializableSystemType a, SerializableSystemType b)
+        {
+            return !(a == b);
+        }
+
+        public override int GetHashCode()
+        {
+            return SystemType.GetHashCode();
+        }
+
+        public static implicit operator SerializableSystemType(Type type)
+        {
+            return new SerializableSystemType(type);
+        }
+
+        public static implicit operator Type(SerializableSystemType type)
+        {
+            return type.SystemType;
+        }
     }
 }

@@ -1,13 +1,12 @@
-using HotlineHyrule.Entities;
-using HotlineHyrule.Level;
-using HotlineHyrule.Quests;
-using HotlineHyrule.Weapons;
+using Misadventure.Entities;
+using Misadventure.Level;
+using Misadventure.Weapons;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     public class BombComponent : SerializedMonoBehaviour
     {

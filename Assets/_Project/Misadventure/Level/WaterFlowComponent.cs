@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using HotlineHyrule.Entities;
+using Misadventure.Entities;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace HotlineHyrule.Level
+namespace Misadventure.Level
 {
     public class WaterFlowComponent : SerializedMonoBehaviour
     {

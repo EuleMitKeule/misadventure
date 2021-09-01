@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace HotlineHyrule.Quests
+namespace Misadventure.Quests
 {
     [Serializable]
     public class KillQuestTarget : QuestTarget

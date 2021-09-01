@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace HotlineHyrule.Extensions
+namespace Misadventure.Extensions
 {
     public static class Vector2Extensions
     {

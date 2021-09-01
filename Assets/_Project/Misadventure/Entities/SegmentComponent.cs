@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using HotlineHyrule.Extensions;
+using Misadventure.Extensions;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities
+namespace Misadventure.Entities
 {
     public class SegmentComponent : MonoBehaviour
     {

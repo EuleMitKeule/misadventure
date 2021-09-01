@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     [CreateAssetMenu(menuName = "Item/New Movement Item")]
     public class MovementItemData : ConsumableItemData

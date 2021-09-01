@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace HotlineHyrule.Quests
+namespace Misadventure.Quests
 {
     public class QuestAreaComponent : MonoBehaviour
     {

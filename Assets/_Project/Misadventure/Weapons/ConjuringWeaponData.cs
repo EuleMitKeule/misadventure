@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HotlineHyrule.Weapons
+namespace Misadventure.Weapons
 {
     [CreateAssetMenu(menuName = "Weapons/New Conjuring Weapon")]
     public class ConjuringWeaponData : WeaponData

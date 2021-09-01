@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities
+namespace Misadventure.Entities
 {
     public class EntityEventArgs : EventArgs
     {

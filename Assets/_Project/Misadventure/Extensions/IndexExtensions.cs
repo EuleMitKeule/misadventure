@@ -2,9 +2,10 @@
 // https://github.com/dotnet/runtime/blob/419e949d258ecee4c40a460fb09c66d974229623/src/libraries/System.Private.CoreLib/src/System/Range.cs
 
 #nullable enable
+using System;
 using System.Runtime.CompilerServices;
 
-namespace System
+namespace Misadventure.Extensions
 {
     /// <summary>Represent a type can be used to index a collection either from the start or the end.</summary>
     /// <remarks>
@@ -232,10 +233,7 @@ namespace System
             return (start, end - start);
         }
     }
-}
 
-namespace System.Runtime.CompilerServices
-{
     internal static class RuntimeHelpers
     {
         /// <summary>

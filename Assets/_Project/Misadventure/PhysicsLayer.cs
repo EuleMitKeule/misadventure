@@ -1,4 +1,4 @@
-namespace HotlineHyrule
+namespace Misadventure
 {
     public static class PhysicsLayer
     {

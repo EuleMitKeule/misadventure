@@ -1,16 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using HotlineHyrule.Entities;
-using HotlineHyrule.Items;
-using HotlineHyrule.Weapons.Projectiles;
-using UnityEditor;
+using Misadventure.Entities;
+using Misadventure.Items;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
-namespace HotlineHyrule.Weapons
+namespace Misadventure.Weapons.Projectiles
 {
     public class ProjectileComponent : MonoBehaviour
     {

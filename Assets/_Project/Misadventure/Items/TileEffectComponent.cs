@@ -1,14 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using HotlineHyrule.Entities;
-using HotlineHyrule.Level;
-using HotlineHyrule.Tiles;
+using Misadventure.Level;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Sirenix.OdinInspector;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     public class TileEffectComponent : MonoBehaviour
     {

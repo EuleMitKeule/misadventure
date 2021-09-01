@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HotlineHyrule.Entities.EnemyStates;
-using HotlineHyrule.Extensions;
-using HotlineHyrule.Items;
-using HotlineHyrule.Weapons;
+using Misadventure.Entities.EnemyStates;
+using Misadventure.Extensions;
+using Misadventure.Items;
+using Misadventure.Weapons;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace HotlineHyrule.Entities
+namespace Misadventure.Entities
 {
     /// <summary>
     /// prototype; only contains a respawn point for now

@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using HotlineHyrule.Entities;
-using HotlineHyrule.Level;
+using Misadventure.Entities;
+using Misadventure.Level;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HotlineHyrule.UserInterface
+namespace Misadventure.UserInterface
 {
     public class PlayerHealthInterfaceComponent : MonoBehaviour
     {
@@ -62,7 +62,7 @@ namespace HotlineHyrule.UserInterface
 
             if (isLastHalf && HealthIcons.Count != 0)
             {
-                var heartImage = HealthIcons[^1].GetComponent<Image>();
+                var heartImage = HealthIcons[HealthIcons.Count - 1].GetComponent<Image>();
                 heartImage.sprite = halfHeartSprite;
             }
         }

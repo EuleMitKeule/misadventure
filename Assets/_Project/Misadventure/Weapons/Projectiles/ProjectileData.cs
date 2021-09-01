@@ -1,9 +1,9 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace HotlineHyrule.Weapons.Projectiles
+namespace Misadventure.Weapons.Projectiles
 {
     public class ProjectileData : ScriptableObject
     {

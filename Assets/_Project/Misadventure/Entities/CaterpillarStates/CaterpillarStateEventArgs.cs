@@ -1,6 +1,6 @@
 using System;
 
-namespace HotlineHyrule.Entities.CaterpillarStates
+namespace Misadventure.Entities.CaterpillarStates
 {
     public class CaterpillarStateEventArgs : EventArgs
     {

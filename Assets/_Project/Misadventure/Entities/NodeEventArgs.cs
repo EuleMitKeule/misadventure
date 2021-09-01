@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace HotlineHyrule.Entities
+namespace Misadventure.Entities
 {
     public class NodeEventArgs : EventArgs
     {

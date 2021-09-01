@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace HotlineHyrule.Entities.PlayerStates
+namespace Misadventure.Entities.PlayerStates
 {
     public class PlayerFrozenStateComponent : PlayerBaseStateComponent
     {

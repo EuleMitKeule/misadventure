@@ -1,6 +1,6 @@
 using System;
 
-namespace HotlineHyrule.Weapons
+namespace Misadventure.Weapons
 {
     public class WeaponEventArgs : EventArgs
     {

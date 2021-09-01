@@ -1,10 +1,9 @@
-using HotlineHyrule.Entities;
-using HotlineHyrule.Level;
+using Misadventure.Level;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     public class ItemEnablerComponent : SerializedMonoBehaviour
     {

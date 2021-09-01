@@ -1,8 +1,8 @@
-﻿using HotlineHyrule.Entities;
+﻿using Misadventure.Entities;
 using UnityEditor;
 using UnityEngine;
 
-namespace HotlineHyruleEditor
+namespace MisadventureEditor
 {
     [CustomEditor(typeof(HealthComponent))]
     public class HealthComponentEditor : Editor

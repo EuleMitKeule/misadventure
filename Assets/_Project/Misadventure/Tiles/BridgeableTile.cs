@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace HotlineHyrule.Tiles
+namespace Misadventure.Tiles
 {
     [CreateAssetMenu(menuName = "2D/Tiles/Bridgeable Tile")]
     public class BridgeableTile : RuleTile

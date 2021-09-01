@@ -1,8 +1,8 @@
-using HotlineHyrule.Extensions;
+using Misadventure.Extensions;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace HotlineHyrule.Tiles
+namespace Misadventure.Tiles
 {
     [CreateAssetMenu(menuName = "2D/Tiles/Prefab Tile")]
     public class PrefabTile : TileBase

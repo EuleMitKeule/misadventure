@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using HotlineHyrule.Entities;
-using HotlineHyrule.Extensions;
+using Misadventure.Extensions;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace HotlineHyrule.Pathfinding
+namespace Misadventure.Pathfinding
 {
     public class PathfindingComponent : MonoBehaviour
     {

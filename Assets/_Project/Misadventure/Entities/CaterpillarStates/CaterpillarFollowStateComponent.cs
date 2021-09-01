@@ -1,10 +1,7 @@
 using System.Collections.Generic;
-using System.Net.Http.Headers;
-using HotlineHyrule.Extensions;
-using Sirenix.Serialization;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities.CaterpillarStates
+namespace Misadventure.Entities.CaterpillarStates
 {
     public class CaterpillarFollowStateComponent : CaterpillarBaseStateComponent
     {

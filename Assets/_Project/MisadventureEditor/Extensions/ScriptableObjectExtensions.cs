@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace HotlineHyruleEditor.Extensions
+namespace MisadventureEditor.Extensions
 {
     public static class ScriptableObjectExtensions
     {

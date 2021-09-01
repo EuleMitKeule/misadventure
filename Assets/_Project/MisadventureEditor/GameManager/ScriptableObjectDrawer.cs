@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
-namespace HotlineHyruleEditor.GameManager
+namespace MisadventureEditor.GameManager
 {
     public class ScriptableObjectDrawer<T> where T : ScriptableObject
     {

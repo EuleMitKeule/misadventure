@@ -1,8 +1,8 @@
 using System;
-using HotlineHyrule.Weapons;
+using Misadventure.Weapons;
 using UnityEngine;
 
-namespace HotlineHyrule.Quests
+namespace Misadventure.Quests
 {
     [Serializable]
     public class UseWeaponQuestTarget : QuestTarget

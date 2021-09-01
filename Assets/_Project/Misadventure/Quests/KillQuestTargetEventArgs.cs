@@ -1,6 +1,6 @@
 using System;
 
-namespace HotlineHyrule.Quests
+namespace Misadventure.Quests
 {
     public class KillQuestTargetEventArgs : EventArgs
     {

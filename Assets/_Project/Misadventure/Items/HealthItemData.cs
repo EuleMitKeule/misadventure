@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     [CreateAssetMenu(menuName = "Item/New Health Item")]
     public class HealthItemData : ConsumableItemData

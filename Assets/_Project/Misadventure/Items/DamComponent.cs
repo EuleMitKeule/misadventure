@@ -1,11 +1,10 @@
-using HotlineHyrule.Entities;
-using HotlineHyrule.Weapons;
+using Misadventure.Weapons;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     public class DamComponent : SerializedMonoBehaviour
     {

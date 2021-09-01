@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities.EnemyStates
+namespace Misadventure.Entities.EnemyStates
 {
     public class EnemyIdleStateComponent : EnemyBaseStateComponent
     {

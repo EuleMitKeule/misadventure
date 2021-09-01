@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities.EnemyStates
+namespace Misadventure.Entities.EnemyStates
 {
     public class EnemyAttackStateComponent : EnemyBaseStateComponent
     {

@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace HotlineHyrule.Quests
+namespace Misadventure.Quests
 {
     [Serializable]
     [HideReferenceObjectPicker]

@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities.CaterpillarStates
+namespace Misadventure.Entities.CaterpillarStates
 {
     public abstract class CaterpillarBaseStateComponent : SerializedMonoBehaviour
     {

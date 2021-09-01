@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace HotlineHyrule.Pathfinding
+namespace Misadventure.Pathfinding
 {
     public class CellEventArgs : EventArgs
     {

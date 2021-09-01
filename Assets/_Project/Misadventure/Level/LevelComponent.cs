@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using HotlineHyrule.Extensions;
-using HotlineHyrule.Input;
+using Misadventure.Extensions;
+using Misadventure.Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace HotlineHyrule.Level
+namespace Misadventure.Level
 {
     /// <summary>
     /// Contains level information for the level (grid) it's attached to.

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HotlineHyrule.Weapons
+namespace Misadventure.Weapons
 {
     [Serializable]
     public struct ProjectileSpawnRing

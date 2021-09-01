@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace HotlineHyrule.Extensions
+namespace Misadventure.Extensions
 {
     public static class Vector3IntExtensions
     {

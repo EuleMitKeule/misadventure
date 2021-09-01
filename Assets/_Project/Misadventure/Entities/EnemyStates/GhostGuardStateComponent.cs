@@ -1,11 +1,11 @@
 using System;
 using System.Numerics;
-using HotlineHyrule.Extensions;
+using Misadventure.Extensions;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-namespace HotlineHyrule.Entities.EnemyStates
+namespace Misadventure.Entities.EnemyStates
 {
     public class GhostGuardStateComponent : EnemyBaseStateComponent
     {

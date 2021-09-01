@@ -1,4 +1,4 @@
-namespace HotlineHyrule.Entities.PlayerStates
+namespace Misadventure.Entities.PlayerStates
 {
     public class PlayerIdleStateComponent : PlayerBaseStateComponent
     {

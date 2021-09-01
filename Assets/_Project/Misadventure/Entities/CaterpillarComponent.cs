@@ -1,15 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using HotlineHyrule.Entities.CaterpillarStates;
-using HotlineHyrule.Extensions;
+using Misadventure.Entities.CaterpillarStates;
+using Misadventure.Extensions;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
-namespace HotlineHyrule.Entities
+namespace Misadventure.Entities
 {
     public class CaterpillarComponent : SerializedMonoBehaviour
     {

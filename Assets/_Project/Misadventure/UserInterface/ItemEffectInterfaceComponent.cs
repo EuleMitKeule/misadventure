@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using HotlineHyrule.Items;
-using HotlineHyrule.Level;
+using Misadventure.Items;
+using Misadventure.Level;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace HotlineHyrule.UserInterface
+namespace Misadventure.UserInterface
 {
     public class ItemEffectInterfaceComponent : MonoBehaviour
     {

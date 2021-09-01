@@ -1,13 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using HotlineHyrule.Extensions;
-using HotlineHyrule.Level;
+using Misadventure.Extensions;
+using Misadventure.Level;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     public class FestoonComponent : MonoBehaviour
     {

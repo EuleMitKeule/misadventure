@@ -1,18 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using HotlineHyrule.Entities;
-using HotlineHyrule.Extensions;
-using HotlineHyrule.Items;
-using HotlineHyrule.Level;
-using HotlineHyrule.Weapons;
-using UnityEditor;
+using Misadventure.Entities;
+using Misadventure.Extensions;
+using Misadventure.Items;
+using Misadventure.Level;
+using Misadventure.Weapons;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = System.Random;
 
-namespace HotlineHyrule.Quests
+namespace Misadventure.Quests
 {
     public class QuestComponent : MonoBehaviour
     {

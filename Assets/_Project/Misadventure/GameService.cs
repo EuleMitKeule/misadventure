@@ -1,8 +1,7 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace HotlineHyrule
+namespace Misadventure
 {
     public class GameService : MonoBehaviour
     {

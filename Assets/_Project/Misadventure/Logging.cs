@@ -1,7 +1,7 @@
-namespace HotlineHyrule
-{
-    using System.Diagnostics;
+using System.Diagnostics;
 
+namespace Misadventure
+{
     public static class Logging
     {
         [Conditional("DEBUG")]

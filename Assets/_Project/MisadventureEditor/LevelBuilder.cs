@@ -1,13 +1,12 @@
-using System.IO;
 using System.Text.RegularExpressions;
 using Cinemachine;
-using HotlineHyrule.Level;
-using HotlineHyrule.Quests;
+using Misadventure.Level;
+using Misadventure.Quests;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace HotlineHyruleEditor
+namespace MisadventureEditor
 {
     public static class LevelBuilder
     {

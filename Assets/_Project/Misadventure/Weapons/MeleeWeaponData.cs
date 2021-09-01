@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace HotlineHyrule.Weapons
+namespace Misadventure.Weapons
 {
     [CreateAssetMenu(menuName = "Weapon/New Melee Weapon")]
     public class MeleeWeaponData : WeaponData

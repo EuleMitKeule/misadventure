@@ -1,11 +1,11 @@
 using System.Text.RegularExpressions;
 using Cinemachine;
-using HotlineHyrule.Level;
+using Misadventure.Level;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace HotlineHyruleEditor
+namespace MisadventureEditor
 {
     public class LevelCreatorWindow : EditorWindow
     {

@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
-using HotlineHyrule.Items;
-using UnityEditor;
+using Misadventure.Items;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities
+namespace Misadventure.Entities
 {
     /// <summary>
     /// Handles the health of the entity it's attached to.

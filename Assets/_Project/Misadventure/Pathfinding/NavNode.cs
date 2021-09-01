@@ -1,7 +1,6 @@
 using UnityEngine;
-using System;
 
-namespace HotlineHyrule.Pathfinding
+namespace Misadventure.Pathfinding
 {
     public class NavNode
     {

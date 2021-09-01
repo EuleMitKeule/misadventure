@@ -1,16 +1,15 @@
-using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using HotlineHyrule;
-using HotlineHyrule.Entities;
-using HotlineHyrule.Items;
-using HotlineHyrule.Weapons;
-using HotlineHyrule.Weapons.Projectiles;
+using Misadventure;
+using Misadventure.Entities;
+using Misadventure.Items;
+using Misadventure.Weapons;
+using Misadventure.Weapons.Projectiles;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace HotlineHyruleEditor.GameManager
+namespace MisadventureEditor
 {
     public static class WeaponBuilder
     {

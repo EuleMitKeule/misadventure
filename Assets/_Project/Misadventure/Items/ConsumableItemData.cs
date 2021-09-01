@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     public abstract class ConsumableItemData : ItemData
     {

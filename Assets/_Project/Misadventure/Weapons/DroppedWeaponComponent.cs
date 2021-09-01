@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HotlineHyrule.Weapons
+namespace Misadventure.Weapons
 {
     public class DroppedWeaponComponent : MonoBehaviour
     {
