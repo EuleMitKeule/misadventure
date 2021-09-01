@@ -74,3 +74,6 @@ crashlytics-build.properties
 *.htm
 *.css
 *.js
+
+# Odin Inspector
+/[Aa]ssets/Sirenix/*

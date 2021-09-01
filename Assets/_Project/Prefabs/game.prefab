@@ -2269,6 +2269,7 @@ GameObject:
   - component: {fileID: 798222154536571080}
   - component: {fileID: 8560927562555361284}
   - component: {fileID: 1219237909291782960}
+  - component: {fileID: 3447974666129316616}
   m_Layer: 5
   m_Name: canvas_game
   m_TagString: Untagged
@@ -2398,6 +2399,18 @@ MonoBehaviour:
   levelFinishedParent: {fileID: 0}
   gameFinishedParent: {fileID: 0}
   deathParent: {fileID: 0}
+--- !u!225 &3447974666129316616
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798222154536571082}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &798222154745908282
 GameObject:
   m_ObjectHideFlags: 0
@@ -2699,9 +2712,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5646028587347235475}
   m_Direction: 0
   m_MinValue: 0.0001
-  m_MaxValue: 10
+  m_MaxValue: 5
   m_WholeNumbers: 0
-  m_Value: 6
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2991,24 +3004,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmAudioMixerGroup: {fileID: 4137990136780820279, guid: d811e6afab6167b47815067b88827273, type: 2}
   sfxAudioMixerGroup: {fileID: 491457270032787840, guid: d811e6afab6167b47815067b88827273, type: 2}
-  debugData1: {fileID: 11400000, guid: 0b34f64cdacaf534e93e18a905414ec4, type: 2}
-  debugData2: {fileID: 11400000, guid: f0e242accf8efad46aba5b7cb4bd8266, type: 2}
-  debugFadeBGMAction:
-    m_Name: Debug Fade BGM
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: bb0728e6-3454-4ab2-9829-02065a1a02e8
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 06b18b84-3b51-41d1-92bf-4eaafadc6f17
-      m_Path: <Keyboard>/#(B)
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Debug Fade BGM
-      m_Flags: 0
 --- !u!1 &2028744239555466306
 GameObject:
   m_ObjectHideFlags: 0
@@ -3093,9 +3088,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 6537149099524391558}
   m_Direction: 0
   m_MinValue: 0.0001
-  m_MaxValue: 10
+  m_MaxValue: 5
   m_WholeNumbers: 0
-  m_Value: 6
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3693,9 +3688,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3094163045001082201}
   m_Direction: 0
   m_MinValue: 0.0001
-  m_MaxValue: 10
+  m_MaxValue: 5
   m_WholeNumbers: 0
-  m_Value: 6
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -6577,20 +6572,20 @@ MonoBehaviour:
   - scene_forest_general_01
   - scene_forest_general_02
   - scene_forest_general_03
+  - scene_forest_general_04
   - scene_forest_ruins_01
   - scene_forest_ruins_02
   - scene_forest_ruins_03
   - scene_forest_ruins_04
   - scene_forest_ruins_05
-  - scene_forest_japanese_02
-  - scene_snow01
-  - scene_forest_general_04
   - scene_forest_japanese_01
+  - scene_forest_japanese_02
   - scene_forest_japanese_03
-  - scene_forest_japanese_04
   - scene_forest_japanese_05
+  - scene_snow01
   - scene_snow02
   - scene_snow04
+  - scene_snow03
   bossLevels:
   - scene_forest_general_boss
   - scene_forest_ruins_boss

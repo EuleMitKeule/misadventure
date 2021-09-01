@@ -337,8 +337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bda75ed6226a534e8618a01819c8fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  startHealth: 100
+  maxHealth: 80
+  startHealth: 80
 --- !u!114 &1512549236598669729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,10 +353,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultWeapon: {fileID: 11400000, guid: 7fbc3196429833247905ee22e8ece4c4, type: 2}
   loadoutSlots:
-  - weaponData: {fileID: 11400000, guid: 9368bade870391a4894e218110e868fc, type: 2}
-    weaponCharges: 100
-  - weaponData: {fileID: 11400000, guid: 3d73b0030c67d364e8b5b56b97ed0986, type: 2}
-    weaponCharges: 50
+  - weaponData: {fileID: 11400000, guid: dda91c349427f7946824aa6c4c95778e, type: 2}
+    weaponCharges: 20
+  - weaponData: {fileID: 0}
+    weaponCharges: 0
   changeWeaponAction:
     m_Name: Change Weapon
     m_Type: 0
