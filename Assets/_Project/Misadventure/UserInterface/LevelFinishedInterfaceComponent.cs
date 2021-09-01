@@ -1,10 +1,8 @@
-using System;
-using HotlineHyrule.Level;
-using HotlineHyrule.Quests;
+using Misadventure.Level;
 using TMPro;
 using UnityEngine;
 
-namespace HotlineHyrule.UserInterface
+namespace Misadventure.UserInterface
 {
     public class LevelFinishedInterfaceComponent : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System.Numerics;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-namespace HotlineHyrule.Extensions
+namespace Misadventure.Extensions
 {
     public static class ComplexExtensions
     {

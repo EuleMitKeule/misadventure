@@ -1,9 +1,8 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Audio;
 
-namespace HotlineHyrule.Sound
+namespace Misadventure.Sound
 {
     public class SoundComponent : MonoBehaviour
     {

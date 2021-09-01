@@ -3,7 +3,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEditor;
 
-namespace HotlineHyruleEditor.GameManager
+namespace MisadventureEditor.GameManager
 {
     public class LevelOrQuestDrawer
     {

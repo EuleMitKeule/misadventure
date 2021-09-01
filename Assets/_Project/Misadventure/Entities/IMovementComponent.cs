@@ -1,7 +1,6 @@
-using System;
-using HotlineHyrule.Items;
+using Misadventure.Items;
 
-namespace HotlineHyrule.Entities
+namespace Misadventure.Entities
 {
     public interface IMovementComponent
     {

@@ -1,8 +1,8 @@
-using HotlineHyrule.Attributes;
+using Misadventure.Attributes;
 using UnityEditor;
 using UnityEngine;
 
-namespace HotlineHyruleEditor
+namespace MisadventureEditor
 {
     [CustomPropertyDrawer(typeof(SceneAttribute))]
     public class SceneDrawer : PropertyDrawer

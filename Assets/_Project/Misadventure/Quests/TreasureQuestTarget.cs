@@ -1,11 +1,9 @@
 using System;
-using HotlineHyrule.Items;
+using Misadventure.Items;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-using UnityEngine;
-using UnityEngine.Tilemaps;
 
-namespace HotlineHyrule.Quests
+namespace Misadventure.Quests
 {
     [Serializable]
     public class TreasureQuestTarget : QuestTarget

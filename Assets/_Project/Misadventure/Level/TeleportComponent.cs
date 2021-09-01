@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HotlineHyrule.Level
+namespace Misadventure.Level
 {
     public class TeleportComponent : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HotlineHyrule.Graphics
+namespace Misadventure.Graphics
 {
     [RequireComponent(typeof(ParticleSystem))]
     public class ParticleSystemAnimationComponent : MonoBehaviour

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HotlineHyrule.Weapons.Projectiles
+namespace Misadventure.Weapons.Projectiles
 {
     [CreateAssetMenu(menuName = "Weapon/New Curved Projectile")]
     public class CurvedProjectileData : ProjectileData

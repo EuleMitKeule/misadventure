@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HotlineHyrule.Graphics
+namespace Misadventure.Graphics
 {
     /// <summary>
     /// Handles the movement behavior of the camera it's attached to.

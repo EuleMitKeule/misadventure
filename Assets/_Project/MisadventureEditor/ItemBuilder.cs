@@ -1,12 +1,12 @@
 using System;
 using System.Text.RegularExpressions;
-using HotlineHyrule.Items;
-using HotlineHyrule.Weapons;
-using HotlineHyruleEditor.Extensions;
+using Misadventure.Items;
+using Misadventure.Weapons;
+using MisadventureEditor.Extensions;
 using UnityEditor;
 using UnityEngine;
 
-namespace HotlineHyruleEditor
+namespace MisadventureEditor
 {
     public static class ItemBuilder
     {

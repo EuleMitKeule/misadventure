@@ -1,11 +1,10 @@
-using System;
-using HotlineHyrule.Extensions;
-using HotlineHyrule.Level;
-using HotlineHyrule.Pathfinding;
+using Misadventure.Extensions;
+using Misadventure.Level;
+using Misadventure.Pathfinding;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace HotlineHyrule.Entities.EnemyStates
+namespace Misadventure.Entities.EnemyStates
 {
     public class EnemyPathfindingDebugStateComponent : EnemyBaseStateComponent
     {

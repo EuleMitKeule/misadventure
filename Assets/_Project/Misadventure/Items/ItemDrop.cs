@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     /// <summary>
     /// Struct that combines given Item data with a drop rate

@@ -1,12 +1,11 @@
-using System;
-using HotlineHyrule.Level;
+using Misadventure.Level;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace HotlineHyruleEditor.GameManager
+namespace MisadventureEditor.GameManager
 {
     public class LevelDrawer : ScriptableObjectDrawer<LevelData>
     {

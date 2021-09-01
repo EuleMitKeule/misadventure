@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-using System.Net.Http.Headers;
-using HotlineHyrule.Extensions;
+using Misadventure.Extensions;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities.CaterpillarStates
+namespace Misadventure.Entities.CaterpillarStates
 {
     public class CaterpillarMovingStateComponent : CaterpillarBaseStateComponent
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HotlineHyrule.Weapons
+namespace Misadventure.Weapons
 {
     /// <summary>
     /// Determines the properties of a ranged weapon.

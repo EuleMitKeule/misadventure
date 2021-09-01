@@ -1,13 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using HotlineHyrule.Entities;
-using HotlineHyrule.Level;
-using HotlineHyrule.Weapons;
+using Misadventure.Entities;
+using Misadventure.Level;
+using Misadventure.Weapons;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     public class ItemPickupComponent : MonoBehaviour
     {

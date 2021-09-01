@@ -1,7 +1,7 @@
-using HotlineHyrule.Level;
+using Misadventure.Level;
 using UnityEngine;
 
-namespace HotlineHyrule.UserInterface
+namespace Misadventure.UserInterface
 {
     public class UserInterfaceComponent : MonoBehaviour
     {

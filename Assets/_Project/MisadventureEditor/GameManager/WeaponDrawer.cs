@@ -1,11 +1,11 @@
-using HotlineHyrule.Weapons;
-using HotlineHyrule.Weapons.Projectiles;
-using HotlineHyruleEditor.Extensions;
+using Misadventure.Weapons;
+using Misadventure.Weapons.Projectiles;
+using MisadventureEditor.Extensions;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
-namespace HotlineHyruleEditor.GameManager
+namespace MisadventureEditor.GameManager
 {
     public class WeaponDrawer : ScriptableObjectDrawer<WeaponData>
     {

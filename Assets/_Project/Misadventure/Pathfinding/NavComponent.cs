@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using HotlineHyrule.Extensions;
+using Misadventure.Extensions;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace HotlineHyrule.Pathfinding
+namespace Misadventure.Pathfinding
 {
     public class NavComponent : MonoBehaviour
     {

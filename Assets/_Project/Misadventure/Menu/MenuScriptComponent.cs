@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using Misadventure.Sound;
 using UnityEngine;
 
-namespace HotlineHyrule.Menu
+namespace Misadventure.Menu
 {
     public class MenuScriptComponent : MonoBehaviour
     {

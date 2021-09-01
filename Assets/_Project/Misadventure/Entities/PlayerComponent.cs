@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using HotlineHyrule.Entities.EnemyStates;
-using HotlineHyrule.Entities.PlayerStates;
-using HotlineHyrule.Items;
-using HotlineHyrule.Level;
-using HotlineHyrule.Weapons;
+using Misadventure.Entities.PlayerStates;
+using Misadventure.Items;
+using Misadventure.Level;
+using Misadventure.Weapons;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace HotlineHyrule.Entities
+namespace Misadventure.Entities
 {
     /// <summary>
     /// Handles the player's movement.

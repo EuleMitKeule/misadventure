@@ -1,9 +1,9 @@
 using System;
-using HotlineHyrule.Entities;
-using HotlineHyrule.Level;
+using Misadventure.Entities;
+using Misadventure.Level;
 using UnityEngine;
 
-namespace HotlineHyrule.UserInterface
+namespace Misadventure.UserInterface
 {
     public class GameInterfaceComponent : MonoBehaviour
     {

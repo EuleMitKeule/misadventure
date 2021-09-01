@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using HotlineHyrule.Items;
+using Misadventure.Items;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities
+namespace Misadventure.Entities
 {
     public class PlayerStateData : ScriptableObject
     {

@@ -1,7 +1,7 @@
-namespace HotlineHyrule.Attributes
-{
-    using UnityEngine;
+using UnityEngine;
 
+namespace Misadventure.Attributes
+{
     public class SceneAttribute : PropertyAttribute
     {
     }

@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using HotlineHyrule.Quests;
+using Misadventure.Quests;
 using UnityEditor;
 using UnityEngine;
 
-namespace HotlineHyruleEditor
+namespace MisadventureEditor
 {
     // [CustomEditor(typeof(QuestData))]
     public class QuestDataEditor : Editor

@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using HotlineHyrule.Extensions;
-using HotlineHyrule.Items;
-using HotlineHyrule.Level;
+using Misadventure.Items;
+using Misadventure.Level;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-namespace HotlineHyrule.Quests
+namespace Misadventure.Quests
 {
     public class RewardComponent : MonoBehaviour
     {

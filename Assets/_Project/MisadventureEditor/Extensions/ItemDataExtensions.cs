@@ -1,8 +1,8 @@
-using HotlineHyrule.Items;
+using Misadventure.Items;
 using UnityEditor;
 using UnityEngine;
 
-namespace HotlineHyruleEditor.Extensions
+namespace MisadventureEditor.Extensions
 {
     public static class ItemDataExtensions
     {

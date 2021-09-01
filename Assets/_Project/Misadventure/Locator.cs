@@ -1,11 +1,11 @@
-using HotlineHyrule.Entities;
-using HotlineHyrule.Graphics;
-using HotlineHyrule.Level;
-using HotlineHyrule.Pathfinding;
-using HotlineHyrule.Quests;
-using HotlineHyrule.Sound;
+using Misadventure.Entities;
+using Misadventure.Graphics;
+using Misadventure.Level;
+using Misadventure.Pathfinding;
+using Misadventure.Quests;
+using Misadventure.Sound;
 
-namespace HotlineHyrule
+namespace Misadventure
 {
     /// <summary>
     /// Provides access to singleton objects and services.

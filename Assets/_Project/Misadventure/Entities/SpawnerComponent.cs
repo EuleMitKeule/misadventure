@@ -1,15 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
-using Random = UnityEngine.Random;
-using HotlineHyrule.Level;
-using HotlineHyrule.Extensions;
-using UnityEngine.Tilemaps;
 using System.Linq;
-using HotlineHyrule.Weapons;
+using Misadventure.Extensions;
+using Misadventure.Weapons;
+using UnityEngine;
+using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
-namespace HotlineHyrule.Entities
+namespace Misadventure.Entities
 {
     public class SpawnerComponent : MonoBehaviour
     {

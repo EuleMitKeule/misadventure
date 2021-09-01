@@ -1,7 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     public class QuestDestroyComponent : SerializedMonoBehaviour
     {

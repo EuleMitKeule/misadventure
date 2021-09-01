@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using HotlineHyrule.Entities.EnemyStates;
-using HotlineHyrule.Items;
-using HotlineHyrule.Weapons;
+using Misadventure.Entities.EnemyStates;
+using Misadventure.Items;
+using Misadventure.Weapons;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities.PlayerStates
+namespace Misadventure.Entities.PlayerStates
 {
     public class PlayerBaseStateComponent : MonoBehaviour
     {

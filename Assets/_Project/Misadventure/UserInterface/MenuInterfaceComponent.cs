@@ -1,9 +1,9 @@
-using HotlineHyrule.Level;
+using Misadventure.Level;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-namespace HotlineHyrule.UserInterface
+namespace Misadventure.UserInterface
 {
     public class MenuInterfaceComponent : MonoBehaviour
     {

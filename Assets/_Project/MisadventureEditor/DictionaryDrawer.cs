@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using HotlineHyrule.Items;
+using Misadventure.Extensions;
+using Misadventure.Items;
 using UnityEditor;
 using UnityEngine;
 using UnityObject = UnityEngine.Object;
 
-namespace HotlineHyruleEditor
+namespace MisadventureEditor
 {
     public abstract class DictionaryDrawer<TK, TV> : PropertyDrawer
     {

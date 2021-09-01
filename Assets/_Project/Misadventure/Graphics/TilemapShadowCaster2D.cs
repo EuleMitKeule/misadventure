@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using HotlineHyrule.Extensions;
+using Misadventure.Extensions;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
-using UnityEngine.Tilemaps;
 
-namespace HotlineHyrule.Graphics
+namespace Misadventure.Graphics
 {
     [DisallowMultipleComponent]
     [ExecuteInEditMode]

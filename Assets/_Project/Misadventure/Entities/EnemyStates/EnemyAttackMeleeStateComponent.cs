@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace HotlineHyrule.Entities.EnemyStates
+namespace Misadventure.Entities.EnemyStates
 {
     public class EnemyAttackMeleeStateComponent : EnemyAttackStateComponent
     {

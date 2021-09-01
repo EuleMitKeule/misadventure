@@ -1,7 +1,7 @@
 using System;
-using HotlineHyrule.Entities;
+using Misadventure.Entities;
 
-namespace HotlineHyrule.Level
+namespace Misadventure.Level
 {
     public class LevelEventArgs : EventArgs
     {

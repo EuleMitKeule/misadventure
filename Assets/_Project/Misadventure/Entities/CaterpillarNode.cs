@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HotlineHyrule.Entities
+namespace Misadventure.Entities
 {
     public class CaterpillarNode
     {

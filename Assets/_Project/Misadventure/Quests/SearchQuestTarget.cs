@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using HotlineHyrule.Items;
+using Misadventure.Items;
 using Sirenix.Serialization;
-using UnityEngine;
 
-namespace HotlineHyrule.Quests
+namespace Misadventure.Quests
 {
     [Serializable]
     public class SearchQuestTarget : QuestTarget

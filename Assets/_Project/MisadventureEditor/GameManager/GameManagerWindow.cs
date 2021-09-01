@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using HotlineHyrule;
-using HotlineHyrule.Items;
-using HotlineHyrule.Level;
-using HotlineHyrule.Quests;
-using HotlineHyrule.Weapons;
-using HotlineHyrule.Weapons.Projectiles;
+using Misadventure.Items;
+using Misadventure.Level;
+using Misadventure.Quests;
+using Misadventure.Weapons;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Serialization;
@@ -14,7 +11,7 @@ using Sirenix.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 
-namespace HotlineHyruleEditor.GameManager
+namespace MisadventureEditor.GameManager
 {
     public class GameManagerWindow : OdinMenuEditorWindow
     {

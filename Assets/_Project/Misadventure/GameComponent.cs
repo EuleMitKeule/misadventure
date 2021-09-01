@@ -2,14 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using HotlineHyrule.Attributes;
-using HotlineHyrule.Entities;
-using HotlineHyrule.Level;
+using Misadventure.Attributes;
+using Misadventure.Entities;
+using Misadventure.Level;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
-namespace HotlineHyrule
+namespace Misadventure
 {
     public class GameComponent : MonoBehaviour
     {

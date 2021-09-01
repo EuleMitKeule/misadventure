@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HotlineHyrule.Entities.PlayerStates
+namespace Misadventure.Entities.PlayerStates
 {
     public class PlayerDodgeStateComponent : PlayerBaseStateComponent
     {

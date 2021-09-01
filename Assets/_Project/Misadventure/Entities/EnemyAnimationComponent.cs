@@ -1,8 +1,7 @@
-using System;
-using HotlineHyrule.Entities.EnemyStates;
+using Misadventure.Entities.EnemyStates;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities
+namespace Misadventure.Entities
 {
     public class EnemyAnimationComponent : MonoBehaviour
     {

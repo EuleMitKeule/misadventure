@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using HotlineHyrule.Items;
+using Misadventure.Items;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace HotlineHyrule.Quests
+namespace Misadventure.Quests
 {
     [CreateAssetMenu(menuName = "Quest/New Quest")]
     [HideMonoScript]

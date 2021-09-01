@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using HotlineHyrule.Weapons;
+using Misadventure.Weapons;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities.EnemyStates
+namespace Misadventure.Entities.EnemyStates
 {
     [System.Serializable]
     public struct WeaponAnimation

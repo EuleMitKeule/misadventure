@@ -1,9 +1,9 @@
-using HotlineHyrule.Extensions;
-using HotlineHyrule.Level;
-using HotlineHyrule.Pathfinding;
+using Misadventure.Extensions;
+using Misadventure.Level;
+using Misadventure.Pathfinding;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities.EnemyStates
+namespace Misadventure.Entities.EnemyStates
 {
     public class EnemyGuardStateComponent : EnemyBaseStateComponent
     {

@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
-using HotlineHyrule.Level;
-using HotlineHyrule.Quests;
+using Misadventure.Level;
+using Misadventure.Quests;
 using TMPro;
 using UnityEngine;
 
-namespace HotlineHyrule.UserInterface
+namespace Misadventure.UserInterface
 {
     public class QuestInterfaceComponent : MonoBehaviour
     {

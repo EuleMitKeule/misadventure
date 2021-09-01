@@ -1,9 +1,7 @@
-using System;
-using HotlineHyrule.Entities;
-using HotlineHyrule.Items;
+using Misadventure.Items;
 using UnityEngine;
 
-namespace HotlineHyrule.Weapons
+namespace Misadventure.Weapons
 {
     public class WeaponAnimationComponent : MonoBehaviour
     {

@@ -1,10 +1,8 @@
-using System;
-using System.ComponentModel;
-using HotlineHyrule.Level;
+using Misadventure.Level;
 using TMPro;
 using UnityEngine;
 
-namespace HotlineHyrule.UserInterface
+namespace Misadventure.UserInterface
 {
     public class GameFinishedInterfaceComponent : MonoBehaviour
     {

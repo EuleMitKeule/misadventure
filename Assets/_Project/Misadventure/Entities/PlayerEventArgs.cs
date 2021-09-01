@@ -1,6 +1,6 @@
 using System;
 
-namespace HotlineHyrule.Entities
+namespace Misadventure.Entities
 {
     public class PlayerEventArgs : EventArgs
     {

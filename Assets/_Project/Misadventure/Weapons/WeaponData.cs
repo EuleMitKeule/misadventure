@@ -1,10 +1,7 @@
-using HotlineHyrule.Extensions;
-using HotlineHyrule.Items;
-using Sirenix.OdinInspector;
-using UnityEditor;
+using Misadventure.Items;
 using UnityEngine;
 
-namespace HotlineHyrule.Weapons
+namespace Misadventure.Weapons
 {
     /// <summary>
     /// Determines the properties of a weapon.

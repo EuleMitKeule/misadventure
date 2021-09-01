@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using HotlineHyrule.Items;
-using HotlineHyrule.Quests;
-using HotlineHyrule.Weapons;
-using HotlineHyruleEditor.Extensions;
+using Misadventure.Items;
+using Misadventure.Weapons;
+using MisadventureEditor.Extensions;
 using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using UnityEditor;
 using UnityEngine;
 
-namespace HotlineHyruleEditor.GameManager
+namespace MisadventureEditor.GameManager
 {
     public class ItemDrawer : ScriptableObjectDrawer<ItemData>
     {

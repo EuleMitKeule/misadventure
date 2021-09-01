@@ -1,16 +1,15 @@
 using System;
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
-using HotlineHyrule.Entities;
-using HotlineHyrule.Extensions;
-using HotlineHyrule.Items;
-using HotlineHyrule.Level;
+using Misadventure.Entities;
+using Misadventure.Extensions;
+using Misadventure.Items;
+using Misadventure.Weapons.Projectiles;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
-namespace HotlineHyrule.Weapons
+namespace Misadventure.Weapons
 {
     /// <summary>
     /// Handles the behavior of the weapon it's attached to.

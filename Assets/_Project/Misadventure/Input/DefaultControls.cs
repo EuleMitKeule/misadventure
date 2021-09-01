@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace HotlineHyrule.Input
+namespace Misadventure.Input
 {
     public class @DefaultControls : IInputActionCollection, IDisposable
     {

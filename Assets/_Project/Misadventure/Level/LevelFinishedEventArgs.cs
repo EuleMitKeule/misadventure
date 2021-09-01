@@ -1,6 +1,6 @@
 using System;
 
-namespace HotlineHyrule.Level
+namespace Misadventure.Level
 {
     public class LevelFinishedEventArgs : EventArgs
     {

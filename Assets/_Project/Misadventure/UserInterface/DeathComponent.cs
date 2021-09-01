@@ -1,9 +1,9 @@
-using HotlineHyrule.Entities;
-using HotlineHyrule.Level;
+using Misadventure.Entities;
+using Misadventure.Level;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace HotlineHyrule.UserInterface
+namespace Misadventure.UserInterface
 {
     public class DeathComponent : MonoBehaviour
     {

@@ -1,12 +1,9 @@
-using System.Runtime.CompilerServices;
-using HotlineHyrule.Extensions;
-using HotlineHyrule.Weapons;
-using HotlineHyrule.Weapons.Projectiles;
-using HotlineHyruleEditor.GameManager;
+using Misadventure.Weapons;
+using Misadventure.Weapons.Projectiles;
 using UnityEditor;
 using UnityEngine;
 
-namespace HotlineHyruleEditor.Extensions
+namespace MisadventureEditor.Extensions
 {
     public static class WeaponDataExtensions
     {

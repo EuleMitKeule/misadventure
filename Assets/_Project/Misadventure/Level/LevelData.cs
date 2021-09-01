@@ -1,10 +1,11 @@
 using System;
-using HotlineHyrule.Quests;
+using Misadventure.Quests;
+using Misadventure.Sound;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace HotlineHyrule.Level
+namespace Misadventure.Level
 {
     [CreateAssetMenu(menuName = "Level/New Level")]
     [HideMonoScript]

@@ -1,9 +1,8 @@
-using System.Runtime.Remoting.Messaging;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
-namespace HotlineHyruleEditor.GameManager
+namespace MisadventureEditor.GameManager
 {
     public class EnemyDrawer
     {

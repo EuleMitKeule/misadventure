@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HotlineHyrule.Menu
+namespace Misadventure.Menu
 {
     public class MenuCameraComponent : MonoBehaviour
     {

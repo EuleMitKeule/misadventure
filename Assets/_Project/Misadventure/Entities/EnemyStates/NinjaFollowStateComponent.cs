@@ -1,7 +1,7 @@
-using HotlineHyrule.Weapons;
+using Misadventure.Weapons;
 using UnityEngine;
 
-namespace HotlineHyrule.Entities.EnemyStates
+namespace Misadventure.Entities.EnemyStates
 {
     public class NinjaFollowStateComponent : EnemyFollowStateComponent
     {

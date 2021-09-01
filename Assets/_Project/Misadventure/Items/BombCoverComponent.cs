@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using HotlineHyrule.Level;
+using Misadventure.Level;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     public class BombCoverComponent : SerializedMonoBehaviour
     {

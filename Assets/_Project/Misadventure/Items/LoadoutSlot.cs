@@ -1,8 +1,8 @@
 using System;
-using HotlineHyrule.Weapons;
+using Misadventure.Weapons;
 using UnityEngine;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     [Serializable]
     public class LoadoutSlot

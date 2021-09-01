@@ -1,9 +1,8 @@
-using System;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace HotlineHyrule.Items
+namespace Misadventure.Items
 {
     [HideMonoScript]
     public class ItemData : SerializedScriptableObject
