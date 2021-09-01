@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
+  m_Name: weapon_snow_ball
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: snow_ball
+    - Name: ItemPrefab
+      Entry: 6
+      Data: 
+  movementFactor: 1
+  slowTimeWindow: 0
+  attackRate: 0.5
+  weaponPrefab: {fileID: 4899150326432017422, guid: f8cac1e34bc60674081bee56ee0cf257, type: 3}
+  hasInfiniteCharges: 0
+  weaponCharges: 0
+  chargeRandomness: 0
+  deadzoneRadius: 0
+  projectilePrefab: {fileID: 4899266987339174514, guid: c259d2d9c1565df4293892eff279675d, type: 3}
+  spawnPosition: {x: 0, y: 0}
+  weaponFiredSound: {fileID: 8300000, guid: 05d7ccc0ae1900a4f84c040739f5cce8, type: 3}
+  projectileCount: 1
+  projectileAngle: 0
+  projectileAngleOffset: 0
+  projectileDelay: 0
+  flip: 0

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: controller_weapon_snow_ball
+  m_Controller: {fileID: 9100000, guid: ede1559477db535418d8bcbccdd98bc8, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: fa5a03ba204e4a94eb2338e9145727d3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 587b69402c181b540860a2e5ff4009d9, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6d01fef1e520aed4eaa1216ceac3f27f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: af11bc863792f504d95c200c07560db5, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 67fe384ccfc50d042bdf8a1f84319129, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6e0c2c496400b9c44844fb2e6d3e69c8, type: 2}

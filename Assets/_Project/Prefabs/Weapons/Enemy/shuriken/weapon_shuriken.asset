@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
+  m_Name: weapon_shuriken
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: shuriken
+    - Name: ItemPrefab
+      Entry: 6
+      Data: 
+  movementFactor: 1
+  slowTimeWindow: 0
+  attackRate: 0.8
+  weaponPrefab: {fileID: 3193329723167763181, guid: d9f0b8168e2ac1a84acd8fa50b85218e, type: 3}
+  hasInfiniteCharges: 0
+  weaponCharges: 0
+  chargeRandomness: 0
+  deadzoneRadius: 0
+  projectilePrefab: {fileID: 4088921383590290785, guid: 08472f35d90d51e8181e08a64fe55869, type: 3}
+  spawnPosition: {x: 0.26, y: 0.26}
+  weaponFiredSound: {fileID: 8300000, guid: 83d99217e63305f47807bdd36cbbebe9, type: 3}
+  projectileCount: 3
+  projectileAngle: 45
+  projectileAngleOffset: 0
+  projectileDelay: 0.1
+  flip: 1

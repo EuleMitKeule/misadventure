@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ddead9777e4cc0941388194fd467a0, type: 3}
+  m_Name: weapon_wand_ice
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: wand_ice
+    - Name: ItemPrefab
+      Entry: 6
+      Data: 
+  movementFactor: 0
+  slowTimeWindow: 0
+  attackRate: 0.5
+  weaponPrefab: {fileID: 9084397236909348207, guid: 7f912b86248148d4a856f84bae4af413, type: 3}
+  hasInfiniteCharges: 1
+  weaponCharges: 0
+  chargeRandomness: 0
+  projectilePrefab: {fileID: 8874698304576867284, guid: de1bb1b7270d85c48975828e8c493cdd, type: 3}
+  delayBetweenSpawnRings: 0.25
+  offset: {x: 0, y: 0}
+  weaponFiredSound: {fileID: 8300000, guid: 8db2144109b18444b9d092a1cb23254e, type: 3}
+  spawnRings:
+  - numberOfProjectiles: 1
+    radius: 0
+  - numberOfProjectiles: 6
+    radius: 1

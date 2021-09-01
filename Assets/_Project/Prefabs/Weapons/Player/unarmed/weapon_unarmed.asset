@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a99539d74b6f4c01b5d13551d1511721, type: 3}
+  m_Name: weapon_unarmed
+  m_EditorClassIdentifier: 
+  itemName: 
+  itemPrefab: {fileID: 6325796044115875506, guid: cd143c243af2bb5438803a8ea5fb18af, type: 3}
+  movementFactor: 1
+  slowTimeWindow: 0
+  attackRate: 1.5
+  weaponPrefab: {fileID: 6325796044115875506, guid: cd143c243af2bb5438803a8ea5fb18af, type: 3}
+  droppedWeaponPrefab: {fileID: 0}
+  hasInfiniteCharges: 1
+  weaponCharges: 0
+  chargeRandomness: 0
+  damage: 10

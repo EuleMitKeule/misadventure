@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72112766fd8a400786090afb9f205301, type: 3}
+  m_Name: quest_forest_general_boss
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: questTargets
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[HotlineHyrule.Quests.QuestTarget,
+        HotlineHyrule]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|HotlineHyrule.Quests.KillSpecificQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
+    - Name: shortTargetText
+      Entry: 1
+      Data: Kill the caterpillar
+    - Name: targetReachedText
+      Entry: 1
+      Data: 
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We didn't do something.
+    - Name: killTarget
+      Entry: 3
+      Data: 1
+    - Name: enemyName
+      Entry: 1
+      Data: caterpillar
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  finishLevelOnCompletion: 1
+  finishGameOnCompletion: 1
+  questText: Oh shit, we better kill that before it turns into a giant murder butterfly.
+  questTargetText: 
+  questRewards: []
+  questRewardCount: 0

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
+  m_Name: weapon_bow
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 87149508903852376, guid: 3b9850ef556f92847987735fe3d6a0e1, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: bow
+    - Name: ItemPrefab
+      Entry: 10
+      Data: 0
+  movementFactor: 1
+  slowTimeWindow: 0
+  attackRate: 2
+  weaponPrefab: {fileID: 5105910019921273631, guid: 490df2099ce251e4b84573fe0369646f, type: 3}
+  hasInfiniteCharges: 0
+  weaponCharges: 30
+  chargeRandomness: 0.16666667
+  deadzoneRadius: 1
+  projectilePrefab: {fileID: 8636156419958803353, guid: 07c24f9187b030848977eb21dc349ec5, type: 3}
+  spawnPosition: {x: 0.0313, y: 0.56}
+  weaponFiredSound: {fileID: 8300000, guid: 730fd8cd09c673f468f9c3fd091ec962, type: 3}
+  projectileCount: 1
+  projectileAngle: 0
+  projectileAngleOffset: 0
+  projectileDelay: 0
+  flip: 0

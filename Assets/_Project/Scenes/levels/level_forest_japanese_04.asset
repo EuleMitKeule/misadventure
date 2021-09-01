@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1634ab00f9b94a66bf6a7eaacdc248f4, type: 3}
+  m_Name: level_forest_japanese_04
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: effectType
+      Entry: 3
+      Data: 0
+  areaName: Warrior's Path
+  areaText: There's a long way infront of us. We have to fight our way throught
+  areaFinishedText: We passed the Warrior's Path and became true warriors
+  questData: {fileID: 11400000, guid: bc6dc9049f4e9ad4294fd41527828cad, type: 2}
+  playerSpawnPosition: {x: 0, y: 0, z: 0}
+  bgmData: {fileID: 11400000, guid: 43296168350be6343bc2df1003915cc1, type: 2}

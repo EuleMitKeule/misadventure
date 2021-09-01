@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6070212056741860343
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Name: ruletile_rocks_small (Override)
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 6105198080708522248, guid: eb90d68abb6ea8c43b10751f5086e6a9, type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: 6105198080708522248, guid: eb90d68abb6ea8c43b10751f5086e6a9, type: 3}
+    - {fileID: -1483509373163248942, guid: eb90d68abb6ea8c43b10751f5086e6a9, type: 3}
+    - {fileID: 444819745602231962, guid: eb90d68abb6ea8c43b10751f5086e6a9, type: 3}
+    - {fileID: 5461456946051344850, guid: eb90d68abb6ea8c43b10751f5086e6a9, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 1
+    m_ColliderType: 1
+    m_RandomTransform: 1
+    m_Neighbors: 
+    m_NeighborPositions:
+    - {x: -1, y: 1, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: -1, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: 1, y: -1, z: 0}
+    m_RuleTransform: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c779848d9dd029409ca676b49e10a18, type: 3}
+  m_Name: ruletile_override_pebbles
+  m_EditorClassIdentifier: 
+  m_Tile: {fileID: 11400000, guid: 9b9e3988936405943aab74442a0c6fbe, type: 2}
+  m_Sprites:
+  - m_OriginalSprite: {fileID: 1250326156537483774, guid: eb90d68abb6ea8c43b10751f5086e6a9, type: 3}
+    m_OverrideSprite: {fileID: -1483509373163248942, guid: eb90d68abb6ea8c43b10751f5086e6a9, type: 3}
+  - m_OriginalSprite: {fileID: -1905143122170854846, guid: eb90d68abb6ea8c43b10751f5086e6a9, type: 3}
+    m_OverrideSprite: {fileID: 6105198080708522248, guid: eb90d68abb6ea8c43b10751f5086e6a9, type: 3}
+  - m_OriginalSprite: {fileID: 8649421855548186164, guid: eb90d68abb6ea8c43b10751f5086e6a9, type: 3}
+    m_OverrideSprite: {fileID: 444819745602231962, guid: eb90d68abb6ea8c43b10751f5086e6a9, type: 3}
+  - m_OriginalSprite: {fileID: 5016155275321706242, guid: eb90d68abb6ea8c43b10751f5086e6a9, type: 3}
+    m_OverrideSprite: {fileID: 5461456946051344850, guid: eb90d68abb6ea8c43b10751f5086e6a9, type: 3}
+  m_GameObjects: []
+  m_InstanceTile: {fileID: -6070212056741860343}

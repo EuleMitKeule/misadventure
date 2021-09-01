@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911c969171484f789dcdca5ca6dc5fb1, type: 3}
+  m_Name: item_health_heal
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 9085038711784390681, guid: b730e36813bcc4c4aa151dc56d20ec51, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: health_heal
+    - Name: ItemPrefab
+      Entry: 10
+      Data: 0
+    - Name: ConsumeParticleSystemPrefab
+      Entry: 6
+      Data: 
+    - Name: InfoText
+      Entry: 1
+      Data: + Health
+    - Name: SelectedHealType
+      Entry: 3
+      Data: 0
+    - Name: HealTotal
+      Entry: 3
+      Data: 10
+    - Name: HealAmount
+      Entry: 3
+      Data: 0
+    - Name: HealRate
+      Entry: 4
+      Data: 0

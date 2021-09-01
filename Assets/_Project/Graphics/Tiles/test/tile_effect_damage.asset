@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16756a7c42f247138c2fdd1e06d1d9bc, type: 3}
+  m_Name: tile_effect_damage
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 4956629371853595402, guid: 9f8902cd9c39e8e749747c9c8fbe13cd, type: 3}
+  m_DefaultGameObject: {fileID: 6005058954304402631, guid: b7acdc4e9df130043a9262e8f246893f, type: 3}
+  m_DefaultColliderType: 0
+  m_TilingRules: []
+  itemEffects:
+  - {fileID: 11400000, guid: fcd5cfe8689e663458930a5d282bf6a1, type: 2}
+  effectInterval: 0

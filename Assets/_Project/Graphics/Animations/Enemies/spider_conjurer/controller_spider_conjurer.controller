@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: controller_spider_conjurer
+  m_Controller: {fileID: 9100000, guid: 607ea13e5d7b32f4db4349fa7b7dca10, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: c76ece5e502b1cf4c93099c0b5bd9035, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 79d3dccb7ca72ad439725c46768927c1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 96a48c3ef6bff374f9e278d525e189bd, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: dbad822196d3acd42acb4becfdc16569, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: bec35b4f48de6805cbc136305f40fd2c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 963072ddfd0d6b64189e01297ecc6de5, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0705c913b39b06344b2c65dc8473a05c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ea11773149a34fa42971ff891c56c6b4, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5758d139ddc536b4181a94733639f765, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 061909b9d9d86294ebe04bf1c5b2e86d, type: 2}

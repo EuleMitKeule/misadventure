@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
+  m_Name: weapon_spear
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 87149508903852376, guid: fc9e959bdcc8aea47a2ee8bd41d78e0f, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: spear
+    - Name: ItemPrefab
+      Entry: 10
+      Data: 0
+  movementFactor: 1
+  slowTimeWindow: 0
+  attackRate: 1
+  weaponPrefab: {fileID: 5105910019921273631, guid: 7c40c8da16d6edb4fb09483fde587857, type: 3}
+  hasInfiniteCharges: 0
+  weaponCharges: 10
+  chargeRandomness: 0
+  deadzoneRadius: 1
+  projectilePrefab: {fileID: 8636156419958803353, guid: b3e3606a20fe6924e887e9d19ded1b10, type: 3}
+  spawnPosition: {x: 0, y: 0}
+  weaponFiredSound: {fileID: 8300000, guid: 730fd8cd09c673f468f9c3fd091ec962, type: 3}
+  projectileCount: 1
+  projectileAngle: 0
+  projectileAngleOffset: 0
+  projectileDelay: 0
+  flip: 0

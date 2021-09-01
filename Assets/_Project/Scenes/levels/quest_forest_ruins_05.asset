@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72112766fd8a400786090afb9f205301, type: 3}
+  m_Name: quest_forest_ruins_05
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 45a891532faec19419787f161af1371b, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: questTargets
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[HotlineHyrule.Quests.QuestTarget,
+        HotlineHyrule]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 1|HotlineHyrule.Quests.KillSpecificQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
+    - Name: shortTargetText
+      Entry: 1
+      Data: Exterminate {x} spiders
+    - Name: targetReachedText
+      Entry: 1
+      Data: The old lady thanked us and provided us with some food and blankets for
+        our journey.
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We didn't do something.
+    - Name: killTarget
+      Entry: 3
+      Data: 20
+    - Name: enemyName
+      Entry: 1
+      Data: spider
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|HotlineHyrule.Quests.SearchQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 4
+    - Name: shortTargetText
+      Entry: 1
+      Data: Clear the cobwebs
+    - Name: targetReachedText
+      Entry: 1
+      Data: We felt happy about helping a fellow citizen.
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: Unfortunately we had no time left to help cleaning up.
+    - Name: Items
+      Entry: 7
+      Data: 3|System.Collections.Generic.Dictionary`2[[HotlineHyrule.Items.ItemData,
+        HotlineHyrule],[System.Int32, mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 4|System.Collections.Generic.ObjectEqualityComparer`1[[HotlineHyrule.Items.ItemData,
+        HotlineHyrule]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 10
+      Data: 0
+    - Name: $v
+      Entry: 3
+      Data: 40
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  finishLevelOnCompletion: 0
+  finishGameOnCompletion: 0
+  questText: We had to help the friendly woman with her problem.
+  questTargetText: While at it we thought we could do something about all the dust
+    and webs around us.
+  questRewards:
+  - {fileID: 11400000, guid: d99a9217006240b45a2c69825432e731, type: 2}
+  questRewardCount: 1

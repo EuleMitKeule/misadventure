@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_menu.unity
+    guid: d149a2a0032964b469abe6e2a89e3006
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_general_01.unity
+    guid: 628f177c436d87b9eb682a0324c14964
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_general_02.unity
+    guid: 58c3097d9131003c1a9cb0bae837681f
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_general_03.unity
+    guid: 9557828e823af5a43aec4cd4b6e72960
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_general_04.unity
+    guid: acda4c048962ae34aba8fe4325ca2aa6
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_general_boss.unity
+    guid: 3efa03959751e5d48995a8c4f1d208b0
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_ruins_01.unity
+    guid: 3da0895d3374b1749b6998677317cb3b
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_ruins_02.unity
+    guid: a2e49e68e20ee9940a25014f00a2a5c6
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_ruins_03.unity
+    guid: 70d23c5d5ed2bd944bef815863ff5820
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_ruins_04.unity
+    guid: 893c0bf131ee7a34698da16871bd1347
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_ruins_05.unity
+    guid: 8e7101373e4a8384d9176b6ecc59bffb
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_ruins_boss.unity
+    guid: 35ec72e85d37ecb4d9f571426027c994
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_japanese_01.unity
+    guid: fa340c71d4836ba6baa2eebb1a036e8a
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_japanese_02.unity
+    guid: adfaa0120e921ddbfb8d9e16e80afd43
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_japanese_03.unity
+    guid: 2c095bde97dce668e8278b8a18391a58
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_forest_japanese_05.unity
+    guid: 3762a490f26841548ac09ec0c3519a2f
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_japanese_forest_boss.unity
+    guid: 41d99bce51147f283afec7e85b4d9315
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_snow01.unity
+    guid: 3dd30a09b81a5e44fab9e4832195c8d6
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_snow02.unity
+    guid: 2ac435446e9edb748b71682bd7b5ba1d
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_snow03.unity
+    guid: be334481cf841d04c813c2da6bf0df3a
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_snow04.unity
+    guid: aaec997b095b0e1479279602f6d090a2
+  - enabled: 1
+    path: Assets/_Project/Scenes/levels/scene_snow_boss.unity
+    guid: 8713b2e8b395a60448ce6a0c9c8fea8d
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 9695df9ad24f9cf478c55e60d3ff18dd, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 6dfa4f0392a59a241a436d1f6c1f39ad, type: 2}

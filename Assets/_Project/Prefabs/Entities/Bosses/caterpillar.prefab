@@ -1,0 +1,202 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3392037398564683107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3392037398564683104}
+  - component: {fileID: 3392037398564683134}
+  - component: {fileID: 3392037398564683105}
+  - component: {fileID: 6967384053706649436}
+  - component: {fileID: 4195321836437454277}
+  m_Layer: 12
+  m_Name: caterpillar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3392037398564683104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392037398564683107}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3392037398564683134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392037398564683107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88820c769e54d5b819d2c0713c9b190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 22100000, guid: 7463fb38bae7cfed696e4450818f2dda, type: 2}
+    - {fileID: 22100000, guid: 138eb9e4db77fa26cbb6a6d080871c20, type: 2}
+    - {fileID: 22100000, guid: 4034b69df692734efa79c97e7919d7db, type: 2}
+    - {fileID: 2704867736424833540, guid: 7437c324ee323b44c9e299efb91e31a8, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Health
+      Entry: 3
+      Data: 480
+    - Name: Damage
+      Entry: 3
+      Data: 10
+    - Name: DamageFrequency
+      Entry: 4
+      Data: 1
+    - Name: HeadController
+      Entry: 10
+      Data: 0
+    - Name: BodyController
+      Entry: 10
+      Data: 1
+    - Name: TailController
+      Entry: 10
+      Data: 2
+    - Name: MoveSpeed
+      Entry: 4
+      Data: 3.5
+    - Name: FollowSpeed
+      Entry: 4
+      Data: 5
+    - Name: ViewAngle
+      Entry: 4
+      Data: 90
+    - Name: ViewDistance
+      Entry: 4
+      Data: 7.5
+    - Name: PlayerMask
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 64
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: SegmentPrefab
+      Entry: 10
+      Data: 3
+    - Name: SegmentCount
+      Entry: 3
+      Data: 16
+    - Name: SegmentDistance
+      Entry: 4
+      Data: 1
+    - Name: NodeDistance
+      Entry: 4
+      Data: 0.5
+    - Name: MaxTurnAngle
+      Entry: 4
+      Data: 7.5
+    - Name: MaxRotationJitter
+      Entry: 4
+      Data: 10
+    - Name: MaxSpeedOffset
+      Entry: 4
+      Data: 10
+    - Name: WallCheckDistance
+      Entry: 4
+      Data: 3
+    - Name: WallMask
+      Entry: 7
+      Data: UnityEngine.LayerMask, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 528
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: HeadRotationDampingPercentage
+      Entry: 4
+      Data: 0.01
+    - Name: HeadMovementThreshold
+      Entry: 4
+      Data: 0.05
+--- !u!114 &3392037398564683105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392037398564683107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7dce5067fb940bca92b364670854031, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+--- !u!114 &6967384053706649436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392037398564683107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c8ff3483d342c5b6ff5d6b189e3fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+--- !u!50 &4195321836437454277
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392037398564683107}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

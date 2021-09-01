@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72112766fd8a400786090afb9f205301, type: 3}
+  m_Name: quest_forest_general_04
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: questTargets
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[HotlineHyrule.Quests.QuestTarget,
+        HotlineHyrule]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 1|HotlineHyrule.Quests.DestroyQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 2
+    - Name: shortTargetText
+      Entry: 1
+      Data: Destroy the dam
+    - Name: targetReachedText
+      Entry: 1
+      Data: 
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We didn't do something.
+    - Name: objectName
+      Entry: 1
+      Data: item_dam
+    - Name: count
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|HotlineHyrule.Quests.KillQuestTarget, HotlineHyrule
+    - Name: requiredType
+      Entry: 3
+      Data: 4
+    - Name: shortTargetText
+      Entry: 1
+      Data: Kill {x} gnomes
+    - Name: targetReachedText
+      Entry: 1
+      Data: "Those creatures would never harm the forest again.\t"
+    - Name: targetNotReachedText
+      Entry: 1
+      Data: We spared the gnomes and hoped they'd never try such a foolish thing
+        again.
+    - Name: killTarget
+      Entry: 3
+      Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  finishLevelOnCompletion: 0
+  finishGameOnCompletion: 0
+  questText: Apparently some gnomes had constructed a great dam to withhold the water
+    from this territory. We had to stop this endangering of the wildlife.
+  questTargetText: The gnomes didn't seem to value any life so why should we value
+    theirs.
+  questRewards:
+  - {fileID: 11400000, guid: c4eaa2e0c9ec2de40afddeae4665bc4b, type: 2}
+  questRewardCount: 1

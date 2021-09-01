@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c90f0fceb81d7c4ea40dff4cc743749, type: 3}
+  m_Name: weapon_wand_storm
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: wand_storm
+    - Name: ItemPrefab
+      Entry: 6
+      Data: 
+  movementFactor: 0
+  slowTimeWindow: 0
+  attackRate: 0.4
+  weaponPrefab: {fileID: 4456085385587587559, guid: 5ddc7cfdf6412344da3e2029e5d6fefd, type: 3}
+  hasInfiniteCharges: 1
+  weaponCharges: 0
+  chargeRandomness: 0
+  deadzoneRadius: 0
+  projectilePrefab: {fileID: 3168395468748182143, guid: 2d6be5d032b40df16a49430d867dd80b, type: 3}
+  spawnPosition: {x: -0.35, y: 0.88}
+  weaponFiredSound: {fileID: 8300000, guid: 8db2144109b18444b9d092a1cb23254e, type: 3}
+  projectileCount: 1
+  projectileAngle: 0
+  projectileAngleOffset: 0
+  projectileDelay: 0
+  flip: 0

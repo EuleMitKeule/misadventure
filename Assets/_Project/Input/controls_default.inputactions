@@ -1,0 +1,33 @@
+{
+    "name": "controls_default",
+    "maps": [
+        {
+            "name": "map_default",
+            "id": "02932347-4c8f-4982-8d05-72d981bf86ea",
+            "actions": [
+                {
+                    "name": "action_finish",
+                    "type": "Button",
+                    "id": "ca036363-2756-4a03-a536-2cdfecc6bf7a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6a93c6f4-9f01-41a6-83f1-f0b197ab1311",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "action_finish",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

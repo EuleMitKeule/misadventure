@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: controller_projectile_explosive_present
+  m_Controller: {fileID: 9100000, guid: 722517cdec31a3141ad795cefa8f186f, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 1dc1426920239cd4cbb14fe692d06919, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6a15fb7037e6a614499eb080b316670d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a2e842a115f92244a88b50723f22f781, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 63a14406c1a624c4383b210a8365fba1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: fa559ded3cd4d8e4fa9ecbd99073872a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7ef8c541f924dc041abe06291e591161, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 649dad6a92c3df3408bcc24822370ca6, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9516170e33e6f4943b141c1523ca6dee, type: 2}

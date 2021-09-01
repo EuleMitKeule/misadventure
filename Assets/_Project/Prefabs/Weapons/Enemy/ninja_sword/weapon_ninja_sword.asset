@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a99539d74b6f4c01b5d13551d1511721, type: 3}
+  m_Name: weapon_ninja_sword
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: ItemName
+      Entry: 1
+      Data: ninja_sword
+    - Name: ItemPrefab
+      Entry: 6
+      Data: 
+  movementFactor: 1
+  slowTimeWindow: 0
+  attackRate: 1
+  weaponPrefab: {fileID: 3193329723167763181, guid: ae41976a544ea200e85020a80c900487, type: 3}
+  hasInfiniteCharges: 1
+  weaponCharges: 30
+  chargeRandomness: 0.16666667
+  damage: 15

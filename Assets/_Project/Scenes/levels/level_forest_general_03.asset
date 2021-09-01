@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1634ab00f9b94a66bf6a7eaacdc248f4, type: 3}
+  m_Name: level_forest_general_03
+  m_EditorClassIdentifier: 
+  areaName: Forest Lake
+  areaText: This lake seemed to be infused with magic energy.
+  areaFinishedText: We felt envigorated by the lake's energy as we proceeded through
+    the forest.
+  questData: {fileID: 11400000, guid: d588924489b790348b3785763cf8e340, type: 2}
+  playerSpawnPosition: {x: -36, y: -3, z: 0}
+  bgmData: {fileID: 11400000, guid: f0e242accf8efad46aba5b7cb4bd8266, type: 2}
